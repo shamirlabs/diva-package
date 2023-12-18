@@ -8,7 +8,7 @@ def launch(plan):
             image=OPERATOR_UI_IMAGE,
             ports={
                 "http": PortSpec(
-                    number=80, transport_protocol="tcp", application_protocol="http"
+                    number=80, transport_protocol="TCP", application_protocol="http"
                 )
             },
         ),

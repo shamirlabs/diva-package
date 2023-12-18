@@ -53,24 +53,21 @@ def new_key(plan):
                 "npx hardhat new-key",
             ]
         ),
+        extract={"publicKey": ".publicKey", "privateKey": ".privateKey"},
     )
-    # confirm this contains the keys
-    return result.output
+    return result["extract.publicKey"], result["extract.privateKey"]
 
 
-def register_identity(plan, contract_address, node_address):
+def register(plan, custom_private_key, contract_address, node_address):
     result = plan.exec(
         service_name=DIVA_SC_SERVICE_NAME,
         recipe=ExecRecipe(
             command=[
                 "/bin/sh",
                 "-c",
-                "npx hardhat registerOperator --contract={0} --node={1} --network=custom".format(
+                "CUSTOM_PRIVATE_KEY={0} npx hardhat registerOperatorAndNode --contract={1} --node={2} --network=custom".format(
                     contract_address, node_address
                 ),
             ],
-            extract={"publicKey": ".publicKey", "privateKey": ".privateKey"},
         ),
     )
-
-    return result["extract.publicKey"], result["extract.privateKey"]
