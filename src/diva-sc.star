@@ -41,3 +41,33 @@ def fund(plan, node_address):
             ]
         ),
     )
+
+
+def new_key(plan):
+    result = plan.exec(
+        service_name=DIVA_SC_SERVICE_NAME,
+        recipe=ExecRecipe(
+            command=[
+                "/bin/sh",
+                "-c",
+                "npx hardhat new-key",
+            ]
+        ),
+    )
+    # confirm this contains the keys
+    return result.output
+
+
+def register_identity(plan, contract_address, node_address):
+    result = plan.exec(
+        service_name=DIVA_SC_SERVICE_NAME,
+        recipe=ExecRecipe(
+            command=[
+                "/bin/sh",
+                "-c",
+                "npx hardhat registerOperator --contract={0} --node={1} --network=custom".format(
+                    contract_address, node_address
+                ),
+            ]
+        ),
+    )
