@@ -6,6 +6,7 @@ genesis_constants = import_module(
 diva_server = import_module("./src/diva-server.star")
 diva_sc = import_module("./src/diva-sc.star")
 
+
 def run(plan, args):
     ethereum_network = ethereum_package.run(plan, args)
     plan.print("Succesfully launched an Ethereum Network")
@@ -26,9 +27,13 @@ def run(plan, args):
     el_uri = "http://{0}:{1}".format(el_ip_addr, el_rpc_port)
 
     cl_ip_addr = ethereum_network.all_participants[0].cl_client_context.ip_addr
-    cl_http_port_num = ethereum_network.all_participants[0].cl_client_context.http_port_num
+    cl_http_port_num = ethereum_network.all_participants[
+        0
+    ].cl_client_context.http_port_num
     cl_uri = "http://{0}:{1}".format(cl_ip_addr, cl_http_port_num)
 
-    smart_contract_address = diva_sc.deploy(el_uri, genesis_constants.PRE_FUNDED_ACCOUNTS[0].private_key)
-    
+    smart_contract_address = diva_sc.deploy(
+        el_uri, genesis_constants.PRE_FUNDED_ACCOUNTS[0].private_key
+    )
+
     diva_server.start_boot_node(el_uri, cl_uri, smart_contract_address)
