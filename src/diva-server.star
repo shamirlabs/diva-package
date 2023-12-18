@@ -31,7 +31,7 @@ def start_bootnode(el_url, cl_url, contract_address):
             ports={
                 "p2p": PortSpec(number=5050, transport_protocol="TCP"),
                 "metrics": PortSpec(number=9000, transport_protocol="TCP"),
-                "swagger": PortSpec(number=30000, transport_protocol="TCP"),
+                "api": PortSpec(number=30000, transport_protocol="TCP"),
             },
         ),
     )
@@ -86,7 +86,7 @@ def start_node(
             ports={
                 "p2p": PortSpec(number=5050, transport_protocol="TCP"),
                 "metrics": PortSpec(number=9000, transport_protocol="TCP"),
-                "swagger": PortSpec(number=30000, transport_protocol="TCP"),
+                "api": PortSpec(number=30000, transport_protocol="TCP"),
             },
         ),
     )

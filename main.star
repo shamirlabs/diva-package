@@ -1,8 +1,6 @@
 ethereum_package = import_module("github.com/kurtosis-tech/ethereum-package/main.star")
 nimbus = import_module("./src/nimbus.star")
 
-DIVA_CLI_IMAGE = "diva/cli"
-
 
 def run(plan, args):
     ethereum_network = ethereum_package.run(plan, args)
@@ -13,3 +11,8 @@ def run(plan, args):
         cl_client_context = participant.cl_client_context
         validator_service_name = cl_client_context.validator_service_name
         plan.remove_service(validator_service_name)
+
+    genesis_validators_root, final_genesis_timestamp = (
+        ethereum_network.genesis_validators_root,
+        ethereum_network.final_genesis_timestamp,
+    )
