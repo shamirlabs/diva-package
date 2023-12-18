@@ -69,10 +69,7 @@ def register_identity(plan, contract_address, node_address):
                     contract_address, node_address
                 ),
             ],
-            extract = {
-                "publicKey": ".publicKey",
-                "privateKey": ".privateKey"
-            }
+            extract={"publicKey": ".publicKey", "privateKey": ".privateKey"},
         ),
     )
 
