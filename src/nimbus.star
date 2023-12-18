@@ -4,7 +4,7 @@ NIMBUS_IMAGE = "statusim/nimbus-validator-client:multiarch-v23.10.1"
 def launch(plan, service_name, web3_signer_url, beacon_url):
     # TODO make this persistent
     plan.add_service(
-        service_name=service_name,
+        name=service_name,
         config=ServiceConfig(
             image=NIMBUS_IMAGE,
             cmd=[
