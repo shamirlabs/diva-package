@@ -5,7 +5,7 @@ genesis_constants = import_module(
 
 diva_server = import_module("./src/diva-server.star")
 diva_sc = import_module("./src/diva-sc.star")
-
+diva_operator = import_module("./src/operator.star")
 
 def run(plan, args):
     ethereum_network = ethereum_package.run(plan, args)
@@ -37,3 +37,5 @@ def run(plan, args):
     )
 
     diva_server.start_bootnode(plan, el_uri, cl_uri, smart_contract_address)
+
+    diva_operator.launch(plan)
