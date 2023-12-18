@@ -12,11 +12,13 @@ def run(plan, args):
     ethereum_network = ethereum_package.run(plan, args)
     plan.print("Succesfully launched an Ethereum Network")
 
-    plan.print("Shutting down all validators")
-    for participant in ethereum_network.all_participants:
-        cl_client_context = participant.cl_client_context
-        validator_service_name = cl_client_context.validator_service_name
-        plan.remove_service(validator_service_name)
+    # WE seem to need the validators to deploy smart contracts
+    # DO this stop and restart later
+    # plan.print("Shutting down all validators")
+    # for participant in ethereum_network.all_participants:
+    #     cl_client_context = participant.cl_client_context
+    #     validator_service_name = cl_client_context.validator_service_name
+    #     plan.remove_service(validator_service_name)
 
     genesis_validators_root, final_genesis_timestamp = (
         ethereum_network.genesis_validators_root,
