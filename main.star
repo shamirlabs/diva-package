@@ -1,4 +1,5 @@
 ethereum_package = import_module("github.com/kurtosis-tech/ethereum-package/main.star")
+nimbus = import_module("./src/nimbus.star")
 
 DIVA_CLI_IMAGE = "diva/cli"
 
