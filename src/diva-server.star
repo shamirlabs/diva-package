@@ -6,7 +6,7 @@ DIVA_BOOTNODE_NAME = "diva-bootnode-coordinator"
 
 
 # Starts the BootNode / Coordinator Node
-def start_bootnode(plan, el_url, cl_url, contract_address):
+def start_bootnode(plan, el_url, cl_url, contract_address, genesis_validators_root, genesis_time):
     plan.add_service(
         name=DIVA_BOOTNODE_NAME,
         config=ServiceConfig(
@@ -23,6 +23,11 @@ def start_bootnode(plan, el_url, cl_url, contract_address):
                 "--swagger-ui-enabled",
                 "--contract={0}".format(contract_address),
                 "--master-key={0}".format(constants.DIVA_API_KEY),
+                '--fork-info=0x40000038',
+                "--gvr={0}".format(genesis_validators_root),
+                "--deposit-contract=0x4242424242424242424242424242424242424242",
+                "--chain-id=3151908",
+                "--genesis-time={0}".format(genesis_time),
             ],
             env_vars={
                 "DIVA_VAULT_PASSWORD": constants.DIVA_VAULT_PASSWORD,

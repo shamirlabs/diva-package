@@ -39,7 +39,7 @@ def run(plan, args):
         plan, el_uri, genesis_constants.PRE_FUNDED_ACCOUNTS[0].private_key
     )
 
-    diva_server.start_bootnode(plan, el_uri, cl_uri, smart_contract_address)
+    diva_server.start_bootnode(plan, el_uri, cl_uri, smart_contract_address, genesis_validators_root, final_genesis_timestamp)
 
     # fund bootnode
     # start nodes, following the operator registration and funding model
