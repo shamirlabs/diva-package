@@ -12,7 +12,7 @@ def start_bootnode(plan, el_url, cl_url, contract_address):
         config=ServiceConfig(
             image=DIVA_SERVER_IMAGE,
             cmd=[
-                "--db=/opt/diva/data/diva.db",
+                "--db=/tmp/diva.db",
                 "--w3s-address=0.0.0.0",
                 "--execution-client-url={0}".format(el_url),
                 "--consensus-client-url={0}".format(cl_url),
@@ -51,7 +51,7 @@ def start_node(
     is_nimbus=True,
 ):
     cmd = [
-        "--db=/opt/diva/data/diva.db",
+        "--db=/tmp/diva.db",
         "--w3s-address=0.0.0.0",
         "--execution-client-url={0}".format(el_url),
         "--consensus-client-url={0}".format(cl_url),

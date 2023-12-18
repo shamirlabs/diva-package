@@ -41,4 +41,9 @@ def run(plan, args):
 
     diva_server.start_bootnode(plan, el_uri, cl_uri, smart_contract_address)
 
+    # fund bootnode
+    # start nodes, following the operator registration and funding model
+    # shut down validators
+    # start web3s validators
+
     diva_operator.launch(plan)
