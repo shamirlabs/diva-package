@@ -6,7 +6,7 @@ DIVA_BOOTNODE_NAME = "diva-bootnode-coordinator"
 
 
 # Starts the BootNode / Coordinator Node
-def start_bootnode(el_url, cl_url, contract_address):
+def start_bootnode(plan, el_url, cl_url, contract_address):
     plan.add_service(
         name=DIVA_BOOTNODE_NAME,
         config=ServiceConfig(
@@ -40,6 +40,7 @@ def start_bootnode(el_url, cl_url, contract_address):
 # Starts a normal DIVA Node
 # TODO parallelize this?
 def start_node(
+    plan,
     diva_node_name,
     el_url,
     cl_url,

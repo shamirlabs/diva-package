@@ -1,6 +1,6 @@
 ethereum_package = import_module("github.com/kurtosis-tech/ethereum-package/main.star")
 genesis_constants = import_module(
-    "./src/prelaunch_data_generator/genesis_constants/genesis_constants.star"
+    "github.com/kurtosis-tech/ethereum-package/src/prelaunch_data_generator/genesis_constants/genesis_constants.star"
 )
 
 diva_server = import_module("./src/diva-server.star")
@@ -33,7 +33,7 @@ def run(plan, args):
     cl_uri = "http://{0}:{1}".format(cl_ip_addr, cl_http_port_num)
 
     smart_contract_address = diva_sc.deploy(
-        el_uri, genesis_constants.PRE_FUNDED_ACCOUNTS[0].private_key
+        plan, el_uri, genesis_constants.PRE_FUNDED_ACCOUNTS[0].private_key
     )
 
-    diva_server.start_boot_node(el_uri, cl_uri, smart_contract_address)
+    diva_server.start_bootnode(plan, el_uri, cl_uri, smart_contract_address)

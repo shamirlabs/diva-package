@@ -2,11 +2,11 @@ DIVA_SC_IMAGE = "diva/sc"
 DIVA_SC_SERVICE_NAME = "diva-smartcontract-deployer"
 
 
-def deploy(el_url, address):
+def deploy(plan, el_url, address):
     plan.add_service(
         name=DIVA_SC_SERVICE_NAME,
         config=ServiceConfig(
-            image="DIVA_SC_IMAGE",
+            image=DIVA_SC_IMAGE,
             env_vars={"CUSTOM_URL": el_url, "CUSTOM_PRIVATE_KEY": address},
             cmd=["tail", "-f", "/dev/null"],
         ),
@@ -28,7 +28,7 @@ def deploy(el_url, address):
     return smart_contract_address
 
 
-def fund(node_address):
+def fund(plan, node_address):
     plan.exec(
         service_name=DIVA_SC_SERVICE_NAME,
         recipe=ExecRecipe(
