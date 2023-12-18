@@ -1,7 +1,5 @@
 constants = import_module("./constants.star")
 
-DIVA_API_PORT_ID
-
 
 # this is costly as we are spinning up a temporary container and downloading requests
 # we can/should dockerize this
