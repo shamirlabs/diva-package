@@ -1,6 +1,6 @@
 constants = import_module("./src/constants.star")
 
-DIVA_CLI_IMAGE = "diva/cli"
+DIVA_CLI_IMAGE = "diva-cli"
 DIVA_CLI_NAME = "diva-cli"
 
 

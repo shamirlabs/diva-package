@@ -1,6 +1,6 @@
 constants = import_module("./constants.star")
 
-DIVA_SERVER_IMAGE = "diva/server"
+DIVA_SERVER_IMAGE = "diva-server"
 DIVA_BOOT_NODE_NAME = "diva-bootnode-coordinator"
 DIVA_BOOTNODE_NAME = "diva-bootnode-coordinator"
 

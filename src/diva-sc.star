@@ -1,4 +1,4 @@
-DIVA_SC_IMAGE = "diva/sc"
+DIVA_SC_IMAGE = "diva-sc"
 DIVA_SC_SERVICE_NAME = "diva-smartcontract-deployer"
 
 
@@ -68,6 +68,12 @@ def register_identity(plan, contract_address, node_address):
                 "npx hardhat registerOperator --contract={0} --node={1} --network=custom".format(
                     contract_address, node_address
                 ),
-            ]
+            ],
+            extract = {
+                "publicKey": ".publicKey",
+                "privateKey": ".privateKey"
+            }
         ),
     )
+
+    return result["extract.publicKey"], result["extract.privateKey"]
