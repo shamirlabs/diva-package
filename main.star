@@ -1,5 +1,8 @@
 ethereum_package = import_module("github.com/kurtosis-tech/ethereum-package/main.star")
 
+DIVA_CLI_IMAGE = "diva/cli"
+
+
 def run(plan, args):
     ethereum_network = ethereum_package.run(plan, args)
     plan.print("Succesfully launched an Ethereum Network")
