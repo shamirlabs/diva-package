@@ -36,7 +36,8 @@ def start_bootnode(
                 # TODO fill up jaeger configuration
             },
             ports={
-                "p2p": PortSpec(number=5050, transport_protocol="TCP"),
+                # TODO figure out why the port check isn't working
+                "p2p": PortSpec(number=5050, transport_protocol="TCP", wait=None),
                 # TODO figure out why the port check isn't working
                 "signer-api": PortSpec(
                     number=9000, transport_protocol="TCP", wait=None
@@ -97,7 +98,8 @@ def start_node(
                 # TODO fill up jaeger configuration
             },
             ports={
-                "p2p": PortSpec(number=5050, transport_protocol="TCP"),
+                # TODO figure out why the port check isn't working
+                "p2p": PortSpec(number=5050, transport_protocol="TCP", wait=None),
                 # TODO figure out why the port check isn't working
                 "signer-api": PortSpec(
                     number=9000, transport_protocol="TCP", wait=None
