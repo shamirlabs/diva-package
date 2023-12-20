@@ -15,14 +15,6 @@ def run(plan, args):
     ethereum_network = ethereum_package.run(plan, args)
     plan.print("Succesfully launched an Ethereum Network")
 
-    # WE seem to need the validators to deploy smart contracts
-    # DO this stop and restart later
-    # plan.print("Shutting down all validators")
-    # for participant in ethereum_network.all_participants:
-    #     cl_client_context = participant.cl_client_context
-    #     validator_service_name = cl_client_context.validator_service_name
-    #     plan.remove_service(validator_service_name)
-
     genesis_validators_root, final_genesis_timestamp = (
         ethereum_network.genesis_validators_root,
         ethereum_network.final_genesis_timestamp,
@@ -58,6 +50,40 @@ def run(plan, args):
     bootnode_peer_id = utils.get_peer_id(plan, bootnode_url)
 
     diva_sc.fund(plan, bootnode_address)
+
+    plan.print("Shutting down all validators")
+    for index, participant in enumerate(ethereum_network.all_participants):
+        per_node_el_ip_addr = ethereum_network.all_participants[
+            index
+        ].el_client_context.ip_addr
+        per_node_el_rpc_port = ethereum_network.all_participants[
+            index
+        ].el_client_context.rpc_port_num
+        per_node_el_uri = "http://{index}:{1}".format(el_ip_addr, el_rpc_port)
+
+        per_node_cl_ip_addr = ethereum_network.all_participants[
+            0
+        ].cl_client_context.ip_addr
+        per_node_cl_http_port_num = ethereum_network.all_participants[
+            index
+        ].cl_client_context.http_port_num
+        per_node_cl_uri = "http://{0}:{1}".format(cl_ip_addr, cl_http_port_num)
+
+        cl_client_context = participant.cl_client_context
+        validator_service_name = cl_client_context.validator_service_name
+        plan.remove_service(validator_service_name)
+        diva_server.start_node(
+            plan,
+            validator_service_name,
+            per_node_el_uri,
+            per_node_cl_uri,
+            contract_address,
+            bootnode_peer_id,
+            genesis_validators_root,
+            final_genesis_timestamp,
+            # for now we assume this only connects to nimbus
+            is_nimbus=True,
+        )
 
     # start nodes, following the operator registration and funding model
     # shut down validators
