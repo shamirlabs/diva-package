@@ -23,7 +23,7 @@ def generate_identity(plan, diva_server_url):
             command=[
                 "/bin/sh",
                 "-c",
-                "DIVA_SERVER_URL={0} echo $DIVA_SERVER_URL && /usr/bin/diva identity generate".format(diva_server_url),
+                "export DIVA_SERVER_URL={0} && /usr/bin/diva identity generate".format(diva_server_url),
             ]
         ),
     )
