@@ -18,6 +18,12 @@ def run(plan, args):
     ethereum_network = ethereum_package.run(plan, args)
     plan.print("Succesfully launched an Ethereum Network")
 
+    validator_keystores = []
+    for index, participant in enumerate(ethereum_network.all_participants):
+        validator_keystores.append(
+            participant.cl_client_context.validator_keystore_files_artifact_uuid
+        )
+
     genesis_validators_root, final_genesis_timestamp = (
         ethereum_network.genesis_validators_root,
         ethereum_network.final_genesis_timestamp,
@@ -80,9 +86,6 @@ def run(plan, args):
         validator_service_name = cl_client_context.validator_service_name
         prefixes.append(validator_service_name)
         validators_to_shutdown.append(validator_service_name)
-        validator_keystores.append(
-            participant.cl_client_context.validator_keystore_files_artifact_uuid
-        )
 
         for index in range(0, 5):
             node, node_url = diva_server.start_node(
