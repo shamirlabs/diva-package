@@ -6,8 +6,10 @@ DIVA_BOOTNODE_NAME = "diva-bootnode-coordinator"
 
 
 # Starts the BootNode / Coordinator Node
-def start_bootnode(plan, el_url, cl_url, contract_address, genesis_validators_root, genesis_time):
-    plan.add_service(
+def start_bootnode(
+    plan, el_url, cl_url, contract_address, genesis_validators_root, genesis_time
+):
+    result = plan.add_service(
         name=DIVA_BOOTNODE_NAME,
         config=ServiceConfig(
             image=DIVA_SERVER_IMAGE,
@@ -23,7 +25,7 @@ def start_bootnode(plan, el_url, cl_url, contract_address, genesis_validators_ro
                 "--swagger-ui-enabled",
                 "--contract={0}".format(contract_address),
                 "--master-key={0}".format(constants.DIVA_API_KEY),
-                '--fork-info=0x40000038',
+                "--fork-info=0x40000038",
                 "--gvr={0}".format(genesis_validators_root),
                 "--deposit-contract=0x4242424242424242424242424242424242424242",
                 "--chain-id=3151908",
@@ -36,11 +38,15 @@ def start_bootnode(plan, el_url, cl_url, contract_address, genesis_validators_ro
             ports={
                 "p2p": PortSpec(number=5050, transport_protocol="TCP"),
                 # TODO figure out why the port check isn't working
-                "signer-api": PortSpec(number=9000, transport_protocol="TCP", wait=None),
+                "signer-api": PortSpec(
+                    number=9000, transport_protocol="TCP", wait=None
+                ),
                 "api": PortSpec(number=30000, transport_protocol="TCP"),
             },
         ),
     )
+
+    return result, "http://{0}:30000"
 
 
 # Starts a normal DIVA Node
@@ -81,7 +87,7 @@ def start_node(
     if is_nimbus:
         cmd.append("--verify-fee-recipient")
 
-    plan.add_service(
+    result = plan.add_service(
         name=diva_node_name,
         config=ServiceConfig(
             image=DIVA_SERVER_IMAGE,
@@ -93,8 +99,12 @@ def start_node(
             ports={
                 "p2p": PortSpec(number=5050, transport_protocol="TCP"),
                 # TODO figure out why the port check isn't working
-                "signer-api": PortSpec(number=9000, transport_protocol="TCP", wait=None),
+                "signer-api": PortSpec(
+                    number=9000, transport_protocol="TCP", wait=None
+                ),
                 "api": PortSpec(number=30000, transport_protocol="TCP"),
             },
         ),
     )
+
+    return result

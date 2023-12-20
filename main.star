@@ -6,6 +6,9 @@ genesis_constants = import_module(
 diva_server = import_module("./src/diva-server.star")
 diva_sc = import_module("./src/diva-sc.star")
 diva_operator = import_module("./src/operator.star")
+diva_cli = import_module("./src/diva-cli.star")
+
+utils = import_module("./src/utils.star")
 
 
 def run(plan, args):
@@ -39,7 +42,20 @@ def run(plan, args):
         plan, el_uri, genesis_constants.PRE_FUNDED_ACCOUNTS[0].private_key
     )
 
-    diva_server.start_bootnode(plan, el_uri, cl_uri, smart_contract_address, genesis_validators_root, final_genesis_timestamp)
+    bootnode, bootnode_url = diva_server.start_bootnode(
+        plan,
+        el_uri,
+        cl_uri,
+        smart_contract_address,
+        genesis_validators_root,
+        final_genesis_timestamp,
+    )
+
+    diva_cli.start_cli(plan)
+    diva_cli.generate_identity(bootnode_url)
+
+    bootnode_address = utils.get_address(bootnode_url)
+    bootnode_peer_id = utils.get_peer_id(bootnode_url)
 
     # fund bootnode
     # start nodes, following the operator registration and funding model

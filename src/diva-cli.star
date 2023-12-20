@@ -4,7 +4,7 @@ DIVA_CLI_IMAGE = "diva-cli"
 DIVA_CLI_NAME = "diva-cli"
 
 
-def start_cli():
+def start_cli(plan):
     plan.add_service(
         name=DIVA_CLI_NAME,
         config=ServiceConfig(
