@@ -52,6 +52,7 @@ def run(plan, args):
     diva_sc.fund(plan, bootnode_address)
 
     plan.print("Shutting down all validators")
+    prefixes = []
     for index, participant in enumerate(ethereum_network.all_participants):
         per_node_el_ip_addr = ethereum_network.all_participants[
             index
@@ -71,6 +72,7 @@ def run(plan, args):
 
         cl_client_context = participant.cl_client_context
         validator_service_name = cl_client_context.validator_service_name
+        prefixes.append(validator_service_name)
         plan.remove_service(validator_service_name)
         diva_server.start_node(
             plan,

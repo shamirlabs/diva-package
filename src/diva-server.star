@@ -52,7 +52,7 @@ def start_bootnode(
         ),
     )
 
-    return result, "http://{0}:30000"
+    return result, "http://{0}:30000".format(result.service_name)
 
 
 # Starts a normal DIVA Node
@@ -117,4 +117,4 @@ def start_node(
         ),
     )
 
-    return result
+    return result, "http://{0}:30000".format(result.service_name)
