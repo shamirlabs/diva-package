@@ -51,9 +51,9 @@ def new_key(plan):
                 "/bin/sh",
                 "-c",
                 "npx hardhat new-key",
-            ]
+            ],
+            extract={"publicKey": ".publicKey", "privateKey": ".privateKey"},
         ),
-        extract={"publicKey": ".publicKey", "privateKey": ".privateKey"},
     )
     return result["extract.publicKey"], result["extract.privateKey"]
 
@@ -66,7 +66,7 @@ def register(plan, custom_private_key, contract_address, node_address):
                 "/bin/sh",
                 "-c",
                 "export CUSTOM_PRIVATE_KEY={0} && npx hardhat registerOperatorAndNode --contract={1} --node={2} --network=custom".format(
-                    contract_address, node_address
+                    custom_private_key, contract_address, node_address
                 ),
             ],
         ),

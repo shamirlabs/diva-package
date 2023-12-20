@@ -80,12 +80,14 @@ def run(plan, args):
         validator_service_name = cl_client_context.validator_service_name
         prefixes.append(validator_service_name)
         validators_to_shutdown.append(validator_service_name)
-        validator_keystores.append(participant.cl_client_context.validator_keystore_files_artifact_uuid)
+        validator_keystores.append(
+            participant.cl_client_context.validator_keystore_files_artifact_uuid
+        )
 
-        for node in range(0, 5):
+        for index in range(0, 5):
             node, node_url = diva_server.start_node(
                 plan,
-                "{0}-{1}".format(validator_service_name),
+                "{0}-{1}".format(validator_service_name, index),
                 per_node_el_uri,
                 per_node_cl_uri,
                 smart_contract_address,
