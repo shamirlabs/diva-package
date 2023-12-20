@@ -1,14 +1,18 @@
+constants = import_module("./constants.star")
+
+PYTHON_RUNNER_IMAGE = "python:3.11-alpine"
+
+
 def generate_configuration_tomls(plan, validator_keystores, prefixes):
-    files = (
-        {
-            "/tmp/scripts": script,
-        },
-    )
+    script = plan.upload_files("../python_scripts/keys.py")
+
+    files = {
+        "/tmp/scripts": script,
+    }
 
     for index, keystore in enumerate(validator_keystores):
         files["/tmp/node-{0}".format(index)] = keystore
 
-    script = plan.upload_files("./python_scripts/keys.py")
     plan.add_service(
         name="python-runner",
         config=ServiceConfig(
@@ -32,8 +36,8 @@ def generate_configuration_tomls(plan, validator_keystores, prefixes):
                     "-c",
                     "python /tmp/scripts/keys.py /tmp/node-{0}/node-{0}-keystores/teku-keys /tmp/node-{0}/node-{0}-keystores/teku-secrets {1} {2}".format(
                         index,
-                        NUMBER_OF_DIVA_NODES_PER_NODE,
-                        DIVA_THRESHOLD,
+                        constants.NUMBER_OF_DIVA_NODES_PER_NODE,
+                        constants.DIVA_THRESHOLD,
                         constants.DIVA_API_KEY,
                         prefix,
                         "/tmp/configurations/config-{0}".format(index),
@@ -42,4 +46,4 @@ def generate_configuration_tomls(plan, validator_keystores, prefixes):
             ),
         )
 
-    return plan.store_service_files(name="python-runner", src="/tmp/configurations")
+    return plan.store_service_files(service_name="python-runner", src="/tmp/configurations")

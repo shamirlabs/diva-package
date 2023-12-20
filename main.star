@@ -12,12 +12,6 @@ keys = import_module("./src/keys.star")
 
 utils = import_module("./src/utils.star")
 
-NUMBER_OF_DIVA_NODES_PER_NODE = 5
-DIVA_THRESHOLD = 3
-
-PYTHON_RUNNER_IMAGE = "python:3.11-alpine"
-
-
 
 def run(plan, args):
     ethereum_network = ethereum_package.run(plan, args)
@@ -98,7 +92,7 @@ def run(plan, args):
         validator_service_name = cl_client_context.validator_service_name
         validators_to_shutdown.append(validator_service_name)
 
-        for index in range(0, 5):
+        for index in range(0, constants.NUMBER_OF_DIVA_NODES_PER_NODE):
             node, node_url = diva_server.start_node(
                 plan,
                 "{0}-{1}".format(validator_service_name, index),
@@ -122,5 +116,3 @@ def run(plan, args):
 
     # configuration deployed
     # restart validators
-
-
