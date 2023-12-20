@@ -12,6 +12,8 @@ keys = import_module("./src/keys.star")
 
 utils = import_module("./src/utils.star")
 
+# TODO not hardcode this
+NUM_VALIDATOR_KEYS_PER_NODE = 64
 
 def run(plan, args):
     ethereum_network = ethereum_package.run(plan, args)
@@ -113,6 +115,7 @@ def run(plan, args):
             diva_sc.register(plan, private_key, smart_contract_address, node_address)
 
     diva_operator.launch(plan)
+    diva_cli.deploy(plan, prefixes, NUM_VALIDATOR_KEYS_PER_NODE)
+    
 
-    # configuration deployed
-    # restart validators
+    # stop & restart validators

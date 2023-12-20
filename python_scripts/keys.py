@@ -54,7 +54,7 @@ def main():
         }
         configurations.append(configuration)
 
-    print(f"writing out {len(configurations)} to {destination}")
+    print(f"writing out {len(configurations)} configurations to {destination}")
     for index in range(0, len(configurations)):
         filepath = f"{destination}/config-{index}.toml"
         with open(filepath, "w") as output_file_handle:

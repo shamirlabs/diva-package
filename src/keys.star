@@ -21,6 +21,11 @@ def generate_configuration_tomls(plan, validator_keystores, prefixes):
             cmd=["tail", "-f", "/dev/null"],
         ),
     )
+
+    plan.exec(
+        service_name="python-runner", recipe=ExecRecipe(command=["pip", "install", "pyyaml"])
+    )
+
     for index, prefix in enumerate(prefixes):
         plan.exec(
             service_name="python-runner",
@@ -34,7 +39,7 @@ def generate_configuration_tomls(plan, validator_keystores, prefixes):
                 command=[
                     "/bin/sh",
                     "-c",
-                    "python /tmp/scripts/keys.py /tmp/node-{0}/node-{0}-keystores/teku-keys /tmp/node-{0}/node-{0}-keystores/teku-secrets {1} {2}".format(
+                    "python /tmp/scripts/keys.py /tmp/node-{0}/node-{0}-keystores/teku-keys /tmp/node-{0}/node-{0}-keystores/teku-secrets {1} {2} {3} {4} {5}".format(
                         index,
                         constants.NUMBER_OF_DIVA_NODES_PER_NODE,
                         constants.DIVA_THRESHOLD,
@@ -46,4 +51,6 @@ def generate_configuration_tomls(plan, validator_keystores, prefixes):
             ),
         )
 
-    return plan.store_service_files(service_name="python-runner", src="/tmp/configurations")
+    return plan.store_service_files(
+        service_name="python-runner", src="/tmp/configurations"
+    )

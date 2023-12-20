@@ -32,3 +32,10 @@ def generate_identity(plan, diva_server_url):
             ]
         ),
     )
+
+def deploy(plan, validator_service_names, number_of_keys_per_node):
+    for validator_index in range(0, validator_service_names):
+        for key_index in range(0, number_of_keys_per_node):
+            configuration_file = "/configuration/config-{0}/config-{1}.toml".format(validator_index, key_index)
+            plan.print("deploying {0} for validator {1}".format(configuration_file, validator_index))
+
