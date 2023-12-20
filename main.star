@@ -41,8 +41,10 @@ def run(plan, args):
     )
 
     el_ip_addr = ethereum_network.all_participants[0].el_client_context.ip_addr
+    el_ws_port = ethereum_network.all_participants[0].el_client_context.ws_port_num
     el_rpc_port = ethereum_network.all_participants[0].el_client_context.rpc_port_num
-    el_uri = "http://{0}:{1}".format(el_ip_addr, el_rpc_port)
+    el_rpc_uri = "http://{0}:{1}".format(el_ip_addr, el_rpc_port)
+    el_ws_uri = "ws://{0}:{1}".format(el_ip_addr, el_ws_port)
 
     cl_ip_addr = ethereum_network.all_participants[0].cl_client_context.ip_addr
     cl_http_port_num = ethereum_network.all_participants[
@@ -51,12 +53,12 @@ def run(plan, args):
     cl_uri = "http://{0}:{1}".format(cl_ip_addr, cl_http_port_num)
 
     smart_contract_address = diva_sc.deploy(
-        plan, el_uri, genesis_constants.PRE_FUNDED_ACCOUNTS[0].private_key
+        plan, el_rpc_uri, genesis_constants.PRE_FUNDED_ACCOUNTS[0].private_key
     )
 
     bootnode, bootnode_url = diva_server.start_bootnode(
         plan,
-        el_uri,
+        el_ws_uri,
         cl_uri,
         smart_contract_address,
         genesis_validators_root,
@@ -80,10 +82,10 @@ def run(plan, args):
         per_node_el_ip_addr = ethereum_network.all_participants[
             index
         ].el_client_context.ip_addr
-        per_node_el_rpc_port = ethereum_network.all_participants[
+        per_node_el_ws_port = ethereum_network.all_participants[
             index
-        ].el_client_context.rpc_port_num
-        per_node_el_uri = "http://{0}:{1}".format(el_ip_addr, el_rpc_port)
+        ].el_client_context.ws_port_num
+        per_node_el_uri = "ws://{0}:{1}".format(el_ip_addr, per_node_el_ws_port)
 
         per_node_cl_ip_addr = ethereum_network.all_participants[
             0
