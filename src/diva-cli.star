@@ -34,7 +34,7 @@ def generate_identity(plan, diva_server_url):
     )
     # TODO replace this sleep with something nice
     # this exists to wait for the diva container to restart
-    plan.exec(service_name=DIVA_CLI_NAME, recipe=ExecRecipe(command=["sleep", "7"]))
+    plan.exec(service_name=DIVA_CLI_NAME, recipe=ExecRecipe(command=["sleep", "20"]))
 
 
 def deploy(plan, validator_service_names, number_of_keys_per_node):
