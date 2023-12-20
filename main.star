@@ -123,8 +123,9 @@ def run(plan, args):
     plan.print("stopping existing validators and starting nimbus' with diva configured")
     for index, participant in enumerate(ethereum_network.all_participants):
         validator_service_name = cl_client_context.validator_service_name
-        plan.stop(validator_service_name)
+        plan.stop_service(validator_service_name + "-diva")
         nimbus.launch(
+            plan,
             validator_service_name,
             diva_nodes[index],
             cl_uris[index],
