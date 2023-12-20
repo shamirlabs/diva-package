@@ -57,7 +57,8 @@ def run(plan, args):
     bootnode_address = utils.get_address(plan, bootnode_url)
     bootnode_peer_id = utils.get_peer_id(plan, bootnode_url)
 
-    # fund bootnode
+    diva_sc.fund(plan, bootnode_address)
+
     # start nodes, following the operator registration and funding model
     # shut down validators
     # start web3s validators
