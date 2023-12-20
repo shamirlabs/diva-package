@@ -38,4 +38,15 @@ def deploy(plan, validator_service_names, number_of_keys_per_node):
         for key_index in range(0, number_of_keys_per_node):
             configuration_file = "/configuration/config-{0}/config-{1}.toml".format(validator_index, key_index)
             plan.print("deploying {0} for validator {1}".format(configuration_file, validator_index))
-
+            plan.exec(
+                service_name=DIVA_CLI_NAME,
+                recipe = ExecRecipe(
+                    command = ["/bin/sh", "-c", "/usr/bin/diva pools migrate {0} > /tmp/pool.json".format(configuration_file)]
+                )
+            )
+            plan.exec(
+                service_name=DIVA_CLI_NAME,
+                recipe = ExecRecipe(
+                    command = ["/bin/sh", "-c", "/usr/bin/diva pools deploy /tmp/pool.json"]
+                )
+            )

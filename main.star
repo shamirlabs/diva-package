@@ -9,6 +9,7 @@ diva_operator = import_module("./src/operator.star")
 diva_cli = import_module("./src/diva-cli.star")
 constants = import_module("./src/constants.star")
 keys = import_module("./src/keys.star")
+nimbus = import_module("./src/nimbus.star")
 
 utils = import_module("./src/utils.star")
 
@@ -73,6 +74,7 @@ def run(plan, args):
     diva_nodes = []
     validators_to_shutdown = []
     validator_keystores = []
+    cl_uris = []
     for index, participant in enumerate(ethereum_network.all_participants):
         per_node_el_ip_addr = ethereum_network.all_participants[
             index
@@ -89,6 +91,7 @@ def run(plan, args):
             index
         ].cl_client_context.http_port_num
         per_node_cl_uri = "http://{0}:{1}".format(cl_ip_addr, cl_http_port_num)
+        cl_uris.append(per_node_cl_uri)
 
         cl_client_context = participant.cl_client_context
         validator_service_name = cl_client_context.validator_service_name
@@ -107,7 +110,7 @@ def run(plan, args):
                 # for now we assume this only connects to nimbus
                 is_nimbus=True,
             )
-            diva_nodes.append(node)
+            diva_nodes.append(node_url)
             node_identity = diva_cli.generate_identity(plan, node_url)
             public_key, private_key = diva_sc.new_key(plan)
             diva_sc.fund(plan, public_key)
@@ -116,6 +119,16 @@ def run(plan, args):
 
     diva_operator.launch(plan)
     diva_cli.deploy(plan, prefixes, NUM_VALIDATOR_KEYS_PER_NODE)
-    
+
+    plan.print("stopping existing validators and starting nimbus' with diva configured")
+    for index, participant in enumerate(ethereum_network.all_participants):
+        validator_service_name = cl_client_context.validator_service_name
+        plan.stop(validator_service_name)
+        nimbus.launch(
+            validator_service_name,
+            diva_nodes[index],
+            cl_uris[index],
+        )
+  
 
     # stop & restart validators
