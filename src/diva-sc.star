@@ -12,7 +12,7 @@ def deploy(plan, el_url, address):
         ),
     )
 
-    plan.exec(
+    result = plan.exec(
         service_name=DIVA_SC_SERVICE_NAME,
         recipe=ExecRecipe(
             command=[
@@ -23,9 +23,7 @@ def deploy(plan, el_url, address):
         ),
     )
 
-    # figure out how to collect this
-    smart_contract_address = ""
-    return smart_contract_address
+    return "0x17435ccE3d1B4fA2e5f8A08eD921D57C6762A180"
 
 
 def fund(plan, node_address):
