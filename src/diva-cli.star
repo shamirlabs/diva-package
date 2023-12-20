@@ -9,7 +9,7 @@ def start_cli(plan):
         name=DIVA_CLI_NAME,
         config=ServiceConfig(
             image=DIVA_CLI_IMAGE,
-            cmd=["tail", "-f", "/dev/null"],
+            entrypoint=["tail", "-f", "/dev/null"],
             env_vars={"DIVA_API_KEY": constants.DIVA_API_KEY},
         ),
     )
@@ -22,7 +22,7 @@ def generate_identity(plan, diva_server_url):
             command=[
                 "/bin/sh",
                 "-c",
-                "DIVA_SERVER_URL={0} ./diva identity generate".format(diva_server_url),
+                "DIVA_SERVER_URL={0} ./usr/bin/diva identity generate".format(diva_server_url),
             ]
         ),
     )
