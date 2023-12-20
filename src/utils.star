@@ -9,7 +9,7 @@ def get_address(plan, diva_url):
         run="""
 import requests
 import sys
-response = requests.get("{0}"""
+response = requests.get(\""""
         + diva_url
         + """/api/v1/node/info", headers={"Authorization": "Bearer: \""""
         + constants.DIVA_API_KEY
@@ -31,7 +31,7 @@ def get_peer_id(plan, diva_url):
         run="""
 import requests
 import sys
-response = requests.get("{0}"""
+response = requests.get(\""""
         + diva_url
         + """/api/v1/node/info", headers={"Authorization": "Bearer: \""""
         + constants.DIVA_API_KEY

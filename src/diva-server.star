@@ -44,9 +44,11 @@ def start_bootnode(
                 ),
                 "api": PortSpec(number=30000, transport_protocol="TCP"),
             },
-            files = {
-                "/data": Directory(persistent_key="diva-db-{0}".format(DIVA_BOOT_NODE_NAME))
-            }
+            files={
+                "/data": Directory(
+                    persistent_key="diva-db-{0}".format(DIVA_BOOT_NODE_NAME)
+                )
+            },
         ),
     )
 
@@ -109,9 +111,9 @@ def start_node(
                 ),
                 "api": PortSpec(number=30000, transport_protocol="TCP"),
             },
-            files = {
+            files={
                 "/data": Directory(persistent_key="diva-db-{0}".format(diva_node_name))
-            }
+            },
         ),
     )
 
