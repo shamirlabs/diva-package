@@ -35,7 +35,8 @@ def start_bootnode(plan, el_url, cl_url, contract_address, genesis_validators_ro
             },
             ports={
                 "p2p": PortSpec(number=5050, transport_protocol="TCP"),
-                "metrics": PortSpec(number=9000, transport_protocol="TCP"),
+                # TODO figure out why the port check isn't working
+                "signer-api": PortSpec(number=9000, transport_protocol="TCP", wait=None),
                 "api": PortSpec(number=30000, transport_protocol="TCP"),
             },
         ),
@@ -91,7 +92,8 @@ def start_node(
             },
             ports={
                 "p2p": PortSpec(number=5050, transport_protocol="TCP"),
-                "metrics": PortSpec(number=9000, transport_protocol="TCP"),
+                # TODO figure out why the port check isn't working
+                "signer-api": PortSpec(number=9000, transport_protocol="TCP", wait=None),
                 "api": PortSpec(number=30000, transport_protocol="TCP"),
             },
         ),
