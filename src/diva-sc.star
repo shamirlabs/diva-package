@@ -23,6 +23,7 @@ def deploy(plan, el_url, address):
         ),
     )
 
+    # TODO un hardcode this
     return "0x17435ccE3d1B4fA2e5f8A08eD921D57C6762A180"
 
 
