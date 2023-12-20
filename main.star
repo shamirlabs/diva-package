@@ -8,6 +8,7 @@ diva_sc = import_module("./src/diva-sc.star")
 diva_operator = import_module("./src/operator.star")
 diva_cli = import_module("./src/diva-cli.star")
 constants = import_module("./src/constants.star")
+keys = import_module("./src/keys.star")
 
 utils = import_module("./src/utils.star")
 
@@ -17,6 +18,7 @@ DIVA_THRESHOLD = 3
 PYTHON_RUNNER_IMAGE = "python:3.11-alpine"
 
 
+
 def run(plan, args):
     ethereum_network = ethereum_package.run(plan, args)
     plan.print("Succesfully launched an Ethereum Network")
@@ -24,13 +26,14 @@ def run(plan, args):
     validator_keystores = []
     prefixes = []
     for index, participant in enumerate(ethereum_network.all_participants):
+        cl_client_context = participant.cl_client_context
         validator_keystores.append(
             participant.cl_client_context.validator_keystore_files_artifact_uuid
         )
         validator_service_name = cl_client_context.validator_service_name
         prefixes.append(validator_service_name)
 
-    configuration_tomls = generate_configuration_tomls(
+    configuration_tomls = keys.generate_configuration_tomls(
         plan, validator_keystores, prefixes
     )
 
@@ -121,48 +124,3 @@ def run(plan, args):
     # restart validators
 
 
-def generate_configuration_tomls(plan, validator_keystores, prefixes):
-    files = (
-        {
-            "/tmp/scripts": script,
-        },
-    )
-
-    for index, keystore in enumerate(validator_keystores):
-        files["/tmp/node-{0}".format(index)] = keystore
-
-    script = plan.upload_files("./python_scripts/keys.py")
-    plan.add_service(
-        name="python-runner",
-        config=ServiceConfig(
-            image=PYTHON_RUNNER_IMAGE,
-            files=files,
-            cmd=["tail", "-f", "/dev/null"],
-        ),
-    )
-    for index, prefix in enumerate(prefixes):
-        plan.exec(
-            service_name="python-runner",
-            recipe=ExecRecipe(
-                command=["mkdir", "-p", "/tmp/configurations/config-{0}".format(index)]
-            ),
-        )
-        plan.exec(
-            service_name="python-runner",
-            recipe=ExecRecipe(
-                command=[
-                    "/bin/sh",
-                    "-c",
-                    "python /tmp/scripts/keys.py /tmp/node-{0}/node-{0}-keystores/teku-keys /tmp/node-{0}/node-{0}-keystores/teku-secrets {1} {2}".format(
-                        index,
-                        NUMBER_OF_DIVA_NODES_PER_NODE,
-                        DIVA_THRESHOLD,
-                        constants.DIVA_API_KEY,
-                        prefix,
-                        "/tmp/configurations/config-{0}".format(index),
-                    ),
-                ]
-            ),
-        )
-
-    return plan.store_service_files(name="python-runner", src="/tmp/configurations")
