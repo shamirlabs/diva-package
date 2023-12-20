@@ -52,10 +52,10 @@ def run(plan, args):
     )
 
     diva_cli.start_cli(plan)
-    diva_cli.generate_identity(bootnode_url)
+    diva_cli.generate_identity(plan, bootnode_url)
 
-    bootnode_address = utils.get_address(bootnode_url)
-    bootnode_peer_id = utils.get_peer_id(bootnode_url)
+    bootnode_address = utils.get_address(plan, bootnode_url)
+    bootnode_peer_id = utils.get_peer_id(plan, bootnode_url)
 
     # fund bootnode
     # start nodes, following the operator registration and funding model

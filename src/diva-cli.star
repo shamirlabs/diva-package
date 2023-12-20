@@ -1,4 +1,4 @@
-constants = import_module("./src/constants.star")
+constants = import_module("./constants.star")
 
 DIVA_CLI_IMAGE = "diva-cli"
 DIVA_CLI_NAME = "diva-cli"
@@ -15,11 +15,11 @@ def start_cli(plan):
     )
 
 
-def generate_identity(diva_server_url):
+def generate_identity(plan, diva_server_url):
     plan.exec(
         service_name=DIVA_CLI_NAME,
         recipe=ExecRecipe(
-            cmd=[
+            command=[
                 "/bin/sh",
                 "-c",
                 "DIVA_SERVER_URL={0} ./diva identity generate".format(diva_server_url),

@@ -3,7 +3,7 @@ constants = import_module("./constants.star")
 
 # this is costly as we are spinning up a temporary container and downloading requests
 # we can/should dockerize this
-def get_address(diva_url):
+def get_address(plan, diva_url):
     result = plan.run_python(
         packages=["requests"],
         run="""
@@ -18,12 +18,12 @@ print(node_address)
             diva_url, constants.DIVA_API_KEY
         ),
     )
-    return reuslt.output
+    return result.output
 
 
 # this is costly as we are spinning up a temporary container and downloading requests
 # we can/should dockerize this
-def get_peer_id(diva_url):
+def get_peer_id(plan, diva_url):
     result = plan.run_python(
         packages=["requests"],
         run="""
@@ -38,4 +38,4 @@ print(peer_id)
             diva_url, constants.DIVA_API_KEY
         ),
     )
-    return reuslt.output
+    return result.output
