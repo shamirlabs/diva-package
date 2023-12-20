@@ -13,10 +13,11 @@ response = requests.get(\""""
         + diva_url
         + """/api/v1/node/info", headers={"Authorization": "Bearer: """
         + constants.DIVA_API_KEY
-        + """\", "accept": "application/json"})
-if response.status_code != 200
+        + """\"})
+print(response.status_code)
+if response.status_code != 200:
     sys.exit(1)
-node_address = response.json()["node_address"],
+node_address = response.json()["node_address"]
 print(node_address)
 """,
     )
@@ -35,10 +36,10 @@ response = requests.get(\""""
         + diva_url
         + """/api/v1/node/info", headers={"Authorization": "Bearer: """
         + constants.DIVA_API_KEY
-        + """\", "accept": "application/json"})
-if response.status_code != 200
+        + """\"})
+if response.status_code != 200:
     sys.exit(1)
-peer_id = response.json()["peer_id"],
+peer_id = response.json()["peer_id"]
 print(peer_id)
 """,
     )
