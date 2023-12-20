@@ -54,8 +54,11 @@ def run(plan, args):
 
     diva_sc.fund(plan, bootnode_address)
 
-    plan.print("Shutting down validators, starting diva nodes")
+    plan.print("Starting DIVA nodes")
     prefixes = []
+    diva_nodes = []
+    validators_to_shutdown = []
+    validator_keystores = []
     for index, participant in enumerate(ethereum_network.all_participants):
         per_node_el_ip_addr = ethereum_network.all_participants[
             index
@@ -76,10 +79,11 @@ def run(plan, args):
         cl_client_context = participant.cl_client_context
         validator_service_name = cl_client_context.validator_service_name
         prefixes.append(validator_service_name)
-        plan.remove_service(validator_service_name)
+        validators_to_shutdown.append(validator_service_name)
+        validator_keystores.append(participant.cl_client_context.validator_keystore_files_artifact_uuid)
 
         for node in range(0, 5):
-            diva_server.start_node(
+            node, node_url = diva_server.start_node(
                 plan,
                 "{0}-{1}".format(validator_service_name),
                 per_node_el_uri,
@@ -91,9 +95,14 @@ def run(plan, args):
                 # for now we assume this only connects to nimbus
                 is_nimbus=True,
             )
-
-    # start nodes, following the operator registration and funding model
-    # shut down validators
-    # start web3s validators
+            diva_nodes.append(node)
+            node_identity = diva_cli.generate_identity(plan, node_url)
+            public_key, private_key = diva_sc.new_key(plan)
+            diva_sc.fund(plan, public_key)
+            node_address = utils.get_address(plan, node_url)
+            diva_sc.register(plan, private_key, smart_contract_address, node_address)
 
     diva_operator.launch(plan)
+
+    # configuration deployed
+    # restart validators
