@@ -16,13 +16,14 @@ def start_cli(plan):
 
 
 def generate_identity(plan, diva_server_url):
+    plan.print("Generating identity for {0}".format(diva_server_url))
     plan.exec(
         service_name=DIVA_CLI_NAME,
         recipe=ExecRecipe(
             command=[
                 "/bin/sh",
                 "-c",
-                "DIVA_SERVER_URL={0} ./usr/bin/diva identity generate".format(diva_server_url),
+                "DIVA_SERVER_URL={0} echo $DIVA_SERVER_URL && /usr/bin/diva identity generate".format(diva_server_url),
             ]
         ),
     )
