@@ -4,13 +4,16 @@ DIVA_CLI_IMAGE = "diva-cli"
 DIVA_CLI_NAME = "diva-cli"
 
 
-def start_cli(plan):
+def start_cli(plan, configuration_tomls):
     plan.add_service(
         name=DIVA_CLI_NAME,
         config=ServiceConfig(
             image=DIVA_CLI_IMAGE,
             entrypoint=["tail", "-f", "/dev/null"],
             env_vars={"DIVA_API_KEY": constants.DIVA_API_KEY},
+            files={
+                "/configuration": configuration_tomls,
+            },
         ),
     )
 
