@@ -14,7 +14,7 @@ def start_bootnode(
         config=ServiceConfig(
             image=DIVA_SERVER_IMAGE,
             cmd=[
-                "--db=/tmp/diva.db",
+                "--db=/data/diva.db",
                 "--w3s-address=0.0.0.0",
                 "--execution-client-url={0}".format(el_url),
                 "--consensus-client-url={0}".format(cl_url),
@@ -44,6 +44,9 @@ def start_bootnode(
                 ),
                 "api": PortSpec(number=30000, transport_protocol="TCP"),
             },
+            files = {
+                "/data": Directory(persistent_key="diva-db-{0}".format(DIVA_BOOT_NODE_NAME))
+            }
         ),
     )
 
@@ -64,7 +67,7 @@ def start_node(
     is_nimbus=True,
 ):
     cmd = [
-        "--db=/tmp/diva.db",
+        "--db=/data/diva.db",
         "--w3s-address=0.0.0.0",
         "--execution-client-url={0}".format(el_url),
         "--consensus-client-url={0}".format(cl_url),
@@ -106,6 +109,9 @@ def start_node(
                 ),
                 "api": PortSpec(number=30000, transport_protocol="TCP"),
             },
+            files = {
+                "/data": Directory(persistent_key="diva-db-{0}".format(diva_node_name))
+            }
         ),
     )
 
