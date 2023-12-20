@@ -11,7 +11,7 @@ import requests
 import sys
 response = requests.get(\""""
         + diva_url
-        + """/api/v1/node/info", headers={"Authorization": "Bearer: """
+        + """/api/v1/node/info", headers={"Authorization": "Bearer """
         + constants.DIVA_API_KEY
         + """\"})
 print(response.status_code)
@@ -34,7 +34,7 @@ import requests
 import sys
 response = requests.get(\""""
         + diva_url
-        + """/api/v1/node/info", headers={"Authorization": "Bearer: """
+        + """/api/v1/node/info", headers={"Authorization": "Bearer """
         + constants.DIVA_API_KEY
         + """\"})
 if response.status_code != 200:
