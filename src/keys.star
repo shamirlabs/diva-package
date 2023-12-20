@@ -23,7 +23,8 @@ def generate_configuration_tomls(plan, validator_keystores, prefixes):
     )
 
     plan.exec(
-        service_name="python-runner", recipe=ExecRecipe(command=["pip", "install", "pyyaml"])
+        service_name="python-runner",
+        recipe=ExecRecipe(command=["pip", "install", "pyyaml"]),
     )
 
     for index, prefix in enumerate(prefixes):

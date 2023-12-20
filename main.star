@@ -16,6 +16,7 @@ utils = import_module("./src/utils.star")
 # TODO not hardcode this
 NUM_VALIDATOR_KEYS_PER_NODE = 64
 
+
 def run(plan, args):
     ethereum_network = ethereum_package.run(plan, args)
     plan.print("Succesfully launched an Ethereum Network")
@@ -130,6 +131,5 @@ def run(plan, args):
             diva_nodes[index],
             cl_uris[index],
         )
-  
 
     # stop & restart validators
