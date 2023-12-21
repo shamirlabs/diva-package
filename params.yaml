@@ -2,5 +2,6 @@ network_params:
   genesis_delay: 50
 participants:
   - el_client_type: geth
-  - cl_client_type: nimbus
-  - count: 5
+    cl_client_type: nimbus
+    count: 5
+    cl_split_mode: true
