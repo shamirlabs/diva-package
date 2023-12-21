@@ -25,9 +25,6 @@ def main():
     diva_threshold = int(sys.argv[5])
     diva_api_key = sys.argv[6]
     destination = sys.argv[7]
-
-    assert(diva_threshold <= len(diva_urls))
-    
     entries = []
     for keystore_file in os.listdir(keystore_folder):
         keystore_contents = ""
