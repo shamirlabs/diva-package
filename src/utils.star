@@ -17,7 +17,7 @@ response = requests.get(\""""
 if response.status_code != 200:
     sys.exit(1)
 node_address = response.json()["node_address"]
-print(node_address)
+print(node_address, end="")
 """,
     )
     return result.output
@@ -39,7 +39,7 @@ response = requests.get(\""""
 if response.status_code != 200:
     sys.exit(1)
 peer_id = response.json()["peer_id"]
-print(peer_id)
+print(peer_id, end="")
 """,
     )
     return result.output
