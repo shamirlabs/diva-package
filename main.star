@@ -65,6 +65,7 @@ def run(plan, args):
     validator_keystores = []
     cl_uris = []
     diva_addresses = []
+    signer_urls = []
     for index, participant in enumerate(ethereum_network.all_participants):
         per_node_el_ip_addr = ethereum_network.all_participants[
             index
@@ -87,7 +88,7 @@ def run(plan, args):
         validator_service_name = cl_client_context.validator_service_name
         validators_to_shutdown.append(validator_service_name)
 
-        node, node_url = diva_server.start_node(
+        node, node_url, signer_url = diva_server.start_node(
             plan,
             # TODO improve on this name for diva
             "cl-{0}-diva".format(index + 1),
@@ -102,6 +103,7 @@ def run(plan, args):
             is_nimbus=True,
         )
         diva_urls.append(node_url)
+        signer_urls.append(signer_url)
         node_identity = diva_cli.generate_identity(plan, node_url)
         public_key, private_key, operator_address = diva_sc.new_key(plan)
         diva_sc.fund(plan, operator_address)
@@ -127,6 +129,6 @@ def run(plan, args):
         nimbus.launch(
             plan,
             validator_service_name + "-diva",
-            diva_urls[index],
+            signer_urls[index],
             cl_uris[index],
         )

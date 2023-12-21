@@ -119,4 +119,8 @@ def start_node(
         ),
     )
 
-    return result, "http://{0}:30000".format(result.name)
+    return (
+        result,
+        "http://{0}:30000".format(result.name),
+        "http://{0}:9000".format(result.name),
+    )
