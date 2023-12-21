@@ -49,11 +49,21 @@ def new_key(plan):
             command=[
                 "/bin/sh",
                 "-c",
-                "npx hardhat new-key",
+                "npx hardhat new-key | tr -d '\n' > key.txt",
+            ],
+        ),
+    )
+
+    result = plan.exec(
+        service_name=DIVA_SC_SERVICE_NAME,
+        recipe=ExecRecipe(
+            command=[
+                "cat", "key.txt"
             ],
             extract={"publicKey": ".publicKey", "privateKey": ".privateKey"},
         ),
     )
+
     return result["extract.publicKey"], result["extract.privateKey"]
 
 
