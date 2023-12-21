@@ -67,6 +67,7 @@ def start_node(
     bootnode_peer_id,
     genesis_validators_root,
     genesis_time,
+    bootnode_ip_address,
     is_nimbus=True,
 ):
     cmd = [
@@ -80,7 +81,7 @@ def start_node(
         "--swagger-ui-enabled",
         "--contract={0}".format(contract_address),
         "--bootnode-address=/ip4/{0}/tcp/5050/p2p/{1}".format(
-            DIVA_BOOT_NODE_NAME, bootnode_peer_id
+            bootnode_ip_address, bootnode_peer_id
         ),
         "--master-key={0}".format(constants.DIVA_API_KEY),
         "--fork-info=0x40000038",

@@ -110,6 +110,7 @@ def run(plan, args):
             bootnode_peer_id,
             genesis_validators_root,
             final_genesis_timestamp,
+            bootnode.ip_address,
             # for now we assume this only connects to nimbus
             is_nimbus=True,
         )
