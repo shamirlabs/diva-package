@@ -100,25 +100,25 @@ def run(plan, args):
         validator_service_name = cl_client_context.validator_service_name
         validators_to_shutdown.append(validator_service_name)
 
-        for index in range(0, constants.NUMBER_OF_DIVA_NODES_PER_NODE):
-            node, node_url = diva_server.start_node(
-                plan,
-                "{0}-{1}".format(validator_service_name, index),
-                per_node_el_uri,
-                per_node_cl_uri,
-                smart_contract_address,
-                bootnode_peer_id,
-                genesis_validators_root,
-                final_genesis_timestamp,
-                # for now we assume this only connects to nimbus
-                is_nimbus=True,
-            )
-            diva_nodes.append(node_url)
-            node_identity = diva_cli.generate_identity(plan, node_url)
-            public_key, private_key, operator_address = diva_sc.new_key(plan)
-            diva_sc.fund(plan, operator_address)
-            node_address = utils.get_address(plan, node_url)
-            diva_sc.register(plan, private_key, smart_contract_address, node_address)
+        node, node_url = diva_server.start_node(
+            plan,
+            # TODO improve on this name for diva
+            "cl-{0}-diva".format(index),
+            per_node_el_uri,
+            per_node_cl_uri,
+            smart_contract_address,
+            bootnode_peer_id,
+            genesis_validators_root,
+            final_genesis_timestamp,
+            # for now we assume this only connects to nimbus
+            is_nimbus=True,
+        )
+        diva_nodes.append(node_url)
+        node_identity = diva_cli.generate_identity(plan, node_url)
+        public_key, private_key, operator_address = diva_sc.new_key(plan)
+        diva_sc.fund(plan, operator_address)
+        node_address = utils.get_address(plan, node_url)
+        diva_sc.register(plan, private_key, smart_contract_address, node_address)
 
     diva_operator.launch(plan)
     diva_cli.deploy(plan, prefixes, NUM_VALIDATOR_KEYS_PER_NODE)

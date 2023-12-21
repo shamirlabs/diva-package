@@ -60,7 +60,7 @@ def new_key(plan):
             command=[
                 "/bin/sh",
                 "-c",
-                """cat key.txt | awk -F'"publicKey": "' '{print $2}' | awk -F'"' '{print $1}' | tr -d '\n'"""
+                """cat key.txt | awk -F'"publicKey": "' '{print $2}' | awk -F'"' '{print $1}' | tr -d '\n'""",
             ],
         ),
     )
@@ -71,7 +71,7 @@ def new_key(plan):
             command=[
                 "/bin/sh",
                 "-c",
-                """cat key.txt | awk -F'"privateKey": "' '{print $2}' | awk -F'"' '{print $1}' | tr -d '\n'"""
+                """cat key.txt | awk -F'"privateKey": "' '{print $2}' | awk -F'"' '{print $1}' | tr -d '\n'""",
             ],
         ),
     )
@@ -82,7 +82,7 @@ def new_key(plan):
             command=[
                 "/bin/sh",
                 "-c",
-                """cat key.txt | awk -F'"address": "' '{print $2}' | awk -F'"' '{print $1}' | tr -d '\n'"""
+                """cat key.txt | awk -F'"address": "' '{print $2}' | awk -F'"' '{print $1}' | tr -d '\n'""",
             ],
         ),
     )
