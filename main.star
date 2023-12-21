@@ -1,6 +1,6 @@
-ethereum_package = import_module("github.com/kurtosis-tech/ethereum-package/main.star")
+ethereum_package = import_module("github.com/kurtosis-tech/ethereum-package/main.star@h4ck3rk3y-patch-2")
 genesis_constants = import_module(
-    "github.com/kurtosis-tech/ethereum-package/src/prelaunch_data_generator/genesis_constants/genesis_constants.star"
+    "github.com/kurtosis-tech/ethereum-package/src/prelaunch_data_generator/genesis_constants/genesis_constants.star@h4ck3rk3y-patch-2"
 )
 
 diva_server = import_module("./src/diva-server.star")
