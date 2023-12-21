@@ -97,7 +97,7 @@ def register(plan, custom_private_key, contract_address, node_address):
             command=[
                 "/bin/sh",
                 "-c",
-                "export CUSTOM_PRIVATE_KEY={0} && npx hardhat registerOperatorAndNode --contract {1} --node {2} --network custom".format(
+                "export CUSTOM_OPERATOR_PRIVATE_KEY={0} && npx hardhat registerOperatorAndNode --contract {1} --node {2} --network custom".format(
                     custom_private_key, contract_address, node_address
                 ),
             ],
