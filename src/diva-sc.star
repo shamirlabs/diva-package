@@ -54,17 +54,29 @@ def new_key(plan):
         ),
     )
 
-    result = plan.exec(
+    publicKey = plan.exec(
         service_name=DIVA_SC_SERVICE_NAME,
         recipe=ExecRecipe(
             command=[
-                "cat", "key.txt"
+                "/bin/sh",
+                "-c",
+                """cat key.txt | awk -F'"publicKey": "' '{print $2}' | awk -F'"' '{print $1}' | tr -d '\n'"""
             ],
-            extract={"publicKey": ".publicKey", "privateKey": ".privateKey"},
         ),
     )
 
-    return result["extract.publicKey"], result["extract.privateKey"]
+    privateKey = plan.exec(
+        service_name=DIVA_SC_SERVICE_NAME,
+        recipe=ExecRecipe(
+            command=[
+                "/bin/sh",
+                "-c",
+                """cat key.txt | awk -F'"privateKey": "' '{print $2}' | awk -F'"' '{print $1}' | tr -d '\n'"""
+            ],
+        ),
+    )
+
+    return publicKey["output"], privateKey["output"]
 
 
 def register(plan, custom_private_key, contract_address, node_address):
