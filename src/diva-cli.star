@@ -2,18 +2,23 @@ constants = import_module("./constants.star")
 
 DIVA_CLI_IMAGE = "diva-cli"
 DIVA_CLI_NAME = "diva-cli"
+DIVA_DEPLOYER_CLI_NAME = "diva-cli-deployer"
 
 
-def start_cli(plan, configuration_tomls):
+def start_cli(plan, configuration_tomls=None):
+    files = {}
+    if configuration_tomls:
+        files["/configuration"] = configuration_tomls
+    name = DIVA_CLI_IMAGE
+    if configuration_tomls:
+        name = DIVA_DEPLOYER_CLI_NAME
     plan.add_service(
-        name=DIVA_CLI_NAME,
+        name=name,
         config=ServiceConfig(
             image=DIVA_CLI_IMAGE,
             entrypoint=["tail", "-f", "/dev/null"],
             env_vars={"DIVA_API_KEY": constants.DIVA_API_KEY},
-            files={
-                "/configuration": configuration_tomls,
-            },
+            files=files,
         ),
     )
 
@@ -37,11 +42,13 @@ def generate_identity(plan, diva_server_url):
     plan.exec(service_name=DIVA_CLI_NAME, recipe=ExecRecipe(command=["sleep", "7"]))
 
 
-def deploy(plan, validator_service_names, number_of_keys_per_node):
-    for validator_index in range(0, len(validator_service_names)):
+def deploy(plan, number_of_validators, number_of_keys_per_node):
+    for validator_index in range(0, number_of_validators):
         for key_index in range(0, number_of_keys_per_node):
-            configuration_file = "/configuration/configurations/config-{0}/config-{1}.toml".format(
-                validator_index, key_index
+            configuration_file = (
+                "/configuration/configurations/config-{0}/config-{1}.toml".format(
+                    validator_index, key_index
+                )
             )
             plan.print(
                 "deploying {0} for validator {1}".format(
@@ -49,7 +56,7 @@ def deploy(plan, validator_service_names, number_of_keys_per_node):
                 )
             )
             plan.exec(
-                service_name=DIVA_CLI_NAME,
+                service_name=DIVA_DEPLOYER_CLI_NAME,
                 recipe=ExecRecipe(
                     command=[
                         "/bin/sh",
@@ -61,7 +68,7 @@ def deploy(plan, validator_service_names, number_of_keys_per_node):
                 ),
             )
             plan.exec(
-                service_name=DIVA_CLI_NAME,
+                service_name=DIVA_DEPLOYER_CLI_NAME,
                 recipe=ExecRecipe(
                     command=[
                         "/bin/sh",

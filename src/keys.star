@@ -3,7 +3,7 @@ constants = import_module("./constants.star")
 PYTHON_RUNNER_IMAGE = "python:3.11-alpine"
 
 
-def generate_configuration_tomls(plan, validator_keystores, prefixes):
+def generate_configuration_tomls(plan, validator_keystores, diva_urls, diva_addresses):
     script = plan.upload_files("../python_scripts/keys.py")
 
     files = {
@@ -27,7 +27,8 @@ def generate_configuration_tomls(plan, validator_keystores, prefixes):
         recipe=ExecRecipe(command=["pip", "install", "pyyaml"]),
     )
 
-    for index, prefix in enumerate(prefixes):
+    # note here all keys from all validator keystores are split over all divas
+    for index in range(0, len(validator_keystores)):
         plan.exec(
             service_name="python-runner",
             recipe=ExecRecipe(
@@ -42,10 +43,10 @@ def generate_configuration_tomls(plan, validator_keystores, prefixes):
                     "-c",
                     "python /tmp/scripts/keys.py /tmp/node-{0}/node-{0}-keystores/teku-keys /tmp/node-{0}/node-{0}-keystores/teku-secrets {1} {2} {3} {4} {5}".format(
                         index,
-                        constants.NUMBER_OF_DIVA_NODES_PER_NODE,
+                        diva_urls,
+                        diva_addresses,
                         constants.DIVA_THRESHOLD,
                         constants.DIVA_API_KEY,
-                        prefix,
                         "/tmp/configurations/config-{0}".format(index),
                     ),
                 ]
