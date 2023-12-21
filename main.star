@@ -133,5 +133,3 @@ def run(plan, args):
             diva_nodes[index],
             cl_uris[index],
         )
-
-    # stop & restart validators
