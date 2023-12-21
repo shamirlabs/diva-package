@@ -80,7 +80,7 @@ def run(plan, args):
         node, node_url, signer_url = diva_server.start_node(
             plan,
             # TODO improve on this name for diva
-            "cl-{0}-diva".format(index + 1),
+            "diva-client-{0}".format(index + 1),
             el_ws_uri,
             cl_uri,
             smart_contract_address,
