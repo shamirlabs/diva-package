@@ -73,7 +73,9 @@ def deploy(plan, number_of_validators, number_of_keys_per_node):
                     command=[
                         "/bin/sh",
                         "-c",
-                        "/usr/bin/diva pools deploy {0} | /usr/bin/diva pools deploy {0}".format(pool_name["output"]),
+                        "/usr/bin/diva pools deploy {0} | /usr/bin/diva pools deploy {0}".format(
+                            pool_name["output"]
+                        ),
                     ]
                 ),
             )

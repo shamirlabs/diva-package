@@ -45,7 +45,7 @@ def generate_configuration_tomls(plan, validator_keystores, diva_urls, diva_addr
                         index,
                         ",".join(diva_urls),
                         ",".join(diva_addresses),
-                        constants.DIVA_THRESHOLD,
+                        max(len(diva_addresses) - 2, 1),
                         constants.DIVA_API_KEY,
                         "/tmp/configurations/config-{0}".format(index),
                     ),

@@ -34,7 +34,7 @@ def fund(plan, address):
             command=[
                 "/bin/sh",
                 "-c",
-                "npx hardhat fund --to {0} --amount 10 --network custom".format(
+                "npx hardhat fund --to {0} --amount 100 --network custom".format(
                     address
                 ),
             ]
