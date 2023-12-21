@@ -13,7 +13,7 @@ network_params:
   genesis_delay: 120
 participants:
   - el_client_type: geth
-    cl_client_type: lighthouse
+    cl_client_type: nimbus
     cl_split_mode_enabled: true
   - el_client_type: geth
     cl_client_type: lighthouse
