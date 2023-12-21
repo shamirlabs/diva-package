@@ -17,5 +17,4 @@ participants:
     cl_split_mode_enabled: true
   - el_client_type: geth
     cl_client_type: lighthouse
-    cl_split_mode_enabled: true
     validator_count: 65  
