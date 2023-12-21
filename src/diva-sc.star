@@ -24,7 +24,7 @@ def deploy(plan, el_url, address):
     )
 
     # TODO un hardcode this
-    return "0x17435ccE3d1B4fA2e5f8A08eD921D57C6762A180"
+    return "0x17435ccE3d1B4fA2e5f8A08eD921D57C6762A180".lower()
 
 
 def fund(plan, address):
@@ -97,7 +97,7 @@ def register(plan, custom_private_key, contract_address, node_address):
             command=[
                 "/bin/sh",
                 "-c",
-                "export CUSTOM_PRIVATE_KEY={0} && npx hardhat registerOperatorAndNode --contract={1} --node={2} --network=custom".format(
+                "export CUSTOM_PRIVATE_KEY={0} && npx hardhat registerOperatorAndNode --contract {1} --node {2} --network custom".format(
                     custom_private_key, contract_address, node_address
                 ),
             ],
