@@ -43,8 +43,8 @@ def generate_configuration_tomls(plan, validator_keystores, diva_urls, diva_addr
                     "-c",
                     "python /tmp/scripts/keys.py /tmp/node-{0}/node-{0}-keystores/teku-keys /tmp/node-{0}/node-{0}-keystores/teku-secrets {1} {2} {3} {4} {5}".format(
                         index,
-                        diva_urls,
-                        diva_addresses,
+                        ",".join(diva_urls),
+                        ",".join(diva_addresses),
                         constants.DIVA_THRESHOLD,
                         constants.DIVA_API_KEY,
                         "/tmp/configurations/config-{0}".format(index),

@@ -26,7 +26,7 @@ def main():
     diva_api_key = sys.argv[6]
     destination = sys.argv[7]
 
-    assert(diva_threshold <= num_diva_nodes)
+    assert(diva_threshold <= len(diva_urls))
     
     entries = []
     for keystore_file in os.listdir(keystore_folder):
