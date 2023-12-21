@@ -28,6 +28,7 @@ def start_bootnode(
                 "--fork-info=0x40000038",
                 "--gvr={0}".format(genesis_validators_root),
                 "--deposit-contract=0x4242424242424242424242424242424242424242",
+                # TODO this can be parametrized and use `network_params.network_id`
                 "--chain-id=3151908",
                 "--genesis-time={0}".format(genesis_time),
             ],

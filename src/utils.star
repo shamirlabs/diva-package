@@ -14,7 +14,6 @@ response = requests.get(\""""
         + """/api/v1/node/info", headers={"Authorization": "Bearer """
         + constants.DIVA_API_KEY
         + """\"})
-print(response.status_code)
 if response.status_code != 200:
     sys.exit(1)
 node_address = response.json()["node_address"]

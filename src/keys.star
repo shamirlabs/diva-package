@@ -53,5 +53,5 @@ def generate_configuration_tomls(plan, validator_keystores, prefixes):
         )
 
     return plan.store_service_files(
-        service_name="python-runner", src="/tmp/configurations"
+        service_name="python-runner", src="/tmp/configurations", name = "diva-configuration-tomls"
     )
