@@ -13,11 +13,19 @@ nimbus = import_module("./src/nimbus.star")
 
 utils = import_module("./src/utils.star")
 
-# TODO not hardcode this
-NUM_VALIDATOR_KEYS_PER_NODE = 64
+DEFAULT_NUM_VALIDATOR_KEYS_PER_NODE = 64
 
 
 def run(plan, args):
+    network_params = args.get(
+        "network_params",
+        {"num_validator_keys_per_node": DEFAULT_NUM_VALIDATOR_KEYS_PER_NODE},
+    )
+    num_validator_keys_per_node = network_params.get(
+        "num_validator_keys_per_node", DEFAULT_NUM_VALIDATOR_KEYS_PER_NODE
+    )
+    plan.print(num_validator_keys_per_node)
+
     ethereum_network = ethereum_package.run(plan, args)
     plan.print("Succesfully launched an Ethereum Network")
 
@@ -120,7 +128,7 @@ def run(plan, args):
         plan, validator_keystores, diva_urls, diva_addresses
     )
     diva_cli.start_cli(plan, configuration_tomls)
-    diva_cli.deploy(plan, len(diva_urls), NUM_VALIDATOR_KEYS_PER_NODE)
+    diva_cli.deploy(plan, len(diva_urls), num_validator_keys_per_node)
 
     plan.print("stopping existing validators and starting nimbus' with diva configured")
     for index, participant in enumerate(ethereum_network.all_participants):

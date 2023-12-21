@@ -42,6 +42,8 @@ def generate_identity(plan, diva_server_url):
     plan.exec(service_name=DIVA_CLI_NAME, recipe=ExecRecipe(command=["sleep", "7"]))
 
 
+# TODO parallelize this; this is currently being called in Kurtosis but
+# we can write a python script that creates a thread pool and runs migrate + deploy
 def deploy(plan, number_of_validators, number_of_keys_per_node):
     for validator_index in range(0, number_of_validators):
         for key_index in range(0, number_of_keys_per_node):
