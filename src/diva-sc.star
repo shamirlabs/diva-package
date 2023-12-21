@@ -27,7 +27,7 @@ def deploy(plan, el_url, address):
     return "0x17435ccE3d1B4fA2e5f8A08eD921D57C6762A180"
 
 
-def fund(plan, node_address):
+def fund(plan, address):
     plan.exec(
         service_name=DIVA_SC_SERVICE_NAME,
         recipe=ExecRecipe(
@@ -35,7 +35,7 @@ def fund(plan, node_address):
                 "/bin/sh",
                 "-c",
                 "npx hardhat fund --to {0} --amount 10 --network custom".format(
-                    node_address
+                    address
                 ),
             ]
         ),
@@ -76,7 +76,18 @@ def new_key(plan):
         ),
     )
 
-    return publicKey["output"], privateKey["output"]
+    address = plan.exec(
+        service_name=DIVA_SC_SERVICE_NAME,
+        recipe=ExecRecipe(
+            command=[
+                "/bin/sh",
+                "-c",
+                """cat key.txt | awk -F'"address": "' '{print $2}' | awk -F'"' '{print $1}' | tr -d '\n'"""
+            ],
+        ),
+    )
+
+    return publicKey["output"], privateKey["output"], address["output"]
 
 
 def register(plan, custom_private_key, contract_address, node_address):

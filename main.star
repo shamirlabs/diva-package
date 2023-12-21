@@ -115,8 +115,8 @@ def run(plan, args):
             )
             diva_nodes.append(node_url)
             node_identity = diva_cli.generate_identity(plan, node_url)
-            public_key, private_key = diva_sc.new_key(plan)
-            diva_sc.fund(plan, public_key)
+            public_key, private_key, operator_address = diva_sc.new_key(plan)
+            diva_sc.fund(plan, operator_address)
             node_address = utils.get_address(plan, node_url)
             diva_sc.register(plan, private_key, smart_contract_address, node_address)
 
