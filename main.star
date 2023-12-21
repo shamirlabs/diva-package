@@ -24,7 +24,7 @@ def run(plan, args):
     num_validator_keys_per_node = network_params.get(
         "num_validator_keys_per_node", DEFAULT_NUM_VALIDATOR_KEYS_PER_NODE
     )
-    plan.print(num_validator_keys_per_node)
+    plan.print("{0} is the value of num_validator_keys_per_node ".format(num_validator_keys_per_node))
 
     ethereum_network = ethereum_package.run(plan, args)
     plan.print("Succesfully launched an Ethereum Network")
