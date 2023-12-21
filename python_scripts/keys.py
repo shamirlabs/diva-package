@@ -42,7 +42,7 @@ def main():
 
     diva_urls = []
     for index in range(0, num_diva_nodes):
-        diva_urls.append(f"http://cl{0}-diva:30000/api")
+        diva_urls.append(f"http://cl{index+1}-diva:30000/api")
 
     configurations = []
     for entry in entries:

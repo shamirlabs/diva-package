@@ -103,7 +103,7 @@ def run(plan, args):
         node, node_url = diva_server.start_node(
             plan,
             # TODO improve on this name for diva
-            "cl-{0}-diva".format(index),
+            "cl-{0}-diva".format(index+1),
             per_node_el_uri,
             per_node_cl_uri,
             smart_contract_address,
