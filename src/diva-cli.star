@@ -44,40 +44,40 @@ def generate_identity(plan, diva_server_url):
 
 # TODO parallelize this; this is currently being called in Kurtosis but
 # we can write a python script that creates a thread pool and runs migrate + deploy
-def deploy(plan, number_of_validators, number_of_keys_per_node):
-    for validator_index in range(0, number_of_validators):
-        for key_index in range(0, number_of_keys_per_node):
-            configuration_file = (
-                "/configuration/configurations/config-{0}/config-{1}.toml".format(
-                    validator_index, key_index
-                )
+# its always 0 can be cleaned up first_node_index
+def deploy(plan, first_node_index, number_of_keys_per_node):
+    for key_index in range(0, number_of_keys_per_node):
+        configuration_file = (
+            "/configuration/configurations/config-{0}/config-{1}.toml".format(
+                first_node_index, key_index
             )
-            plan.print(
-                "deploying {0} for validator {1}".format(
-                    configuration_file, validator_index
-                )
+        )
+        plan.print(
+            "deploying {0} for validator {1}".format(
+                configuration_file, first_node_index
             )
-            pool_name = plan.exec(
-                service_name=DIVA_DEPLOYER_CLI_NAME,
-                recipe=ExecRecipe(
-                    command=[
-                        "/bin/sh",
-                        "-c",
-                        "/usr/bin/diva pools migrate {0} | grep -o 'saved .*\\.json' | sed 's/saved //' | tr -d '\n' ".format(
-                            configuration_file
-                        ),
-                    ]
-                ),
-            )
-            plan.exec(
-                service_name=DIVA_DEPLOYER_CLI_NAME,
-                recipe=ExecRecipe(
-                    command=[
-                        "/bin/sh",
-                        "-c",
-                        "/usr/bin/diva pools deploy {0} | /usr/bin/diva pools deploy {0}".format(
-                            pool_name["output"]
-                        ),
-                    ]
-                ),
-            )
+        )
+        pool_name = plan.exec(
+            service_name=DIVA_DEPLOYER_CLI_NAME,
+            recipe=ExecRecipe(
+                command=[
+                    "/bin/sh",
+                    "-c",
+                    "/usr/bin/diva pools migrate {0} | grep -o 'saved .*\\.json' | sed 's/saved //' | tr -d '\n' ".format(
+                        configuration_file
+                    ),
+                ]
+            ),
+        )
+        plan.exec(
+            service_name=DIVA_DEPLOYER_CLI_NAME,
+            recipe=ExecRecipe(
+                command=[
+                    "/bin/sh",
+                    "-c",
+                    "/usr/bin/diva pools deploy {0} | /usr/bin/diva pools deploy {0}".format(
+                        pool_name["output"]
+                    ),
+                ]
+            ),
+        )
