@@ -108,6 +108,9 @@ def run(plan, args):
         node_address = utils.get_address(plan, node_url)
         diva_addresses.append(node_address)
         diva_sc.register(plan, private_key, smart_contract_address, node_address)
+        validator_keystores.append(
+            cl_client_context.validator_keystore_files_artifact_uuid
+        )
 
     diva_operator.launch(plan)
 

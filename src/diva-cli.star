@@ -55,13 +55,13 @@ def deploy(plan, number_of_validators, number_of_keys_per_node):
                     configuration_file, validator_index
                 )
             )
-            plan.exec(
+            pool_name = plan.exec(
                 service_name=DIVA_DEPLOYER_CLI_NAME,
                 recipe=ExecRecipe(
                     command=[
                         "/bin/sh",
                         "-c",
-                        "/usr/bin/diva pools migrate {0} > /tmp/pool.json".format(
+                        "/usr/bin/diva pools migrate {0} | grep -o 'saved .*\\.json' | sed 's/saved //' | tr -d '\n' ".format(
                             configuration_file
                         ),
                     ]
@@ -73,7 +73,7 @@ def deploy(plan, number_of_validators, number_of_keys_per_node):
                     command=[
                         "/bin/sh",
                         "-c",
-                        "/usr/bin/diva pools deploy /tmp/pool.json",
+                        "/usr/bin/diva pools deploy {0} | /usr/bin/diva pools deploy {0}".format(pool_name["output"]),
                     ]
                 ),
             )
