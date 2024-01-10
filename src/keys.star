@@ -3,7 +3,9 @@ constants = import_module("./constants.star")
 PYTHON_RUNNER_IMAGE = "python:3.11-alpine"
 
 
-def generate_configuration_tomls(plan, validator_keystores, diva_urls, diva_addresses, threshold):
+def generate_configuration_tomls(
+    plan, validator_keystores, diva_urls, diva_addresses, threshold
+):
     script = plan.upload_files("../python_scripts/keys.py")
 
     files = {
