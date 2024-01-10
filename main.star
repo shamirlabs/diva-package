@@ -1,6 +1,11 @@
-ethereum_package = import_module("github.com/kurtosis-tech/ethereum-package/main.star@1.2.0")
-genesis_constants = import_module(
+ethereum_package = import_module(
+    "github.com/kurtosis-tech/ethereum-package/main.star@1.2.0"
+)
+ethereum_genesis_constants = import_module(
     "github.com/kurtosis-tech/ethereum-package/src/prelaunch_data_generator/genesis_constants/genesis_constants.star@1.2.0"
+)
+ethereum_input_parser = import_module(
+    "github.com/kurtosis-tech/ethereum-package/src/package_io/input_parser.star@1.2.0"
 )
 
 diva_server = import_module("./src/diva-server.star")
@@ -10,29 +15,19 @@ diva_cli = import_module("./src/diva-cli.star")
 constants = import_module("./src/constants.star")
 keys = import_module("./src/keys.star")
 nimbus = import_module("./src/nimbus.star")
-
+input_parser = import_module("./src/input_parser.star")
 utils = import_module("./src/utils.star")
 
-DEFAULT_NUM_VALIDATOR_KEYS_PER_NODE = 64
-
-
 def run(plan, args):
-    network_params = args.get(
-        "network_params",
-        {"num_validator_keys_per_node": DEFAULT_NUM_VALIDATOR_KEYS_PER_NODE},
-    )
+    args_with_right_defaults = input_parser.input_parser(plan, args)
+    network_params = args_with_right_defaults["network_params"]
+    diva_params = args_with_right_defaults["diva"]
+
     num_validator_keys_per_node = network_params["num_validator_keys_per_node"]
-    
-    diva_params = args.get(
-        "diva",
-        {"nodes": constants.DEFAULT_DIVA_NODES,
-        "threshold": constants.DEFAULT_DIVA_THRESHOLD,
-        "validators_to_import": constants.DEFAULT_DIVA_VALIDATORS_TO_IMPORT},
-    )
-    diva_nodes = diva_params["nodes"]         # TODO: validate
-    diva_threshold = diva_params["threshold"] # TODO: validate
-    diva_validators_to_import = diva_params["validators_to_import"] # TODO: validate
-    # actual_num_validators = args["network_params"].get("validator_count", num_validator_keys_per_node)
+
+    diva_nodes = diva_params["nodes"]
+    diva_threshold = diva_params["threshold"]
+    diva_validators_to_import = diva_params["validators_to_import"]
 
     plan.print(
         "{0} is the value of num_validator_keys_per_node ".format(
@@ -61,7 +56,7 @@ def run(plan, args):
     cl_uri = "http://{0}:{1}".format(cl_ip_addr, cl_http_port_num)
 
     smart_contract_address = diva_sc.deploy(
-        plan, el_rpc_uri, genesis_constants.PRE_FUNDED_ACCOUNTS[0].private_key
+        plan, el_rpc_uri, ethereum_genesis_constants.PRE_FUNDED_ACCOUNTS[0].private_key
     )
 
     bootnode, bootnode_url = diva_server.start_bootnode(
@@ -125,14 +120,12 @@ def run(plan, args):
     )
 
     diva_cli.start_cli(plan, configuration_tomls)
-    
+
     for i in range(diva_validators_to_import):
         diva_cli.deploy(plan, i, num_validator_keys_per_node)
-    
+
     for validator in validators_name:
-        plan.print(
-            "stopping validator {0}".format(validator)
-        )
+        plan.print("stopping validator {0}".format(validator))
         plan.stop_service(validator)
 
     plan.print("starting nimbus with diva configured")
