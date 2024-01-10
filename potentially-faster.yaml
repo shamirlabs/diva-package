@@ -7,7 +7,7 @@ network_params:
   # 13 validators per validator client
   # the first four client are up
   # the fifth client we bring it down, 13 validators for diva
-  # 
+  #
   num_validator_keys_per_node: 1
   # change this to something smaller for iterations
   genesis_delay: 120
@@ -17,4 +17,8 @@ participants:
     cl_split_mode_enabled: true
   - el_client_type: geth
     cl_client_type: lighthouse
-    validator_count: 65  
+    validator_count: 65
+diva:
+  nodes: 5
+  threshold: 3
+  validators_to_import: 1
