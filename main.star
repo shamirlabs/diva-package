@@ -26,7 +26,6 @@ def run(plan, args):
         "diva_pools"
     )
 
-    ethereum_network = ethereum_package.run(plan, args)
     plan.print("Starting a diva set")
 
     genesis_validators_root, final_genesis_timestamp = (
@@ -34,11 +33,11 @@ def run(plan, args):
         ethereum_params.genesis_timestamp,
     )
 
-    el_rpc_uri = (ethereum_network.execution_http)
-    el_ws_uri = (ethereum_network.execution_ws)
-    cl_uri = (ethereum_network.consensus_http)
+    el_rpc_uri = (ethereum_params.execution_http)
+    el_ws_uri = (ethereum_params.execution_ws)
+    cl_uri = (ethereum_params.consensus_http)
 
-    smart_contract_address = ethereum_network.diva_contract
+    smart_contract_address = ethereum_params.diva_contract
 
  
     plan.print("Starting DIVA nodes")
@@ -70,8 +69,7 @@ def run(plan, args):
 
     diva_operator.launch(plan)
 
-    # TODO: rescue the priv_key of first validator diva_pools.validator_keys derived from 
-    #https://github.com/kurtosis-tech/ethereum-package/blob/main/src/prelaunch_data_generator/validator_keystores/validator_keystore_generator.star
+    # TODO: rescue the first diva_pools.validator_keys keys derived from https://github.com/kurtosis-tech/ethereum-package/blob/main/network_params.yaml#L41
     # then create pools.json an dthen deploy diva_cli.deploy(plan, first_node_index, num_validator_keys_per_node)
 
 
