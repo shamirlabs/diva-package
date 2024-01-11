@@ -76,56 +76,16 @@ def run(plan, args):
     validators_to_shutdown = []
     diva_addresses = []
     signer_urls = []
-    for index in range(0, constants.NUMBER_OF_DIVA_NODES):
-        node, node_url, signer_url = diva_server.start_node(
-            plan,
-            # TODO improve on this name for diva
-            "diva-client-{0}".format(index + 1),
-            el_ws_uri,
-            cl_uri,
-            smart_contract_address,
-            bootnode_peer_id,
-            genesis_validators_root,
-            final_genesis_timestamp,
-            bootnode.ip_address,
-            # for now we assume this only connects to nimbus
-            is_nimbus=True,
-        )
-        diva_urls.append(node_url)
-        signer_urls.append(signer_url)
-        node_identity = diva_cli.generate_identity(plan, node_url)
-        public_key, private_key, operator_address = diva_sc.new_key(plan)
-        diva_sc.fund(plan, operator_address)
-        node_address = utils.get_address(plan, node_url)
-        diva_addresses.append(node_address)
-        diva_sc.register(plan, private_key, smart_contract_address, node_address)
+
 
     diva_operator.launch(plan)
 
     first_participant = ethereum_network.all_participants[0].cl_client_context
     first_participant_validator_service_name = first_participant.validator_service_name
-    first_participant_keystore = (
-        first_participant.validator_keystore_files_artifact_uuid
-    )
-    first_node_index = 0
-
-    configuration_tomls = keys.generate_configuration_tomls(
-        plan, [first_participant_keystore], diva_urls, diva_addresses
-    )
-
-    diva_cli.start_cli(plan, configuration_tomls)
-    diva_cli.deploy(plan, first_node_index, num_validator_keys_per_node)
-
+ 
+   
     plan.print(
         "stopping validator {0}".format(first_participant_validator_service_name)
     )
     plan.stop_service(first_participant_validator_service_name)
 
-    plan.print("starting nimbus with diva configured")
-    for index in range(0, constants.NUMBER_OF_DIVA_NODES):
-        nimbus.launch(
-            plan,
-            "diva-validator-{0}".format(index),
-            signer_urls[index],
-            cl_uri,
-        )
