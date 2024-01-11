@@ -1,17 +1,21 @@
 network_params:
-  # feel free to tweak this
-  # we will have 5 el cl clients, so 5*13=65 validators at genesis
-  # we will take them all down
-  # and make them diva validators 64
-  # what if out of the five; leave four up and the five one make it diva
-  # 13 validators per validator client
-  # the first four client are up
-  # the fifth client we bring it down, 13 validators for diva
-  # 
-  num_validator_keys_per_node: 13
-participants:
-  - el_client_type: geth
-    cl_client_type: nimbus
-    cl_split_mode_enabled: true
-    count: 5
-  
+  genesis_delay: 120
+
+ethereum:
+  consensus_http: "http://"
+  execution_ws: "ws://"
+  bootnode_add: ""
+  deposit_contract: "0x4242424242424242424242424242424242424242"
+  diva_contract: "0x17435ccE3d1B4fA2e5f8A08eD921D57C6762A180"
+  chain_id: "3151908"
+  genesis_timestamp: ""
+  genesis_fork_version: "0x10000038"
+  genesis_validators_root: "0xae3bf670c40b1d7c8db596193fb5090aeb9751e2ccab31ae2463d9947a83c715"
+  funded_priv_key: "bcdf20249abf0ed6d944c0288fad489e33f66b3960d9e6229c1cd214ed3bbe31"
+
+diva_pools:
+  set_size: 5
+  set_threshold: 3
+  diva_nodes: 5
+  validator_client: nimbus
+  validator_keys: 1
