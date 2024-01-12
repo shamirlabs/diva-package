@@ -1,11 +1,11 @@
 ethereum_package = import_module(
-    "github.com/kurtosis-tech/ethereum-package/main.star@1.2.0"
+    "github.com/kurtosis-tech/ethereum-package/main.star"
 )
 ethereum_genesis_constants = import_module(
-    "github.com/kurtosis-tech/ethereum-package/src/prelaunch_data_generator/genesis_constants/genesis_constants.star@1.2.0"
+    "github.com/kurtosis-tech/ethereum-package/src/prelaunch_data_generator/genesis_constants/genesis_constants.star"
 )
 ethereum_input_parser = import_module(
-    "github.com/kurtosis-tech/ethereum-package/src/package_io/input_parser.star@1.2.0"
+    "github.com/kurtosis-tech/ethereum-package/src/package_io/input_parser.star"
 )
 
 diva_server = import_module("./src/diva-server.star")
@@ -18,6 +18,7 @@ nimbus = import_module("./src/nimbus.star")
 input_parser = import_module("./src/input_parser.star")
 utils = import_module("./src/utils.star")
 
+
 def run(plan, args):
     args_with_right_defaults = input_parser.input_parser(plan, args)
     network_params = args_with_right_defaults["network_params"]
@@ -27,15 +28,9 @@ def run(plan, args):
 
     diva_nodes = diva_params["nodes"]
     diva_threshold = diva_params["threshold"]
-    diva_validators_to_import = diva_params["validators_to_import"]
-
-    plan.print(
-        "{0} is the value of num_validator_keys_per_node ".format(
-            num_validator_keys_per_node
-        )
-    )
-
-    ethereum_network = ethereum_package.run(plan, args)
+    diva_validators = diva_params["validator_count"]
+    
+    ethereum_network = ethereum_package.run(plan, args_with_right_defaults)
     plan.print("Succesfully launched an Ethereum Network")
 
     genesis_validators_root, final_genesis_timestamp = (
@@ -107,26 +102,24 @@ def run(plan, args):
 
     diva_operator.launch(plan)
 
-    validators_keystore = []
-    validators_name = []
-    for i in range(diva_validators_to_import):
-        validator = ethereum_network.all_participants[i].cl_client_context
-        validators_name.append(validator.validator_service_name)
-        validators_keystore.append(validator.validator_keystore_files_artifact_uuid)
-        # first_node_index = 0
+
+    dummy_validator = 0
+    dummy_validator = ethereum_network.all_participants[0].cl_client_context
+    dummy_validator_name = dummy_validator.validator_service_name
+    dummy_validator_keystore = (
+        dummy_validator.validator_keystore_files_artifact_uuid
+    )
 
     configuration_tomls = keys.generate_configuration_tomls(
-        plan, validators_keystore, diva_urls, diva_addresses, diva_threshold
+        plan, [dummy_validator_keystore], diva_urls, diva_addresses, diva_threshold
     )
 
     diva_cli.start_cli(plan, configuration_tomls)
+    diva_cli.deploy(plan, dummy_validator, diva_validators)  # Validator-count?
 
-    for i in range(diva_validators_to_import):
-        diva_cli.deploy(plan, i, num_validator_keys_per_node)
-
-    for validator in validators_name:
-        plan.print("stopping validator {0}".format(validator))
-        plan.stop_service(validator)
+    
+    plan.print("stopping validator {0}".format(dummy_validator_name))
+    plan.stop_service(dummy_validator_name)
 
     plan.print("starting nimbus with diva configured")
     for index in range(0, diva_nodes):

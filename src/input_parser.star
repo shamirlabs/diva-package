@@ -1,18 +1,24 @@
 ethereum_input_parser = import_module(
-    "github.com/kurtosis-tech/ethereum-package/src/package_io/input_parser.star@1.2.0"
+    "github.com/kurtosis-tech/ethereum-package/src/package_io/input_parser.star"
 )
 
 
+def default_diva_validator():
+    validator = ethereum_input_parser.default_participant()
+    validator["el_client_type"] = "geth"
+    validator["cl_client_type"] = "nimbus"
+    validator["cl_split_mode_enabled"] = True
+    return validator
+
+
 def default_diva_params():
-    return {"nodes": 5, "threshold": 3, "validators_to_import": 1}
+    return {"nodes": 5, "threshold": 3, "validator_count": 20}
 
 
 def default_input_args():
     network_params = ethereum_input_parser.default_network_params()
-    participants = [ethereum_input_parser.default_participant()]
     diva = default_diva_params()
     return {
-        "participants": participants,
         "network_params": network_params,
         "diva": diva,
     }
@@ -28,25 +34,27 @@ def parse_diva_params(plan, input_args):
                 sub_value = input_args["network_params"][sub_attr]
                 result["network_params"][sub_attr] = sub_value
         elif attr == "participants":
-            participants = []
+            participants = [default_diva_validator()]
             for participant in input_args["participants"]:
                 new_participant = ethereum_input_parser.default_participant()
                 for sub_attr, sub_value in participant.items():
                     new_participant[sub_attr] = sub_value
-                plan.print(new_participant)
                 for _ in range(0, new_participant["count"]):
-                    participant_copy = ethereum_input_parser.deep_copy_participant(new_participant)
+                    participant_copy = ethereum_input_parser.deep_copy_participant(
+                        new_participant
+                    )
                     participants.append(participant_copy)
             result["participants"] = participants
-            
+
         elif attr == "diva":
             for sub_attr in input_args["diva"]:  # TODO: improve with items
                 sub_value = input_args["diva"][sub_attr]
                 result["diva"][sub_attr] = sub_value
+    
+    plan.print(result["participants"])
+    result["participants"][0]["validator_count"] = result["diva"]["validator_count"]
 
-    total_participant_count = len(result["participants"]) # validator clients
     actual_num_validators = 0
-    # validation of the above defaults
     for index, participant in enumerate(result["participants"]):
         validator_count = participant["validator_count"]
         if validator_count == None:
@@ -72,19 +80,14 @@ def parse_diva_params(plan, input_args):
             "diva.threshold is invalid: %s. Should be between 1 and diva.nodes (%s)"
             % (result["diva"]["threshold"], result["diva"]["nodes"])
         )
-    if result["diva"]["validators_to_import"] <= 0:
+    if result["diva"]["validator_count"] <= 0:
         fail(
-            "diva.validators_to_import is invalid: %s. Should be greater than zero"
+            "diva.diva_validators is invalid: %s. Should be greater than zero"
             % (result["diva"]["validators_to_import"])
-        )
-    if result["diva"]["validators_to_import"] > total_participant_count:
-        fail(
-            "diva.validators_to_import is invalid: %s. Should be between 1 and the number of participants (%s)"
-            % (result["diva"]["validators_to_import"], total_participant_count)
         )
 
     return result
 
 
 def input_parser(plan, input_args):
-    return parse_diva_params(plan,input_args)
+    return parse_diva_params(plan, input_args)
