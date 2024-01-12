@@ -21,14 +21,17 @@ def run(plan, args):
         "network_params",
         {"num_validator_keys_per_node": DEFAULT_NUM_VALIDATOR_KEYS_PER_NODE},
     )
+    diva_params = args.get(
+        "diva_params"
+    )
     num_validator_keys_per_node = network_params.get(
         "num_validator_keys_per_node", DEFAULT_NUM_VALIDATOR_KEYS_PER_NODE
     )
-    plan.print(
-        "{0} is the value of num_validator_keys_per_node ".format(
-            num_validator_keys_per_node
-        )
+
+    verify_fee_recipient=diva_params.get(
+        "verify_fee_recipient"
     )
+
 
     ethereum_network = ethereum_package.run(plan, args)
     plan.print("Succesfully launched an Ethereum Network")
@@ -88,8 +91,9 @@ def run(plan, args):
             genesis_validators_root,
             final_genesis_timestamp,
             bootnode.ip_address,
+            verify_fee_recipient,
             # for now we assume this only connects to nimbus
-            is_nimbus=True,
+            is_nimbus=True
         )
         diva_urls.append(node_url)
         signer_urls.append(signer_url)
@@ -131,5 +135,6 @@ def run(plan, args):
             "diva-validator-{0}".format(index),
             signer_urls[index],
             cl_uri,
-            smart_contract_address
+            smart_contract_address,
+            verify_fee_recipient
         )
