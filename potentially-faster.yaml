@@ -1,0 +1,10 @@
+network_params:
+  num_validator_keys_per_node: 1
+  genesis_delay: 120
+participants:
+  - el_client_type: geth
+    cl_client_type: teku
+    cl_split_mode_enabled: true
+  - el_client_type: geth
+    cl_client_type: nimbus
+    validator_count: 65

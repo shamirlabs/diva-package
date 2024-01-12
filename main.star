@@ -38,13 +38,13 @@ def run(plan, args):
         ethereum_network.final_genesis_timestamp,
     )
 
-    el_ip_addr = ethereum_network.all_participants[0].el_client_context.ip_addr
-    el_ws_port = ethereum_network.all_participants[0].el_client_context.ws_port_num
-    el_rpc_port = ethereum_network.all_participants[0].el_client_context.rpc_port_num
+    el_ip_addr = ethereum_network.all_participants[1].el_client_context.ip_addr
+    el_ws_port = ethereum_network.all_participants[1].el_client_context.ws_port_num
+    el_rpc_port = ethereum_network.all_participants[1].el_client_context.rpc_port_num
     el_rpc_uri = "http://{0}:{1}".format(el_ip_addr, el_rpc_port)
     el_ws_uri = "ws://{0}:{1}".format(el_ip_addr, el_ws_port)
 
-    cl_ip_addr = ethereum_network.all_participants[0].cl_client_context.ip_addr
+    cl_ip_addr = ethereum_network.all_participants[1].cl_client_context.ip_addr
     cl_http_port_num = ethereum_network.all_participants[
         0
     ].cl_client_context.http_port_num
@@ -74,38 +74,15 @@ def run(plan, args):
     plan.print("Starting DIVA nodes")
     diva_urls = []
     validators_to_shutdown = []
-    validator_keystores = []
-    cl_uris = []
     diva_addresses = []
     signer_urls = []
-    for index, participant in enumerate(ethereum_network.all_participants):
-        per_node_el_ip_addr = ethereum_network.all_participants[
-            index
-        ].el_client_context.ip_addr
-        per_node_el_ws_port = ethereum_network.all_participants[
-            index
-        ].el_client_context.ws_port_num
-        per_node_el_uri = "ws://{0}:{1}".format(el_ip_addr, per_node_el_ws_port)
-
-        per_node_cl_ip_addr = ethereum_network.all_participants[
-            0
-        ].cl_client_context.ip_addr
-        per_node_cl_http_port_num = ethereum_network.all_participants[
-            index
-        ].cl_client_context.http_port_num
-        per_node_cl_uri = "http://{0}:{1}".format(cl_ip_addr, cl_http_port_num)
-        cl_uris.append(per_node_cl_uri)
-
-        cl_client_context = participant.cl_client_context
-        validator_service_name = cl_client_context.validator_service_name
-        validators_to_shutdown.append(validator_service_name)
-
+    for index in range(0, constants.NUMBER_OF_DIVA_NODES):
         node, node_url, signer_url = diva_server.start_node(
             plan,
             # TODO improve on this name for diva
-            "cl-{0}-diva".format(index + 1),
-            per_node_el_uri,
-            per_node_cl_uri,
+            "diva-client-{0}".format(index + 1),
+            el_ws_uri,
+            cl_uri,
             smart_contract_address,
             bootnode_peer_id,
             genesis_validators_root,
@@ -122,25 +99,37 @@ def run(plan, args):
         node_address = utils.get_address(plan, node_url)
         diva_addresses.append(node_address)
         diva_sc.register(plan, private_key, smart_contract_address, node_address)
-        validator_keystores.append(
-            cl_client_context.validator_keystore_files_artifact_uuid
-        )
 
     diva_operator.launch(plan)
 
-    configuration_tomls = keys.generate_configuration_tomls(
-        plan, validator_keystores, diva_urls, diva_addresses
+    first_participant = ethereum_network.all_participants[0].cl_client_context
+    first_participant_validator_service_name = first_participant.validator_service_name
+    first_participant_keystore = (
+        first_participant.validator_keystore_files_artifact_uuid
     )
-    diva_cli.start_cli(plan, configuration_tomls)
-    diva_cli.deploy(plan, len(diva_urls), num_validator_keys_per_node)
+    first_node_index = 0
 
-    plan.print("stopping existing validators and starting nimbus' with diva configured")
-    for index, participant in enumerate(ethereum_network.all_participants):
-        validator_service_name = participant.cl_client_context.validator_service_name
-        plan.stop_service(validator_service_name)
+    configuration_tomls = keys.generate_configuration_tomls(
+        plan, [first_participant_keystore], diva_urls, diva_addresses
+    )
+
+    diva_cli.start_cli(plan, configuration_tomls)
+    diva_cli.deploy(plan, first_node_index, num_validator_keys_per_node)
+
+    plan.print(
+        "stopping validator {0}".format(first_participant_validator_service_name)
+    )
+
+    plan.print(
+        "DIVA SC address: {0}".format(smart_contract_address)
+    )    
+    plan.stop_service(first_participant_validator_service_name)
+
+    for index in range(0, constants.NUMBER_OF_DIVA_NODES):
         nimbus.launch(
             plan,
-            validator_service_name + "-diva",
+            "diva-validator-{0}".format(index),
             signer_urls[index],
-            cl_uris[index],
+            cl_uri,
+            smart_contract_address
         )

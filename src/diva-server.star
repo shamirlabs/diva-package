@@ -85,7 +85,6 @@ def start_node(
         ),
         "--master-key={0}".format(constants.DIVA_API_KEY),
         "--fork-info=0x40000038",
-        "--verify-fee-recipient",
         "--gvr={0}".format(genesis_validators_root),
         "--deposit-contract=0x4242424242424242424242424242424242424242",
         "--chain-id=3151908",
