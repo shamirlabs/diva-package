@@ -1,17 +1,12 @@
 network_params:
-  # feel free to tweak this
-  # we will have 5 el cl clients, so 5*13=65 validators at genesis
-  # we will take them all down
-  # and make them diva validators 64
-  # what if out of the five; leave four up and the five one make it diva
-  # 13 validators per validator client
-  # the first four client are up
-  # the fifth client we bring it down, 13 validators for diva
-  # 
-  num_validator_keys_per_node: 13
+  num_validator_keys_per_node: 1
+  genesis_delay: 120
 participants:
   - el_client_type: geth
-    cl_client_type: nimbus
+    cl_client_type: teku
     cl_split_mode_enabled: true
-    count: 5
-  
+  - el_client_type: geth
+    cl_client_type: nimbus
+    validator_count: 65
+diva_params:
+  verify_fee_recipient: true
