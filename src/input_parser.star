@@ -1,12 +1,12 @@
 ethereum_input_parser = import_module(
-    "github.com/kurtosis-tech/ethereum-package/src/package_io/input_parser.star"
+    "github.com/kurtosis-tech/ethereum-package/src/package_io/input_parser.star@d5bf45150dc09432bb84b366d2deda8c6036afea"
 )
 
 
 def default_diva_validator():
     validator = ethereum_input_parser.default_participant()
     validator["el_client_type"] = "geth"
-    validator["cl_client_type"] = "nimbus"
+    validator["cl_client_type"] = "teku"
     validator["cl_split_mode_enabled"] = True
     return validator
 
