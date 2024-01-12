@@ -1,11 +1,11 @@
 ethereum_package = import_module(
-    "github.com/kurtosis-tech/ethereum-package/main.star"
+    "github.com/kurtosis-tech/ethereum-package/main.star@d5bf45150dc09432bb84b366d2deda8c6036afea"
 )
 ethereum_genesis_constants = import_module(
-    "github.com/kurtosis-tech/ethereum-package/src/prelaunch_data_generator/genesis_constants/genesis_constants.star"
+    "github.com/kurtosis-tech/ethereum-package/src/prelaunch_data_generator/genesis_constants/genesis_constants.star@d5bf45150dc09432bb84b366d2deda8c6036afea"
 )
 ethereum_input_parser = import_module(
-    "github.com/kurtosis-tech/ethereum-package/src/package_io/input_parser.star"
+    "github.com/kurtosis-tech/ethereum-package/src/package_io/input_parser.star@d5bf45150dc09432bb84b366d2deda8c6036afea"
 )
 
 diva_server = import_module("./src/diva-server.star")
@@ -103,8 +103,8 @@ def run(plan, args):
     diva_operator.launch(plan)
 
 
-    dummy_validator = 0
-    dummy_validator = ethereum_network.all_participants[0].cl_client_context
+    dummy_validator_index = 0
+    dummy_validator = ethereum_network.all_participants[dummy_validator_index].cl_client_context
     dummy_validator_name = dummy_validator.validator_service_name
     dummy_validator_keystore = (
         dummy_validator.validator_keystore_files_artifact_uuid
@@ -115,7 +115,7 @@ def run(plan, args):
     )
 
     diva_cli.start_cli(plan, configuration_tomls)
-    diva_cli.deploy(plan, dummy_validator, diva_validators)  # Validator-count?
+    diva_cli.deploy(plan, dummy_validator_index, diva_validators)  # Validator-count?
 
     
     plan.print("stopping validator {0}".format(dummy_validator_name))
