@@ -6,7 +6,7 @@ ethereum_input_parser = import_module(
 def default_diva_validator():
     validator = ethereum_input_parser.default_participant()
     validator["el_client_type"] = "geth"
-    validator["cl_client_type"] = "teku"
+    validator["cl_client_type"] = "nimbus"
     validator["cl_split_mode_enabled"] = True
     return validator
 
