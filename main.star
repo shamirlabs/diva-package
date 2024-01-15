@@ -1,11 +1,11 @@
 ethereum_package = import_module(
-    "github.com/kurtosis-tech/ethereum-package/main.star@d5bf45150dc09432bb84b366d2deda8c6036afea"
+    "github.com/kurtosis-tech/ethereum-package/main.star"
 )
 ethereum_genesis_constants = import_module(
-    "github.com/kurtosis-tech/ethereum-package/src/prelaunch_data_generator/genesis_constants/genesis_constants.star@d5bf45150dc09432bb84b366d2deda8c6036afea"
+    "github.com/kurtosis-tech/ethereum-package/src/prelaunch_data_generator/genesis_constants/genesis_constants.star"
 )
 ethereum_input_parser = import_module(
-    "github.com/kurtosis-tech/ethereum-package/src/package_io/input_parser.star@d5bf45150dc09432bb84b366d2deda8c6036afea"
+    "github.com/kurtosis-tech/ethereum-package/src/package_io/input_parser.star"
 )
 
 diva_server = import_module("./src/diva-server.star")

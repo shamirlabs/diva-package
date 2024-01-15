@@ -1,5 +1,5 @@
 ethereum_input_parser = import_module(
-    "github.com/kurtosis-tech/ethereum-package/src/package_io/input_parser.star@d5bf45150dc09432bb84b366d2deda8c6036afea"
+    "github.com/kurtosis-tech/ethereum-package/src/package_io/input_parser.star"
 )
 
 
