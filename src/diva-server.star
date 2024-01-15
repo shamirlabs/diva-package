@@ -68,7 +68,8 @@ def start_node(
     genesis_validators_root,
     genesis_time,
     bootnode_ip_address,
-    is_nimbus=True,
+    verify_fee_recipient,
+    is_nimbus,
 ):
     cmd = [
         "--db=/data/diva.db",
@@ -85,14 +86,13 @@ def start_node(
         ),
         "--master-key={0}".format(constants.DIVA_API_KEY),
         "--fork-info=0x40000038",
-        "--verify-fee-recipient",
         "--gvr={0}".format(genesis_validators_root),
         "--deposit-contract=0x4242424242424242424242424242424242424242",
         "--chain-id=3151908",
         "--genesis-time={0}".format(genesis_time),
     ]
 
-    if is_nimbus:
+    if is_nimbus and verify_fee_recipient:
         cmd.append("--verify-fee-recipient")
 
     result = plan.add_service(

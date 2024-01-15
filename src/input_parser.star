@@ -12,7 +12,12 @@ def default_diva_validator():
 
 
 def default_diva_params():
-    return {"nodes": 5, "threshold": 3, "validator_count": 20}
+    return {
+        "nodes": 5,
+        "threshold": 3,
+        "validator_count": 20,
+        "verify_fee_recipient": True,
+    }
 
 
 def default_input_args():
@@ -50,7 +55,7 @@ def parse_diva_params(plan, input_args):
             for sub_attr in input_args["diva"]:  # TODO: improve with items
                 sub_value = input_args["diva"][sub_attr]
                 result["diva"][sub_attr] = sub_value
-    
+
     plan.print(result["participants"])
     result["participants"][0]["validator_count"] = result["diva"]["validator_count"]
 

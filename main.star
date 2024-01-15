@@ -29,7 +29,8 @@ def run(plan, args):
     diva_nodes = diva_params["nodes"]
     diva_threshold = diva_params["threshold"]
     diva_validators = diva_params["validator_count"]
-    
+    diva_verify_fee_recipient = diva_params["verify_fee_recipient"]
+
     ethereum_network = ethereum_package.run(plan, args_with_right_defaults)
     plan.print("Succesfully launched an Ethereum Network")
 
@@ -38,15 +39,15 @@ def run(plan, args):
         ethereum_network.final_genesis_timestamp,
     )
 
-    el_ip_addr = ethereum_network.all_participants[0].el_client_context.ip_addr
-    el_ws_port = ethereum_network.all_participants[0].el_client_context.ws_port_num
-    el_rpc_port = ethereum_network.all_participants[0].el_client_context.rpc_port_num
+    el_ip_addr = ethereum_network.all_participants[1].el_client_context.ip_addr
+    el_ws_port = ethereum_network.all_participants[1].el_client_context.ws_port_num
+    el_rpc_port = ethereum_network.all_participants[1].el_client_context.rpc_port_num
     el_rpc_uri = "http://{0}:{1}".format(el_ip_addr, el_rpc_port)
     el_ws_uri = "ws://{0}:{1}".format(el_ip_addr, el_ws_port)
 
-    cl_ip_addr = ethereum_network.all_participants[0].cl_client_context.ip_addr
+    cl_ip_addr = ethereum_network.all_participants[1].cl_client_context.ip_addr
     cl_http_port_num = ethereum_network.all_participants[
-        0
+        1
     ].cl_client_context.http_port_num
     cl_uri = "http://{0}:{1}".format(cl_ip_addr, cl_http_port_num)
 
@@ -88,6 +89,7 @@ def run(plan, args):
             genesis_validators_root,
             final_genesis_timestamp,
             bootnode.ip_address,
+            diva_verify_fee_recipient,
             # for now we assume this only connects to nimbus
             is_nimbus=True,
         )
@@ -102,13 +104,12 @@ def run(plan, args):
 
     diva_operator.launch(plan)
 
-
     dummy_validator_index = 0
-    dummy_validator = ethereum_network.all_participants[dummy_validator_index].cl_client_context
+    dummy_validator = ethereum_network.all_participants[
+        dummy_validator_index
+    ].cl_client_context
     dummy_validator_name = dummy_validator.validator_service_name
-    dummy_validator_keystore = (
-        dummy_validator.validator_keystore_files_artifact_uuid
-    )
+    dummy_validator_keystore = dummy_validator.validator_keystore_files_artifact_uuid
 
     configuration_tomls = keys.generate_configuration_tomls(
         plan, [dummy_validator_keystore], diva_urls, diva_addresses, diva_threshold
@@ -117,7 +118,6 @@ def run(plan, args):
     diva_cli.start_cli(plan, configuration_tomls)
     diva_cli.deploy(plan, dummy_validator_index, diva_validators)  # Validator-count?
 
-    
     plan.print("stopping validator {0}".format(dummy_validator_name))
     plan.stop_service(dummy_validator_name)
 
@@ -128,4 +128,6 @@ def run(plan, args):
             "diva-validator-{0}".format(index),
             signer_urls[index],
             cl_uri,
+            smart_contract_address,
+            diva_verify_fee_recipient,
         )

@@ -19,3 +19,4 @@ diva:
   nodes: 5
   threshold: 3
   validator_count: 24
+  verify_fee_recipient: true
