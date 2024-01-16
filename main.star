@@ -13,19 +13,18 @@ nimbus = import_module("./src/nimbus.star")
 
 utils = import_module("./src/utils.star")
 
-DEFAULT_NUM_VALIDATOR_KEYS_PER_NODE = 64
+DEFAULT_NUM_VALIDATOR_KEYS_PER_NODE = 1
 
 
 def run(plan, args):
     network_params = args.get(
-        "network_params",
-        {"num_validator_keys_per_node": DEFAULT_NUM_VALIDATOR_KEYS_PER_NODE},
+        "network_params"
     )
     diva_params = args.get(
         "diva_params"
     )
-    num_validator_keys_per_node = network_params.get(
-        "num_validator_keys_per_node", DEFAULT_NUM_VALIDATOR_KEYS_PER_NODE
+    diva_validators = diva_params.get(
+        "validator_count", DEFAULT_NUM_VALIDATOR_KEYS_PER_NODE
     )
 
     verify_fee_recipient=diva_params.get(
@@ -116,7 +115,7 @@ def run(plan, args):
     )
 
     diva_cli.start_cli(plan, configuration_tomls)
-    diva_cli.deploy(plan, first_node_index, num_validator_keys_per_node)
+    diva_cli.deploy(plan, first_node_index, diva_validators)
 
     plan.print(
         "stopping validator {0}".format(first_participant_validator_service_name)
