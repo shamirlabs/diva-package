@@ -1,6 +1,3 @@
-network_params:
-  genesis_delay: 120
-
 ethereum:
   consensus_http: "http://"
   execution_ws: "ws://"
@@ -12,6 +9,10 @@ ethereum:
   genesis_fork_version: "0x10000038"
   genesis_validators_root: "0xae3bf670c40b1d7c8db596193fb5090aeb9751e2ccab31ae2463d9947a83c715"
   funded_priv_key: "bcdf20249abf0ed6d944c0288fad489e33f66b3960d9e6229c1cd214ed3bbe31"
+  preregistered_validator_keys_mnemonic:
+    "giant issue aisle success illegal bike spike
+    question tent bar rely arctic volcano long crawl hungry vocal artwork sniff fantasy
+    very lucky have athlete"
 
 diva_pools:
   set_size: 5
