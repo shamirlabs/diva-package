@@ -25,7 +25,8 @@ def start_bootnode(
                 "--swagger-ui-enabled",
                 "--contract={0}".format(contract_address),
                 "--master-key={0}".format(constants.DIVA_API_KEY),
-                "--fork-info=0x40000038",
+                "--genesis-fork-version=0x10000038",
+                "--current-fork-version=0x40000038",
                 "--gvr={0}".format(genesis_validators_root),
                 "--deposit-contract=0x4242424242424242424242424242424242424242",
                 # TODO this can be parametrized and use `network_params.network_id`
@@ -85,7 +86,8 @@ def start_node(
             bootnode_ip_address, bootnode_peer_id
         ),
         "--master-key={0}".format(constants.DIVA_API_KEY),
-        "--fork-info=0x40000038",
+        "--genesis-fork-version=0x10000038",
+        "--current-fork-version=0x40000038",
         "--gvr={0}".format(genesis_validators_root),
         "--deposit-contract=0x4242424242424242424242424242424242424242",
         "--chain-id=3151908",
