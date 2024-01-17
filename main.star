@@ -123,7 +123,7 @@ def run(plan, args):
     )
 
     diva_cli.start_cli(plan, configuration_tomls)
-    diva_cli.deploy(plan, first_node_index, diva_validators)
+    diva_cli.deploy(plan, diva_validators)
 
     plan.print(
         "stopping validator {0}".format(first_participant_validator_service_name)

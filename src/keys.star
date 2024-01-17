@@ -28,7 +28,10 @@ def generate_configuration_tomls(plan, validator_keystores, diva_urls, diva_addr
     )
 
     # note here all keys from all validator keystores are split over all divas
-    for index in range(0, len(validator_keystores)):
+    for index in range(0, len(validator_keystores)-1 ):
+        plan.print("Generating keystores for {0}".format(index))
+        plan.print("Total keystores is {0}".format(len(validator_keystores)))
+
         plan.exec(
             service_name="python-runner",
             recipe=ExecRecipe(
