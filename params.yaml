@@ -2,12 +2,12 @@ network_params:
   genesis_delay: 120
 participants:
   - el_client_type: geth
-    cl_client_type: teku
-    cl_split_mode_enabled: true
-    validator_count: 5
+    cl_client_type: lighthouse
+    validator_count: 8
 
   - el_client_type: geth
     cl_client_type: nimbus
-    validator_count: 65
+    validator_count: 68
+
 diva_params:
-  verify_fee_recipient: true
+  verify_fee_recipient: false

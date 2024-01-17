@@ -9,6 +9,7 @@ def launch(plan, service_name, web3_signer_url, beacon_url, fee_recipient, verif
         "--web3-signer-update-interval=360",
         "--beacon-node={0}".format(beacon_url),
         "--suggested-fee-recipient={0}".format(fee_recipient),
+        "--graffiti={0}".format(service_name),
     ]
 
     if verify_fee_recipient:
