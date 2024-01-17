@@ -17,12 +17,15 @@ DEFAULT_NUM_VALIDATOR_KEYS_PER_NODE = 1
 
 
 def run(plan, args):
+
     network_params = args.get(
         "network_params"
     )
+
     diva_params = args.get(
         "diva_params"
     )
+
     diva_validators = diva_params.get(
         "validator_count", DEFAULT_NUM_VALIDATOR_KEYS_PER_NODE
     )
@@ -31,14 +34,19 @@ def run(plan, args):
         "verify_fee_recipient"
     )
 
+    genesis_delay = network_params.get(
+        "genesis_delay"
+    )
 
     ethereum_network = ethereum_package.run(plan, args)
+
     plan.print("Succesfully launched an Ethereum Network")
 
     genesis_validators_root, final_genesis_timestamp = (
         ethereum_network.genesis_validators_root,
         ethereum_network.final_genesis_timestamp,
     )
+    genesis_time= final_genesis_timestamp + genesis_delay
 
     el_ip_addr = ethereum_network.all_participants[1].el_client_context.ip_addr
     el_ws_port = ethereum_network.all_participants[1].el_client_context.ws_port_num
@@ -60,7 +68,7 @@ def run(plan, args):
         cl_uri,
         smart_contract_address,
         genesis_validators_root,
-        final_genesis_timestamp,
+        genesis_time,
     )
 
     diva_cli.start_cli(plan)
@@ -86,7 +94,7 @@ def run(plan, args):
             smart_contract_address,
             bootnode_peer_id,
             genesis_validators_root,
-            final_genesis_timestamp,
+            genesis_time,
             bootnode.ip_address,
             verify_fee_recipient,
             # for now we assume this only connects to nimbus
