@@ -3,8 +3,7 @@ network_params:
   
 additional_services:
   - dora
-
-mev_type: null
+mev_type: none
 
 participants:
   - el_client_type: geth
@@ -17,3 +16,9 @@ participants:
 
 diva_params:
   verify_fee_recipient: false
+  deploy_diva: true
+  deploy_eth:
+    deploy_eth_clients: true
+    deploy_diva_sc: true
+    deploy_diva_coord_boot: true
+
