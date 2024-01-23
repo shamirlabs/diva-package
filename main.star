@@ -1,4 +1,4 @@
-ethereum_package = import_module("github.com/kurtosis-tech/ethereum-package/main.star")
+ethereum_package = import_module("github.com/kurtosis-tech/ethereum-package@1.3.0/main.star")
 genesis_constants = import_module(
     "github.com/kurtosis-tech/ethereum-package/src/prelaunch_data_generator/genesis_constants/genesis_constants.star"
 )
@@ -23,9 +23,7 @@ def run(plan, args):
     diva_params = args.get(
         "diva_params"
     )
-    diva_validators = diva_params.get(
-        "validator_count", DEFAULT_NUM_VALIDATOR_KEYS_PER_NODE
-    )
+    diva_validators = 1
 
     verify_fee_recipient=diva_params.get(
         "verify_fee_recipient"
@@ -40,14 +38,14 @@ def run(plan, args):
         ethereum_network.final_genesis_timestamp,
     )
 
-    el_ip_addr = ethereum_network.all_participants[1].el_client_context.ip_addr
-    el_ws_port = ethereum_network.all_participants[1].el_client_context.ws_port_num
-    el_rpc_port = ethereum_network.all_participants[1].el_client_context.rpc_port_num
+    el_ip_addr = ethereum_network.all_participants[0].el_client_context.ip_addr
+    el_ws_port = ethereum_network.all_participants[0].el_client_context.ws_port_num
+    el_rpc_port = ethereum_network.all_participants[0].el_client_context.rpc_port_num
     el_rpc_uri = "http://{0}:{1}".format(el_ip_addr, el_rpc_port)
     el_ws_uri = "ws://{0}:{1}".format(el_ip_addr, el_ws_port)
 
-    cl_ip_addr = ethereum_network.all_participants[1].cl_client_context.ip_addr
-    cl_http_port_num = ethereum_network.all_participants[1].cl_client_context.http_port_num
+    cl_ip_addr = ethereum_network.all_participants[0].cl_client_context.ip_addr
+    cl_http_port_num = ethereum_network.all_participants[0].cl_client_context.http_port_num
     cl_uri = "http://{0}:{1}".format(cl_ip_addr, cl_http_port_num)
 
     smart_contract_address = diva_sc.deploy(
@@ -108,14 +106,13 @@ def run(plan, args):
     first_participant_keystore = (
         first_participant.validator_keystore_files_artifact_uuid
     )
-    first_node_index = 0
 
     configuration_tomls = keys.generate_configuration_tomls(
         plan, [first_participant_keystore], diva_urls, diva_addresses
     )
 
     diva_cli.start_cli(plan, configuration_tomls)
-    diva_cli.deploy(plan, first_node_index, diva_validators)
+    diva_cli.deploy(plan, diva_validators)
 
     plan.print(
         "stopping validator {0}".format(first_participant_validator_service_name)
