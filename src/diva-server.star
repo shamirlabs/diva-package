@@ -7,8 +7,16 @@ DIVA_BOOTNODE_NAME = "diva-bootnode-coordinator"
 
 # Starts the BootNode / Coordinator Node
 def start_bootnode(
-    plan, el_url, cl_url, contract_address, genesis_validators_root, genesis_time
+    plan, el_url, cl_url, contract_address, genesis_validators_root, genesis_time, ephemeral_ports
 ):
+
+
+    public_ports = {}
+    if not ephemeral_ports:
+        public_ports["diva_w3s"] = PortSpec(number = constants.DIVA_W3S, transport_protocol = "TCP", wait=None)
+        public_ports["diva_api"] = PortSpec(number = constants.DIVA_API , transport_protocol = "TCP", wait=None)
+        public_ports["diva_p2p"] = PortSpec(number = constants.DIVA_P2P , transport_protocol = "TCP", wait=None)
+
     result = plan.add_service(
         name=DIVA_BOOTNODE_NAME,
         config=ServiceConfig(
@@ -39,22 +47,23 @@ def start_bootnode(
             },
             ports={
                 # TODO figure out why the port check isn't working
-                "p2p": PortSpec(number=5050, transport_protocol="TCP", wait=None),
+                "diva_p2p": PortSpec(number=5050, transport_protocol="TCP", wait=None),
                 # TODO figure out why the port check isn't working
-                "signer-api": PortSpec(
+                "diva_w3s": PortSpec(
                     number=9000, transport_protocol="TCP", wait=None
                 ),
-                "api": PortSpec(number=30000, transport_protocol="TCP"),
+                "diva_api": PortSpec(number=30000, transport_protocol="TCP"),
             },
             files={
                 "/data": Directory(
                     persistent_key="diva-db-{0}".format(DIVA_BOOT_NODE_NAME)
                 )
             },
+            #public_ports = public_ports
         ),
     )
 
-    return result, "http://{0}:30000".format(result.name)
+    return result, "http://{0}:{1}".format(result.name,constants.DIVA_API)
 
 
 # Starts a normal DIVA Node

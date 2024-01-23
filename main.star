@@ -13,7 +13,6 @@ nimbus = import_module("./src/nimbus.star")
 
 utils = import_module("./src/utils.star")
 
-DEFAULT_NUM_VALIDATOR_KEYS_PER_NODE = 1
 
 
 def run(plan, args):
@@ -53,7 +52,7 @@ def run(plan, args):
     diva_validators = participants[0].get(
         "validator_count"
     )
-    diva_validators=8
+    diva_validators=2
     verify_fee_recipient=diva_params.get(
         "verify_fee_recipient"
     )
@@ -81,16 +80,17 @@ def run(plan, args):
     cl_http_port_num = ethereum_network.all_participants[1].cl_client_context.http_port_num
     cl_uri = "http://{0}:{1}".format(cl_ip_addr, cl_http_port_num)
 
-    if deploy_diva_sc and deploy_eth_clients:
+    if deploy_diva_sc:
         smart_contract_address = diva_sc.deploy(
             plan, el_rpc_uri, genesis_constants.PRE_FUNDED_ACCOUNTS[1].private_key
         )
         plan.print(
         "DIVA SC address: {0}".format(smart_contract_address)
-        )        
+        )
+
     diva_cli.start_cli(plan)
 
-    if deploy_diva_coord_boot and deploy_eth_clients:
+    if deploy_diva_coord_boot:
         bootnode, bootnode_url = diva_server.start_bootnode(
             plan,
             el_ws_uri,
@@ -98,6 +98,7 @@ def run(plan, args):
             smart_contract_address,
             genesis_validators_root,
             genesis_time,
+            ephemeral_ports=False
         )
         diva_cli.generate_identity(plan, bootnode_url)
         bootnode_address = utils.get_address(plan, bootnode_url)

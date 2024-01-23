@@ -1,14 +1,16 @@
 network_params:
-  genesis_delay: 120
+  genesis_delay: 60
   
 additional_services:
   - dora
-mev_type: none
+  - custom_flood
+
+mev_type: full
 
 participants:
   - el_client_type: geth
     cl_client_type: lighthouse
-    validator_count: 8
+    validator_count: 2
 
   - el_client_type: geth
     cl_client_type: nimbus
@@ -22,3 +24,6 @@ diva_params:
     deploy_diva_sc: true
     deploy_diva_coord_boot: true
 
+
+mev_params:
+  launch_custom_flood: true
