@@ -43,3 +43,47 @@ print(peer_id, end="")
 """,
     )
     return result.output
+
+def get_gvr(plan, cl_url):
+    result = plan.run_python(
+        packages=["requests"],
+        run="""
+import requests
+import sys
+response = requests.get(\""""
+        + cl_url
+        + """/eth/v1/beacon/genesis")
+if response.status_code != 200:
+    sys.exit(1)
+peer_id = response.json()["data"]["genesis_validators_root"]
+print(peer_id, end="")
+""",
+    )
+    return (result.output)
+
+def get_genesis_time(plan, cl_url):
+    result = plan.run_python(
+        packages=["requests"],
+        run="""
+import requests
+import sys
+response = requests.get(\""""
+        + cl_url
+        + """/eth/v1/beacon/genesis")
+if response.status_code != 200:
+    sys.exit(1)
+peer_id = response.json()["data"]["genesis_time"]
+print(peer_id, end="")
+""",
+    )
+    return (result.output)    
+
+
+def get_sc_address(plan, output):
+    lines = output.split('\n')
+    if len(lines) >= 5:
+        line = lines[5].strip() 
+    else:
+        line = ""
+
+    return line

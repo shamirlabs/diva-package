@@ -7,13 +7,13 @@ DIVA_BOOTNODE_NAME = "diva-bootnode-coordinator"
 
 # Starts the BootNode / Coordinator Node
 def start_bootnode(
-    plan, el_url, cl_url, contract_address, genesis_validators_root, genesis_time, ephemeral_ports
+    plan, el_url, cl_url, contract_address, genesis_validators_root, genesis_time, fixed_ports
 ):
 
 
     public_ports = {}
-    if not ephemeral_ports:
-        public_ports["diva_w3s"] = PortSpec(number = constants.DIVA_W3S, transport_protocol = "TCP", wait=None)
+    if fixed_ports:
+        public_ports["diva_w3s"] = PortSpec(number = 1234, transport_protocol = "TCP", wait=None)
         public_ports["diva_api"] = PortSpec(number = constants.DIVA_API , transport_protocol = "TCP", wait=None)
         public_ports["diva_p2p"] = PortSpec(number = constants.DIVA_P2P , transport_protocol = "TCP", wait=None)
 
@@ -50,8 +50,7 @@ def start_bootnode(
                 "diva_p2p": PortSpec(number=5050, transport_protocol="TCP", wait=None),
                 # TODO figure out why the port check isn't working
                 "diva_w3s": PortSpec(
-                    number=9000, transport_protocol="TCP", wait=None
-                ),
+                    number=9000, transport_protocol="TCP", wait=None),
                 "diva_api": PortSpec(number=30000, transport_protocol="TCP"),
             },
             files={
@@ -59,7 +58,7 @@ def start_bootnode(
                     persistent_key="diva-db-{0}".format(DIVA_BOOT_NODE_NAME)
                 )
             },
-            #public_ports = public_ports
+            public_ports = public_ports
         ),
     )
 

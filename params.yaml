@@ -1,29 +1,30 @@
 network_params:
   genesis_delay: 60
-  
+  deneb_fork_epoch: 1
+  electra_fork_epoch: null
+
 additional_services:
   - dora
-  - custom_flood
 
-mev_type: full
+mev_type: none
 
 participants:
   - el_client_type: geth
     cl_client_type: lighthouse
-    validator_count: 2
+    validator_count: 10
 
+  # pair 2 must be geth & nimbus
   - el_client_type: geth
     cl_client_type: nimbus
-    validator_count: 68
+    validator_count: 100
+    count: 2
 
 diva_params:
   verify_fee_recipient: false
-  deploy_diva: true
-  deploy_eth:
-    deploy_eth_clients: true
-    deploy_diva_sc: true
-    deploy_diva_coord_boot: true
-
-
-mev_params:
-  launch_custom_flood: true
+  deploy_eth: false
+  deploy_diva_sc: true
+  deploy_diva_coord_boot: false
+  deploy_diva: false
+  deploy_operator_ui: false
+  public_ports: true
+  permanent: true

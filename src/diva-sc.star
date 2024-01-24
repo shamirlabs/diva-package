@@ -1,16 +1,21 @@
 DIVA_SC_IMAGE = "diva-sc"
 DIVA_SC_SERVICE_NAME = "diva-smartcontract-deployer"
+utils = import_module("./utils.star")
 
 
-def deploy(plan, el_url, address):
+def init(plan, el_url, sender_priv):
     plan.add_service(
         name=DIVA_SC_SERVICE_NAME,
         config=ServiceConfig(
             image=DIVA_SC_IMAGE,
-            env_vars={"CUSTOM_URL": el_url, "CUSTOM_PRIVATE_KEY": address},
+            env_vars={"CUSTOM_URL": el_url, "CUSTOM_PRIVATE_KEY": sender_priv},
             cmd=["tail", "-f", "/dev/null"],
         ),
     )
+
+def deploy(plan, delay_sc):
+
+    plan.exec(service_name=DIVA_SC_SERVICE_NAME, recipe=ExecRecipe(command=["sleep", delay_sc]))
 
     result = plan.exec(
         service_name=DIVA_SC_SERVICE_NAME,
@@ -20,14 +25,14 @@ def deploy(plan, el_url, address):
                 "-c",
                 "npx hardhat run --no-compile scripts/deployDiamondAndSetup.js --network custom",
             ]
+            
         ),
     )
+    
+    return utils.get_sc_address(plan,result["output"])
 
-    # TODO un hardcode this
-    return "0x17435ccE3d1B4fA2e5f8A08eD921D57C6762A180".lower()
 
-
-def fund(plan, address):
+def fund(plan,address):
     plan.exec(
         service_name=DIVA_SC_SERVICE_NAME,
         recipe=ExecRecipe(
