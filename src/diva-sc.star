@@ -23,13 +23,11 @@ def deploy(plan, delay_sc):
             command=[
                 "/bin/sh",
                 "-c",
-                "npx hardhat run --no-compile scripts/deployDiamondAndSetup.js --network custom",
+                "npx hardhat run --no-compile scripts/deployDiamondAndSetup.js --network custom 2>/dev/null | awk 'END{print $NF}'",
             ]
-            
         ),
     )
-    
-    return utils.get_sc_address(plan,result["output"])
+    return result["output"]
 
 
 def fund(plan,address):

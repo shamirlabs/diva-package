@@ -76,14 +76,4 @@ peer_id = response.json()["data"]["genesis_time"]
 print(peer_id, end="")
 """,
     )
-    return (result.output)    
-
-
-def get_sc_address(plan, output):
-    lines = output.split('\n')
-    if len(lines) >= 5:
-        line = lines[5].strip() 
-    else:
-        line = ""
-
-    return line
+    return (result.output)
