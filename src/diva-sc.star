@@ -15,7 +15,6 @@ def init(plan, el_url, sender_priv):
     )
 
 def deploy(plan, delay_sc):
-
     plan.exec(service_name=DIVA_SC_SERVICE_NAME, recipe=ExecRecipe(command=["sleep", delay_sc]))
 
     result = plan.exec(
@@ -95,15 +94,14 @@ def new_key(plan):
 
 
 def register(plan, custom_private_key, contract_address, node_address):
-
     result = plan.exec(
         service_name=DIVA_SC_SERVICE_NAME,
         recipe=ExecRecipe(
             command=[
                 "/bin/sh",
                 "-c",
-                "export CUSTOM_OPERATOR_PRIVATE_KEY={0} && npx hardhat registerOperatorAndNode {1} --network custom  2>/dev/null".format(
-                    custom_private_key, args
+                "export CUSTOM_OPERATOR_PRIVATE_KEY={0} && npx hardhat registerOperatorAndNode --contract {1} --node {2} --network custom  2>/dev/null".format(
+                    custom_private_key, contract_address, node_address
                 ),
             ],
         ),

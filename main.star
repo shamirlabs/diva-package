@@ -1,5 +1,6 @@
 ethereum_package = import_module("github.com/kurtosis-tech/ethereum-package@1.3.0/main.star")
 # for public ports: ethereum_package = import_module("github.com/shamirlabs/ethereum-package/main.star")
+
 genesis_constants = import_module(
     "github.com/shamirlabs/ethereum-package/src/prelaunch_data_generator/genesis_constants/genesis_constants.star"
 )
@@ -57,7 +58,6 @@ def run(plan, args):
         "participants"
     )
 
-
     diva_validators = participants[0].get(
         "validator_count"
     )
@@ -82,9 +82,9 @@ def run(plan, args):
             delay_sc="150"
 
         ethereum_network = ethereum_package.run(plan, args)
-
+ 
         plan.print("Succesfully launched an Ethereum Network")
-        
+
         genesis_validators_root, genesis_time = (
             ethereum_network.genesis_validators_root,
             ethereum_network.final_genesis_timestamp,
@@ -114,9 +114,6 @@ def run(plan, args):
             plan, delay_sc
         )
 
-
-    diva_cli.start_cli(plan, configuration_tomls)
-    diva_cli.deploy(plan, diva_validators)
 
     if deploy_diva or deploy_diva_coord_boot:
         diva_cli.start_cli(plan)
