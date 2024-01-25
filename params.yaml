@@ -1,12 +1,32 @@
 network_params:
-  genesis_delay: 120
+  network_id: "3151908"
+  genesis_delay: 60
+  deneb_fork_epoch: 1
+  electra_fork_epoch: null
+
+additional_services:
+  - dora
+
+mev_type: none
+
 participants:
   - el_client_type: geth
     cl_client_type: lighthouse
-    validator_count: 1
+    validator_count: 10
 
+
+  # pair 2 must be geth & nimbus to expose public ports if you use shamir eth-pack
   - el_client_type: geth
     cl_client_type: nimbus
-    validator_count: 65
+    validator_count: 100
+    count: 2
+
 diva_params:
   verify_fee_recipient: false
+  deploy_eth: false
+  deploy_diva_sc: true
+  deploy_diva_coord_boot: true
+  deploy_diva: true
+  deploy_operator_ui: false
+  public_ports: false
+  permanent: false

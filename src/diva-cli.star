@@ -37,16 +37,16 @@ def generate_identity(plan, diva_server_url):
             ]
         ),
     )
-    # TODO replace this sleep with something nice
-    # this exists to wait for the diva container to restart
-    plan.exec(service_name=DIVA_CLI_NAME, recipe=ExecRecipe(command=["sleep", "7"]))
+    #plan.exec(service_name=DIVA_CLI_NAME, recipe=ExecRecipe(command=["sleep", "10"]))
 
 
 # TODO parallelize this; this is currently being called in Kurtosis but
 # we can write a python script that creates a thread pool and runs migrate + deploy
-# its always 0 can be cleaned up first_node_index
 def deploy(plan, diva_validators):
-    for key_index in range(0, diva_validators):
+    for key_index in range(0, diva_validators - 1):
+        plan.print("index {0}".format(key_index))
+
+
         configuration_file = (
             "/configuration/configurations/config-{0}/config-{1}.toml".format(
                 0, key_index
@@ -57,6 +57,7 @@ def deploy(plan, diva_validators):
                 configuration_file, 0
             )
         )
+        
         pool_name = plan.exec(
             service_name=DIVA_DEPLOYER_CLI_NAME,
             recipe=ExecRecipe(
@@ -75,7 +76,7 @@ def deploy(plan, diva_validators):
                 command=[
                     "/bin/sh",
                     "-c",
-                    "/usr/bin/diva pools deploy {0} | /usr/bin/diva pools deploy {0}".format(
+                    "/usr/bin/diva pools deploy {0}".format(
                         pool_name["output"]
                     ),
                 ]

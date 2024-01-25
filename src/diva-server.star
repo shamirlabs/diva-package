@@ -7,8 +7,14 @@ DIVA_BOOTNODE_NAME = "diva-bootnode-coordinator"
 
 # Starts the BootNode / Coordinator Node
 def start_bootnode(
-    plan, el_url, cl_url, contract_address, genesis_validators_root, genesis_time
+    plan, el_url, cl_url, contract_address, genesis_validators_root, genesis_time, expose_public, chain_id
 ):
+    public_ports = {}
+    if expose_public:
+        public_ports["diva_w3s"] = PortSpec(number = 1234, transport_protocol = "TCP", wait=None)
+        public_ports["diva_api"] = PortSpec(number = constants.DIVA_API , transport_protocol = "TCP", wait=None)
+        public_ports["diva_p2p"] = PortSpec(number = constants.DIVA_P2P , transport_protocol = "TCP", wait=None)
+
     result = plan.add_service(
         name=DIVA_BOOTNODE_NAME,
         config=ServiceConfig(
@@ -29,8 +35,7 @@ def start_bootnode(
                 "--current-fork-version=0x40000038",
                 "--gvr={0}".format(genesis_validators_root),
                 "--deposit-contract=0x4242424242424242424242424242424242424242",
-                # TODO this can be parametrized and use `network_params.network_id`
-                "--chain-id=3151908",
+                "--chain-id={0}".format(chain_id),
                 "--genesis-time={0}".format(genesis_time),
             ],
             env_vars={
@@ -38,13 +43,10 @@ def start_bootnode(
                 # TODO fill up jaeger configuration
             },
             ports={
-                # TODO figure out why the port check isn't working
-                "p2p": PortSpec(number=5050, transport_protocol="TCP", wait=None),
-                # TODO figure out why the port check isn't working
-                "signer-api": PortSpec(
-                    number=9000, transport_protocol="TCP", wait=None
-                ),
-                "api": PortSpec(number=30000, transport_protocol="TCP"),
+                "diva_p2p": PortSpec(number=5050, transport_protocol="TCP", wait=None),
+                "diva_w3s": PortSpec(
+                    number=9000, transport_protocol="TCP", wait=None),
+                "diva_api": PortSpec(number=30000, transport_protocol="TCP"),
             },
             min_cpu=200,
             max_cpu=1000,            
@@ -53,13 +55,13 @@ def start_bootnode(
                     persistent_key="diva-db-{0}".format(DIVA_BOOT_NODE_NAME)
                 )
             },
+            public_ports = public_ports
         ),
     )
 
-    return result, "http://{0}:30000".format(result.name)
+    return result, "http://{0}:{1}".format(result.name,constants.DIVA_API)
 
 
-# Starts a normal DIVA Node
 # TODO parallelize this?
 def start_node(
     plan,
@@ -72,7 +74,8 @@ def start_node(
     genesis_time,
     bootnode_ip_address,
     verify_fee_recipient,
-    is_nimbus
+    chain_id,
+    is_nimbus,
 ):
     cmd = [
         "--db=/data/diva.db",
@@ -92,7 +95,7 @@ def start_node(
         "--current-fork-version=0x40000038",
         "--gvr={0}".format(genesis_validators_root),
         "--deposit-contract=0x4242424242424242424242424242424242424242",
-        "--chain-id=3151908",
+        "--chain-id={0}".format(chain_id),
         "--genesis-time={0}".format(genesis_time),
     ]
 
@@ -109,9 +112,7 @@ def start_node(
                 # TODO fill up jaeger configuration
             },
             ports={
-                # TODO figure out why the port check isn't working
                 "p2p": PortSpec(number=5050, transport_protocol="TCP", wait=None),
-                # TODO figure out why the port check isn't working
                 "signer-api": PortSpec(
                     number=9000, transport_protocol="TCP", wait=None
                 ),
