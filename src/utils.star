@@ -77,3 +77,13 @@ print(peer_id, end="")
 """,
     )
     return (result.output)
+
+
+def getAdd(plan,node_address):
+    result = plan.run_python(
+        run="""
+print(" """+ node_address +""" ", end="")
+""",
+    )
+    return (result.output)
+

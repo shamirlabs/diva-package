@@ -7,12 +7,10 @@ DIVA_BOOTNODE_NAME = "diva-bootnode-coordinator"
 
 # Starts the BootNode / Coordinator Node
 def start_bootnode(
-    plan, el_url, cl_url, contract_address, genesis_validators_root, genesis_time, fixed_ports
+    plan, el_url, cl_url, contract_address, genesis_validators_root, genesis_time, expose_public, chain_id
 ):
-
-
     public_ports = {}
-    if fixed_ports:
+    if expose_public:
         public_ports["diva_w3s"] = PortSpec(number = 1234, transport_protocol = "TCP", wait=None)
         public_ports["diva_api"] = PortSpec(number = constants.DIVA_API , transport_protocol = "TCP", wait=None)
         public_ports["diva_p2p"] = PortSpec(number = constants.DIVA_P2P , transport_protocol = "TCP", wait=None)
@@ -37,8 +35,7 @@ def start_bootnode(
                 "--current-fork-version=0x40000038",
                 "--gvr={0}".format(genesis_validators_root),
                 "--deposit-contract=0x4242424242424242424242424242424242424242",
-                # TODO this can be parametrized and use `network_params.network_id`
-                "--chain-id=3151908",
+                "--chain-id={0}".format(chain_id),
                 "--genesis-time={0}".format(genesis_time),
             ],
             env_vars={
@@ -78,7 +75,8 @@ def start_node(
     genesis_time,
     bootnode_ip_address,
     verify_fee_recipient,
-    is_nimbus
+    chain_id,
+    is_nimbus,
 ):
     cmd = [
         "--db=/data/diva.db",
@@ -98,7 +96,7 @@ def start_node(
         "--current-fork-version=0x40000038",
         "--gvr={0}".format(genesis_validators_root),
         "--deposit-contract=0x4242424242424242424242424242424242424242",
-        "--chain-id=3151908",
+        "--chain-id={0}".format(chain_id),
         "--genesis-time={0}".format(genesis_time),
     ]
 
