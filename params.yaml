@@ -14,6 +14,7 @@ participants:
     cl_client_type: lighthouse
     validator_count: 10
 
+
   # pair 2 must be geth & nimbus to expose public ports if you use shamir eth-pack
   - el_client_type: geth
     cl_client_type: nimbus

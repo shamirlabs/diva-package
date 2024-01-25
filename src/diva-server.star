@@ -48,6 +48,8 @@ def start_bootnode(
                     number=9000, transport_protocol="TCP", wait=None),
                 "diva_api": PortSpec(number=30000, transport_protocol="TCP"),
             },
+            min_cpu=200,
+            max_cpu=1000,            
             files={
                 "/data": Directory(
                     persistent_key="diva-db-{0}".format(DIVA_BOOT_NODE_NAME)
