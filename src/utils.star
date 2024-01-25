@@ -1,9 +1,39 @@
 constants = import_module("./constants.star")
 
 
-# this is costly as we are spinning up a temporary container and downloading requests
-# we can/should dockerize this
+# TODO: dockerize all this
+
 def get_address(plan, diva_url):
+    result = plan.run_python(
+        packages=["requests"], 
+        run="""
+import requests
+import sys
+
+max_retries = 50
+attempts = 0
+
+while attempts < max_retries:
+    try:
+        response = requests.get(\"""" + diva_url + """/api/v1/node/info", headers={"Authorization": "Bearer """
+         + constants.DIVA_API_KEY
+        + """\"})
+        if response.status_code == 200:
+            node_address = response.json()["node_address"]
+            print(node_address, end="")
+            break
+        else:
+            attempts += 1
+    except requests.RequestException:
+        attempts += 1
+
+if attempts == max_retries:
+    sys.exit(1)
+""",
+    )
+    return result.output
+
+def get_address1(plan, diva_url):
     result = plan.run_python(
         packages=["requests"],
         run="""
@@ -22,9 +52,6 @@ print(node_address, end="")
     )
     return result.output
 
-
-# this is costly as we are spinning up a temporary container and downloading requests
-# we can/should dockerize this
 def get_peer_id(plan, diva_url):
     result = plan.run_python(
         packages=["requests"],

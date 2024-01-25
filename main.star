@@ -146,12 +146,10 @@ def run(plan, args):
         validators_to_shutdown = []
         diva_addresses = []
         signer_urls = []
-        #diva_sc.initRegister(plan, el_rpc_uri)
-        for index in range(0, constants.NUMBER_OF_DIVA_NODES):
+        for index in range(0, constants.DIVA_NODES):
             node, node_url, signer_url = diva_server.start_node(
                 plan,
-                # TODO improve on this name for diva
-                "diva-client-{0}".format(index + 1),
+                "diva-node-{0}".format(index + 1),
                 el_ws_uri,
                 cl_uri,
                 smart_contract_address,
@@ -161,7 +159,6 @@ def run(plan, args):
                 bootnode_ip,
                 verify_fee_recipient,
                 network_id,
-                # for now we assume this only connects to nimbus
                 is_nimbus=True,
             )
             diva_urls.append(node_url)
@@ -196,7 +193,7 @@ def run(plan, args):
         plan.stop_service(first_participant_validator_service_name)
 
     if deploy_diva:
-        for index in range(0, constants.NUMBER_OF_DIVA_NODES):
+        for index in range(0, constants.DIVA_NODES):
             nimbus.launch(
                 plan,
                 "diva-validator-{0}".format(index),

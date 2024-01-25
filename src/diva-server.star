@@ -43,9 +43,7 @@ def start_bootnode(
                 # TODO fill up jaeger configuration
             },
             ports={
-                # TODO figure out why the port check isn't working
                 "diva_p2p": PortSpec(number=5050, transport_protocol="TCP", wait=None),
-                # TODO figure out why the port check isn't working
                 "diva_w3s": PortSpec(
                     number=9000, transport_protocol="TCP", wait=None),
                 "diva_api": PortSpec(number=30000, transport_protocol="TCP"),
@@ -62,7 +60,6 @@ def start_bootnode(
     return result, "http://{0}:{1}".format(result.name,constants.DIVA_API)
 
 
-# Starts a normal DIVA Node
 # TODO parallelize this?
 def start_node(
     plan,
@@ -113,9 +110,7 @@ def start_node(
                 # TODO fill up jaeger configuration
             },
             ports={
-                # TODO figure out why the port check isn't working
                 "p2p": PortSpec(number=5050, transport_protocol="TCP", wait=None),
-                # TODO figure out why the port check isn't working
                 "signer-api": PortSpec(
                     number=9000, transport_protocol="TCP", wait=None
                 ),

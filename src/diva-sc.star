@@ -24,7 +24,7 @@ def deploy(plan, delay_sc):
             command=[
                 "/bin/sh",
                 "-c",
-                "npx hardhat run --no-compile scripts/deployDiamondAndSetup.js --network custom 2>/dev/null | awk 'END{print $NF}'",
+                "npx hardhat run --no-compile scripts/deployDiamondAndSetup.js --network custom 2>/dev/null | awk 'END{print $NF}' | tr -d '\n' ",
             ]
         ),
     )
@@ -93,25 +93,17 @@ def new_key(plan):
 
     return publicKey["output"], privateKey["output"], address["output"]
 
-def initRegister(plan, el_url, private_key):
-    plan.add_service(
-        name=DIVA_SC_REGISTER_NAME,
-        config=ServiceConfig(
-            image=DIVA_SC_IMAGE,
-            env_vars={"CUSTOM_URL": el_url, "CUSTOM_PRIVATE_KEY": private_key},
-            cmd=["tail", "-f", "/dev/null"],
-        ),
-    )
 
 def register(plan, custom_private_key, contract_address, node_address):
+
     result = plan.exec(
         service_name=DIVA_SC_SERVICE_NAME,
         recipe=ExecRecipe(
             command=[
                 "/bin/sh",
                 "-c",
-                "export CUSTOM_OPERATOR_PRIVATE_KEY={0} && npx hardhat registerOperatorAndNode --contract {1} --node {2} --network custom  2>/dev/null".format(
-                    custom_private_key, contract_address, node_address
+                "export CUSTOM_OPERATOR_PRIVATE_KEY={0} && npx hardhat registerOperatorAndNode {1} --network custom  2>/dev/null".format(
+                    custom_private_key, args
                 ),
             ],
         ),
