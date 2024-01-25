@@ -179,6 +179,15 @@ def run(plan, args):
         first_participant_keystore = (
             first_participant.validator_keystore_files_artifact_uuid
         )
+    if deploy_diva :
+        configuration_tomls = keys.generate_configuration_tomls(
+            plan, diva_urls, diva_addresses
+        )
+
+        diva_cli.start_cli(plan, configuration_tomls)
+        diva_cli.deploy(plan, diva_validators)
+ 
+
 
     if deploy_diva and deploy_eth:
         configuration_tomls = keys.generate_configuration_tomls(
