@@ -2,9 +2,6 @@ constants = import_module("./constants.star")
 PYTHON_RUNNER_IMAGE = "python:3.11-alpine"
 
 
-# TODO: dockerize all this
-
-
 def initUtils(plan):
     script = plan.upload_files("../python_scripts/utils.py")
 
@@ -33,7 +30,7 @@ def get_address(plan, diva_url):
             command=[
                 "/bin/sh",
                 "-c",
-                "python /tmp/scripts/utils.py get_address {0} {1}".format(
+                "python /tmp/scripts/utils.py get_address {0} {1} | tr -d '\n'".format(
                     diva_url, constants.DIVA_API_KEY
                 ),
             ]
@@ -48,7 +45,7 @@ def get_peer_id(plan, diva_url):
             command=[
                 "/bin/sh",
                 "-c",
-                "python /tmp/scripts/utils.py get_peer_id {0} {1}".format(
+                "python /tmp/scripts/utils.py get_peer_id {0} {1} | tr -d '\n'".format(
                     diva_url, constants.DIVA_API_KEY
                 ),
             ]
@@ -63,12 +60,13 @@ def get_gvr(plan, beacon_url):
             command=[
                 "/bin/sh",
                 "-c",
-                "python /tmp/scripts/utils.py get_gvr {0}".format(
+                "python /tmp/scripts/utils.py get_gvr {0} | tr -d '\n'".format(
                     beacon_url
                 ),
             ]
         ),
-    )    
+    )
+    plan.print(result["output"])
     return result["output"]
 
 def get_genesis_time(plan, beacon_url):
@@ -78,10 +76,11 @@ def get_genesis_time(plan, beacon_url):
             command=[
                 "/bin/sh",
                 "-c",
-                "python /tmp/scripts/utils.py get_genesis_time {0}".format(
+                "python /tmp/scripts/utils.py get_genesis_time {0} | tr -d '\n'".format(
                     beacon_url
                 ),
             ]
         ),
     )    
+    plan.print(result["output"])
     return result["output"]

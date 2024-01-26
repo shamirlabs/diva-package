@@ -21,7 +21,7 @@ def main():
 def get_address():
     diva_url= sys.argv[2]
     api_key= sys.argv[3]
-    max_retries = 50
+    max_retries = 100
     attempts = 0
 
     while attempts < max_retries:
@@ -31,7 +31,7 @@ def get_address():
             if response.status_code == 200:
                 node_address = response.json()["node_address"]
                 print(node_address, end="")
-                print(attempts, end="")
+                print(response.json(), end="")
                 return node_address
             else:
                 attempts += 1
@@ -49,20 +49,45 @@ def get_peer_id():
     if response.status_code != 200:
         sys.exit(1)
     peer_id = response.json()["peer_id"]
+    print(peer_id)
     return peer_id
 
 def get_gvr():
     beacon_url= sys.argv[2]
-    response = requests.get(beacon_url + "/eth/v1/beacon/genesis")
-    if response.status_code != 200:
-        sys.exit(1)
-    return (response.json()["data"].get("genesis_validators_root"))
+    max_retries = 50
+    attempts = 0
+    while attempts < max_retries:
+        try:
+            response = requests.get(beacon_url + "/eth/v1/beacon/genesis")
+            if response.status_code == 200:
+                res= (response.json()["data"].get("genesis_validators_root"))
+                print(res)                
+                return res
+            else:
+                attempts += 1
+        except requests.RequestException:
+            attempts += 1
 
+    if attempts == max_retries:
+        sys.exit(1)    
+
+   
 def get_genesis_time():
     beacon_url= sys.argv[2]
-    response = requests.get(beacon_url + "/eth/v1/beacon/genesis")
-    if response.status_code != 200:
-        sys.exit(1)
-    return (response.json()["data"].get("genesis_time"))
+    max_retries = 50
+    attempts = 0
+    while attempts < max_retries:
+        try:
+            response = requests.get(beacon_url + "/eth/v1/beacon/genesis")
+            if response.status_code == 200:
+                res= (response.json()["data"].get("genesis_time"))
+                print(res)
+                return res
+            else:
+                attempts += 1
+        except requests.RequestException:
+            attempts += 1
+    if attempts == max_retries:
+        sys.exit(1)    
 
 main()
