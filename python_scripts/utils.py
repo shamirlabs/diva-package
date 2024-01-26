@@ -31,7 +31,6 @@ def get_address():
             if response.status_code == 200:
                 node_address = response.json()["node_address"]
                 print(node_address, end="")
-                print(response.json(), end="")
                 return node_address
             else:
                 attempts += 1

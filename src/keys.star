@@ -1,16 +1,16 @@
 constants = import_module("./constants.star")
+genesis = import_module("./genesis.star")
 
 PYTHON_RUNNER_IMAGE = "python:3.11-alpine"
 
+def upload_pregenesis_keys(plan, keystore, num_validators):
 
-def generate_configuration_tomls(plan, validator_keystores, diva_node_urls, diva_addresses):
     script = plan.upload_files("../python_scripts/keys.py")
-
     files = {
         "/tmp/scripts": script,
     }
-    files["/tmp/node-0"] = validator_keystores[0]
 
+    files["/tmp/node-0"] = genesis.generate_validator_keystores(plan,num_validators)
     plan.add_service(
         name="python-runner",
         config=ServiceConfig(
@@ -19,22 +19,18 @@ def generate_configuration_tomls(plan, validator_keystores, diva_node_urls, diva
             cmd=["tail", "-f", "/dev/null"],
         ),
     )
-
     plan.exec(
         service_name="python-runner",
         recipe=ExecRecipe(command=["pip", "install", "pyyaml"]),
     )
-    
-    for index in range(0, len(validator_keystores)):    
-        plan.print("Generating keystores for {0}".format(index))
-        plan.print("Total keystores is {0}".format(len(validator_keystores)))
-        plan.exec(
-            service_name="python-runner",
-            recipe=ExecRecipe(
-                command=["mkdir", "-p", "/tmp/configurations/config-{0}".format(index)]
-            ),
-        )
+    plan.exec(
+        service_name="python-runner",
+        recipe=ExecRecipe(
+            command=["mkdir", "-p", "/tmp/configurations/config-0"]
+        ),
+    )
 
+def proccess_pregenesis_keys(plan, diva_node_urls, diva_addresses):
     plan.exec(
         service_name="python-runner",
         recipe=ExecRecipe(
@@ -46,14 +42,14 @@ def generate_configuration_tomls(plan, validator_keystores, diva_node_urls, diva
                     ",".join(diva_addresses),
                     constants.DIVA_SET_THRESHOLD,
                     constants.DIVA_API_KEY,
-                    len(validator_keystores),
+                    constants.DIVA_VALIDATORS,
                     ",".join(diva_node_urls),
                     (constants.DIVA_DISTRIBUTION)
                 ),
             ]
         ),
     )
-
+    
     return plan.store_service_files(
         service_name="python-runner",
         src="/tmp/configurations",

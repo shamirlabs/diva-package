@@ -56,10 +56,11 @@ def run(plan, args):
         "participants"
     )
 
-
-    diva_validators = participants[0].get(
+    diva_validators_eth = participants[0].get(
         "validator_count"
     )
+
+    diva_validators = constants.DIVA_VALIDATORS
 
     verify_fee_recipient=diva_params.get(
         "verify_fee_recipient"
@@ -71,6 +72,10 @@ def run(plan, args):
     
     deploy_operator_ui=diva_params.get(
         "deploy_operator_ui"
+    )
+
+    charge_pre_genesis_keys=diva_params.get(
+        "charge_pre_genesis_keys"
     )
     
     genesis_delay = network_params.get(
@@ -175,22 +180,23 @@ def run(plan, args):
 
     if deploy_operator_ui:
         diva_operator_ui.launch(plan)
-    
-    if deploy_eth:
+    first_participant_keystore=""    
+    if deploy_eth and deploy_diva and charge_pre_genesis_keys:
         first_participant = ethereum_network.all_participants[0].cl_client_context
         first_participant_validator_service_name = first_participant.validator_service_name
         first_participant_keystore = (
             first_participant.validator_keystore_files_artifact_uuid
         )
 
-    if deploy_diva and deploy_eth:
-        configuration_tomls = keys.generate_configuration_tomls(
-            plan, [first_participant_keystore], diva_urls, diva_addresses
-        )
-
+    if deploy_diva and charge_pre_genesis_keys:
+        keys.upload_pregenesis_keys(plan,first_participant_keystore,diva_validators)
+        plan.print(diva_addresses)
+        configuration_tomls = keys.proccess_pregenesis_keys(
+            plan, diva_urls, diva_addresses
+        )            
         diva_cli.start_cli(plan, configuration_tomls)
         diva_cli.deploy(plan, diva_validators)
- 
+
 
     if deploy_eth:
         plan.stop_service(first_participant_validator_service_name)
