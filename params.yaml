@@ -23,7 +23,7 @@ participants:
 
 diva_params:
   verify_fee_recipient: false
-  deploy_eth: true
+  deploy_eth: false
   deploy_diva_sc: false
   deploy_diva_coord_boot: false
   deploy_diva: true

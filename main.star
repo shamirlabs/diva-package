@@ -78,7 +78,7 @@ def run(plan, args):
     )
 
     delay_sc="0"
-
+    utils.initUtils(plan)
 
     if deploy_eth:
         if deploy_diva_sc:
