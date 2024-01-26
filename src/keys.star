@@ -4,14 +4,12 @@ PYTHON_RUNNER_IMAGE = "python:3.11-alpine"
 
 
 def generate_configuration_tomls(plan, validator_keystores, diva_node_urls, diva_addresses):
-    script = plan.upload_files("../python_scripts/keyshares.py")
+    script = plan.upload_files("../python_scripts/keys.py")
 
     files = {
         "/tmp/scripts": script,
     }
-
-    for index, keystore in enumerate(validator_keystores):
-        files["/tmp/node-{0}".format(index)] = keystore
+    files["/tmp/node-0"] = validator_keystores[0]
 
     plan.add_service(
         name="python-runner",
@@ -28,6 +26,8 @@ def generate_configuration_tomls(plan, validator_keystores, diva_node_urls, diva
     )
     
     for index in range(0, len(validator_keystores)):    
+        plan.print("Generating keystores for {0}".format(index))
+        plan.print("Total keystores is {0}".format(len(validator_keystores)))
         plan.exec(
             service_name="python-runner",
             recipe=ExecRecipe(
@@ -41,15 +41,14 @@ def generate_configuration_tomls(plan, validator_keystores, diva_node_urls, diva
             command=[
                 "/bin/sh",
                 "-c",
-                "python /tmp/scripts/keyshares.py /tmp/node-0/node-0-keystores/teku-keys /node-0/node-0-keystores/teku-secrets {0} {1} {2} {3} {4}".format(
-                    diva_node_urls,
+                "python /tmp/scripts/keys.py /tmp/node-0/node-0-keystores/teku-keys /tmp/node-0/node-0-keystores/teku-secrets {0} {1} {2} {3} {4} {5} {6}".format(
+                    constants.DIVA_SET_SIZE,
                     ",".join(diva_addresses),
                     constants.DIVA_SET_THRESHOLD,
                     constants.DIVA_API_KEY,
-                    "/tmp/configurations/config-0",
                     len(validator_keystores),
-                    constants.DIVA_SET_SIZE
-                    constants.DIVA_DISTRIBUTION
+                    ",".join(diva_node_urls),
+                    (constants.DIVA_DISTRIBUTION)
                 ),
             ]
         ),

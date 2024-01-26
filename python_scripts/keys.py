@@ -7,27 +7,28 @@ import yaml
 
 Entry = namedtuple("Entry", ["key", "secret"])
 def main():
-    keystore_folder = sys.argv[1] 
+    keystore_folder= sys.argv[1]
     secrets_folder = sys.argv[2]
-    diva_urls = sys.argv[3]
+    diva_set_size = int(sys.argv[3]) 
     diva_addresses = sys.argv[4]
     diva_threshold = int(sys.argv[5])
     diva_api_key = sys.argv[6]
-    destination = sys.argv[7]
-    num_validators = sys.argv[8]
-    diva_set_size = sys.argv[9]
-    diva_distribution = sys.argv[10]
-    
+    num_validators = int(sys.argv[7])
+    diva_urls = sys.argv[8]
+    diva_distribution=[]
+    if len(sys.argv) > 9:
+        diva_distribution = parse_distribution_arg(sys.argv[9])
+
+    diva_urls = diva_urls.split(",")
+    diva_addresses = diva_addresses.split(",")
+
     result= distribution(diva_set_size, len(diva_urls),num_validators,diva_distribution)
 
     for index in range(0, num_validators):
         validator_i= result[index]
-        keystore_folder_val_i=make_with_index(keystore_folder,index)
-        secrets_folder_val_i=make_with_index(secrets_folder,index)
-        destination_val_i=make_with_index(destination,index)
         node_urls_val_i = [diva_urls[node_index] for node_index in validator_i]
         diva_addresses_val_i = [diva_addresses[node_index] for node_index in validator_i]
-        create_pool(keystore_folder_val_i, secrets_folder_val_i, node_urls_val_i, diva_addresses_val_i, diva_threshold, diva_api_key, destination_val_i)
+        create_pool(keystore_folder, secrets_folder, node_urls_val_i, diva_addresses_val_i, diva_threshold, diva_api_key)
 
                      
 def distribution(num_keyshares_per_validator,num_total_nodes,num_validators,distribution):
@@ -35,11 +36,9 @@ def distribution(num_keyshares_per_validator,num_total_nodes,num_validators,dist
     total_num_keyshares = num_validators * num_keyshares_per_validator
 
     total_keyshares_distribution = sum(distribution)
-    if total_keyshares_distribution > total_num_keyshares:
-        raise ValueError("The total number of keyshares in 'distribution' its too hight for the keyshares avaialble")
+    if total_keyshares_distribution > total_num_keyshares or num_total_nodes < num_keyshares_per_validator:
+        raise ValueError("Distribution is not possible with that configuration")
 
-    if num_total_nodes < num_keyshares_per_validator:
-        raise ValueError("There are not enough nodes to uniquely distribute all keyshares per validator")
 
     distribution_result = {validator_id: [] for validator_id in range(num_validators)}
 
@@ -78,18 +77,7 @@ def distribution(num_keyshares_per_validator,num_total_nodes,num_validators,dist
     return distribution_result
 
 
-def create_pool(keystore_folder, secrets_folder, diva_urls, diva_addresses, diva_threshold, diva_api_key, destination):
-    """
-        This script takes in a few arguments and outputs DIVA CLI friendly configuration
-        keystore_folder: the folder containing all keystore json files
-        secrets_folder: the folder containing all the secrets files
-        diva_urls: the url of the diva nodes
-        diva_addresses: the addresses of the diva nodes
-        threshold: diva threshold
-        diva_api_key: the DIVA API key
-        destination: the destination folder to write too
-    """
-
+def create_pool(keystore_folder, secrets_folder, diva_urls, diva_addresses, diva_threshold, diva_api_key):
     entries = []
     for keystore_file in os.listdir(keystore_folder):
         keystore_contents = ""
@@ -102,9 +90,7 @@ def create_pool(keystore_folder, secrets_folder, diva_urls, diva_addresses, diva
             secret = secret_file_handle.read()
         entries.append(Entry(keystore_contents, secret))
 
-    diva_urls = diva_urls.split(",")
-    diva_addresses = diva_addresses.split(",")
-
+    destination="/tmp/configurations/config-0"
     configurations = []
     for entry in entries:
         configuration = {
@@ -129,7 +115,9 @@ def get_index(index):
 def append(folder, file):
     return folder + "/" + file
 
-def make_with_index(string, index):
-    return re.sub(r'\d+', str(index), string)
+def parse_distribution_arg(diva_distribution):
+    diva_distribution=diva_distribution.strip("[] \t\n\r")
+    return [int(x.strip()) for x in diva_distribution.split(",") if x.strip()]
+
 
 main()

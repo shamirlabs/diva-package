@@ -1,6 +1,5 @@
 ethereum_package = import_module("github.com/kurtosis-tech/ethereum-package@1.3.0/main.star")
 # for public ports: ethereum_package = import_module("github.com/shamirlabs/ethereum-package/main.star")
-
 genesis_constants = import_module(
     "github.com/shamirlabs/ethereum-package/src/prelaunch_data_generator/genesis_constants/genesis_constants.star"
 )
@@ -12,7 +11,6 @@ diva_cli = import_module("./src/diva-cli.star")
 constants = import_module("./src/constants.star")
 keys = import_module("./src/keys.star")
 nimbus = import_module("./src/nimbus.star")
-
 utils = import_module("./src/utils.star")
 
 
@@ -58,6 +56,7 @@ def run(plan, args):
         "participants"
     )
 
+
     diva_validators = participants[0].get(
         "validator_count"
     )
@@ -65,6 +64,10 @@ def run(plan, args):
     verify_fee_recipient=diva_params.get(
         "verify_fee_recipient"
     )
+
+    private_pools_only=diva_params.get(
+        "private_pools_only"
+    )    
     
     deploy_operator_ui=diva_params.get(
         "deploy_operator_ui"
@@ -82,9 +85,9 @@ def run(plan, args):
             delay_sc="150"
 
         ethereum_network = ethereum_package.run(plan, args)
- 
-        plan.print("Succesfully launched an Ethereum Network")
 
+        plan.print("Succesfully launched an Ethereum Network")
+        
         genesis_validators_root, genesis_time = (
             ethereum_network.genesis_validators_root,
             ethereum_network.final_genesis_timestamp,
@@ -113,7 +116,6 @@ def run(plan, args):
         smart_contract_address = diva_sc.deploy(
             plan, delay_sc
         )
-
 
     if deploy_diva or deploy_diva_coord_boot:
         diva_cli.start_cli(plan)
@@ -165,10 +167,11 @@ def run(plan, args):
             signer_urls.append(signer_url)
             node_identity = diva_cli.generate_identity(plan, node_url)
             operator_public_key, operator_private_key, operator_address = diva_sc.new_key(plan)
-            diva_sc.fund(plan, operator_address)
             node_address = utils.get_address(plan, node_url)
             diva_addresses.append(node_address)
-            diva_sc.register(plan, operator_private_key, smart_contract_address, node_address)
+            if not private_pools_only:
+                diva_sc.fund(plan, operator_address)
+                diva_sc.register(plan, operator_private_key, smart_contract_address, node_address)
 
     if deploy_operator_ui:
         diva_operator_ui.launch(plan)
@@ -179,15 +182,6 @@ def run(plan, args):
         first_participant_keystore = (
             first_participant.validator_keystore_files_artifact_uuid
         )
-    if deploy_diva :
-        configuration_tomls = keys.generate_configuration_tomls(
-            plan, diva_urls, diva_addresses
-        )
-
-        diva_cli.start_cli(plan, configuration_tomls)
-        diva_cli.deploy(plan, diva_validators)
- 
-
 
     if deploy_diva and deploy_eth:
         configuration_tomls = keys.generate_configuration_tomls(
