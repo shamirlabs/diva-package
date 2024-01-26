@@ -10,7 +10,7 @@ def initUtils(plan):
     }
 
     plan.add_service(
-        name="utils",
+        name="diva-utils",
         config=ServiceConfig(
             image=PYTHON_RUNNER_IMAGE,
             files=files,
@@ -19,18 +19,18 @@ def initUtils(plan):
     )
 
     plan.exec(
-        service_name="utils",
+        service_name="diva-utils",
         recipe=ExecRecipe(command=["pip", "install", "requests"]),
     )
     
 def get_address(plan, diva_url):
     result = plan.exec(
-        service_name="utils",
+        service_name="diva-utils",
         recipe=ExecRecipe(
             command=[
                 "/bin/sh",
                 "-c",
-                "python /tmp/scripts/utils.py get_address {0} {1} | tr -d '\n'".format(
+                "python /tmp/scripts/utils.py get_address {0} {1}".format(
                     diva_url, constants.DIVA_API_KEY
                 ),
             ]
@@ -40,7 +40,7 @@ def get_address(plan, diva_url):
 
 def get_peer_id(plan, diva_url):
     result = plan.exec(
-        service_name="utils",
+        service_name="diva-utils",
         recipe=ExecRecipe(
             command=[
                 "/bin/sh",
@@ -55,7 +55,7 @@ def get_peer_id(plan, diva_url):
 
 def get_gvr(plan, beacon_url):
     result = plan.exec(
-        service_name="utils",
+        service_name="diva-utils",
         recipe=ExecRecipe(
             command=[
                 "/bin/sh",
@@ -71,7 +71,7 @@ def get_gvr(plan, beacon_url):
 
 def get_genesis_time(plan, beacon_url):
     result = plan.exec(
-        service_name="utils",
+        service_name="diva-utils",
         recipe=ExecRecipe(
             command=[
                 "/bin/sh",

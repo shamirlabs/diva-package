@@ -7,7 +7,7 @@ EL_HTTP_PORT="8545"
 CL_PORT="4000"
 DIVA_SC="0x6f00cAa972723C5e1D1012cdAc385753c2AA3a93"
 BOOTNODE_PORT="30000"
-
+PREGENESIS_VAL_SEED="giant issue aisle success illegal bike spike question tent bar rely arctic volcano long crawl hungry vocal artwork sniff fantasy very lucky have athlete"
 
 
 DIVA_W3S=9000

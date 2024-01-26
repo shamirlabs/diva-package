@@ -27,6 +27,7 @@ diva_params:
   deploy_diva_sc: false
   deploy_diva_coord_boot: false
   deploy_diva: true
+  charge_pre_genesis_keys: true
   deploy_operator_ui: false
   private_pools_only: true
   public_ports: false
