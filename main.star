@@ -12,17 +12,13 @@ constants = import_module("./src/constants.star")
 keys = import_module("./src/keys.star")
 nimbus = import_module("./src/nimbus.star")
 utils = import_module("./src/utils.star")
+input_parser = import_module("./src/input-parser.star")
 
 
 
 def run(plan, args):
-
-    network_params = args.get(
-        "network_params"
-    )
-    network_id = network_params.get(
-        "network_id"
-    )    
+    
+    diva_args = input_parser.input_parser(plan, args)
 
     diva_params = args.get(
         "diva_params"
@@ -42,7 +38,8 @@ def run(plan, args):
 
     deploy_eth= diva_params.get(
         "deploy_eth"
-    )    
+    )
+    deploy_eth=diva_args.deploy_eth
 
     deploy_diva_coord_boot= diva_params.get(
         "deploy_diva_coord_boot"
@@ -78,9 +75,6 @@ def run(plan, args):
         "charge_pre_genesis_keys"
     )
     
-    genesis_delay = network_params.get(
-        "genesis_delay"
-    )
 
     delay_sc="0"
     utils.initUtils(plan)
@@ -105,12 +99,17 @@ def run(plan, args):
         cl_ip_addr = ethereum_network.all_participants[1].cl_client_context.ip_addr
         cl_http_port_num = ethereum_network.all_participants[1].cl_client_context.http_port_num
         cl_uri = "http://{0}:{1}".format(cl_ip_addr, cl_http_port_num)
+        network_id = args.get("network_params").get("network_id") if  args.get("network_params").get("network_id") != None else 3151908
+        plan.print(network_id)
+        return 1
     else:
         el_ws_uri = "ws://{0}:{1}".format(constants.HOST, constants.EL_WS_PORT)
         cl_uri = "http://{0}:{1}".format(constants.HOST, constants.CL_PORT)
         el_rpc_uri = "http://{0}:{1}".format(constants.HOST, constants.EL_HTTP_PORT)
         genesis_validators_root = utils.get_gvr(plan,cl_uri)
         genesis_time = utils.get_genesis_time(plan,cl_uri)
+        network_id = utils.get_chain_id(plan,cl_uri) 
+
  
     if deploy_diva_sc or deploy_diva_coord_boot or deploy_diva:
         diva_sc.init(plan, el_rpc_uri, genesis_constants.PRE_FUNDED_ACCOUNTS[1].private_key)
@@ -190,15 +189,11 @@ def run(plan, args):
 
     if deploy_diva and charge_pre_genesis_keys:
         keys.upload_pregenesis_keys(plan,first_participant_keystore,diva_validators)
-        plan.print(diva_addresses)
         configuration_tomls = keys.proccess_pregenesis_keys(
             plan, diva_urls, diva_addresses
         )            
         diva_cli.start_cli(plan, configuration_tomls)
         diva_cli.deploy(plan, diva_validators)
-
-
-    if deploy_eth:
         plan.stop_service(first_participant_validator_service_name)
 
     if deploy_diva:
