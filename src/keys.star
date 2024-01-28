@@ -3,14 +3,14 @@ genesis = import_module("./genesis.star")
 
 PYTHON_RUNNER_IMAGE = "python:3.11-alpine"
 
-def upload_pregenesis_keys(plan, keystore, num_validators):
+def upload_pregenesis_keys(plan, start_index_val,stop_index_val):
 
     script = plan.upload_files("../python_scripts/keys.py")
     files = {
         "/tmp/scripts": script,
     }
 
-    files["/tmp/node-0"] = genesis.generate_validator_keystores(plan,num_validators)
+    files["/tmp/node-0"] = genesis.generate_validator_keystores(plan,start_index_val,stop_index_val)
     plan.add_service(
         name="python-runner",
         config=ServiceConfig(
@@ -30,7 +30,7 @@ def upload_pregenesis_keys(plan, keystore, num_validators):
         ),
     )
 
-def proccess_pregenesis_keys(plan, diva_node_urls, diva_addresses):
+def proccess_pregenesis_keys(plan, diva_node_urls, diva_addresses, start_index_val, stop_index_val):
     plan.exec(
         service_name="python-runner",
         recipe=ExecRecipe(
@@ -42,7 +42,8 @@ def proccess_pregenesis_keys(plan, diva_node_urls, diva_addresses):
                     ",".join(diva_addresses),
                     constants.DIVA_SET_THRESHOLD,
                     constants.DIVA_API_KEY,
-                    constants.DIVA_VALIDATORS,
+                    start_index_val,
+                    stop_index_val,
                     ",".join(diva_node_urls),
                     (constants.DIVA_DISTRIBUTION)
                 ),

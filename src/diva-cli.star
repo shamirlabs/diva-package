@@ -54,7 +54,7 @@ def deploy(plan, diva_validators):
         )
         plan.print(
             "deploying {0} for validator {1}".format(
-                configuration_file, 0
+                configuration_file, key_index
             )
         )
         

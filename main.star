@@ -18,63 +18,23 @@ input_parser = import_module("./src/input-parser.star")
 
 def run(plan, args):
     
-    diva_args = input_parser.input_parser(plan, args)
+    diva_args = input_parser.diva_input_parser(plan, args)
+    diva_params= diva_args.diva_params
+    deploy_eth= diva_params.deploy_eth
+    deploy_diva = diva_params.deploy_diva
+    deploy_diva_sc= diva_params.deploy_diva_sc
+    deploy_diva_coord_boot= diva_params.deploy_diva_coord_boot
+    deploy_operator_ui=diva_params.deploy_operator_ui
+    verify_fee_recipient=diva_params.verify_fee_recipient
+    private_pools_only=diva_params.private_pools_only    
+    charge_pre_genesis_keys=diva_params.charge_pre_genesis_keys
+    
 
-    diva_params = args.get(
-        "diva_params"
-    )
-
-    deploy_eth = diva_params.get(
-        "deploy_eth"
-    )
-
-    deploy_diva = diva_params.get(
-        "deploy_diva"
-    )
-
-    deploy_diva_sc= diva_params.get(
-        "deploy_diva_sc"
-    )
-
-    deploy_eth= diva_params.get(
-        "deploy_eth"
-    )
-    deploy_eth=diva_args.deploy_eth
-
-    deploy_diva_coord_boot= diva_params.get(
-        "deploy_diva_coord_boot"
-    )
-
-    public_ports= diva_params.get(
-        "public_ports"
-    )
-
-    participants = args.get(
-        "participants"
-    )
-
-    diva_validators_eth = participants[0].get(
-        "validator_count"
-    )
-
+    public_ports= diva_params.public_ports
+    participants = diva_args.participants
     diva_validators = constants.DIVA_VALIDATORS
-
-    verify_fee_recipient=diva_params.get(
-        "verify_fee_recipient"
-    )
-
-    private_pools_only=diva_params.get(
-        "private_pools_only"
-    )    
-    
-    deploy_operator_ui=diva_params.get(
-        "deploy_operator_ui"
-    )
-
-    charge_pre_genesis_keys=diva_params.get(
-        "charge_pre_genesis_keys"
-    )
-    
+    start_index_val=diva_params.diva_val_start
+    stop_index_val=diva_params.diva_val_stop
 
     delay_sc="0"
     utils.initUtils(plan)
@@ -100,8 +60,6 @@ def run(plan, args):
         cl_http_port_num = ethereum_network.all_participants[1].cl_client_context.http_port_num
         cl_uri = "http://{0}:{1}".format(cl_ip_addr, cl_http_port_num)
         network_id = args.get("network_params").get("network_id") if  args.get("network_params").get("network_id") != None else 3151908
-        plan.print(network_id)
-        return 1
     else:
         el_ws_uri = "ws://{0}:{1}".format(constants.HOST, constants.EL_WS_PORT)
         cl_uri = "http://{0}:{1}".format(constants.HOST, constants.CL_PORT)
@@ -179,22 +137,13 @@ def run(plan, args):
 
     if deploy_operator_ui:
         diva_operator_ui.launch(plan)
-    first_participant_keystore=""    
-    if deploy_eth and deploy_diva and charge_pre_genesis_keys:
-        first_participant = ethereum_network.all_participants[0].cl_client_context
-        first_participant_validator_service_name = first_participant.validator_service_name
-        first_participant_keystore = (
-            first_participant.validator_keystore_files_artifact_uuid
-        )
-
     if deploy_diva and charge_pre_genesis_keys:
-        keys.upload_pregenesis_keys(plan,first_participant_keystore,diva_validators)
+        keys.upload_pregenesis_keys(plan,start_index_val,stop_index_val)
         configuration_tomls = keys.proccess_pregenesis_keys(
-            plan, diva_urls, diva_addresses
+            plan, diva_urls, diva_addresses,start_index_val,stop_index_val
         )            
         diva_cli.start_cli(plan, configuration_tomls)
-        diva_cli.deploy(plan, diva_validators)
-        plan.stop_service(first_participant_validator_service_name)
+        diva_cli.deploy(plan, stop_index_val - start_index_val)
 
     if deploy_diva:
         for index in range(0, constants.DIVA_NODES):

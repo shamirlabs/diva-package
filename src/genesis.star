@@ -17,23 +17,19 @@ ENTRYPOINT_ARGS = [
 ]
 
 
-def generate_validator_keystores(plan , num_validators):
+def generate_validator_keystores(plan, start_index, stop_index):
     service_name = launch_prelaunch_data_generator(plan, {}, "diva-pre-val-keys")
 
     all_sub_command_strs = []
-    running_total_validator_count = 0
 
     output_dirpath = NODE_KEYSTORES_OUTPUT_DIRPATH_FORMAT_STR.format(0)
-    start_index = 0
-    stop_index = num_validators
-
     generate_keystores_cmd = '{0} keystores --insecure --prysm-pass {1} --out-loc {2} --source-mnemonic "{3}" --source-min {4} --source-max {5}'.format(
         KEYSTORES_GENERATION_TOOL_NAME,
         "PRYSM_PASSWORD",
         output_dirpath,
         constants.PREGENESIS_VAL_SEED,
-        start_index,
-        stop_index,
+        start_index + 1,
+        stop_index + 1,
     )
     teku_permissions_cmd = (
         "chmod 0777 -R " + output_dirpath + "/" + TEKU_KEYS_DIRNAME
@@ -56,8 +52,8 @@ def generate_validator_keystores(plan , num_validators):
     keystore_files = []
     idx=0
     padded_idx = 1
-    keystore_start_index = 0
-    keystore_stop_index = (num_validators) - 1
+    keystore_start_index = start_index
+    keystore_stop_index = (stop_index) - 1
     artifact_name = "diva-artefact-pre-val"
     artifact_name = plan.store_service_files(
         service_name, output_dirpath, name=artifact_name

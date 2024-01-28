@@ -18,5 +18,5 @@ DIVA_P2P=5050
 DIVA_SET_SIZE = 3
 DIVA_SET_THRESHOLD = 2
 DIVA_NODES= 4
-DIVA_VALIDATORS= 3
+DIVA_VALIDATORS= 3 #-1 for all available validators created at pre-genesis 
 DIVA_DISTRIBUTION=[1]

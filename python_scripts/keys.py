@@ -13,18 +13,19 @@ def main():
     diva_addresses = sys.argv[4]
     diva_threshold = int(sys.argv[5])
     diva_api_key = sys.argv[6]
-    num_validators = int(sys.argv[7])
-    diva_urls = sys.argv[8]
+    start_index = int(sys.argv[7])
+    stop_index = int(sys.argv[8])
+    diva_urls = sys.argv[9]
     diva_distribution=[]
-    if len(sys.argv) > 9:
+    if len(sys.argv) > 10:
         diva_distribution = parse_distribution_arg(sys.argv[9])
 
     diva_urls = diva_urls.split(",")
     diva_addresses = diva_addresses.split(",")
 
-    result= distribution(diva_set_size, len(diva_urls),num_validators,diva_distribution)
+    result= distribution(diva_set_size, len(diva_urls),stop_index - start_index,diva_distribution)
 
-    for index in range(0, num_validators):
+    for index in range(0, stop_index - start_index):
         validator_i= result[index]
         node_urls_val_i = [diva_urls[node_index] for node_index in validator_i]
         diva_addresses_val_i = [diva_addresses[node_index] for node_index in validator_i]

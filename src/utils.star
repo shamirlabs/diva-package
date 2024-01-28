@@ -84,3 +84,18 @@ def get_genesis_time(plan, beacon_url):
     )    
     plan.print(result["output"])
     return result["output"]
+
+def get_chain_id(plan, beacon_url):
+    result = plan.exec(
+        service_name="diva-utils",
+        recipe=ExecRecipe(
+            command=[
+                "/bin/sh",
+                "-c",
+                "python /tmp/scripts/utils.py get_chain_id {0} | tr -d '\n'".format(
+                    beacon_url
+                ),
+            ]
+        ),
+    )    
+    return result["output"]
