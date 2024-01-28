@@ -20,7 +20,7 @@ def initUtils(plan):
 
     plan.exec(
         service_name="diva-utils",
-        recipe=ExecRecipe(command=["pip", "install", "requests"]),
+        recipe=ExecRecipe(command=["sh", "-c", "pip install requests > /dev/null 2>&1"])
     )
     
 def get_address(plan, diva_url):

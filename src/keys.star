@@ -12,7 +12,7 @@ def upload_pregenesis_keys(plan, start_index_val,stop_index_val):
 
     files["/tmp/node-0"] = genesis.generate_validator_keystores(plan,start_index_val,stop_index_val)
     plan.add_service(
-        name="python-runner",
+        name="diva-keys-python",
         config=ServiceConfig(
             image=PYTHON_RUNNER_IMAGE,
             files=files,
@@ -20,11 +20,12 @@ def upload_pregenesis_keys(plan, start_index_val,stop_index_val):
         ),
     )
     plan.exec(
-        service_name="python-runner",
-        recipe=ExecRecipe(command=["pip", "install", "pyyaml"]),
+        service_name="diva-keys-python",
+        #recipe=ExecRecipe(command=["pip", "install", "pyyaml"]),
+        recipe=ExecRecipe(command=["sh", "-c", "pip install pyyaml > /dev/null 2>&1"])
     )
     plan.exec(
-        service_name="python-runner",
+        service_name="diva-keys-python",
         recipe=ExecRecipe(
             command=["mkdir", "-p", "/tmp/configurations/config-0"]
         ),
@@ -32,12 +33,12 @@ def upload_pregenesis_keys(plan, start_index_val,stop_index_val):
 
 def proccess_pregenesis_keys(plan, diva_node_urls, diva_addresses, start_index_val, stop_index_val):
     plan.exec(
-        service_name="python-runner",
+        service_name="diva-keys-python",
         recipe=ExecRecipe(
             command=[
                 "/bin/sh",
                 "-c",
-                "python /tmp/scripts/keys.py /tmp/node-0/node-0-keystores/teku-keys /tmp/node-0/node-0-keystores/teku-secrets {0} {1} {2} {3} {4} {5} {6}".format(
+                "python /tmp/scripts/keys.py /tmp/node-0/node-0-keystores/teku-keys /tmp/node-0/node-0-keystores/teku-secrets {0} {1} {2} {3} {4} {5} {6} {7}".format(
                     constants.DIVA_SET_SIZE,
                     ",".join(diva_addresses),
                     constants.DIVA_SET_THRESHOLD,
@@ -52,7 +53,7 @@ def proccess_pregenesis_keys(plan, diva_node_urls, diva_addresses, start_index_v
     )
     
     return plan.store_service_files(
-        service_name="python-runner",
+        service_name="diva-keys-python",
         src="/tmp/configurations",
         name="diva-configuration-tomls",
     )

@@ -59,63 +59,8 @@ def generate_validator_keystores(plan, start_index, stop_index):
         service_name, output_dirpath, name=artifact_name
     )
     return artifact_name
-    # This is necessary because the way Kurtosis currently implements artifact-storing is
-    base_dirname_in_artifact = path_base(output_dirpath)
-    to_add = new_keystore_files(
-        artifact_name,
-            path_join(base_dirname_in_artifact),
-            path_join(base_dirname_in_artifact, RAW_KEYS_DIRNAME),
-            path_join(base_dirname_in_artifact, RAW_SECRETS_DIRNAME),
-            path_join(base_dirname_in_artifact, "NIMBUS_KEYS_DIRNAME"),
-            path_join(base_dirname_in_artifact, "PRYSM_DIRNAME"),
-            path_join(base_dirname_in_artifact, TEKU_KEYS_DIRNAME),
-            path_join(base_dirname_in_artifact, TEKU_SECRETS_DIRNAME),
-    )
-
-    keystore_files.append(to_add)
-
-    
-    result = new_generate_keystores_result(
-        "prysm_password_artifact_name",
-        path_base("PRYSM_PASSWORD_FILEPATH_ON_GENERATOR"),
-        keystore_files,
-    )
-
-    return result
 
 
-def new_keystore_files(
-    files_artifact_uuid,
-    raw_root_dirpath,
-    raw_keys_relative_dirpath,
-    raw_secrets_relative_dirpath,
-    nimbus_keys_relative_dirpath,
-    prysm_relative_dirpath,
-    teku_keys_relative_dirpath,
-    teku_secrets_relative_dirpath,
-):
-    return struct(
-        files_artifact_uuid=files_artifact_uuid,
-        # ------------ All directories below are relative to the root of the files artifact ----------------
-        raw_root_dirpath=raw_root_dirpath,
-        raw_keys_relative_dirpath=raw_keys_relative_dirpath,
-        raw_secrets_relative_dirpath=raw_secrets_relative_dirpath,
-        nimbus_keys_relative_dirpath=nimbus_keys_relative_dirpath,
-        prysm_relative_dirpath=prysm_relative_dirpath,
-        teku_keys_relative_dirpath=teku_keys_relative_dirpath,
-        teku_secrets_relative_dirpath=teku_secrets_relative_dirpath,
-    )
-def new_generate_keystores_result(
-    prysm_password_artifact_uuid, prysm_password_relative_filepath, per_node_keystores
-):
-    return struct(
-        # Files artifact UUID where the Prysm password is stored
-        prysm_password_artifact_uuid=prysm_password_artifact_uuid,
-        # Relative to root of files artifact
-        prysm_password_relative_filepath=prysm_password_relative_filepath,
-        # Contains keystores-per-client-type for each node in the network
-        per_node_keystores=per_node_keystores,
-    )
 
 def path_join(*args):
     joined_path = "/".join(args)

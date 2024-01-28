@@ -6,7 +6,7 @@ genesis_constants = import_module(
 
 diva_server = import_module("./src/diva-server.star")
 diva_sc = import_module("./src/diva-sc.star")
-diva_operator_ui = import_module("./src/operator.star")
+diva_operator_ui = import_module("./src/diva-operator.star")
 diva_cli = import_module("./src/diva-cli.star")
 constants = import_module("./src/constants.star")
 keys = import_module("./src/keys.star")
@@ -35,7 +35,6 @@ def run(plan, args):
     diva_validators = constants.DIVA_VALIDATORS
     start_index_val=diva_params.diva_val_start
     stop_index_val=diva_params.diva_val_stop
-
     delay_sc="0"
     utils.initUtils(plan)
 

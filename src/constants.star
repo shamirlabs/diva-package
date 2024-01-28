@@ -14,9 +14,9 @@ DIVA_W3S=9000
 DIVA_API=30000
 DIVA_P2P=5050
 
-
+DIVA_VAL_INDEX_START=100 # when deploy divas to existing eth-network
 DIVA_SET_SIZE = 3
 DIVA_SET_THRESHOLD = 2
 DIVA_NODES= 4
-DIVA_VALIDATORS= 3 #-1 for all available validators created at pre-genesis 
-DIVA_DISTRIBUTION=[1]
+DIVA_VALIDATORS= 5 #-1 for all available validators created at pre-genesis 
+DIVA_DISTRIBUTION=[2]

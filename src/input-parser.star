@@ -179,21 +179,23 @@ def diva_val_index(plan,result):
     charge_pre_genesis_keys=result["diva_params"]["deployment"]["options"]["charge_pre_genesis_keys"]
     running_total_validator_count=0
     stop=0
-    if charge_pre_genesis_keys and deploy_eth and deploy_diva:
-        for participant in result["participants"]:
-            plan.print(participant)
-            if participant["validator_count"] == 0:
-                continue
-            running_total_validator_count += participant["validator_count"]
-        available= result["network_params"]["preregistered_validator_count"] - int(running_total_validator_count)
-        if available < constants.DIVA_VALIDATORS:
-            fail("Not enough validators", available)
-        if constants.DIVA_VALIDATORS== -1:
-            stop= int(result["network_params"]["preregistered_validator_count"])-1
+    if charge_pre_genesis_keys and deploy_diva:
+        if deploy_eth :
+            for participant in result["participants"]:
+                plan.print(participant)
+                if participant["validator_count"] == 0:
+                    continue
+                running_total_validator_count += participant["validator_count"]
+            available= result["network_params"]["preregistered_validator_count"] - int(running_total_validator_count)
+            if available < constants.DIVA_VALIDATORS:
+                fail("Not enough validators", available)
+            if constants.DIVA_VALIDATORS== -1:
+                stop= int(result["network_params"]["preregistered_validator_count"])-1
+            else:
+                stop= running_total_validator_count + constants.DIVA_VALIDATORS
         else:
-            stop= running_total_validator_count + constants.DIVA_VALIDATORS
-        return (running_total_validator_count, stop)
-
+            return (constants.DIVA_VAL_INDEX_START, constants.DIVA_VAL_INDEX_START+constants.DIVA_VALIDATORS)
+    return (running_total_validator_count, stop)
 
 def parse_network_params(input_args):
     result = default_input_args()
