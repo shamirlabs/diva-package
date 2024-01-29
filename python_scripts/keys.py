@@ -21,9 +21,9 @@ def main():
         diva_distribution = parse_distribution_arg(sys.argv[10])
     diva_urls = diva_urls.split(",")
     diva_addresses = diva_addresses.split(",")
-
+    
     result= distribution(diva_set_size, len(diva_urls),stop_index - start_index,diva_distribution)
-    print(result)
+
     entries= manage_keystores(keystore_folder,secrets_folder)
     for index in range(0, stop_index - start_index):
         validator_i= result[index]
@@ -33,13 +33,11 @@ def main():
     return 1
                      
 def distribution(num_keyshares_per_validator,num_total_nodes,num_validators,distribution):
-
     total_num_keyshares = num_validators * num_keyshares_per_validator
-
     total_keyshares_distribution = sum(distribution)
-    if total_keyshares_distribution > total_num_keyshares or num_total_nodes < num_keyshares_per_validator:
+    
+    if max(distribution)>num_validators or total_keyshares_distribution > total_num_keyshares or num_total_nodes < num_keyshares_per_validator:
         raise ValueError("Distribution is not possible with that configuration")
-
 
     distribution_result = {validator_id: [] for validator_id in range(num_validators)}
 
@@ -102,7 +100,7 @@ def append(folder, file):
     return folder + "/" + file
 
 def parse_distribution_arg(diva_distribution):
-    diva_distribution=diva_distribution.strip("[] \t\n\r")
+    diva_distribution = diva_distribution.replace('[', '').replace(']', '').strip()
     return [int(x.strip()) for x in diva_distribution.split(",") if x.strip()]
 
 def manage_keystores(keystore_folder,secrets_folder):

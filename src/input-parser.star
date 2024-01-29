@@ -194,7 +194,10 @@ def diva_val_index(plan,result):
             else:
                 stop= running_total_validator_count + constants.DIVA_VALIDATORS
         else:
-            return (constants.DIVA_VAL_INDEX_START, constants.DIVA_VAL_INDEX_START+constants.DIVA_VALIDATORS)
+            if constants.DIVA_VALIDATORS== -1:
+                return (constants.DIVA_VAL_INDEX_START, constants.DIVA_VAL_INDEX_START+10)
+            else:
+                return (constants.DIVA_VAL_INDEX_START, constants.DIVA_VAL_INDEX_START+constants.DIVA_VALIDATORS)
     return (running_total_validator_count, stop)
 
 def parse_network_params(input_args):

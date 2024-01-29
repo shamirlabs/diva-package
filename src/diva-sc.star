@@ -1,14 +1,14 @@
-DIVA_SC_IMAGE = "diva-sc"
 DIVA_SC_SERVICE_NAME = "diva-smartcontract-deployer"
 DIVA_SC_REGISTER_NAME = "diva-smartcontract-register"
 utils = import_module("./utils.star")
+constants = import_module("./constants.star")
 
 
 def init(plan, el_url, sender_priv):
     plan.add_service(
         name=DIVA_SC_SERVICE_NAME,
         config=ServiceConfig(
-            image=DIVA_SC_IMAGE,
+            image=constants.DIVA_SC_IMAGE,
             env_vars={"CUSTOM_URL": el_url, "CUSTOM_PRIVATE_KEY": sender_priv},
             cmd=["tail", "-f", "/dev/null"],
         ),

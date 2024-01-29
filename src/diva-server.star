@@ -1,6 +1,5 @@
 constants = import_module("./constants.star")
 
-DIVA_SERVER_IMAGE = "diva-server"
 DIVA_BOOT_NODE_NAME = "diva-bootnode-coordinator"
 DIVA_BOOTNODE_NAME = "diva-bootnode-coordinator"
 
@@ -18,7 +17,7 @@ def start_bootnode(
     result = plan.add_service(
         name=DIVA_BOOTNODE_NAME,
         config=ServiceConfig(
-            image=DIVA_SERVER_IMAGE,
+            image=constants.DIVA_SERVER_IMAGE,
             cmd=[
                 "--db=/data/diva.db",
                 "--w3s-address=0.0.0.0",
@@ -105,7 +104,7 @@ def start_node(
     result = plan.add_service(
         name=diva_node_name,
         config=ServiceConfig(
-            image=DIVA_SERVER_IMAGE,
+            image=constants.DIVA_SERVER_IMAGE,
             cmd=cmd,
             env_vars={
                 "DIVA_VAULT_PASSWORD": constants.DIVA_VAULT_PASSWORD,
