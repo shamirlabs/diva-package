@@ -1,6 +1,5 @@
 constants = import_module("./constants.star")
 
-DIVA_CLI_IMAGE = "diva-cli"
 DIVA_CLI_NAME = "diva-cli"
 DIVA_DEPLOYER_CLI_NAME = "diva-cli-deployer"
 
@@ -9,13 +8,13 @@ def start_cli(plan, configuration_tomls=None):
     files = {}
     if configuration_tomls:
         files["/configuration"] = configuration_tomls
-    name = DIVA_CLI_IMAGE
+    name = constants.DIVA_CLI_IMAGE
     if configuration_tomls:
         name = DIVA_DEPLOYER_CLI_NAME
     plan.add_service(
         name=name,
         config=ServiceConfig(
-            image=DIVA_CLI_IMAGE,
+            image=constants.DIVA_CLI_IMAGE,
             entrypoint=["tail", "-f", "/dev/null"],
             env_vars={"DIVA_API_KEY": constants.DIVA_API_KEY},
             files=files,
@@ -54,7 +53,7 @@ def deploy(plan, diva_validators):
         )
         plan.print(
             "deploying {0} for validator {1}".format(
-                configuration_file, 0
+                configuration_file, key_index
             )
         )
         

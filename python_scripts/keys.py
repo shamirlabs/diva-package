@@ -13,32 +13,31 @@ def main():
     diva_addresses = sys.argv[4]
     diva_threshold = int(sys.argv[5])
     diva_api_key = sys.argv[6]
-    num_validators = int(sys.argv[7])
-    diva_urls = sys.argv[8]
+    start_index = int(sys.argv[7])
+    stop_index = int(sys.argv[8])
+    diva_urls = sys.argv[9]
     diva_distribution=[]
     if len(sys.argv) > 9:
-        diva_distribution = parse_distribution_arg(sys.argv[9])
-
+        diva_distribution = parse_distribution_arg(sys.argv[10])
     diva_urls = diva_urls.split(",")
     diva_addresses = diva_addresses.split(",")
+    
+    result= distribution(diva_set_size, len(diva_urls),stop_index - start_index,diva_distribution)
 
-    result= distribution(diva_set_size, len(diva_urls),num_validators,diva_distribution)
-
-    for index in range(0, num_validators):
+    entries= manage_keystores(keystore_folder,secrets_folder)
+    for index in range(0, stop_index - start_index):
         validator_i= result[index]
-        node_urls_val_i = [diva_urls[node_index] for node_index in validator_i]
+        node_urls_val_i = [diva_urls[node_index] for node_index in validator_i]   
         diva_addresses_val_i = [diva_addresses[node_index] for node_index in validator_i]
-        create_pool(keystore_folder, secrets_folder, node_urls_val_i, diva_addresses_val_i, diva_threshold, diva_api_key)
-
+        create_pool(entries[index],node_urls_val_i, diva_addresses_val_i, diva_threshold, diva_api_key,index)
+    return 1
                      
 def distribution(num_keyshares_per_validator,num_total_nodes,num_validators,distribution):
-
     total_num_keyshares = num_validators * num_keyshares_per_validator
-
     total_keyshares_distribution = sum(distribution)
-    if total_keyshares_distribution > total_num_keyshares or num_total_nodes < num_keyshares_per_validator:
+    
+    if max(distribution)>num_validators or total_keyshares_distribution > total_num_keyshares or num_total_nodes < num_keyshares_per_validator:
         raise ValueError("Distribution is not possible with that configuration")
-
 
     distribution_result = {validator_id: [] for validator_id in range(num_validators)}
 
@@ -77,35 +76,20 @@ def distribution(num_keyshares_per_validator,num_total_nodes,num_validators,dist
     return distribution_result
 
 
-def create_pool(keystore_folder, secrets_folder, diva_urls, diva_addresses, diva_threshold, diva_api_key):
-    entries = []
-    for keystore_file in os.listdir(keystore_folder):
-        keystore_contents = ""
-        with open(append(keystore_folder, keystore_file)) as keystore_file_handle:
-            keystore_contents = keystore_file_handle.read()
-        secrets_file = keystore_file.replace("json", "txt")
-        secrets_file = append(secrets_folder, secrets_file)
-        secret = ""
-        with open(secrets_file) as secret_file_handle:
-            secret = secret_file_handle.read()
-        entries.append(Entry(keystore_contents, secret))
+def create_pool(validator,diva_urls, diva_addresses, diva_threshold, diva_api_key,index):
 
     destination="/tmp/configurations/config-0"
-    configurations = []
-    for entry in entries:
-        configuration = {
-            "keystore": entry.key,
-            "keystore_password": entry.secret,
-            "threshold": diva_threshold,
-            "key_shares": [{"client_api_url": url, "client_api_key": diva_api_key, "node_address": diva_addresses[index], "index": get_index(index+1)} for index, url in enumerate(diva_urls)]
-        }
-        configurations.append(configuration)
 
-    print(f"writing out {len(configurations)} configurations to {destination}")
-    for index in range(0, len(configurations)):
-        filepath = f"{destination}/config-{index}.toml"
-        with open(filepath, "w") as output_file_handle:
-            output_file_handle.write(yaml.dump(configurations[index]))
+    configuration = {
+        "keystore": validator.key, 
+        "keystore_password": validator.secret,
+        "threshold": diva_threshold,
+        "key_shares": [{"client_api_url": url, "client_api_key": diva_api_key, "node_address": diva_addresses[index], "index": get_index(index+1)} for index, url in enumerate(diva_urls)]
+    }
+
+    filepath = f"{destination}/config-{index}.toml"
+    with open(filepath, "w") as output_file_handle:
+        output_file_handle.write(yaml.dump(configuration))
 
 
 # index will change in next release 
@@ -116,8 +100,20 @@ def append(folder, file):
     return folder + "/" + file
 
 def parse_distribution_arg(diva_distribution):
-    diva_distribution=diva_distribution.strip("[] \t\n\r")
+    diva_distribution = diva_distribution.replace('[', '').replace(']', '').strip()
     return [int(x.strip()) for x in diva_distribution.split(",") if x.strip()]
 
-
+def manage_keystores(keystore_folder,secrets_folder):
+    entries=[]
+    for keystore_file in os.listdir(keystore_folder):
+        keystore_contents = ""
+        with open(append(keystore_folder, keystore_file)) as keystore_file_handle:
+            keystore_contents = keystore_file_handle.read()
+        secrets_file = keystore_file.replace("json", "txt")
+        secrets_file = append(secrets_folder, secrets_file)
+        secret = ""
+        with open(secrets_file) as secret_file_handle:
+            secret = secret_file_handle.read()
+        entries.append(Entry(keystore_contents, secret))
+    return entries
 main()

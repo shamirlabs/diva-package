@@ -1,3 +1,9 @@
+DIVA_SC_IMAGE = "diva-sc"
+DIVA_CLI_IMAGE = "diva-cli"
+OPERATOR_UI_IMAGE = "diva/operator-ui:latest"
+DIVA_SERVER_IMAGE = "diva-server"
+
+
 DIVA_API_KEY="diva"
 DIVA_VAULT_PASSWORD=DIVA_API_KEY
 
@@ -14,9 +20,9 @@ DIVA_W3S=9000
 DIVA_API=30000
 DIVA_P2P=5050
 
-
+DIVA_VAL_INDEX_START=100 # when deploy divas to existing eth-network
 DIVA_SET_SIZE = 3
-DIVA_SET_THRESHOLD = 2
-DIVA_NODES= 4
-DIVA_VALIDATORS= 3
-DIVA_DISTRIBUTION=[1]
+DIVA_SET_THRESHOLD = 3
+DIVA_NODES= 5
+DIVA_VALIDATORS= 8 #-1 for all available validators created at pre-genesis
+DIVA_DISTRIBUTION="[7,1]"

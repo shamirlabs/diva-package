@@ -3,9 +3,10 @@ network_params:
   genesis_delay: 60
   deneb_fork_epoch: 1
   electra_fork_epoch: null
+  preregistered_validator_count: 115 #Those not assigned in participats will be available for diva
 
-additional_services: []
-#  - dora
+additional_services: 
+  - dora
 
 mev_type: none
 
@@ -14,21 +15,24 @@ participants:
     cl_client_type: lighthouse
     validator_count: 10
 
-
   # pair 2 must be geth & nimbus to expose public ports if you use shamir eth-pack
   - el_client_type: geth
     cl_client_type: nimbus
     validator_count: 100
-    count: 1
 
 diva_params:
-  verify_fee_recipient: false
-  deploy_eth: false
-  deploy_diva_sc: false
-  deploy_diva_coord_boot: false
-  deploy_diva: true
-  charge_pre_genesis_keys: true
-  deploy_operator_ui: false
-  private_pools_only: true
-  public_ports: false
-  permanent: false
+  deployment:
+    deploy_eth: false
+    deploy_diva_sc: false
+    deploy_diva_coord_boot: false
+    deploy_diva: true
+    deploy_operator_ui: false
+    options:
+      charge_pre_genesis_keys: true
+      public_ports: false
+
+  protocol_features:
+    verify_fee_recipient: false
+    private_pools_only: true
+  
+permanent: false
