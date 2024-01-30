@@ -35,9 +35,14 @@ def main():
 def distribution(num_keyshares_per_validator,num_total_nodes,num_validators,distribution):
     total_num_keyshares = num_validators * num_keyshares_per_validator
     total_keyshares_distribution = sum(distribution)
+
     
-    if max(distribution)>num_validators or total_keyshares_distribution > total_num_keyshares or num_total_nodes < num_keyshares_per_validator:
-        raise ValueError("Distribution is not possible with that configuration")
+    if total_keyshares_distribution != 0 and max(distribution)>num_validators:
+        raise ValueError("Distribution is not possible with that configuration, max(distribution)>num_validators")
+    if total_keyshares_distribution > total_num_keyshares:
+        raise ValueError("Distribution is not possible with that configuration, total_keyshares_distribution > total_num_keyshares")
+    if num_total_nodes < num_keyshares_per_validator:
+        raise ValueError("Distribution is not possible with that configuration, num_total_nodes < num_keyshares_per_validator")
 
     distribution_result = {validator_id: [] for validator_id in range(num_validators)}
 
