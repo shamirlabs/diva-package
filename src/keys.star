@@ -32,6 +32,7 @@ def upload_pregenesis_keys(plan, start_index_val,stop_index_val):
     )
 
 def proccess_pregenesis_keys(plan, diva_node_urls, diva_addresses, start_index_val, stop_index_val):
+
     plan.exec(
         service_name="diva-keys-python",
         recipe=ExecRecipe(

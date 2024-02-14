@@ -23,7 +23,7 @@ def main():
 def get_address():
     diva_url= sys.argv[2]
     api_key= sys.argv[3]
-    max_retries = 30
+    max_retries = 60
     attempts = 0
 
     while attempts < max_retries:
@@ -90,7 +90,7 @@ def get_gvr():
 
 def get_chain_id():
     beacon_url= sys.argv[2]
-    max_retries = 30
+    max_retries = 60
     attempts = 0
     while attempts < max_retries:
         try:

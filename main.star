@@ -1,5 +1,5 @@
 ethereum_package = import_module("github.com/kurtosis-tech/ethereum-package@1.3.0/main.star")
-# for public ports: ethereum_package = import_module("github.com/shamirlabs/ethereum-package/main.star")
+ethereum_package_shamir = import_module("github.com/shamirlabs/ethereum-package/main.star")
 genesis_constants = import_module(
     "github.com/shamirlabs/ethereum-package/src/prelaunch_data_generator/genesis_constants/genesis_constants.star"
 )
@@ -41,7 +41,8 @@ def run(plan, args):
     if deploy_eth:
         if deploy_diva_sc:
             delay_sc="150"
-
+        if public_ports:
+            ethereum_package=ethereum_package_shamir
         ethereum_network = ethereum_package.run(plan, args)
 
         plan.print("Succesfully launched an Ethereum Network")
@@ -50,15 +51,16 @@ def run(plan, args):
             ethereum_network.genesis_validators_root,
             ethereum_network.final_genesis_timestamp,
         )
-        el_ip_addr = ethereum_network.all_participants[1].el_client_context.ip_addr
-        el_ws_port = ethereum_network.all_participants[1].el_client_context.ws_port_num
-        el_rpc_port = ethereum_network.all_participants[1].el_client_context.rpc_port_num
+        el_ip_addr = ethereum_network.all_participants[0].el_client_context.ip_addr
+        el_ws_port = ethereum_network.all_participants[0].el_client_context.ws_port_num
+        el_rpc_port = ethereum_network.all_participants[0].el_client_context.rpc_port_num
         el_rpc_uri = "http://{0}:{1}".format(el_ip_addr, el_rpc_port)
         el_ws_uri = "ws://{0}:{1}".format(el_ip_addr, el_ws_port)
-        cl_ip_addr = ethereum_network.all_participants[1].cl_client_context.ip_addr
-        cl_http_port_num = ethereum_network.all_participants[1].cl_client_context.http_port_num
+        cl_ip_addr = ethereum_network.all_participants[0].cl_client_context.ip_addr
+        cl_http_port_num = ethereum_network.all_participants[0].cl_client_context.http_port_num
         cl_uri = "http://{0}:{1}".format(cl_ip_addr, cl_http_port_num)
         network_id = args.get("network_params").get("network_id") if  args.get("network_params").get("network_id") != None else 3151908
+        sc_verif=ethereum_network.blockscout_sc_verif_url
     else:
         el_ws_uri = "ws://{0}:{1}".format(constants.HOST, constants.EL_WS_PORT)
         cl_uri = "http://{0}:{1}".format(constants.HOST, constants.CL_PORT)
@@ -66,16 +68,19 @@ def run(plan, args):
         genesis_validators_root = utils.get_gvr(plan,cl_uri)
         genesis_time = utils.get_genesis_time(plan,cl_uri)
         network_id = utils.get_chain_id(plan,cl_uri) 
-
- 
+        sc_verif = "http://{0}:{1}".format(constants.HOST, constants.EXEC_EXPL_PORT)
+        
     if deploy_diva_sc or deploy_diva_coord_boot or deploy_diva:
         diva_sc.init(plan, el_rpc_uri, genesis_constants.PRE_FUNDED_ACCOUNTS[1].private_key)
     
     smart_contract_address = constants.DIVA_SC
+    plan.print(sc_verif)
+    plan.print(delay_sc)
+    plan.print(network_id)
 
     if deploy_diva_sc:
         smart_contract_address = diva_sc.deploy(
-            plan, delay_sc
+            plan, delay_sc, network_id,sc_verif
         )
 
     if deploy_diva or deploy_diva_coord_boot:

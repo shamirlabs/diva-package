@@ -14,21 +14,37 @@ def init(plan, el_url, sender_priv):
         ),
     )
 
-def deploy(plan, delay_sc):
+def deploy(plan, delay_sc, chainID, sc_verif):
     plan.exec(service_name=DIVA_SC_SERVICE_NAME, recipe=ExecRecipe(command=["sleep", delay_sc]))
 
-    result = plan.exec(
+    diamond = plan.exec(
         service_name=DIVA_SC_SERVICE_NAME,
         recipe=ExecRecipe(
             command=[
                 "/bin/sh",
                 "-c",
-                "npx hardhat run --no-compile scripts/deployDiamondAndSetup.js --network custom 2>/dev/null | awk 'END{print $NF}' | tr -d '\n' ",
+                "npx hardhat run --no-compile scripts/deployDiamondAndSetup.js --network custom  2>/dev/null | tail -n 1 | awk '{print $1, $2, $3}' | tr -d '\n' "
             ]
         ),
     )
-    return result["output"]
 
+    plan.print(chainID)
+    plan.print(sc_verif)
+    plan.print(diamond["output"] )
+    result= plan.exec(
+        service_name=DIVA_SC_SERVICE_NAME,
+        recipe=ExecRecipe(
+            command=[
+                "/bin/sh",
+                "-c",
+                "CHAINID=3151908 VERIF_API={1}/api VERIF_URL={1} npx hardhat verify --network custom {2}  | tr -d '\n' ".format(
+                    chainID, sc_verif, diamond["output"] 
+                ),
+            ]
+        ),
+    )    
+    plan.print(diamond["output"].split(" ")[0])
+    return (diamond["output"].split(" ")[0])
 
 def fund(plan,address):
     plan.exec(

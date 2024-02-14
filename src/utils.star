@@ -98,4 +98,4 @@ def get_chain_id(plan, beacon_url):
             ]
         ),
     )    
-    return result["output"]
+    return result["output"]    
