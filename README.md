@@ -147,3 +147,18 @@ cd diva-package
 ```
 kurtosis run . --enclave enclaveName
 ```
+
+### Issues?
+
+To remove the enclave
+```
+kurtosis enclave rm enclaveName -f
+```
+
+To restart everything
+```
+systemctl restart kurtosis
+systemctl restart docker
+```
+
+Do you still have issues, pls check the above Upgrade Kurtosis section
