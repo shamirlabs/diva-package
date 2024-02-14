@@ -1,27 +1,31 @@
-# diva-package
+# Diva Package Installation and Use
 
-## Install kurtosis 
-``
+## Install Kurtosis 
+To install Kurtosis, you need to add its repository to your system and then install the ``kurtosis-cli`` package. Use the following commands:
+
+
+``````
 echo "deb [trusted=yes] https://apt.fury.io/kurtosis-tech/ /" | sudo tee /etc/apt/sources.list.d/kurtosis.list
 sudo apt update
 sudo apt install kurtosis-cli
-``
+``````
 
 ### Upgrade Kurtosis
-Sometimes you will find weird errors and that's because approximately once per month kurtosis introduces breaking changes, please update:
-``
+Kurtosis may introduce breaking changes approximately once per month. If you encounter any issues, it is recommended to update your installation. Use the following commands to upgrade Kurtosis and restart its engine:
+``````
 apt update && apt install --only-upgrade kurtosis-cli
 kurtosis engine restart
-``
+``````
 
 
 
 
-## Parameters
+## Configuration Parameters
 
-You can define the different options in two files:
-    - params.yaml          # Arguments that will define the deployment itself, it contains parameters about ethereum-package and diva-package as well
-    - src/constants.star   # Parameters for when you want set different protocol specific information or in case you want to attach one deployment to another
+
+Configuration for the Diva package deployment can be defined in two files:
+    - params.yaml          # Contains arguments defining the deployment itself, including parameters for both the Ethereum package and the Diva package services.
+    - src/constants.star   # Used to set protocol-specific information or link one deployment to another.
 
 
 ### Params.yaml
@@ -117,7 +121,7 @@ DIVA_DISTRIBUTION="[1]"
 
 ## Pipeline
 
-Kurtosis can deploy the following services in order:
+Kurtosis can sequentially deploy the following services for a Diva package setup:
 
 - ethereum_clients
 - deploy smart_contract
@@ -128,11 +132,11 @@ Kurtosis can deploy the following services in order:
 - deploy of operator ui
 - validator-clients
 
-Each service can be skiped, but most of them need the previous one, so if skipped the pipeline will assume the previous services will be found on the endpoints defined at constants.star
+Services can be skipped as needed, but dependencies between them mean that skipping a service assumes its functionality is provided by another means, as configured in constants.star.
 
 
 
-## Use diva-package
+## Using the Diva Package
 
 ```
 git clone https://github.com/shamirlabs/diva-package
