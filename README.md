@@ -1,4 +1,4 @@
-# Diva Package Installation and Use
+# Diva Package 
 
 ## Install Kurtosis 
 To install Kurtosis, you need to add its repository to your system and then install the ``kurtosis-cli`` package. Use the following commands:
@@ -76,7 +76,7 @@ persistent: false                       # will make diva and eth-package persist
 
 ````
 
-
+# Those are the docker image tags that kurtosis will try to fetch, if private and images are not locally, auth need to be set
 DIVA_SC_IMAGE = "sc"
 DIVA_CLI_IMAGE = "diva-cli"
 OPERATOR_UI_IMAGE = "diva/operator-ui:latest"
