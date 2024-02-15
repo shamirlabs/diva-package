@@ -148,6 +148,26 @@ cd diva-package
 kurtosis run . --enclave enclaveName
 ```
 
+### Prefunded accounts
+For your convenience, some of the prefunded accounts -pub/priv keys- in the eth-package can be found bellow:
+
+    new_prefunded_account(
+        "0x741bFE4802cE1C4b5b00F9Df2F5f179A1C89171A",
+        "3a91003acaf4c21b3953d94fa4a6db694fa69e5242b2e37be05dd82761058899",
+    ),
+    new_prefunded_account(
+        "0xc3913d4D8bAb4914328651C2EAE817C8b78E1f4c",
+        "bb1d0f125b4fb2bb173c318cdead45468474ca71474e2247776b2b4c0fa2d3f5",
+    ),
+    new_prefunded_account(
+        "0x65D08a056c17Ae13370565B04cF77D2AfA1cB9FA",
+        "850643a0224065ecce3882673c21f56bcf6eef86274cc21cadff15930b59fc8c",
+    ),
+    new_prefunded_account(
+        "0x3e95dFbBaF6B348396E6674C7871546dCC568e56",
+        "94eb3102993b41ec55c241060f47daa0f6372e2e3ad7e91612ae36c364042e44",
+
+
 ### Issues?
 
 To remove the enclave
