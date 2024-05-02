@@ -1,8 +1,12 @@
+# Images
 DIVA_SC_IMAGE = "diva-sc"
 DIVA_CLI_IMAGE = "diva-cli:1"
 OPERATOR_UI_IMAGE = "diva/operator-ui:latest"
 DIVA_SERVER_IMAGE = "diva-server:1"
 
+
+# Service names
+DIVA_BOOTNODE_NAME = "diva-bootnode-coordinator"
 
 DIVA_API_KEY="diva"
 DIVA_VAULT_PASSWORD=DIVA_API_KEY

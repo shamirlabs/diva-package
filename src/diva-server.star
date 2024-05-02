@@ -1,8 +1,5 @@
 constants = import_module("./constants.star")
 
-DIVA_BOOT_NODE_NAME = "diva-bootnode-coordinator"
-DIVA_BOOTNODE_NAME = "diva-bootnode-coordinator"
-
 
 # Starts the BootNode / Coordinator Node
 def start_bootnode(
@@ -15,10 +12,12 @@ def start_bootnode(
         public_ports["diva_p2p"] = PortSpec(number = constants.DIVA_P2P , transport_protocol = "TCP", wait=None)
 
     result = plan.add_service(
-        name=DIVA_BOOTNODE_NAME,
+        name=constants.DIVA_BOOTNODE_NAME,
         config=ServiceConfig(
             image=constants.DIVA_SERVER_IMAGE,
             cmd=[
+                "--execution-client-url={0}".format(el_url),
+                "--consensus-client-url={0}".format(cl_url),
                 "--db=/var/diva/config/diva.db",
                 "--w3s-address=0.0.0.0",
                 "--tracing",
@@ -30,7 +29,8 @@ def start_bootnode(
                 "--deposit-contract=0x4242424242424242424242424242424242424242",
                 "--chain-id={0}".format(chain_id),
                 "--genesis-time={0}".format(genesis_time),
-                "--genesis-fork-version=0x10000038"
+                "--genesis-fork-version=0x10000038",
+                "--insecure-api"
             ],
             env_vars={
                 "DIVA_VAULT_PASSWORD": constants.DIVA_VAULT_PASSWORD,
@@ -39,13 +39,13 @@ def start_bootnode(
                 "p2p-port": PortSpec(number=5050, transport_protocol="TCP", wait=None),
                 "w3s-port": PortSpec(
                     number=9000, transport_protocol="TCP", wait=None),
-                "port": PortSpec(number=30000, transport_protocol="TCP"),
+                "api-port": PortSpec(number=30000, transport_protocol="TCP"),
             },
             min_cpu=200,
             max_cpu=1000,            
             files={
                 "/var/diva": Directory(
-                    persistent_key="diva-db-{0}".format(DIVA_BOOT_NODE_NAME)
+                    persistent_key="diva-db-{0}".format(constants.DIVA_BOOTNODE_NAME)
                 )
             },
             public_ports = public_ports
@@ -87,6 +87,7 @@ def start_node(
         "--deposit-contract=0x4242424242424242424242424242424242424242",
         "--chain-id={0}".format(chain_id),
         "--genesis-time={0}".format(genesis_time),
+        "--insecure-api",
     ]
 
     if is_nimbus and verify_fee_recipient:
@@ -102,11 +103,11 @@ def start_node(
                 # TODO fill up jaeger configuration
             },
             ports={
-                "p2p": PortSpec(number=5050, transport_protocol="TCP", wait=None),
-                "signer-api": PortSpec(
+                "p2p-port": PortSpec(number=5050, transport_protocol="TCP", wait=None),
+                "w3s-port": PortSpec(
                     number=9000, transport_protocol="TCP", wait=None
                 ),
-                "api": PortSpec(number=30000, transport_protocol="TCP"),
+                "api-port": PortSpec(number=30000, transport_protocol="TCP"),
             },
             files={
                 "/var/diva": Directory(persistent_key="diva-db-{0}".format(diva_node_name))

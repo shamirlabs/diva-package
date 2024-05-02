@@ -30,7 +30,7 @@ def run(plan, args):
     deploy_operator_ui=False
     verify_fee_recipient=True
     private_pools_only=True    
-    charge_pre_genesis_keys=True
+    charge_pre_genesis_keys=False
     
 
     public_ports= False
@@ -76,7 +76,7 @@ def run(plan, args):
         network_id = utils.get_chain_id(plan,cl_uri) 
         sc_verif = "http://{0}:{1}".format(constants.HOST, constants.EXEC_EXPL_PORT)
         
-    if deploy_diva_sc or deploy_diva_coord_boot or deploy_diva:
+    if deploy_diva_sc or deploy_diva:
         diva_sc.init(plan, el_rpc_uri, genesis_constants.PRE_FUNDED_ACCOUNTS[1].private_key)
     
     smart_contract_address = constants.DIVA_SC
@@ -105,7 +105,10 @@ def run(plan, args):
             network_id
         )
         diva_cli.generate_identity(plan, bootnode_url)
-        bootnode_address = utils.get_address(plan, bootnode_url)
+        bootnode_address = utils.get_diva_field(plan, constants.DIVA_BOOTNODE_NAME, "node_address")
+        plan.print(bootnode_address)
+        plan.print("bootnode-address")
+
         if deploy_diva_sc:        
             diva_sc.fund(plan, bootnode_address)
     
@@ -113,17 +116,26 @@ def run(plan, args):
         bootonde_url= "http://{0}:{1}".format(constants.HOST,constants.BOOTNODE_PORT)
         bootnode_ip= constants.HOST
         if deploy_diva_coord_boot:
-            bootnode_ip= bootnode.ip_address            
+            bootnode_ip= bootnode.ip_address
+
+
+
+        bootnode_peer_id = utils.get_diva_field(plan,constants.DIVA_BOOTNODE_NAME,"network_settings.peer_id")
+        plan.print(bootonde_url)
+        plan.print(bootnode_peer_id)
+        
+
         plan.print("Starting DIVA nodes")
-        bootnode_peer_id = utils.get_peer_id(plan, bootonde_url)
+        
         diva_urls = []
         validators_to_shutdown = []
         diva_addresses = []
         signer_urls = []
         for index in range(0, constants.DIVA_NODES):
+            service_name_node = "diva-node-{0}".format(index + 1)
             node, node_url, signer_url = diva_server.start_node(
                 plan,
-                "diva-node-{0}".format(index + 1),
+                service_name_node,
                 el_ws_uri,
                 cl_uri,
                 smart_contract_address,
@@ -138,7 +150,7 @@ def run(plan, args):
             diva_urls.append(node_url)
             signer_urls.append(signer_url)
             node_identity = diva_cli.generate_identity(plan, node_url)
-            node_address = utils.get_address(plan, node_url)
+            node_address = utils.get_diva_field(plan,service_name_node,"node_address")
             diva_addresses.append(node_address)
             if not private_pools_only:
                 operator_public_key, operator_private_key, operator_address = diva_sc.new_key(plan)
