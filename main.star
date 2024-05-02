@@ -1,4 +1,4 @@
-ethereum_package = import_module("github.com/kurtosis-tech/ethereum-package@1.3.0/main.star")
+ethereum_package_official = import_module("github.com/kurtosis-tech/ethereum-package@/main.star")
 ethereum_package_shamir = import_module("github.com/shamirlabs/ethereum-package/main.star")
 genesis_constants = import_module(
     "github.com/shamirlabs/ethereum-package/src/prelaunch_data_generator/genesis_constants/genesis_constants.star"
@@ -12,29 +12,31 @@ constants = import_module("./src/constants.star")
 keys = import_module("./src/keys.star")
 nimbus = import_module("./src/nimbus.star")
 utils = import_module("./src/utils.star")
-input_parser = import_module("./src/input-parser.star")
+#input_parser = import_module("./src/input-parser.star")
 
 
 
 def run(plan, args):
     
-    diva_args = input_parser.diva_input_parser(plan, args)
-    diva_params= diva_args.diva_params
-    deploy_eth= diva_params.deploy_eth
-    deploy_diva = diva_params.deploy_diva
-    deploy_diva_sc= diva_params.deploy_diva_sc
-    deploy_diva_coord_boot= diva_params.deploy_diva_coord_boot
-    deploy_operator_ui=diva_params.deploy_operator_ui
-    verify_fee_recipient=diva_params.verify_fee_recipient
-    private_pools_only=diva_params.private_pools_only    
-    charge_pre_genesis_keys=diva_params.charge_pre_genesis_keys
+    #diva_args = input_parser.diva_input_parser(plan, args)
+    diva_params= args.get(
+        "diva_params"
+    )
+
+    deploy_eth= False
+    deploy_diva = True
+    deploy_diva_sc= False
+    deploy_diva_coord_boot= True
+    deploy_operator_ui=False
+    verify_fee_recipient=True
+    private_pools_only=True    
+    charge_pre_genesis_keys=True
     
 
-    public_ports= diva_params.public_ports
-    participants = diva_args.participants
+    public_ports= False
     diva_validators = constants.DIVA_VALIDATORS
-    start_index_val=diva_params.diva_val_start
-    stop_index_val=diva_params.diva_val_stop
+    start_index_val=0
+    stop_index_val=10
     delay_sc="0"
     utils.initUtils(plan)
 
@@ -42,7 +44,11 @@ def run(plan, args):
         if deploy_diva_sc:
             delay_sc="150"
         if public_ports:
-            ethereum_package=ethereum_package_shamir
+            ethereum_package = ethereum_package_shamir
+        else:
+            ethereum_package = ethereum_package_official
+
+
         ethereum_network = ethereum_package.run(plan, args)
 
         plan.print("Succesfully launched an Ethereum Network")
@@ -51,15 +57,15 @@ def run(plan, args):
             ethereum_network.genesis_validators_root,
             ethereum_network.final_genesis_timestamp,
         )
-        el_ip_addr = ethereum_network.all_participants[0].el_client_context.ip_addr
-        el_ws_port = ethereum_network.all_participants[0].el_client_context.ws_port_num
-        el_rpc_port = ethereum_network.all_participants[0].el_client_context.rpc_port_num
+        el_ip_addr = ethereum_network.all_participants[0].el_context.ip_addr
+        el_ws_port = ethereum_network.all_participants[0].el_context.ws_port_num
+        el_rpc_port = ethereum_network.all_participants[0].el_context.rpc_port_num
         el_rpc_uri = "http://{0}:{1}".format(el_ip_addr, el_rpc_port)
         el_ws_uri = "ws://{0}:{1}".format(el_ip_addr, el_ws_port)
-        cl_ip_addr = ethereum_network.all_participants[0].cl_client_context.ip_addr
-        cl_http_port_num = ethereum_network.all_participants[0].cl_client_context.http_port_num
+        cl_ip_addr = ethereum_network.all_participants[0].cl_context.ip_addr
+        cl_http_port_num = ethereum_network.all_participants[0].cl_context.http_port
         cl_uri = "http://{0}:{1}".format(cl_ip_addr, cl_http_port_num)
-        network_id = args.get("network_params").get("network_id") if  args.get("network_params").get("network_id") != None else 3151908
+        network_id = 3151908
         sc_verif=ethereum_network.blockscout_sc_verif_url
     else:
         el_ws_uri = "ws://{0}:{1}".format(constants.HOST, constants.EL_WS_PORT)
@@ -100,8 +106,8 @@ def run(plan, args):
         )
         diva_cli.generate_identity(plan, bootnode_url)
         bootnode_address = utils.get_address(plan, bootnode_url)
-
-        diva_sc.fund(plan, bootnode_address)
+        if deploy_diva_sc:        
+            diva_sc.fund(plan, bootnode_address)
     
     if deploy_diva:
         bootonde_url= "http://{0}:{1}".format(constants.HOST,constants.BOOTNODE_PORT)
@@ -132,10 +138,10 @@ def run(plan, args):
             diva_urls.append(node_url)
             signer_urls.append(signer_url)
             node_identity = diva_cli.generate_identity(plan, node_url)
-            operator_public_key, operator_private_key, operator_address = diva_sc.new_key(plan)
             node_address = utils.get_address(plan, node_url)
             diva_addresses.append(node_address)
             if not private_pools_only:
+                operator_public_key, operator_private_key, operator_address = diva_sc.new_key(plan)
                 diva_sc.fund(plan, operator_address)
                 diva_sc.register(plan, operator_private_key, smart_contract_address, node_address)
 

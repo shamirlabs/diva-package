@@ -12,12 +12,12 @@ mev_type: none
 
 participants:
   # first pair must be geth & nimbus to expose public ports if you use shamir eth-pack
-  - el_client_type: geth
-    cl_client_type: nimbus
+  - el_type: geth
+    cl_type: nimbus
     validator_count: 32
 
-  - el_client_type: geth
-    cl_client_type: nimbus
+  - el_type: geth
+    cl_type: nimbus
     validator_count: 32
 
 diva_params:

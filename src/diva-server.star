@@ -19,38 +19,32 @@ def start_bootnode(
         config=ServiceConfig(
             image=constants.DIVA_SERVER_IMAGE,
             cmd=[
-                "--db=/data/diva.db",
+                "--db=/var/diva/config/diva.db",
                 "--w3s-address=0.0.0.0",
-                "--execution-client-url={0}".format(el_url),
-                "--consensus-client-url={0}".format(cl_url),
                 "--tracing",
                 "--log-level=debug",
                 "--bootnode-address=",
-                "--enable-coordinator",
                 "--swagger-ui-enabled",
-                "--contract={0}".format(contract_address),
                 "--master-key={0}".format(constants.DIVA_API_KEY),
-                "--genesis-fork-version=0x10000038",
-                "--current-fork-version=0x40000038",
                 "--gvr={0}".format(genesis_validators_root),
                 "--deposit-contract=0x4242424242424242424242424242424242424242",
                 "--chain-id={0}".format(chain_id),
                 "--genesis-time={0}".format(genesis_time),
+                "--genesis-fork-version=0x10000038"
             ],
             env_vars={
                 "DIVA_VAULT_PASSWORD": constants.DIVA_VAULT_PASSWORD,
-                # TODO fill up jaeger configuration
             },
             ports={
-                "diva_p2p": PortSpec(number=5050, transport_protocol="TCP", wait=None),
-                "diva_w3s": PortSpec(
+                "p2p-port": PortSpec(number=5050, transport_protocol="TCP", wait=None),
+                "w3s-port": PortSpec(
                     number=9000, transport_protocol="TCP", wait=None),
-                "diva_api": PortSpec(number=30000, transport_protocol="TCP"),
+                "port": PortSpec(number=30000, transport_protocol="TCP"),
             },
             min_cpu=200,
             max_cpu=1000,            
             files={
-                "/data": Directory(
+                "/var/diva": Directory(
                     persistent_key="diva-db-{0}".format(DIVA_BOOT_NODE_NAME)
                 )
             },
@@ -77,21 +71,18 @@ def start_node(
     is_nimbus,
 ):
     cmd = [
-        "--db=/data/diva.db",
+        "--db=/var/diva/config/diva.db",
         "--w3s-address=0.0.0.0",
         "--execution-client-url={0}".format(el_url),
         "--consensus-client-url={0}".format(cl_url),
-        # TODO remove this for now if lack of jaeger causes issues
-        "--tracing",
         "--log-level=debug",
         "--swagger-ui-enabled",
-        "--contract={0}".format(contract_address),
+        #"--contract={0}".format(contract_address),
         "--bootnode-address=/ip4/{0}/tcp/5050/p2p/{1}".format(
             bootnode_ip_address, bootnode_peer_id
         ),
         "--master-key={0}".format(constants.DIVA_API_KEY),
         "--genesis-fork-version=0x10000038",
-        "--current-fork-version=0x40000038",
         "--gvr={0}".format(genesis_validators_root),
         "--deposit-contract=0x4242424242424242424242424242424242424242",
         "--chain-id={0}".format(chain_id),
@@ -118,7 +109,7 @@ def start_node(
                 "api": PortSpec(number=30000, transport_protocol="TCP"),
             },
             files={
-                "/data": Directory(persistent_key="diva-db-{0}".format(diva_node_name))
+                "/var/diva": Directory(persistent_key="diva-db-{0}".format(diva_node_name))
             },
         ),
     )

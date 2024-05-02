@@ -38,33 +38,7 @@ def diva_input_parser(plan, input_args):
         # if its inserted we use the value inserted
         if attr not in ATTR_TO_BE_SKIPPED_AT_ROOT and attr in input_args:
             result[attr] = value
-        # custom eth2 attributes config
-        elif attr == "mev_params":
-            for sub_attr in input_args["mev_params"]:
-                sub_value = input_args["mev_params"][sub_attr]
-                result["mev_params"][sub_attr] = sub_value
-        elif attr == "tx_spammer_params":
-            for sub_attr in input_args["tx_spammer_params"]:
-                sub_value = input_args["tx_spammer_params"][sub_attr]
-                result["tx_spammer_params"][sub_attr] = sub_value
-        elif attr == "custom_flood_params":
-            for sub_attr in input_args["custom_flood_params"]:
-                sub_value = input_args["custom_flood_params"][sub_attr]
-                result["custom_flood_params"][sub_attr] = sub_value
-        elif attr == "goomy_blob_params":
-            for sub_attr in input_args["goomy_blob_params"]:
-                sub_value = input_args["goomy_blob_params"][sub_attr]
-                result["goomy_blob_params"][sub_attr] = sub_value
-        elif attr == "assertoor_params":
-            for sub_attr in input_args["assertoor_params"]:
-                sub_value = input_args["assertoor_params"][sub_attr]
-                result["assertoor_params"][sub_attr] = sub_value
-        elif attr == "xatu_sentry_params":
-            for sub_attr in input_args["xatu_sentry_params"]:
-                sub_value = input_args["xatu_sentry_params"][sub_attr]
-                result["xatu_sentry_params"][sub_attr] = sub_value
-
-    
+        plan.print(attr)
     aux= diva_val_index(plan,result)
     if aux != None:
         diva_val_start, diva_val_stop = aux
@@ -88,35 +62,35 @@ def diva_input_parser(plan, input_args):
     sol =struct(
         participants=[
             struct(
-                el_client_type=participant["el_client_type"],
-                el_client_image=participant["el_client_image"],
-                el_client_log_level=participant["el_client_log_level"],
-                el_client_volume_size=participant["el_client_volume_size"],
+                el_type=participant["el_type"],
+                el_image=participant["el_image"],
+                el_log_level=participant["el_log_level"],
+                el_volume_size=participant["el_volume_size"],
                 el_extra_params=participant["el_extra_params"],
                 el_extra_env_vars=participant["el_extra_env_vars"],
                 el_extra_labels=participant["el_extra_labels"],
-                cl_client_type=participant["cl_client_type"],
-                cl_client_image=participant["cl_client_image"],
-                cl_client_log_level=participant["cl_client_log_level"],
-                cl_client_volume_size=participant["cl_client_volume_size"],
+                cl_type=participant["cl_type"],
+                cl_image=participant["cl_image"],
+                cl_log_level=participant["cl_log_level"],
+                cl_volume_size=participant["cl_volume_size"],
                 cl_split_mode_enabled=participant["cl_split_mode_enabled"],
-                beacon_extra_params=participant["beacon_extra_params"],
-                beacon_extra_labels=participant["beacon_extra_labels"],
-                validator_extra_params=participant["validator_extra_params"],
-                validator_extra_labels=participant["validator_extra_labels"],
+                cl_extra_params=participant["cl_extra_params"],
+                cl_extra_labels=participant["cl_extra_labels"],
+                vc_extra_params=participant["vc_extra_params"],
+                vc_extra_labels=participant["vc_extra_labels"],
                 builder_network_params=participant["builder_network_params"],
                 el_min_cpu=participant["el_min_cpu"],
                 el_max_cpu=participant["el_max_cpu"],
                 el_min_mem=participant["el_min_mem"],
                 el_max_mem=participant["el_max_mem"],
-                bn_min_cpu=participant["bn_min_cpu"],
-                bn_max_cpu=participant["bn_max_cpu"],
-                bn_min_mem=participant["bn_min_mem"],
-                bn_max_mem=participant["bn_max_mem"],
-                v_min_cpu=participant["v_min_cpu"],
-                v_max_cpu=participant["v_max_cpu"],
-                v_min_mem=participant["v_min_mem"],
-                v_max_mem=participant["v_max_mem"],
+                cl_min_cpu=participant["cl_min_cpu"],
+                cl_max_cpu=participant["cl_max_cpu"],
+                cl_min_mem=participant["cl_min_mem"],
+                cl_max_mem=participant["cl_max_mem"],
+                vc_min_cpu=participant["vc_min_cpu"],
+                vc_max_cpu=participant["vc_max_cpu"],
+                vc_min_mem=participant["vc_min_mem"],
+                vc_max_mem=participant["vc_max_mem"],
                 validator_count=participant["validator_count"],
                 snooper_enabled=participant["snooper_enabled"],
                 count=participant["count"],
@@ -159,7 +133,7 @@ def diva_input_parser(plan, input_args):
         ),
         additional_services=result["additional_services"],
         wait_for_finalization=result["wait_for_finalization"],
-        global_client_log_level=result["global_client_log_level"],
+        global_log_level=result["global_log_level"],
         mev_type=result["mev_type"],
         snooper_enabled=result["snooper_enabled"],
         ethereum_metrics_exporter_enabled=result["ethereum_metrics_exporter_enabled"],
@@ -174,9 +148,9 @@ def diva_input_parser(plan, input_args):
 
 
 def diva_val_index(plan,result):
-    deploy_eth=result["diva_params"]["deployment"]["deploy_eth"]
-    deploy_diva=result["diva_params"]["deployment"]["deploy_diva"]
-    charge_pre_genesis_keys=result["diva_params"]["deployment"]["options"]["charge_pre_genesis_keys"]
+    deploy_eth=True
+    deploy_diva=True
+    charge_pre_genesis_keys=True
     running_total_validator_count=0
     stop=0
     if charge_pre_genesis_keys and deploy_diva:
@@ -237,7 +211,7 @@ def default_input_args():
         "participants": participants,
         "network_params": network_params,
         "wait_for_finalization": False,
-        "global_client_log_level": "info",
+        "global_log_level": "info",
         "snooper_enabled": False,
         "ethereum_metrics_exporter_enabled": False,
         "xatu_sentry_enabled": False,
@@ -268,35 +242,35 @@ def default_network_params():
 
 def default_participant():
     return {
-        "el_client_type": "geth",
-        "el_client_image": "",
-        "el_client_log_level": "",
-        "el_client_volume_size": 0,
+        "el_type": "geth",
+        "el_image": "",
+        "el_log_level": "",
+        "el_volume_size": 0,
         "el_extra_params": [],
         "el_extra_env_vars": {},
         "el_extra_labels": {},
-        "cl_client_type": "lighthouse",
-        "cl_client_image": "",
-        "cl_client_log_level": "",
-        "cl_client_volume_size": 0,
+        "cl_type": "lighthouse",
+        "cl_image": "",
+        "cl_log_level": "",
+        "cl_volume_size": 0,
         "cl_split_mode_enabled": False,
-        "beacon_extra_params": [],
-        "beacon_extra_labels": {},
-        "validator_extra_params": [],
-        "validator_extra_labels": {},
+        "cl_extra_params": [],
+        "cl_extra_labels": {},
+        "vc_extra_params": [],
+        "vc_extra_labels": {},
         "builder_network_params": None,
         "el_min_cpu": 0,
         "el_max_cpu": 0,
         "el_min_mem": 0,
         "el_max_mem": 0,
-        "bn_min_cpu": 0,
-        "bn_max_cpu": 0,
-        "bn_min_mem": 0,
-        "bn_max_mem": 0,
-        "v_min_cpu": 0,
-        "v_max_cpu": 0,
-        "v_min_mem": 0,
-        "v_max_mem": 0,
+        "cl_min_cpu": 0,
+        "cl_max_cpu": 0,
+        "cl_min_mem": 0,
+        "cl_max_mem": 0,
+        "vc_min_cpu": 0,
+        "vc_max_cpu": 0,
+        "vc_min_mem": 0,
+        "vc_max_mem": 0,
         "validator_count": None,
         "snooper_enabled": False,
         "ethereum_metrics_exporter_enabled": False,

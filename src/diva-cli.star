@@ -1,15 +1,14 @@
 constants = import_module("./constants.star")
 
-DIVA_CLI_NAME = "diva-cli"
 DIVA_DEPLOYER_CLI_NAME = "diva-cli-deployer"
+DIVA_CLI_NAME = "diva-cli"
 
 
 def start_cli(plan, configuration_tomls=None):
     files = {}
+    name = DIVA_CLI_NAME
     if configuration_tomls:
         files["/configuration"] = configuration_tomls
-    name = constants.DIVA_CLI_IMAGE
-    if configuration_tomls:
         name = DIVA_DEPLOYER_CLI_NAME
     plan.add_service(
         name=name,
@@ -30,7 +29,7 @@ def generate_identity(plan, diva_server_url):
             command=[
                 "/bin/sh",
                 "-c",
-                "export DIVA_SERVER_URL={0} && /usr/bin/diva identity generate".format(
+                "export DIVA_SERVER_URL={0} && /usr/local/bin/diva identity generate".format(
                     diva_server_url
                 ),
             ]

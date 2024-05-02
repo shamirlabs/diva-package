@@ -1,0 +1,23 @@
+version: '3.8'
+
+services:
+  app:
+    user: root
+    image: diva-server:1 # Replace this with your application image
+    command: 
+      - "--db=/var/diva/config/diva.db"
+      - "--w3s-address=0.0.0.0"
+      - "--tracing"
+      - "--log-level=debug"
+      - "--bootnode-address="
+      - "--enable-coordinator"
+      - "--swagger-ui-enabled"
+      - "--master-key=3333333" # Ensure to define DIVA_API_KEY in your environment or docker-compose environment section
+      - "--gvr=0xd1ec305b97bf6336571c2348e4a8bf173684b0cdb7e55f7e6554d51f8478b5a3" # Ensure to define GENESIS_VALIDATORS_ROOT in your environment or docker-compose environment section
+      - "--deposit-contract=0x4242424242424242424242424242424242424242"
+      - "--chain-id=3151908" # Ensure to define CHAIN_ID in your environment or docker-compose environment section
+      - "--genesis-time=1714470656" # Ensure to define GENESIS_TIME in your environment or docker-compose environment section
+      - "--genesis-fork-version=0x10000038"
+
+    volumes:
+      - ./.diva/:/var/diva/.diva  # Ensures that diva.db is in the local data folder and mounted in /var/diva/.diva
