@@ -39,7 +39,7 @@ def proccess_pregenesis_keys(plan, diva_node_urls, diva_addresses, start_index_v
             command=[
                 "/bin/sh",
                 "-c",
-                "python /tmp/scripts/keys.py /tmp/node-0/node-0-keystores/teku-keys /tmp/node-0/node-0-keystores/teku-secrets {0} {1} {2} {3} {4} {5} {6} {7}".format(
+                "python /tmp/scripts/keys.py /tmp/node-0/teku-keys /tmp/node-0/teku-secrets {0} {1} {2} {3} {4} {5} {6} {7}".format(
                     constants.DIVA_SET_SIZE,
                     ",".join(diva_addresses),
                     constants.DIVA_SET_THRESHOLD,

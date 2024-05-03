@@ -46,7 +46,7 @@ def deploy(plan, diva_validators):
 
 
         configuration_file = (
-            "/configuration/configurations/config-{0}/config-{1}.toml".format(
+            "/configuration/config-{0}/config-{1}.toml".format(
                 0, key_index
             )
         )
@@ -62,7 +62,7 @@ def deploy(plan, diva_validators):
                 command=[
                     "/bin/sh",
                     "-c",
-                    "/usr/bin/diva pools migrate {0} | grep -o 'saved .*\\.json' | sed 's/saved //' | tr -d '\n' ".format(
+                    "/usr/local/bin/diva pools migrate {0} | grep -o 'saved .*\\.json' | sed 's/saved //' | tr -d '\n' ".format(
                         configuration_file
                     ),
                 ]
@@ -74,7 +74,7 @@ def deploy(plan, diva_validators):
                 command=[
                     "/bin/sh",
                     "-c",
-                    "/usr/bin/diva pools deploy {0}".format(
+                    "/usr/local/bin/diva pools deploy {0}".format(
                         pool_name["output"]
                     ),
                 ]

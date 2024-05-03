@@ -16,8 +16,8 @@ def start_bootnode(
         config=ServiceConfig(
             image=constants.DIVA_SERVER_IMAGE,
             cmd=[
-                "--execution-client-url={0}".format(el_url),
-                "--consensus-client-url={0}".format(cl_url),
+                #"--execution-client-url={0}".format(el_url),
+                #"--consensus-client-url={0}".format(cl_url),
                 "--db=/var/diva/config/diva.db",
                 "--w3s-address=0.0.0.0",
                 "--tracing",
