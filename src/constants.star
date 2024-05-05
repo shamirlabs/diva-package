@@ -2,7 +2,7 @@
 DIVA_SC_IMAGE = "diva-sc"
 DIVA_CLI_IMAGE = "diva-cli:1"
 OPERATOR_UI_IMAGE = "diva/operator-ui:latest"
-DIVA_SERVER_IMAGE = "diva-server:4"
+DIVA_SERVER_IMAGE = "diva-server:7"
 
 
 # Service names
@@ -25,10 +25,10 @@ DIVA_API=30000
 DIVA_P2P=5050
 
 PARTICIPANTS_VALIDATORS=64
-DIVA_VALIDATORS=3
+DIVA_VALIDATORS=2
 
 DIVA_VAL_INDEX_START=63 # when deploy divas to existing eth-network
 DIVA_SET_SIZE = 5
 DIVA_SET_THRESHOLD = 3
-DIVA_NODES= 10
-DIVA_DISTRIBUTION="[3,3,3]"
+DIVA_NODES= 5
+DIVA_DISTRIBUTION="[]"

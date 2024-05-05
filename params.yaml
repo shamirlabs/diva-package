@@ -1,19 +1,20 @@
 network_params:
   network_id: "3151908"
-  genesis_delay: 30
+  genesis_delay: 120
   deneb_fork_epoch: 0
   electra_fork_epoch: 999999
   preregistered_validator_count: -1 # This is overwritten by DIVA constants
 
 additional_services: 
   - dora
+  - apache
 mev_type: none
 
 participants:
   # first pair must be geth & nimbus to expose public ports if you use shamir eth-pack
   # first cl must be lighthouse or prysm for beaconchain explorer to work
   - el_type: geth
-    cl_type: lighthouse
+    cl_type: prysm
     validator_count: 32
 
   - el_type: geth

@@ -1,4 +1,4 @@
-ethereum_package_official = import_module("github.com/kurtosis-tech/ethereum-package@/main.star")
+ethereum_package_official = import_module("github.com/kurtosis-tech/ethereum-package/main.star")
 ethereum_package_shamir = import_module("../ethereum-package/main.star")
 genesis_constants = import_module(
     "github.com/shamirlabs/ethereum-package/src/prelaunch_data_generator/genesis_constants/genesis_constants.star"
@@ -11,6 +11,7 @@ diva_cli = import_module("./src/diva-cli.star")
 constants = import_module("./src/constants.star")
 keys = import_module("./src/keys.star")
 nimbus = import_module("./src/nimbus.star")
+prysm = import_module("./src/prysm.star")
 utils = import_module("./src/utils.star")
 input_parser = import_module("./src/input-parser.star")
 
@@ -21,12 +22,12 @@ def run(plan, args):
         "diva_params"
     )
 
-    deploy_eth= False
+    deploy_eth= True
     deploy_diva = True
     deploy_diva_sc= False
     deploy_diva_coord_boot= True
     deploy_operator_ui=False
-    verify_fee_recipient=False
+    verify_fee_recipient=True
     private_pools_only=True    
     charge_pre_genesis_keys=True
     
@@ -169,7 +170,7 @@ def run(plan, args):
 
     if deploy_diva:
         for index in range(0, constants.DIVA_NODES):
-            nimbus.launch(
+            prysm.launch(
                 plan,
                 "diva-validator-{0}".format(index+1),
                 signer_urls[index],

@@ -10,6 +10,7 @@ def launch(plan, service_name, web3_signer_url, beacon_url, fee_recipient, verif
         "--beacon-node={0}".format(beacon_url),
         "--suggested-fee-recipient={0}".format(fee_recipient),
         "--graffiti={0}".format(service_name),
+        #"--log-level=TRACE"
     ]
 
     if verify_fee_recipient:
