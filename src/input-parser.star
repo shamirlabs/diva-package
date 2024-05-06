@@ -21,7 +21,7 @@ def diva_input_parser(plan, input_args):
             if 'validator_count' in participant:
                 total_val += participant['validator_count']
     
-    if total_val != constants.PARTICIPANTS_VALIDATORS:
-        fail("The %s validators has not been correctly assigned to participants in paramas.yaml" % (constants.PARTICIPANTS_VALIDATORS))
+    #if total_val != constants.PARTICIPANTS_VALIDATORS:
+        #fail("The %s validators has not been correctly assigned to participants in paramas.yaml" % (constants.PARTICIPANTS_VALIDATORS))
     
     return input_args

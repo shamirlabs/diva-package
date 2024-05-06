@@ -30,7 +30,8 @@ def run(plan, args):
     verify_fee_recipient=True
     private_pools_only=True    
     charge_pre_genesis_keys=True
-    
+    mev=False
+
     public_ports= False
 
     delay_sc="0"
@@ -170,11 +171,12 @@ def run(plan, args):
 
     if deploy_diva:
         for index in range(0, constants.DIVA_NODES):
-            prysm.launch(
+            nimbus.launch(
                 plan,
                 "diva-validator-{0}".format(index+1),
                 signer_urls[index],
                 cl_uri,
                 smart_contract_address,
-                verify_fee_recipient
+                verify_fee_recipient,
+                mev
             )

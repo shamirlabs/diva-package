@@ -1,7 +1,7 @@
-NIMBUS_IMAGE = "statusim/nimbus-validator-client:multiarch-v23.10.1"
+NIMBUS_IMAGE = "statusim/nimbus-validator-client:multiarch-latest"
 
 
-def launch(plan, service_name, web3_signer_url, beacon_url, fee_recipient, verify_fee_recipient):
+def launch(plan, service_name, web3_signer_url, beacon_url, fee_recipient, verify_fee_recipient,mev):
 
     cmd=[
         "--doppelganger-detection=false",
@@ -19,7 +19,8 @@ def launch(plan, service_name, web3_signer_url, beacon_url, fee_recipient, verif
     else:
         cmd.append("--web3-signer-url={0}".format(web3_signer_url))
 
-
+    if mev:
+        cmd.append("--payload-builder=true")
 
     plan.add_service(
         name=service_name,
