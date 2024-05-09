@@ -32,7 +32,6 @@ def deploy(plan, delay_sc, chainID, sc_verif):
         ),
     )
 
-    plan.print(diamond["output"])
     result = plan.exec(
         service_name=DIVA_SC_SERVICE_NAME,
         recipe=ExecRecipe(
@@ -45,7 +44,6 @@ def deploy(plan, delay_sc, chainID, sc_verif):
             ]
         ),
     )
-    plan.print(diamond["output"].split(" ")[0])
     return diamond["output"].split(" ")[0]
 
 

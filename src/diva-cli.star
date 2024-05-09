@@ -41,7 +41,6 @@ def generate_identity(plan, diva_server_url):
 # we can write a python script that creates a thread pool and runs migrate + deploy
 def deploy(plan, diva_validators):
     for key_index in range(0, diva_validators):
-        plan.print("index {0}".format(key_index))
         configuration_file = "/configuration/config-{0}/config-{1}.toml".format(
             0, key_index
         )

@@ -45,10 +45,8 @@ def run(plan, args):
     public_ports = diva_args["diva_params"]["options"]["public_ports"]
     diva_nodes = diva_args["diva_params"]["diva_nodes"]
     diva_val_type = diva_args["diva_params"]["diva_val_type"]
-
     delay_sc = "0"
     utils.initUtils(plan)
-
     if deploy_eth:
         if deploy_diva_sc:
             delay_sc = "150"
