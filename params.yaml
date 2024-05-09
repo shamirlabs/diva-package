@@ -1,9 +1,9 @@
 network_params:
   network_id: "3151908"
-  genesis_delay: 60
+  genesis_delay: 15
   deneb_fork_epoch: 0
   electra_fork_epoch: 999999
-  preregistered_validator_count: -1 # This is overwritten by DIVA constants
+  preregistered_validator_count: -1     # This is overwritten by DIVA
 
 additional_services:
   #- tx_spammer
@@ -15,11 +15,7 @@ additional_services:
   #- prometheus_grafana
   #- full_beaconchain_explorer
 
-mev_type: none
-
 participants:
-  # first pair must be geth & nimbus to expose public ports if you use shamir eth-pack
-  # first cl must be lighthouse or prysm for beaconchain explorer to work
   - el_type: geth
     cl_type: prysm
     validator_count: 32
@@ -28,28 +24,35 @@ participants:
     cl_type: prysm
     validator_count: 0
 
+# Ethereum nodes for diva connections
+# Nodes with 0 validators will be used by diva nodes uniformely distributed
   - el_type: geth
     cl_type: lighthouse
     validator_count: 32
 
 diva_params:
-  deployment:
-    deploy_eth: true
-    deploy_diva_sc: true
-    deploy_diva_coord_boot: true
-    deploy_diva: false
-    deploy_operator_ui: false
-    options:
-      charge_pre_genesis_keys: false
-      public_ports: true
+  diva_validators: 10
+  diva_nodes: 5
+  diva_val_type: prysm 
 
-  protocol_features:
+  options:
+    deploy_eth: true
+    deploy_diva_nodes: true
+    deploy_diva_sc: false
+    deploy_diva_coord_boot: true
+    deploy_operator_ui: false
+    charge_pre_genesis_keys: true
+    private_pools_only: true  
+    public_ports: false
     verify_fee_recipient: false
-    private_pools_only: true
-  
+    eth_connection_enabled: false
+
+  use_w3s: false
+
 persistent: false
 
 mev_params:
   launch_custom_flood: true
   mev_relay_image: flashbots/mev-boost-relay:latest
+
 mev_type: null

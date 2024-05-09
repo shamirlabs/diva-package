@@ -32,8 +32,6 @@ def deploy(plan, delay_sc, chainID, sc_verif):
         ),
     )
 
-    plan.print(chainID)
-    plan.print(sc_verif)
     plan.print(diamond["output"])
     result = plan.exec(
         service_name=DIVA_SC_SERVICE_NAME,

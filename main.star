@@ -22,20 +22,29 @@ w3s = import_module("./src/w3s.star")
 def run(plan, args):
     diva_args = input_parser.diva_input_parser(plan, args)
     diva_params = args.get("diva_params")
+    deploy_eth = diva_args["diva_params"]["options"]["deploy_eth"]
 
-    deploy_eth = True
-    deploy_diva = True
-    deploy_diva_sc = False
-    deploy_diva_coord_boot = True
-    deploy_operator_ui = False
-    verify_fee_recipient = True
-    private_pools_only = True
-    charge_pre_genesis_keys = True
-    mev = False
-    use_w3s = False
-    clients_enabled = False
-
-    public_ports = False
+    deploy_diva = diva_args["diva_params"]["options"]["deploy_diva_nodes"]
+    deploy_diva_sc = diva_args["diva_params"]["options"]["deploy_diva_sc"]
+    deploy_diva_coord_boot = diva_args["diva_params"]["options"][
+        "deploy_diva_coord_boot"
+    ]
+    deploy_operator_ui = diva_args["diva_params"]["options"]["deploy_operator_ui"]
+    verify_fee_recipient = diva_args["diva_params"]["options"]["verify_fee_recipient"]
+    private_pools_only = diva_args["diva_params"]["options"]["private_pools_only"]
+    charge_pre_genesis_keys = diva_args["diva_params"]["options"][
+        "charge_pre_genesis_keys"
+    ]
+    mev = diva_args["mev_type"] != None
+    use_w3s = diva_args["diva_params"]["use_w3s"]
+    eth_connection_enabled = diva_args["diva_params"]["options"][
+        "eth_connection_enabled"
+    ]
+    start_index_val = int(diva_args["eth_validator_count"]) - 1
+    diva_validators = diva_args["diva_params"]["diva_validators"]
+    public_ports = diva_args["diva_params"]["options"]["public_ports"]
+    diva_nodes = diva_args["diva_params"]["diva_nodes"]
+    diva_val_type = diva_args["diva_params"]["diva_val_type"]
 
     delay_sc = "0"
     utils.initUtils(plan)
@@ -49,6 +58,7 @@ def run(plan, args):
             ethereum_package = ethereum_package_official
 
         ethereum_network = ethereum_package.run(plan, diva_args)
+
         plan.print("Succesfully launched an Ethereum Network")
 
         el_ip_addr = ethereum_network.all_participants[1].el_context.ip_addr
@@ -61,7 +71,6 @@ def run(plan, args):
         cl_uri = "http://{0}:{1}".format(cl_ip_addr, cl_http_port_num)
         network_id = 3151908
         sc_verif = ethereum_network.blockscout_sc_verif_url
-        start_index_val = constants.PARTICIPANTS_VALIDATORS - 1
         genesis_validators_root = utils.get_gvr(plan, cl_uri)
         genesis_time = utils.get_genesis_time(plan, cl_uri)
 
@@ -75,8 +84,7 @@ def run(plan, args):
         sc_verif = "http://{0}:{1}".format(constants.HOST, constants.EXEC_EXPL_PORT)
         start_index_val = constants.DIVA_VAL_INDEX_START
 
-    stop_index_val = start_index_val + constants.DIVA_VALIDATORS
-    diva_validators = constants.DIVA_VALIDATORS
+    stop_index_val = start_index_val + diva_validators
 
     if deploy_diva_sc or deploy_diva:
         diva_sc.init(
@@ -84,10 +92,6 @@ def run(plan, args):
         )
 
     smart_contract_address = constants.DIVA_SC
-
-    plan.print(sc_verif)
-    plan.print(delay_sc)
-    plan.print(network_id)
 
     if deploy_diva_sc:
         smart_contract_address = diva_sc.deploy(plan, delay_sc, network_id, sc_verif)
@@ -105,14 +109,12 @@ def run(plan, args):
             genesis_time,
             public_ports,
             network_id,
-            clients_enabled,
+            eth_connection_enabled,
         )
         diva_cli.generate_identity(plan, bootnode_url)
         bootnode_address = utils.get_diva_field(
             plan, constants.DIVA_BOOTNODE_NAME, "node_address"
         )
-        plan.print(bootnode_address)
-        plan.print("bootnode-address")
 
         if deploy_diva_sc:
             diva_sc.fund(plan, bootnode_address)
@@ -127,8 +129,6 @@ def run(plan, args):
         bootnode_peer_id = utils.get_diva_field(
             plan, constants.DIVA_BOOTNODE_NAME, "network_settings.peer_id"
         )
-        plan.print(bootonde_url)
-        plan.print(bootnode_peer_id)
 
         plan.print("Starting DIVA nodes")
 
@@ -136,7 +136,7 @@ def run(plan, args):
         validators_to_shutdown = []
         diva_addresses = []
         signer_urls = []
-        for index in range(0, constants.DIVA_NODES):
+        for index in range(0, diva_nodes):
             service_name_node = "diva{0}".format(index + 1)
             node, node_url, signer_url = diva_server.start_node(
                 plan,
@@ -150,7 +150,7 @@ def run(plan, args):
                 bootnode_ip,
                 verify_fee_recipient,
                 network_id,
-                clients_enabled,
+                eth_connection_enabled,
             )
             diva_urls.append(node_url)
             signer_urls.append(signer_url)
@@ -172,7 +172,6 @@ def run(plan, args):
         diva_operator_ui.launch(plan)
 
     if charge_pre_genesis_keys:
-        # utils.wait(plan,40)
         if deploy_diva:
             keys.upload_pregenesis_keys(plan, start_index_val, stop_index_val)
             configuration_tomls = keys.proccess_pregenesis_keys(
@@ -188,19 +187,30 @@ def run(plan, args):
                 "val1",
                 w3s_url,
                 cl_uri,
-                "0xa0Ee7A142d267C1f36714E4a8F75612F20a79720",
+                constants.DIVA_SC,
                 verify_fee_recipient,
                 mev,
             )
 
     if deploy_diva:
-        for index in range(0, constants.DIVA_NODES):
-            prysm.launch(
-                plan,
-                "val{0}".format(index + 1),
-                signer_urls[index],
-                cl_uri,
-                smart_contract_address,
-                verify_fee_recipient,
-                mev,
-            )
+        for index in range(0, diva_nodes):
+            if diva_val_type == "prysm":
+                prysm.launch(
+                    plan,
+                    "val{0}".format(index + 1),
+                    signer_urls[index],
+                    cl_uri,
+                    smart_contract_address,
+                    verify_fee_recipient,
+                    mev,
+                )
+            else:
+                nimbus.launch(
+                    plan,
+                    "val{0}".format(index + 1),
+                    signer_urls[index],
+                    cl_uri,
+                    smart_contract_address,
+                    verify_fee_recipient,
+                    mev,
+                )

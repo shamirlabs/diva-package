@@ -76,7 +76,6 @@ def get_gvr(plan, beacon_url):
             ]
         ),
     )
-    plan.print(result["output"])
     return result["output"]
 
 
@@ -93,7 +92,6 @@ def get_genesis_time(plan, beacon_url):
             ]
         ),
     )
-    plan.print(result["output"])
     return result["output"]
 
 
