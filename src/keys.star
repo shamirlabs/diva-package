@@ -3,14 +3,16 @@ genesis = import_module("./genesis.star")
 
 PYTHON_RUNNER_IMAGE = "python:3.11-alpine"
 
-def upload_pregenesis_keys(plan, start_index_val,stop_index_val):
 
+def upload_pregenesis_keys(plan, start_index_val, stop_index_val):
     script = plan.upload_files("../python_scripts/keys.py")
     files = {
         "/tmp/scripts": script,
     }
 
-    files["/tmp/node-0"] = genesis.generate_validator_keystores(plan,start_index_val,stop_index_val)
+    files["/tmp/node-0"] = genesis.generate_validator_keystores(
+        plan, start_index_val, stop_index_val
+    )
     plan.add_service(
         name="diva-keys-python",
         config=ServiceConfig(
@@ -21,18 +23,17 @@ def upload_pregenesis_keys(plan, start_index_val,stop_index_val):
     )
     plan.exec(
         service_name="diva-keys-python",
-        #recipe=ExecRecipe(command=["pip", "install", "pyyaml"]),
-        recipe=ExecRecipe(command=["sh", "-c", "pip install pyyaml > /dev/null 2>&1"])
+        recipe=ExecRecipe(command=["sh", "-c", "pip install pyyaml > /dev/null 2>&1"]),
     )
     plan.exec(
         service_name="diva-keys-python",
-        recipe=ExecRecipe(
-            command=["mkdir", "-p", "/tmp/configurations/config-0"]
-        ),
+        recipe=ExecRecipe(command=["mkdir", "-p", "/tmp/configurations/config-0"]),
     )
 
-def proccess_pregenesis_keys(plan, diva_node_urls, diva_addresses, start_index_val, stop_index_val):
 
+def proccess_pregenesis_keys(
+    plan, diva_node_urls, diva_addresses, start_index_val, stop_index_val
+):
     plan.exec(
         service_name="diva-keys-python",
         recipe=ExecRecipe(
@@ -47,12 +48,12 @@ def proccess_pregenesis_keys(plan, diva_node_urls, diva_addresses, start_index_v
                     start_index_val,
                     stop_index_val,
                     ",".join(diva_node_urls),
-                    (constants.DIVA_DISTRIBUTION)
+                    (constants.DIVA_DISTRIBUTION),
                 ),
             ]
         ),
     )
-    
+
     return plan.store_service_files(
         service_name="diva-keys-python",
         src="/tmp/configurations",

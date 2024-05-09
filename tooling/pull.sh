@@ -1,6 +1,6 @@
 #!/bin/bash
 
-project_dir="../diva"
+project_dir="../../diva"
 
 cd "$project_dir"
 

@@ -1,9 +1,16 @@
 PRYSM_IMAGE = "gcr.io/prysmaticlabs/prysm/validator:latest"
 
 
-def launch(plan, service_name, web3_signer_url, beacon_url, fee_recipient, verify_fee_recipient):
-    files = {
-    }
+def launch(
+    plan,
+    service_name,
+    web3_signer_url,
+    beacon_url,
+    fee_recipient,
+    verify_fee_recipient,
+    mev,
+):
+    files = {}
 
     files["/tmp"] = "el_cl_genesis_data"
 
@@ -15,10 +22,11 @@ def launch(plan, service_name, web3_signer_url, beacon_url, fee_recipient, verif
         "--graffiti={0}".format(service_name),
         "--beacon-rpc-provider={0}".format(beacon_url),
         "--beacon-rest-api-provider={0}".format(beacon_url),
-        "--validators-external-signer-public-keys={0}/api/v1/eth2/publicKeys".format(web3_signer_url),
+        "--validators-external-signer-public-keys={0}/api/v1/eth2/publicKeys".format(
+            web3_signer_url
+        ),
         "--validators-external-signer-url={0}".format(web3_signer_url),
-        "--enable-beacon-rest-api"
-
+        "--enable-beacon-rest-api",
     ]
 
     plan.add_service(
@@ -27,5 +35,5 @@ def launch(plan, service_name, web3_signer_url, beacon_url, fee_recipient, verif
             files=files,
             image=PRYSM_IMAGE,
             cmd=cmd,
-        )
+        ),
     )

@@ -31,9 +31,7 @@ def generate_validator_keystores(plan, start_index, stop_index):
         start_index + 1,
         stop_index + 1,
     )
-    teku_permissions_cmd = (
-        "chmod 0777 -R " + output_dirpath + "/" + TEKU_KEYS_DIRNAME
-    )
+    teku_permissions_cmd = "chmod 0777 -R " + output_dirpath + "/" + TEKU_KEYS_DIRNAME
     raw_secret_permissions_cmd = (
         "chmod 0600 -R " + output_dirpath + "/" + RAW_SECRETS_DIRNAME
     )
@@ -47,10 +45,10 @@ def generate_validator_keystores(plan, start_index, stop_index):
         recipe=ExecRecipe(command=["sh", "-c", command_str]), service_name=service_name
     )
 
-    #return command_result
+    # return command_result
     # Store outputs into files artifacts
     keystore_files = []
-    idx=0
+    idx = 0
     padded_idx = 1
     keystore_start_index = start_index
     keystore_stop_index = (stop_index) - 1
@@ -61,19 +59,23 @@ def generate_validator_keystores(plan, start_index, stop_index):
     return artifact_name
 
 
-
 def path_join(*args):
     joined_path = "/".join(args)
     return joined_path.replace("//", "/")
+
+
 def path_base(path):
     split_path = path.split("/")
     return split_path[-1]
+
+
 def get_config(files_artifact_mountpoints):
     return ServiceConfig(
         image=ETH_VAL_TOOLS_IMAGE,
         entrypoint=ENTRYPOINT_ARGS,
         files=files_artifact_mountpoints,
     )
+
 
 def launch_prelaunch_data_generator(
     plan,

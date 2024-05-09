@@ -1,16 +1,23 @@
 NIMBUS_IMAGE = "statusim/nimbus-validator-client:multiarch-latest"
 
 
-def launch(plan, service_name, web3_signer_url, beacon_url, fee_recipient, verify_fee_recipient,mev):
-
-    cmd=[
+def launch(
+    plan,
+    service_name,
+    web3_signer_url,
+    beacon_url,
+    fee_recipient,
+    verify_fee_recipient,
+    mev,
+):
+    cmd = [
         "--doppelganger-detection=false",
         "--non-interactive",
-        "--web3-signer-update-interval=360",
+        "--web3-signer-update-interval=3",
         "--beacon-node={0}".format(beacon_url),
         "--suggested-fee-recipient={0}".format(fee_recipient),
         "--graffiti={0}".format(service_name),
-        #"--log-level=TRACE"
+        # "--log-level=TRACE"
     ]
 
     if verify_fee_recipient:
@@ -27,5 +34,5 @@ def launch(plan, service_name, web3_signer_url, beacon_url, fee_recipient, verif
         config=ServiceConfig(
             image=NIMBUS_IMAGE,
             cmd=cmd,
-        )
+        ),
     )

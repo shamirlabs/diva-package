@@ -1,18 +1,19 @@
 network_params:
   network_id: "3151908"
-#  genesis_delay: 180
+  genesis_delay: 60
   deneb_fork_epoch: 0
   electra_fork_epoch: 999999
   preregistered_validator_count: -1 # This is overwritten by DIVA constants
 
 additional_services:
-  - tx_spammer
-  - blob_spammer
-  - custom_flood
-  - el_forkmon
-  - beacon_metrics_gazer
+  #- tx_spammer
+  #- blob_spammer
+  #- custom_flood
+  #- el_forkmon
+  #- beacon_metrics_gazer
   - dora
-  - prometheus_grafana
+  #- prometheus_grafana
+  #- full_beaconchain_explorer
 
 mev_type: none
 
@@ -20,14 +21,17 @@ participants:
   # first pair must be geth & nimbus to expose public ports if you use shamir eth-pack
   # first cl must be lighthouse or prysm for beaconchain explorer to work
   - el_type: geth
-    cl_type: nimbus
+    cl_type: prysm
     validator_count: 32
-    use_separate_vc: true
 
   - el_type: geth
-    cl_type: nimbus
+    cl_type: prysm
+    validator_count: 0
+
+  - el_type: geth
+    cl_type: lighthouse
     validator_count: 32
-    use_separate_vc: true
+
 diva_params:
   deployment:
     deploy_eth: true
@@ -48,4 +52,4 @@ persistent: false
 mev_params:
   launch_custom_flood: true
   mev_relay_image: flashbots/mev-boost-relay:latest
-mev_type: none
+mev_type: null

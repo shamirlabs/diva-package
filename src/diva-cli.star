@@ -35,7 +35,6 @@ def generate_identity(plan, diva_server_url):
             ]
         ),
     )
-    #plan.exec(service_name=DIVA_CLI_NAME, recipe=ExecRecipe(command=["sleep", "10"]))
 
 
 # TODO parallelize this; this is currently being called in Kurtosis but
@@ -43,19 +42,14 @@ def generate_identity(plan, diva_server_url):
 def deploy(plan, diva_validators):
     for key_index in range(0, diva_validators):
         plan.print("index {0}".format(key_index))
-
-
-        configuration_file = (
-            "/configuration/config-{0}/config-{1}.toml".format(
-                0, key_index
-            )
+        configuration_file = "/configuration/config-{0}/config-{1}.toml".format(
+            0, key_index
         )
+
         plan.print(
-            "deploying {0} for validator {1}".format(
-                configuration_file, key_index
-            )
+            "deploying {0} for validator {1}".format(configuration_file, key_index)
         )
-        
+
         pool_name = plan.exec(
             service_name=DIVA_DEPLOYER_CLI_NAME,
             recipe=ExecRecipe(
@@ -74,9 +68,7 @@ def deploy(plan, diva_validators):
                 command=[
                     "/bin/sh",
                     "-c",
-                    "/usr/local/bin/diva pools deploy {0}".format(
-                        pool_name["output"]
-                    ),
+                    "/usr/local/bin/diva pools deploy {0}".format(pool_name["output"]),
                 ]
             ),
         )

@@ -19,20 +19,22 @@ def initUtils(plan):
     )
 
     plan.exec(
-
         service_name="diva-utils",
-        recipe=ExecRecipe(command=["sh", "-c", "pip install requests > /dev/null 2>&1"])
+        recipe=ExecRecipe(
+            command=["sh", "-c", "pip install requests > /dev/null 2>&1"]
+        ),
     )
 
-def get_diva_field(plan,service_name, field):
+
+def get_diva_field(plan, service_name, field):
     recipe = GetHttpRequestRecipe(
-        port_id = "api-port",
-        endpoint = "/api/v1/node/info",
-        extract = {
-            field : "."+field,
+        port_id="api-port",
+        endpoint="/api/v1/node/info",
+        extract={
+            field: "." + field,
         },
     )
-    field_n="extract."+field
+    field_n = "extract." + field
     response = plan.wait(
         field=field_n,
         assertion="!=",
@@ -42,6 +44,24 @@ def get_diva_field(plan,service_name, field):
         service_name=service_name,
     )
     return response[field_n]
+
+
+def wait(plan, s):
+    result = plan.run_python(
+        # The Python script to execute as a string
+        # This will get executed via '/bin/sh -c "python /tmp/python/main.py"'.
+        # Where `/tmp/python/main.py` is path on the temporary container;
+        # on which the script is written before it gets run
+        # MANDATORY
+        run="""
+import time
+time.sleep(40)
+        """,
+        image="python:3.11-alpine",
+        wait=None,
+        description="running python script.. waiting 40s.",
+    )
+
 
 def get_gvr(plan, beacon_url):
     result = plan.exec(
@@ -59,6 +79,7 @@ def get_gvr(plan, beacon_url):
     plan.print(result["output"])
     return result["output"]
 
+
 def get_genesis_time(plan, beacon_url):
     result = plan.exec(
         service_name="diva-utils",
@@ -71,9 +92,10 @@ def get_genesis_time(plan, beacon_url):
                 ),
             ]
         ),
-    )    
+    )
     plan.print(result["output"])
     return result["output"]
+
 
 def get_chain_id(plan, beacon_url):
     result = plan.exec(
@@ -87,5 +109,5 @@ def get_chain_id(plan, beacon_url):
                 ),
             ]
         ),
-    )    
-    return result["output"]    
+    )
+    return result["output"]
