@@ -1,12 +1,13 @@
 constants = import_module("./constants.star")
 
+
 def diva_input_parser(plan, input_args):
     total_val = 0
     total_part = 0
-    diva_eth_nodes= 0
-    diva_eth_start_index=0
-    diva_eth_start_found=0
-    
+    diva_eth_nodes = 0
+    diva_eth_start_index = 0
+    diva_eth_start_found = 0
+
     if "participants" in input_args:
         for participant in input_args["participants"]:
             if "validator_count" in participant:
@@ -14,7 +15,7 @@ def diva_input_parser(plan, input_args):
                 if participant["validator_count"] == 0:
                     diva_eth_nodes += participant["count"]
                     diva_eth_start_found = 1
-        total_part +=  1
+        total_part += 1
         if diva_eth_start_found == 0:
             diva_eth_start_index += 1
 

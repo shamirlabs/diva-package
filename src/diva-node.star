@@ -100,7 +100,7 @@ def start_node(
     if clients_enabled:
         cmd.append("--execution-client-url={0}".format(el_url))
         cmd.append("--consensus-client-url={0}".format(cl_url))
-        #cmd.append("--contract={0}".format(contract_address))
+        # cmd.append("--contract={0}".format(contract_address))
 
     if verify_fee_recipient:
         cmd.append("--verify-fee-recipient")

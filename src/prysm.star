@@ -1,5 +1,3 @@
-
-
 def launch(
     plan,
     service_name,

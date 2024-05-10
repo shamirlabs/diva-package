@@ -58,7 +58,9 @@ def run(plan, args):
         ethereum_network = ethereum_package.run(plan, diva_args)
 
         plan.print("Succesfully launched an Ethereum Network")
-        cl_uri,el_rpc_uri,el_ws_uri = utils.get_eth_urls(ethereum_network.all_participants,diva_args,0)
+        cl_uri, el_rpc_uri, el_ws_uri = utils.get_eth_urls(
+            ethereum_network.all_participants, diva_args, 0
+        )
         network_id = 3151908
         sc_verif = ethereum_network.blockscout_sc_verif_url
         genesis_validators_root = utils.get_gvr(plan, cl_uri)
@@ -90,7 +92,9 @@ def run(plan, args):
         diva_cli.start_cli(plan)
 
     if deploy_diva_coord_boot:
-        cl_uri,el_rpc_uri,el_ws_uri = utils.get_eth_urls(ethereum_network.all_participants,diva_args,0)
+        cl_uri, el_rpc_uri, el_ws_uri = utils.get_eth_urls(
+            ethereum_network.all_participants, diva_args, 0
+        )
         bootnode, bootnode_url = diva_server.start_bootnode(
             plan,
             el_ws_uri,
@@ -128,7 +132,9 @@ def run(plan, args):
         diva_addresses = []
         signer_urls = []
         for index in range(0, diva_nodes):
-            cl_uri,el_rpc_uri,el_ws_uri = utils.get_eth_urls(ethereum_network.all_participants,diva_args,index)
+            cl_uri, el_rpc_uri, el_ws_uri = utils.get_eth_urls(
+                ethereum_network.all_participants, diva_args, index
+            )
             service_name_node = "diva{0}".format(index + 1)
             node, node_url, signer_url = diva_server.start_node(
                 plan,
@@ -167,7 +173,12 @@ def run(plan, args):
         if deploy_diva:
             keys.upload_pregenesis_keys(plan, start_index_val, stop_index_val)
             configuration_tomls = keys.proccess_pregenesis_keys(
-                plan, diva_urls, diva_addresses, start_index_val, stop_index_val, distribution
+                plan,
+                diva_urls,
+                diva_addresses,
+                start_index_val,
+                stop_index_val,
+                distribution,
             )
             diva_cli.start_cli(plan, configuration_tomls)
             diva_cli.deploy(plan, stop_index_val - start_index_val)
