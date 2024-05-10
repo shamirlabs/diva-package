@@ -9,7 +9,7 @@ diva_params:
   diva_validators: 2
   diva_nodes: 6
   diva_val_type: prysm 
-  distribution: "[2,1]"                 # Array-index is node-index and array value is number of keyshares, if empty will be randomly distributed
+  distribution: "[]"                 # Array-index is node-index and array value is number of keyshares, if empty will be randomly distributed
   
   options:
     deploy_eth: true
@@ -27,11 +27,11 @@ diva_params:
 participants:
   - el_type: geth
     cl_type: lighthouse
-    validator_count: 128
+    validator_count: 64
 
   - el_type: geth
     cl_type: prysm
-    validator_count: 128
+    validator_count: 64
 
 # Ethereum nodes for diva connections
 # Nodes with 0 validators will be used by diva nodes and connections will be uniformely distributed between them
@@ -46,9 +46,9 @@ additional_services:
   #- custom_flood
   #- el_forkmon
   #- beacon_metrics_gazer
-  #- dora
+  - dora
   #- prometheus_grafana
-  - full_beaconchain_explorer
+  #- full_beaconchain_explorer
 
 persistent: false
 
