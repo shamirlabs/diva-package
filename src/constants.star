@@ -14,7 +14,7 @@ DIVA_API_KEY = "diva"
 DIVA_VAULT_PASSWORD = DIVA_API_KEY
 
 # External Network
-HOST = "135.181.29.169"
+HOST = "x.x.x.x"
 EL_WS_PORT = "35276"
 EL_HTTP_PORT = "35277"
 CL_PORT = "35285"
