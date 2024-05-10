@@ -1,4 +1,3 @@
-PRYSM_IMAGE = "gcr.io/prysmaticlabs/prysm/validator:latest"
 
 
 def launch(
@@ -33,7 +32,7 @@ def launch(
         name=service_name,
         config=ServiceConfig(
             files=files,
-            image=PRYSM_IMAGE,
+            image=constants.PRYSM_IMAGE,
             cmd=cmd,
         ),
     )

@@ -25,7 +25,7 @@ def start_node(plan, start_index_val, stop_index_val):
         name="diva-node-1",
         config=ServiceConfig(
             user=User(uid=0, gid=0),
-            image="consensys/web3signer:23.9.0",
+            image=constants.W3S_CONSENSYS,
             cmd=cmd,
             ports={
                 "w3s-port": PortSpec(number=9000, transport_protocol="TCP", wait=None)

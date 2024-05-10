@@ -1,5 +1,5 @@
-NIMBUS_IMAGE = "statusim/nimbus-validator-client:multiarch-latest"
 
+constants = import_module("./constants.star")
 
 def launch(
     plan,
@@ -32,7 +32,7 @@ def launch(
     plan.add_service(
         name=service_name,
         config=ServiceConfig(
-            image=NIMBUS_IMAGE,
+            image=constants.NIMBUS_IMAGE,
             cmd=cmd,
         ),
     )
