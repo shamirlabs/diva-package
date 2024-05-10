@@ -30,8 +30,6 @@ def start_bootnode(
         config=ServiceConfig(
             image=constants.DIVA_SERVER_IMAGE,
             cmd=[
-                # "--execution-client-url={0}".format(el_url),
-                # "--consensus-client-url={0}".format(cl_url),
                 "--db=/var/diva/config/diva.db",
                 "--w3s-address=0.0.0.0",
                 "--tracing",
@@ -102,7 +100,7 @@ def start_node(
     if clients_enabled:
         cmd.append("--execution-client-url={0}".format(el_url))
         cmd.append("--consensus-client-url={0}".format(cl_url))
-        cmd.append("--contract={0}".format(contract_address))
+        #cmd.append("--contract={0}".format(contract_address))
 
     if verify_fee_recipient:
         cmd.append("--verify-fee-recipient")

@@ -1,15 +1,16 @@
 network_params:
   network_id: "3151908"
-  genesis_delay: -1
+  genesis_delay: -1                     # If -1, it is overwritten by DIVA
   deneb_fork_epoch: 0
   electra_fork_epoch: 999999
-  preregistered_validator_count: -1     # This is overwritten by DIVA
+  preregistered_validator_count: -1     # If -1, it is overwritten by DIVA
 
 diva_params:
-  diva_validators: 55
-  diva_nodes: 5
+  diva_validators: 2
+  diva_nodes: 6
   diva_val_type: prysm 
-
+  distribution: "[2,1]"                 # Array-index is node-index and array value is number of keyshares, if empty will be randomly distributed
+  
   options:
     deploy_eth: true
     deploy_diva_nodes: true
@@ -20,23 +21,24 @@ diva_params:
     private_pools_only: true  
     public_ports: false
     verify_fee_recipient: false
-    eth_connection_enabled: false
+    eth_connection_enabled: true
   use_w3s: false
 
 participants:
   - el_type: geth
-    cl_type: prysm
-    validator_count: 32
+    cl_type: lighthouse
+    validator_count: 128
 
+  - el_type: geth
+    cl_type: prysm
+    validator_count: 128
+
+# Ethereum nodes for diva connections
+# Nodes with 0 validators will be used by diva nodes and connections will be uniformely distributed between them
   - el_type: geth
     cl_type: prysm
     validator_count: 0
-
-# Ethereum nodes for diva connections
-# Nodes with 0 validators will be used by diva nodes uniformely distributed
-  - el_type: geth
-    cl_type: prysm
-    validator_count: 32
+    count: 3
 
 additional_services:
   #- tx_spammer
@@ -44,9 +46,9 @@ additional_services:
   #- custom_flood
   #- el_forkmon
   #- beacon_metrics_gazer
-  - dora
+  #- dora
   #- prometheus_grafana
-  #- full_beaconchain_explorer
+  - full_beaconchain_explorer
 
 persistent: false
 
