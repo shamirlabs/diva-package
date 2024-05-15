@@ -32,90 +32,104 @@ Configuration for the Diva package deployment can be defined in two files:
 ``````
 network_params:
   network_id: "3151908"
-  genesis_delay: 60
-  deneb_fork_epoch: 900
-  electra_fork_epoch: null
-  preregistered_validator_count: 66 # Those not assigned in participats will be available for diva, in this example 66-32-32= 2 validators available for diva. This 2 must be set on the constants.star file
-
-additional_services: 
-  - dora             # Consensus light explorer
-  - blockscout       # Explorer full explorer with SC verif
-
-mev_type: none
-
-participants:
-  # first pair must be geth & nimbus to expose public ports if you enable "public_ports" and "deploy_eth"
-  - el_client_type: geth
-    cl_client_type: nimbus
-    validator_count: 32
-
-  - el_client_type: geth
-    cl_client_type: nimbus
-    validator_count: 32
+  genesis_delay: -1                     # If -1, it is overwritten by DIVA
+  deneb_fork_epoch: 0
+  electra_fork_epoch: 999999
+  preregistered_validator_count: -1     # If -1, it is overwritten by DIVA
 
 diva_params:
-  deployment:
-    deploy_eth: false                  # will deploy the eth_clients on the above participants section 
-    deploy_diva_sc: true               # will deploy the diva_sc on the set eth_network 
-    deploy_diva_coord_boot: true       # will deploy a diva client which is a coordinator and bootnode on the set eth_network with set_sc
-    deploy_diva: false                 # will deploy the specified on constant.star diva clients on the set eth_network with set sc and set bootnode
-    deploy_operator_ui: false          # will deploy the operator_ui 
-    options:
-      charge_pre_genesis_keys: false   # will deploy the pregenesis keys as specified in constant.star, must have diva-available keys as indicated in the above 'network_params.preregistered_validator_count'
-      public_ports: true               # for deploy_eth will use the shamir-package with the by-default ports instead of ephimery 
-
-  protocol_features:
-    verify_fee_recipient: false        # will set the verify_w3s on validator client and diva nodes 
-    private_pools_only: true           # will skip all the SC tx to speed up process but disables dkgs   
+  diva_validators: 2
+  diva_nodes: 6
+  diva_val_type: prysm 
+  distribution: "[2,1]"                 # Array-index is node-index and array value is number of keyshares, if empty will be randomly distributed
   
-persistent: false                       # will make diva and eth-package persistent, db will be kept on hd 
+  options:
+    deploy_eth: true
+    deploy_diva_nodes: true
+    deploy_diva_sc: false
+    deploy_diva_coord_boot: true
+    deploy_operator_ui: false
+    charge_pre_genesis_keys: true
+    private_pools_only: true  
+    public_ports: false
+    verify_fee_recipient: false
+    eth_connection_enabled: true
+  use_w3s: false
+
+participants:
+  - el_type: geth
+    cl_type: lighthouse
+    validator_count: 128
+
+  - el_type: geth
+    cl_type: prysm
+    validator_count: 128
+
+# Ethereum nodes for diva connections
+# Nodes with 0 validators will be used by diva nodes and connections will be uniformely distributed between them
+  - el_type: geth
+    cl_type: prysm
+    validator_count: 0
+    count: 3
+
+additional_services:
+  #- tx_spammer
+  #- blob_spammer
+  #- custom_flood
+  #- el_forkmon
+  #- beacon_metrics_gazer
+  #- dora
+  #- prometheus_grafana
+  - full_beaconchain_explorer
+
+persistent: false
+
+mev_params:
+  launch_custom_flood: true
+  mev_relay_image: flashbots/mev-boost-relay:latest
+
+mev_type: null
 
 ``````
 
 ### Constants.star
 
 ````
-
-# Those are the docker image tags that kurtosis will try to fetch, if private and images are not locally, auth need to be set
-DIVA_SC_IMAGE = "sc"
-DIVA_CLI_IMAGE = "diva-cli"
+# Images
+DIVA_SC_IMAGE = "diva-sc"
+DIVA_CLI_IMAGE = "diva-cli:1"
 OPERATOR_UI_IMAGE = "diva/operator-ui:latest"
-DIVA_SERVER_IMAGE = "diva-server"
+DIVA_SERVER_IMAGE = "diva-server:12"
+W3S_CONSENSYS="consensys/web3signer:23.9.0"
+NIMBUS_IMAGE = "statusim/nimbus-validator-client:multiarch-latest"
+PRYSM_IMAGE = "gcr.io/prysmaticlabs/prysm/validator:latest"
 
+# Service names
+DIVA_BOOTNODE_NAME = "diva-bootnode-coordinator"
 
-DIVA_API_KEY="diva"
-DIVA_VAULT_PASSWORD=DIVA_API_KEY
+DIVA_API_KEY = "diva"
+DIVA_VAULT_PASSWORD = DIVA_API_KEY
 
-# when deploy_eth is disabled the program assumes the bellow endpoint will have the desired services avaialble
-HOST="95.216.20.186"   
-EL_WS_PORT="8546"
-EL_HTTP_PORT="8545"
-CL_PORT="4000"
-EXEC_EXPL_PORT="80"
-DIVA_SC="0xDeC3326BE4BaDb9A1fA7Be473Ef8370dA775889a"
-BOOTNODE_PORT="30000"
-PREGENESIS_VAL_SEED="giant issue aisle success illegal bike spike question tent bar rely arctic volcano long crawl hungry vocal artwork sniff fantasy very lucky have athlete"
+# External Network
+HOST = "135.181.29.169"
+EL_WS_PORT = "35276"
+EL_HTTP_PORT = "35277"
+CL_PORT = "35285"
+EXEC_EXPL_PORT = "2878"
+DIVA_SC = "0xDeC3326BE4BaDb9A1fA7Be473Ef8370dA775889a"
+BOOTNODE_PORT = "30000"
+DIVA_VAL_INDEX_START = 64
 
+# Diva specifics
+PREGENESIS_VAL_SEED = "giant issue aisle success illegal bike spike question tent bar rely arctic volcano long crawl hungry vocal artwork sniff fantasy very lucky have athlete"
 
-DIVA_W3S=9000
-DIVA_API=30000
-DIVA_P2P=5050
+DIVA_W3S = 9000
+DIVA_API = 30000
+DIVA_P2P = 5050
 
-
-
-# validator index start should start with the sum of the participants on eth_network
-DIVA_VAL_INDEX_START=64 # when deploy divas to existing eth-network
-DIVA_VALIDATORS= 2 #-1 for all available validators created at pre-genesis
-
-
-# diva-protocol specific options
 DIVA_SET_SIZE = 5
 DIVA_SET_THRESHOLD = 3
-DIVA_NODES= 6
 
-
-# distribution of keyshares, an array where the index specify the node and the value the number of keyshares, if not in the array the number of keyshares for that node will be random. Empty array is allowed.
-DIVA_DISTRIBUTION="[1]"
 ````
 
 
@@ -125,14 +139,14 @@ Kurtosis can sequentially deploy the following services for a Diva package setup
 
 - ethereum_clients
 - deploy smart_contract
-- bootnode and coordinator client, reg and fund
-- diva-clients, 
-- registration and fund of each one of the above diva-clients
-- deploy of the keyshares 
-- deploy of operator ui
+- bootnode and coordinator client, funding and registration
+- diva-nodes, 
+- fund and registration of each one of the above diva-clients
+- deploy of the keyshares
+- deploy of operator-ui
 - validator-clients
 
-Services can be skipped as needed, but dependencies between them mean that skipping a service assumes its functionality is provided by another means, as configured in constants.star.
+Services can be skipped as needed, but required services/dependencies must be provided by another means, configured in constants.star.
 
 
 
@@ -145,7 +159,7 @@ cd diva-package
 
 
 ```
-kurtosis run . --enclave enclaveName
+kurtosis run . --enclave enclaveName --production
 ```
 
 ### Prefunded accounts
