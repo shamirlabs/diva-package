@@ -14,47 +14,62 @@ def init(plan, el_url, sender_priv):
         ),
     )
 
-def deploy(plan, delay_sc, chainID, sc_verif):
-    plan.exec(service_name=DIVA_SC_SERVICE_NAME, recipe=ExecRecipe(command=["sleep", delay_sc]))
 
-    diamond = plan.exec(
+def deploy(plan, el_rpc, delay_sc, chainID, sc_verif):
+    plan.exec(
+        service_name=DIVA_SC_SERVICE_NAME,
+        recipe=ExecRecipe(command=["sleep", "0"]),
+    )
+
+    fund = plan.wait(
         service_name=DIVA_SC_SERVICE_NAME,
         recipe=ExecRecipe(
             command=[
                 "/bin/sh",
                 "-c",
-                "npx hardhat run --no-compile scripts/deployDiamondAndSetup.js --network custom  2>/dev/null | tail -n 1 | awk '{print $1, $2, $3}' | tr -d '\n' "
+                "cast send 0x3fab184622dc19b6109349b94811493bf2a45362 --value \"0.1 ether\" --private-key bcdf20249abf0ed6d944c0288fad489e33f66b3960d9e6229c1cd214ed3bbe31 --rpc-url {0}".format(el_rpc)
+            ]
+        ),
+        field="code", 
+        assertion="==", 
+        target_value=0,
+        interval = "3s",
+        timeout = "3m",
+    )
+
+    create2factory = plan.exec(
+        service_name=DIVA_SC_SERVICE_NAME,
+        recipe=ExecRecipe(
+            command=[
+                "/bin/sh",
+                "-c",
+                "cast publish --rpc-url {0} 0xf8a58085174876e800830186a08080b853604580600e600039806000f350fe7fffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffe03601600081602082378035828234f58015156039578182fd5b8082525050506014600cf31ba02222222222222222222222222222222222222222222222222222222222222222a02222222222222222222222222222222222222222222222222222222222222222".format(el_rpc) 
             ]
         ),
     )
 
-    plan.print(chainID)
-    plan.print(sc_verif)
-    plan.print(diamond["output"] )
-    result= plan.exec(
+    deploy = plan.exec(
         service_name=DIVA_SC_SERVICE_NAME,
         recipe=ExecRecipe(
             command=[
                 "/bin/sh",
                 "-c",
-                "CHAINID=3151908 VERIF_API={1}/api VERIF_URL={1} npx hardhat verify --network custom {2}  | tr -d '\n' ".format(
-                    chainID, sc_verif, diamond["output"] 
-                ),
+                "forge script scripts/Deploy.s.sol -vv  --rpc-url={0} --broadcast --private-key=bcdf20249abf0ed6d944c0288fad489e33f66b3960d9e6229c1cd214ed3bbe31".format(el_rpc)
             ]
         ),
     )    
-    plan.print(diamond["output"].split(" ")[0])
-    return (diamond["output"].split(" ")[0])
+    return deploy["output"]
 
-def fund(plan,address):
+
+def fund(plan, el_rpc, address):
     plan.exec(
         service_name=DIVA_SC_SERVICE_NAME,
         recipe=ExecRecipe(
             command=[
                 "/bin/sh",
                 "-c",
-                "npx hardhat fund --to {0} --amount 100 --network custom 2>/dev/null".format(
-                    address
+                "cast send {0} --value \"0.1 ether\" --private-key bcdf20249abf0ed6d944c0288fad489e33f66b3960d9e6229c1cd214ed3bbe31 --rpc-url {1}".format(
+                    address,el_rpc
                 ),
             ]
         ),
@@ -68,57 +83,29 @@ def new_key(plan):
             command=[
                 "/bin/sh",
                 "-c",
-                "npx hardhat new-key 2>/dev/null | tr -d '\n' > key.txt",
+                "cast wallet new | awk '/Address:/{addr=$2} /Private key:/{key=$3} END{printf \"[\\\"%s\\\",\\\"%s\\\"]\\n\", addr, key}'",
             ],
+            extract = {
+                "address" : "fromjson | .[0]",
+                "private_key" : "fromjson | .[1]",
+            },
         ),
+ 
     )
+    address= result["extract.address"]
+    private_key= result["extract.private_key"]
+    return address, private_key
 
-    publicKey = plan.exec(
-        service_name=DIVA_SC_SERVICE_NAME,
-        recipe=ExecRecipe(
-            command=[
-                "/bin/sh",
-                "-c",
-                """cat key.txt | awk -F'"publicKey": "' '{print $2}' | awk -F'"' '{print $1}' | tr -d '\n'""",
-            ],
-        ),
-    )
-
-    privateKey = plan.exec(
-        service_name=DIVA_SC_SERVICE_NAME,
-        recipe=ExecRecipe(
-            command=[
-                "/bin/sh",
-                "-c",
-                """cat key.txt | awk -F'"privateKey": "' '{print $2}' | awk -F'"' '{print $1}' | tr -d '\n'""",
-            ],
-        ),
-    )
-
-    address = plan.exec(
-        service_name=DIVA_SC_SERVICE_NAME,
-        recipe=ExecRecipe(
-            command=[
-                "/bin/sh",
-                "-c",
-                """cat key.txt | awk -F'"address": "' '{print $2}' | awk -F'"' '{print $1}' | tr -d '\n'""",
-            ],
-        ),
-    )
-
-    return publicKey["output"], privateKey["output"], address["output"]
-
-
-def register(plan, custom_private_key, contract_address, node_address):
+def register(plan, node_address, node_private_key, el_rpc, operator_private_key):
     result = plan.exec(
         service_name=DIVA_SC_SERVICE_NAME,
         recipe=ExecRecipe(
             command=[
                 "/bin/sh",
                 "-c",
-                "export CUSTOM_OPERATOR_PRIVATE_KEY={0} && npx hardhat registerOperatorAndNode --contract {1} --node {2} --network custom  2>/dev/null".format(
-                    custom_private_key, contract_address, node_address
-                ),
+                "NODE_ADDRESS={0} NODE_PRIVATE_KEY={1} forge script ./scripts/testnet/RegisterNode.s.sol -vvv --rpc-url={2} --broadcast --private-key {3}".format(
+                    node_address, node_private_key, el_rpc,operator_private_key
+                )
             ],
         ),
     )

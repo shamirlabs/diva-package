@@ -27,31 +27,49 @@ def get_address(plan, diva_url):
     result = plan.exec(
         service_name="diva-utils",
         recipe=ExecRecipe(
-            command=[
-                "/bin/sh",
-                "-c",
-                "python /tmp/scripts/utils.py get_address {0} {1}".format(
-                    diva_url, constants.DIVA_API_KEY
-                ),
-            ]
+            command=["sh", "-c", "pip install requests > /dev/null 2>&1"]
         ),
-    )    
-    return result["output"]
+    )
 
-def get_peer_id(plan, diva_url):
-    result = plan.exec(
-        service_name="diva-utils",
-        recipe=ExecRecipe(
-            command=[
-                "/bin/sh",
-                "-c",
-                "python /tmp/scripts/utils.py get_peer_id {0} {1} | tr -d '\n'".format(
-                    diva_url, constants.DIVA_API_KEY
-                ),
-            ]
-        ),
-    )    
-    return result["output"]
+
+def get_diva_field(plan, service_name, endpoint, field):
+    recipe = GetHttpRequestRecipe(
+        port_id="api-port",
+        endpoint=endpoint,
+        extract={
+            field: "." + field,
+        },
+        headers = {
+            "Authorization": "Bearer {0}".format(constants.DIVA_API_KEY) 
+        },
+    )
+    field_n = "extract." + field
+    response = plan.wait(
+        field=field_n,
+        assertion="!=",
+        target_value="",
+        timeout="5s",
+        recipe=recipe,
+        service_name=service_name,
+    )
+    return response[field_n]
+
+def wait(plan, s):
+    result = plan.run_python(
+        # The Python script to execute as a string
+        # This will get executed via '/bin/sh -c "python /tmp/python/main.py"'.
+        # Where `/tmp/python/main.py` is path on the temporary container;
+        # on which the script is written before it gets run
+        # MANDATORY
+        run="""
+import time
+time.sleep(40)
+        """,
+        image="python:3.11-alpine",
+        wait=None,
+        description="running python script.. waiting 40s.",
+    )
+
 
 def get_gvr(plan, beacon_url):
     result = plan.exec(

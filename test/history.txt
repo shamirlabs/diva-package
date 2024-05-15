@@ -1,0 +1,13 @@
+
+nimbus w3s 10 ok
+
+nimbus w3s 50 fail
+
+nimbus w3s 100 fail
+
+nimbus w3s 200 fail
+
+prysm w3s 200 ok
+
+prysm w3s 500 fail (4min)
+

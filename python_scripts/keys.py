@@ -45,37 +45,43 @@ def distribution(num_keyshares_per_validator,num_total_nodes,num_validators,dist
         raise ValueError("Distribution is not possible with that configuration, num_total_nodes < num_keyshares_per_validator")
 
     distribution_result = {validator_id: [] for validator_id in range(num_validators)}
+    if (len(distribution)==0 or distribution[0]==-1):
+        current_node = 0
+        for validator_id in range(num_validators):
+            for _ in range(num_keyshares_per_validator):
+                distribution_result[validator_id].append(current_node)
+                current_node = (current_node + 1) % num_total_nodes
+    else:
+        for node_index, keyshares in enumerate(distribution):
+            available_validators = [v_id for v_id in range(num_validators) if node_index not in distribution_result[v_id]]
+            assigned = 0
+            while assigned < keyshares:
+                if not available_validators:  
+                    raise ValueError(f"Unable to distribute {keyshares} keyshares to node {node_index}")
 
-    for node_index, keyshares in enumerate(distribution):
-        available_validators = [v_id for v_id in range(num_validators) if node_index not in distribution_result[v_id]]
-        assigned = 0
-        while assigned < keyshares:
-            if not available_validators:  
-                raise ValueError(f"Unable to distribute {keyshares} keyshares to node {node_index}")
-
-            validator_id = random.choice(available_validators)
-            distribution_result[validator_id].append(node_index)
-            available_validators.remove(validator_id)
-            assigned += 1
-
-
-    assigned_keyshares = {node: 0 for node in range(num_total_nodes)}
-    for validator_nodes in distribution_result.values():
-        for node in validator_nodes:
-            assigned_keyshares[node] += 1
-
-    remaining_nodes = [node for node in range(num_total_nodes) 
-                       if node >= len(distribution) or assigned_keyshares[node] < distribution[node]]
+                validator_id = random.choice(available_validators)
+                distribution_result[validator_id].append(node_index)
+                available_validators.remove(validator_id)
+                assigned += 1
 
 
-    for validator_id in range(num_validators):
-        available_nodes = [node for node in remaining_nodes if node not in distribution_result[validator_id]]
-        while len(distribution_result[validator_id]) < num_keyshares_per_validator:
-            if not available_nodes: 
-                raise ValueError("Unable to distribute remaining keyshares for validator " + str(validator_id)+ " out of "+ str(num_validators))
-            node_index = random.choice(available_nodes)
-            distribution_result[validator_id].append(node_index)
-            available_nodes.remove(node_index) 
+        assigned_keyshares = {node: 0 for node in range(num_total_nodes)}
+        for validator_nodes in distribution_result.values():
+            for node in validator_nodes:
+                assigned_keyshares[node] += 1
+
+        remaining_nodes = [node for node in range(num_total_nodes) 
+                        if node >= len(distribution) or assigned_keyshares[node] < distribution[node]]
+
+
+        for validator_id in range(num_validators):
+            available_nodes = [node for node in remaining_nodes if node not in distribution_result[validator_id]]
+            while len(distribution_result[validator_id]) < num_keyshares_per_validator:
+                if not available_nodes: 
+                    raise ValueError("Unable to distribute remaining keyshares for validator " + str(validator_id)+ " out of "+ str(num_validators))
+                node_index = random.choice(available_nodes)
+                distribution_result[validator_id].append(node_index)
+                available_nodes.remove(node_index) 
 
 
     return distribution_result

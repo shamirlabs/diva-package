@@ -1,38 +1,50 @@
 network_params:
   network_id: "3151908"
-  genesis_delay: 60
-  deneb_fork_epoch: 900
-  electra_fork_epoch: null
-  preregistered_validator_count: 66 #Those not assigned in participats will be available for diva
-
-additional_services: 
-  - dora
-  - blockscout
-mev_type: none
-
-participants:
-  # first pair must be geth & nimbus to expose public ports if you use shamir eth-pack
-  - el_client_type: geth
-    cl_client_type: nimbus
-    validator_count: 32
-
-  - el_client_type: geth
-    cl_client_type: nimbus
-    validator_count: 32
+  genesis_delay: 10 #-1                     # If -1, it is overwritten by DIVA
+  deneb_fork_epoch: 0
+  electra_fork_epoch: 999999
+  preregistered_validator_count: -1     # If -1, it is overwritten by DIVA
 
 diva_params:
-  deployment:
-    deploy_eth: false
+  diva_validators: 1
+  diva_nodes: 5
+  diva_val_type: prysm 
+  distribution: "[]"                    # Array-index is node-index and array value is number of keyshares, if empty will be randomly distributed
+  
+  options:
+    deploy_eth: true
+    deploy_diva_nodes: true
     deploy_diva_sc: true
     deploy_diva_coord_boot: true
-    deploy_diva: false
     deploy_operator_ui: false
-    options:
-      charge_pre_genesis_keys: false
-      public_ports: true
-
-  protocol_features:
+    charge_pre_genesis_keys: true
+    private_pools_only: false
+    public_ports: false
     verify_fee_recipient: false
-    private_pools_only: true
-  
+    eth_connection_enabled: true
+  use_w3s: false
+
+participants:
+  - el_type: geth
+    cl_type: prysm
+    validator_count: 64
+
+# Ethereum nodes for diva connections
+# Nodes with 0 validators will be used by diva nodes and connections will be uniformely distributed between them
+  - el_type: geth
+    cl_type: prysm
+    validator_count: 0
+    count: 1
+
+additional_services:
+  #- tx_spammer
+  #- blob_spammer
+  #- custom_flood
+  #- el_forkmon
+  #- beacon_metrics_gazer
+  - dora
+  #- prometheus_grafana
+  #- full_beaconchain_explorer
+  - blockscout
+
 persistent: false
