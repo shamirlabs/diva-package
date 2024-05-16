@@ -9,6 +9,8 @@ PRYSM_IMAGE = "gcr.io/prysmaticlabs/prysm/validator:latest"
 
 # Service names
 DIVA_BOOTNODE_NAME = "diva-bootnode-coordinator"
+DIVA_DEPLOYER_CLI_NAME = "diva-cli-deployer"
+DIVA_CLI_NAME = "diva-cli"
 
 # Diva API endpoints
 DIVA_INFO_ENDPOINT ="/api/v1/node/info"
@@ -25,7 +27,7 @@ CL_PORT = "32811"
 EXEC_EXPL_PORT = "2878"
 DIVA_SC = "0xDeC3326BE4BaDb9A1fA7Be473Ef8370dA775889a"
 BOOTNODE_PORT = "30000"
-DIVA_VAL_INDEX_START = 64
+DIVA_VAL_INDEX_START = 64 # when deploy divas to existing eth-network
 
 # Diva specifics
 PREGENESIS_VAL_SEED = "giant issue aisle success illegal bike spike question tent bar rely arctic volcano long crawl hungry vocal artwork sniff fantasy very lucky have athlete"
@@ -34,9 +36,5 @@ DIVA_W3S=9000
 DIVA_API=30000
 DIVA_P2P=5050
 
-DIVA_VAL_INDEX_START=64 # when deploy divas to existing eth-network
 DIVA_SET_SIZE = 5
 DIVA_SET_THRESHOLD = 3
-DIVA_NODES= 6
-DIVA_VALIDATORS= 2 #-1 for all available validators created at pre-genesis
-DIVA_DISTRIBUTION="[1]"

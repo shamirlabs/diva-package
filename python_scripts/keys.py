@@ -23,7 +23,6 @@ def main():
     diva_addresses = diva_addresses.split(",")
     
     result= distribution(diva_set_size, len(diva_urls),stop_index - start_index,diva_distribution)
-
     entries= manage_keystores(keystore_folder,secrets_folder)
     for index in range(0, stop_index - start_index):
         validator_i= result[index]
@@ -83,7 +82,7 @@ def distribution(num_keyshares_per_validator,num_total_nodes,num_validators,dist
                 distribution_result[validator_id].append(node_index)
                 available_nodes.remove(node_index) 
 
-
+    print(distribution_result)
     return distribution_result
 
 

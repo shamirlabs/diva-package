@@ -14,11 +14,11 @@ diva_params:
   options:
     deploy_eth: true
     deploy_diva_nodes: true
-    deploy_diva_sc: true
+    deploy_diva_sc: false
     deploy_diva_coord_boot: true
     deploy_operator_ui: false
     charge_pre_genesis_keys: true
-    private_pools_only: false
+    private_pools_only: true
     public_ports: false
     verify_fee_recipient: false
     eth_connection_enabled: true
@@ -48,3 +48,4 @@ additional_services:
   - blockscout
 
 persistent: false
+mev_type: null
