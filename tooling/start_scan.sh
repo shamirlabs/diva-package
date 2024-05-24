@@ -47,6 +47,7 @@ handle_commands() {
         src=$(get_ip "$(get_container "${ADDR[0]}")")
         dst=$(get_ip "$(get_container "${ADDR[1]}")")
         echo "Capturando entre ${ADDR[0]} y ${ADDR[1]}"
+
         sudo tcpdump -i "$interface" -s 0 -nn "(src $src and dst $dst)" -w "../test/${ADDR[0]}_${ADDR[1]}.pcap" &
     done
 }

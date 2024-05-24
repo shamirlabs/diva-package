@@ -24,6 +24,7 @@ def generate_identity(plan, diva_server_url):
     plan.print("Generating identity for {0}".format(diva_server_url))
     plan.exec(
         service_name=constants.DIVA_CLI_NAME,
+        acceptable_codes = [0, 1],
         recipe=ExecRecipe(
             command=[
                 "/bin/sh",

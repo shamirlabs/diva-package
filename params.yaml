@@ -8,31 +8,31 @@ network_params:
 diva_params:
   diva_validators: 1
   diva_nodes: 5
-  diva_val_type: prysm 
+  diva_val_type: nimbus 
   distribution: "[]"                    # Array-index is node-index and array value is number of keyshares, if empty will be randomly distributed
   
   options:
     deploy_eth: true
     deploy_diva_nodes: true
-    deploy_diva_sc: false
+    deploy_diva_sc: true
+    private_pools_only: false
     deploy_diva_coord_boot: true
     deploy_operator_ui: false
     charge_pre_genesis_keys: true
-    private_pools_only: true
     public_ports: false
-    verify_fee_recipient: false
+    verify_fee_recipient: true
     eth_connection_enabled: true
   use_w3s: false
 
 participants:
   - el_type: geth
-    cl_type: prysm
-    validator_count: 64
-
+    cl_type: nimbus
+    validator_count: 32
+    count: 2
 # Ethereum nodes for diva connections
 # Nodes with 0 validators will be used by diva nodes and connections will be uniformely distributed between them
   - el_type: geth
-    cl_type: prysm
+    cl_type: nimbus
     validator_count: 0
     count: 1
 
@@ -45,7 +45,7 @@ additional_services:
   - dora
   #- prometheus_grafana
   #- full_beaconchain_explorer
-  - blockscout
+  #- blockscout
 
 persistent: false
 mev_type: null

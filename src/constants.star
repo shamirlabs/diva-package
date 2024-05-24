@@ -1,8 +1,8 @@
 # Images
-DIVA_SC_IMAGE = "diva-sc:4"
+DIVA_SERVER_IMAGE = "diva-server:18"
+DIVA_SC_IMAGE = "diva-sc:10"
 DIVA_CLI_IMAGE = "diva-cli:1"
 OPERATOR_UI_IMAGE = "diva/operator-ui:latest"
-DIVA_SERVER_IMAGE = "diva-server:12"
 W3S_CONSENSYS = "consensys/web3signer:23.9.0"
 NIMBUS_IMAGE = "statusim/nimbus-validator-client:multiarch-latest"
 PRYSM_IMAGE = "gcr.io/prysmaticlabs/prysm/validator:latest"

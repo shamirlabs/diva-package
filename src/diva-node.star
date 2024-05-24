@@ -100,10 +100,14 @@ def start_node(
     if clients_enabled:
         cmd.append("--execution-client-url={0}".format(el_url))
         cmd.append("--consensus-client-url={0}".format(cl_url))
-        # cmd.append("--contract={0}".format(contract_address))
+        cmd.append("--deployment-contracts-config-file=/var/diva/params/contracts.toml")
+        #cmd.append("--contract=0x15482d1b8E550CcFD512fC0F9c4b82CBaf0323fC")
+        
 
     if verify_fee_recipient:
         cmd.append("--verify-fee-recipient")
+
+    contracts = plan.upload_files("./config/contracts.toml")
 
     result = plan.add_service(
         name=diva_node_name,
@@ -123,7 +127,8 @@ def start_node(
             files={
                 "/var/diva": Directory(
                     persistent_key="diva-db-{0}".format(diva_node_name)
-                )
+                ),
+                "/var/diva/params": contracts
             },
         ),
     )

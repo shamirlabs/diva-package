@@ -86,7 +86,7 @@ def run(plan, args):
     smart_contract_address = constants.DIVA_SC
 
     if deploy_diva_sc:
-        smart_contract_address = diva_sc.deploy(plan, el_rpc_uri_0, delay_sc, network_id, sc_verif)
+        diva_sc.deploy(plan, el_rpc_uri_0, delay_sc, network_id, sc_verif)
 
     if deploy_diva or deploy_diva_coord_boot:
         diva_cli.start_cli(plan)

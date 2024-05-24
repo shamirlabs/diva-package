@@ -1,8 +1,7 @@
 NIMBUS_IMAGE = "statusim/nimbus-validator-client:multiarch-v23.10.1"
 
 
-def launch(plan, service_name, web3_signer_url, beacon_url, fee_recipient, verify_fee_recipient):
-
+def launch(plan, service_name, web3_signer_url, beacon_url, fee_recipient, verify_fee_recipient, mev):
     cmd=[
         "--doppelganger-detection=false",
         "--non-interactive",

@@ -37,7 +37,7 @@ def deploy(plan, el_rpc, delay_sc, chainID, sc_verif):
         timeout = "3m",
     )
 
-    create2factory = plan.exec(
+    create2factory = plan.wait(
         service_name=DIVA_SC_SERVICE_NAME,
         recipe=ExecRecipe(
             command=[
@@ -46,19 +46,40 @@ def deploy(plan, el_rpc, delay_sc, chainID, sc_verif):
                 "cast publish --rpc-url {0} 0xf8a58085174876e800830186a08080b853604580600e600039806000f350fe7fffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffe03601600081602082378035828234f58015156039578182fd5b8082525050506014600cf31ba02222222222222222222222222222222222222222222222222222222222222222a02222222222222222222222222222222222222222222222222222222222222222".format(el_rpc) 
             ]
         ),
+        field="code", 
+        assertion="==", 
+        target_value=0,
+        interval = "3s",
+        timeout = "3m",         
     )
 
-    deploy = plan.exec(
+    deploy = plan.wait(
         service_name=DIVA_SC_SERVICE_NAME,
         recipe=ExecRecipe(
             command=[
                 "/bin/sh",
                 "-c",
-                "forge script scripts/Deploy.s.sol -vv  --rpc-url={0} --broadcast --private-key=bcdf20249abf0ed6d944c0288fad489e33f66b3960d9e6229c1cd214ed3bbe31".format(el_rpc)
+                "TEST=true forge script scripts/Deploy.s.sol -vv  --rpc-url={0} --broadcast --private-key=bcdf20249abf0ed6d944c0288fad489e33f66b3960d9e6229c1cd214ed3bbe31".format(el_rpc)
             ]
         ),
-    )    
-    return deploy["output"]
+        field="code", 
+        assertion="==", 
+        target_value=0,
+        interval = "3s",
+        timeout = "3m",        
+    )
+    validator_manager = plan.exec(
+        service_name=DIVA_SC_SERVICE_NAME,
+        recipe=ExecRecipe(
+            command=[
+                "/bin/sh",
+                "-c",
+                "cat /app/broadcast/Deploy.s.sol/3151908/run-latest.json "
+            ]
+        ),
+    )
+ 
+    
 
 
 def fund(plan, el_rpc, address):
@@ -97,6 +118,10 @@ def new_key(plan):
     return address, private_key
 
 def register(plan, node_address, node_private_key, el_rpc, operator_private_key):
+    plan.print(node_address)
+    plan.print(node_private_key)
+    plan.print(el_rpc)
+    plan.print(operator_private_key)
     result = plan.exec(
         service_name=DIVA_SC_SERVICE_NAME,
         recipe=ExecRecipe(
