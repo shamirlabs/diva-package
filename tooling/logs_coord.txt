@@ -1,0 +1,787 @@
+[39m[39m┌[0m[0m[39m[39m─[0m[0m[39m[39m─[0m[0m[39m[39m─[0m[0m[39m[39m─[0m[0m[39m[39m─[0m[0m[39m[39m─[0m[0m[39m[39m─[0m[0m[39m[39m─[0m[0m[39m[39m─[0m[0m[39m[39m─[0m[0m[39m[39m─[0m[0m[39m[39m─[0m[0m[39m[39m─[0m[0m[39m[39m─[0m[0m[39m[39m─[0m[0m[39m[39m─[0m[0m[39m[39m─[0m[0m[39m[39m─[0m[0m[39m[39m─[0m[0m[39m[39m─[0m[0m[39m[39m─[0m[0m[39m[39m─[0m[0m[39m[39m─[0m[0m[39m[39m─[0m[0m[39m[39m─[0m[0m[39m[39m─[0m[0m[39m[39m─[0m[0m[39m[39m─[0m[0m[39m[39m─[0m[0m[39m[39m─[0m[0m[39m[39m─[0m[0m[39m[39m─[0m[0m[39m[39m─[0m[0m[39m[39m─[0m[0m[39m[39m─[0m[0m[39m[39m─[0m[0m[39m[39m─[0m[0m[39m[39m─[0m[0m[39m[39m─[0m[0m[39m[39m─[0m[0m[39m[39m─[0m[0m[39m[39m─[0m[0m[39m[39m─[0m[0m[39m[39m─[0m[0m[39m[39m─[0m[0m[39m[39m─[0m[0m[39m[39m─[0m[0m[39m[39m─[0m[0m[39m[39m─[0m[0m[39m[39m─[0m[0m[39m[39m─[0m[0m[39m[39m─[0m[0m[39m[39m─[0m[0m[39m[39m┐[0m[0m
+[39m[39m|[0m[0m [39m[39m[0m[0m                                                    [39m[39m|[0m[0m
+[39m[39m|[0m[0m [39m[39m[49m[49m                                      [0m[39m[0m[39m[0m[39m[0m[39m [0m[0m             [39m[39m|[0m[0m
+[39m[39m|[0m[0m [39m[39m[49m[49m[97;1m[97;1m     ██████  ██ ██    ██  █████       [0m[39m[49m[0m[39m[49m[0m[39m[0m[39m[0m[39m[0m[39m [0m[0m             [39m[39m|[0m[0m
+[39m[39m|[0m[0m [39m[39m[49m[49m[97;1m[97;1m     ██   ██ ██ ██    ██ ██   ██      [0m[39m[49m[0m[39m[49m[0m[39m[0m[39m[0m[39m[0m[39m [0m[0m             [39m[39m|[0m[0m
+[39m[39m|[0m[0m [39m[39m[49m[49m[97;1m[97;1m     ██   ██ ██ ██    ██ ███████      [0m[39m[49m[0m[39m[49m[0m[39m[0m[39m[0m[39m[0m[39m [0m[0m             [39m[39m|[0m[0m
+[39m[39m|[0m[0m [39m[39m[49m[49m[97;1m[97;1m     ██   ██ ██  ██  ██  ██   ██      [0m[39m[49m[0m[39m[49m[0m[39m[0m[39m[0m[39m[0m[39m [0m[0m             [39m[39m|[0m[0m
+[39m[39m|[0m[0m [39m[39m[49m[49m[97;1m[97;1m     ██████  ██   ████   ██   ██      [0m[39m[49m[0m[39m[49m[0m[39m[0m[39m[0m[39m[0m[39m [0m[0m             [39m[39m|[0m[0m
+[39m[39m|[0m[0m [39m[39m[49m[49m[97;1m[97;1m                                      [0m[39m[49m[0m[39m[49m[0m[39m[0m[39m[0m[39m[0m[39m [0m[0m             [39m[39m|[0m[0m
+[39m[39m|[0m[0m [39m[39m[49m[49m                                      [0m[39m[0m[39m [0m[0m             [39m[39m|[0m[0m
+[39m[39m|[0m[0m [39m[39mLogging level           [90m[90m | [0m[39m[0m[39m[32;1m[32;1mdebug[0m[39m[0m[39m[0m[39m[0m[39m                    [0m[0m[39m[39m|[0m[0m
+[39m[39m|[0m[0m [39m[39mBoltDB                  [90m[90m | [0m[39m[0m[39m[32;1m[32;1m/var/diva/config/diva.db[0m[39m[0m[39m[0m[39m[0m[39m [0m[0m[39m[39m|[0m[0m
+[39m[39m|[0m[0m [39m[39mdiva API                [90m[90m | [0m[39m[0m[39m[32;1m[32;1m0.0.0.0:30000[0m[39m[0m[39m[0m[39m[0m[39m            [0m[0m[39m[39m|[0m[0m
+[39m[39m|[0m[0m [39m[39mSwagger UI              [90m[90m | [0m[39m[0m[39m[32;1m[32;1menabled[0m[39m[0m[39m[0m[39m[0m[39m                  [0m[0m[39m[39m|[0m[0m
+[39m[39m|[0m[0m [39m[39mWeb3Signer API          [90m[90m | [0m[39m[0m[39m[32;1m[32;1m0.0.0.0:9000[0m[39m[0m[39m[0m[39m[0m[39m             [0m[0m[39m[39m|[0m[0m
+[39m[39m|[0m[0m [39m[39mP2P network address     [90m[90m | [0m[39m[0m[39m[32;1m[32;1m0.0.0.0:5050[0m[39m[0m[39m[0m[39m[0m[39m             [0m[0m[39m[39m|[0m[0m
+[39m[39m|[0m[0m [39m[39mdiva contract address   [90m[90m | [0m[39m[0m[39m[97;2m[97;2mdisabled[0m[39m[0m[39m[0m[39m[0m[39m                 [0m[0m[39m[39m|[0m[0m
+[39m[39m|[0m[0m [39m[39mExecution client address[90m[90m | [0m[39m[0m[39m[32;1m[32;1mws://172.16.4.12:8546[0m[39m[0m[39m[0m[39m[0m[39m    [0m[0m[39m[39m|[0m[0m
+[39m[39m|[0m[0m [39m[39mConsensus client address[90m[90m | [0m[39m[0m[39m[32;1m[32;1mhttp://172.16.4.14:4000[0m[39m[0m[39m[0m[39m[0m[39m  [0m[0m[39m[39m|[0m[0m
+[39m[39m|[0m[0m [39m[39mDKG coordination enabled[90m[90m | [0m[39m[0m[39m[32;1m[32;1mtrue[0m[39m[0m[39m                     [0m[0m[39m[39m|[0m[0m
+[39m[39m|[0m[0m [39m[39m[0m[0m                                                    [39m[39m|[0m[0m
+[39m[39m|[0m[0m [39m[39m[0m[0m                                                    [39m[39m|[0m[0m
+[39m[39m└[0m[0m[39m[39m─[0m[0m[39m[39m─[0m[0m[39m[39m─[0m[0m[39m[39m─[0m[0m[39m[39m─[0m[0m[39m[39m─[0m[0m[39m[39m─[0m[0m[39m[39m─[0m[0m[39m[39m─[0m[0m[39m[39m─[0m[0m[39m[39m─[0m[0m[39m[39m─[0m[0m[39m[39m─[0m[0m[39m[39m─[0m[0m[39m[39m─[0m[0m[39m[39m─[0m[0m[39m[39m─[0m[0m[39m[39m─[0m[0m[39m[39m─[0m[0m[39m[39m─[0m[0m[39m[39m─[0m[0m[39m[39m─[0m[0m[39m[39m─[0m[0m[39m[39m─[0m[0m[39m[39m─[0m[0m[39m[39m─[0m[0m[39m[39m─[0m[0m[39m[39m─[0m[0m[39m[39m─[0m[0m[39m[39m─[0m[0m[39m[39m─[0m[0m[39m[39m─[0m[0m[39m[39m─[0m[0m[39m[39m─[0m[0m[39m[39m─[0m[0m[39m[39m─[0m[0m[39m[39m─[0m[0m[39m[39m─[0m[0m[39m[39m─[0m[0m[39m[39m─[0m[0m[39m[39m─[0m[0m[39m[39m─[0m[0m[39m[39m─[0m[0m[39m[39m─[0m[0m[39m[39m─[0m[0m[39m[39m─[0m[0m[39m[39m─[0m[0m[39m[39m─[0m[0m[39m[39m─[0m[0m[39m[39m─[0m[0m[39m[39m─[0m[0m[39m[39m─[0m[0m[39m[39m─[0m[0m[39m[39m┘[0m[0m
+time="2024-05-25T11:24:25Z" level=info msg="divaproto plugin installed" cc_url="http://172.16.4.14:4000" cc_version= chain_id=3151908 ec_url="ws://172.16.4.12:8546" ec_version="Geth/v1.14.0-unstable-c6119247/linux-amd64/go1.21.8" genesis_fork_version=0x10000038 genesis_validators_root=0x4beaefcf71fe905daf8f4c709ecde5c20cf4ad0d06b34b15d64a3e1b4a59e8b4 prefix=divaproto.plugin
+time="2024-05-25T11:24:25Z" level=debug msg="skipping divanet plugin initialization: missing identity" prefix=divanet.plugin
+[2m11:24AM[0m [92mINF[0m actor system started [2mlib=[0mProto.Actor [2msystem=[0mCJSEStJQ5Rzry4TbTjY38G [2mid=[0mCJSEStJQ5Rzry4TbTjY38G
+time="2024-05-25T11:24:25Z" level=info msg="running diva client" prefix=SystemManager version=v23.12.1-33-g3b5d2ec-dev
+time="2024-05-25T11:24:25Z" level=info msg="enabled master api" api_key=diva prefix=SystemManager
+time="2024-05-25T11:24:25Z" level=debug msg="starting http server" prefix="diva/process/api/v0"
+[39m[39m┌[0m[0m[39m[39m─[0m[0m[39m[39m─[0m[0m[39m[39m─[0m[0m[39m[39m─[0m[0m[39m[39m─[0m[0m[39m[39m─[0m[0m[39m[39m─[0m[0m[39m[39m─[0m[0m[39m[39m─[0m[0m[39m[39m─[0m[0m[39m[39m─[0m[0m[39m[39m─[0m[0m[39m[39m─[0m[0m[39m[39m─[0m[0m[39m[39m─[0m[0m[39m[39m─[0m[0m[39m[39m─[0m[0m[39m[39m─[0m[0m[39m[39m─[0m[0m[39m[39m─[0m[0m[39m[39m─[0m[0m[39m[39m─[0m[0m[39m[39m─[0m[0m[39m[39m─[0m[0m[39m[39m─[0m[0m[39m[39m─[0m[0m[39m[39m─[0m[0m[39m[39m─[0m[0m[39m[39m─[0m[0m[39m[39m─[0m[0m[39m[39m─[0m[0m[39m[39m─[0m[0m[39m[39m─[0m[0m[39m[39m─[0m[0m[39m[39m─[0m[0m[39m[39m─[0m[0m[39m[39m─[0m[0m[39m[39m─[0m[0m[39m[39m─[0m[0m[39m[39m─[0m[0m[39m[39m─[0m[0m[39m[39m─[0m[0m[39m[39m─[0m[0m[39m[39m─[0m[0m[39m[39m─[0m[0m[39m[39m─[0m[0m[39m[39m─[0m[0m[39m[39m─[0m[0m[39m[39m─[0m[0m[39m[39m─[0m[0m[39m[39m─[0m[0m[39m[39m─[0m[0m[39m[39m─[0m[0m[39m[39m┐[0m[0m
+[39m[39m|[0m[0m [39m[39m[0m[0m                                                    [39m[39m|[0m[0m
+[39m[39m|[0m[0m [39m[39m[49m[49m                                      [0m[39m[0m[39m[0m[39m[0m[39m [0m[0m             [39m[39m|[0m[0m
+[39m[39m|[0m[0m [39m[39m[49m[49m[97;1m[97;1m     ██████  ██ ██    ██  █████       [0m[39m[49m[0m[39m[49m[0m[39m[0m[39m[0m[39m[0m[39m [0m[0m             [39m[39m|[0m[0m
+[39m[39m|[0m[0m [39m[39m[49m[49m[97;1m[97;1m     ██   ██ ██ ██    ██ ██   ██      [0m[39m[49m[0m[39m[49m[0m[39m[0m[39m[0m[39m[0m[39m [0m[0m             [39m[39m|[0m[0m
+[39m[39m|[0m[0m [39m[39m[49m[49m[97;1m[97;1m     ██   ██ ██ ██    ██ ███████      [0m[39m[49m[0m[39m[49m[0m[39m[0m[39m[0m[39m[0m[39m [0m[0m             [39m[39m|[0m[0m
+[39m[39m|[0m[0m [39m[39m[49m[49m[97;1m[97;1m     ██   ██ ██  ██  ██  ██   ██      [0m[39m[49m[0m[39m[49m[0m[39m[0m[39m[0m[39m[0m[39m [0m[0m             [39m[39m|[0m[0m
+[39m[39m|[0m[0m [39m[39m[49m[49m[97;1m[97;1m     ██████  ██   ████   ██   ██      [0m[39m[49m[0m[39m[49m[0m[39m[0m[39m[0m[39m[0m[39m [0m[0m             [39m[39m|[0m[0m
+[39m[39m|[0m[0m [39m[39m[49m[49m[97;1m[97;1m                                      [0m[39m[49m[0m[39m[49m[0m[39m[0m[39m[0m[39m[0m[39m [0m[0m             [39m[39m|[0m[0m
+[39m[39m|[0m[0m [39m[39m[49m[49m                                      [0m[39m[0m[39m [0m[0m             [39m[39m|[0m[0m
+[39m[39m|[0m[0m [39m[39mLogging level           [90m[90m | [0m[39m[0m[39m[32;1m[32;1mdebug[0m[39m[0m[39m[0m[39m[0m[39m                    [0m[0m[39m[39m|[0m[0m
+[39m[39m|[0m[0m [39m[39mBoltDB                  [90m[90m | [0m[39m[0m[39m[32;1m[32;1m/var/diva/config/diva.db[0m[39m[0m[39m[0m[39m[0m[39m [0m[0m[39m[39m|[0m[0m
+[39m[39m|[0m[0m [39m[39mdiva API                [90m[90m | [0m[39m[0m[39m[32;1m[32;1m0.0.0.0:30000[0m[39m[0m[39m[0m[39m[0m[39m            [0m[0m[39m[39m|[0m[0m
+[39m[39m|[0m[0m [39m[39mSwagger UI              [90m[90m | [0m[39m[0m[39m[32;1m[32;1menabled[0m[39m[0m[39m[0m[39m[0m[39m                  [0m[0m[39m[39m|[0m[0m
+[39m[39m|[0m[0m [39m[39mWeb3Signer API          [90m[90m | [0m[39m[0m[39m[32;1m[32;1m0.0.0.0:9000[0m[39m[0m[39m[0m[39m[0m[39m             [0m[0m[39m[39m|[0m[0m
+[39m[39m|[0m[0m [39m[39mP2P network address     [90m[90m | [0m[39m[0m[39m[32;1m[32;1m0.0.0.0:5050[0m[39m[0m[39m[0m[39m[0m[39m             [0m[0m[39m[39m|[0m[0m
+[39m[39m|[0m[0m [39m[39mdiva contract address   [90m[90m | [0m[39m[0m[39m[97;2m[97;2mdisabled[0m[39m[0m[39m[0m[39m[0m[39m                 [0m[0m[39m[39m|[0m[0m
+[39m[39m|[0m[0m [39m[39mExecution client address[90m[90m | [0m[39m[0m[39m[32;1m[32;1mws://172.16.4.12:8546[0m[39m[0m[39m[0m[39m[0m[39m    [0m[0m[39m[39m|[0m[0m
+[39m[39m|[0m[0m [39m[39mConsensus client address[90m[90m | [0m[39m[0m[39m[32;1m[32;1mhttp://172.16.4.14:4000[0m[39m[0m[39m[0m[39m[0m[39m  [0m[0m[39m[39m|[0m[0m
+[39m[39m|[0m[0m [39m[39mDKG coordination enabled[90m[90m | [0m[39m[0m[39m[32;1m[32;1mtrue[0m[39m[0m[39m                     [0m[0m[39m[39m|[0m[0m
+[39m[39m|[0m[0m [39m[39m[0m[0m                                                    [39m[39m|[0m[0m
+[39m[39m|[0m[0m [39m[39m[0m[0m                                                    [39m[39m|[0m[0m
+[39m[39m└[0m[0m[39m[39m─[0m[0m[39m[39m─[0m[0m[39m[39m─[0m[0m[39m[39m─[0m[0m[39m[39m─[0m[0m[39m[39m─[0m[0m[39m[39m─[0m[0m[39m[39m─[0m[0m[39m[39m─[0m[0m[39m[39m─[0m[0m[39m[39m─[0m[0m[39m[39m─[0m[0m[39m[39m─[0m[0m[39m[39m─[0m[0m[39m[39m─[0m[0m[39m[39m─[0m[0m[39m[39m─[0m[0m[39m[39m─[0m[0m[39m[39m─[0m[0m[39m[39m─[0m[0m[39m[39m─[0m[0m[39m[39m─[0m[0m[39m[39m─[0m[0m[39m[39m─[0m[0m[39m[39m─[0m[0m[39m[39m─[0m[0m[39m[39m─[0m[0m[39m[39m─[0m[0m[39m[39m─[0m[0m[39m[39m─[0m[0m[39m[39m─[0m[0m[39m[39m─[0m[0m[39m[39m─[0m[0m[39m[39m─[0m[0m[39m[39m─[0m[0m[39m[39m─[0m[0m[39m[39m─[0m[0m[39m[39m─[0m[0m[39m[39m─[0m[0m[39m[39m─[0m[0m[39m[39m─[0m[0m[39m[39m─[0m[0m[39m[39m─[0m[0m[39m[39m─[0m[0m[39m[39m─[0m[0m[39m[39m─[0m[0m[39m[39m─[0m[0m[39m[39m─[0m[0m[39m[39m─[0m[0m[39m[39m─[0m[0m[39m[39m─[0m[0m[39m[39m─[0m[0m[39m[39m─[0m[0m[39m[39m┘[0m[0m
+time="2024-05-25T11:24:26Z" level=info msg="divaproto plugin installed" cc_url="http://172.16.4.14:4000" cc_version= chain_id=3151908 ec_url="ws://172.16.4.12:8546" ec_version="Geth/v1.14.0-unstable-c6119247/linux-amd64/go1.21.8" genesis_fork_version=0x10000038 genesis_validators_root=0x4beaefcf71fe905daf8f4c709ecde5c20cf4ad0d06b34b15d64a3e1b4a59e8b4 prefix=divaproto.plugin
+[2m11:24AM[0m [92mINF[0m actor system started [2mlib=[0mProto.Actor [2msystem=[0mhZSAzoqvtUgNPoFuCqGrYg [2mid=[0mhZSAzoqvtUgNPoFuCqGrYg
+time="2024-05-25T11:24:26Z" level=info msg="running diva client" prefix=SystemManager version=v23.12.1-33-g3b5d2ec-dev
+time="2024-05-25T11:24:26Z" level=info msg="enabled master api" api_key=diva prefix=SystemManager
+time="2024-05-25T11:24:26Z" level=debug msg="starting http server" prefix="diva/process/api/v0"
+time="2024-05-25T11:24:26Z" level=debug msg="NewHead watcher started" prefix="divaproto/process/chain/v0"
+time="2024-05-25T11:24:26Z" level=info msg="web3 signer api started" prefix="diva/process/signing_pool_manager/v0/$3l"
+time="2024-05-25T11:24:26Z" level=info msg="divanet plugin initialized" peer_id=16Uiu2HAmMijCktAT2c2eNV5PJha87KVngSuaC7iC2aYwpCqzptj4 prefix="divanet/process/network/v0"
+time="2024-05-25T11:24:26Z" level=debug msg="grpc server installed" name=dkg.DKGCoordinatorService prefix="divanet/process/network/v0"
+time="2024-05-25T11:24:26Z" level=info msg="pubsub actor started" prefix="divanet/process/network/v0/$jk"
+time="2024-05-25T11:24:26Z" level=debug msg="grpc server installed" name=publicpublicpartialsignerv1.v1.PartialSigningService prefix="divanet/process/network/v0"
+time="2024-05-25T11:24:29Z" level=debug msg="node parameters synced" prefix="*process.NodeParamsSyncTask$jr"
+time="2024-05-25T11:24:29Z" level=debug msg="processed events" from_block=5 prefix="diva/process/block_events/v0" to_block=7
+time="2024-05-25T11:24:29Z" level=debug msg="past events processed" prefix="diva/process/block_events/v0"
+time="2024-05-25T11:24:41Z" level=debug msg="new head" block=8 prefix="diva/process/web3/v0"
+time="2024-05-25T11:24:41Z" level=info msg="node is synced" prefix="diva/process/web3/v0"
+time="2024-05-25T11:24:43Z" level=debug msg="new node discovered" peer_id=16Uiu2HAmB11gKKMQryedB6R6xbRi2gkdu8M7YYPjUFdHtmuZkmsa prefix="divanet/process/network/v0" remote_maddr=[/ip4/172.16.4.23/tcp/5050]
+time="2024-05-25T11:24:46Z" level=debug msg="dht key advertised" ns="0.node_address=0x5AA01D6490CD45f0d378C409f00be81a58292890" prefix="divanet/process/network/v0"
+time="2024-05-25T11:24:46Z" level=debug msg="dht key advertised" ns=0.coordinators prefix="divanet/process/network/v0"
+time="2024-05-25T11:24:53Z" level=debug msg="new slot" prefix="diva/process/slots/v0" remaining_slots=23 slot=9 timeframe=576460752303423487
+time="2024-05-25T11:24:53Z" level=debug msg="new head" block=9 prefix="diva/process/web3/v0"
+time="2024-05-25T11:24:53Z" level=debug msg="processed events" from_block=5 prefix="diva/process/block_events/v0" to_block=9
+time="2024-05-25T11:25:05Z" level=debug msg="new slot" prefix="diva/process/slots/v0" remaining_slots=22 slot=10 timeframe=576460752303423487
+time="2024-05-25T11:25:05Z" level=debug msg="new head" block=10 prefix="diva/process/web3/v0"
+time="2024-05-25T11:25:05Z" level=debug msg="processed events" from_block=5 prefix="diva/process/block_events/v0" to_block=10
+time="2024-05-25T11:25:17Z" level=debug msg="new slot" prefix="diva/process/slots/v0" remaining_slots=21 slot=11 timeframe=576460752303423487
+time="2024-05-25T11:25:17Z" level=debug msg="new head" block=11 prefix="diva/process/web3/v0"
+time="2024-05-25T11:25:17Z" level=debug msg="operator registered" operator=0x4CcB6C4Cd5196A5EC4Ea35326f4eAA635ee17BA2 prefix="diva/process/block_events/v0"
+time="2024-05-25T11:25:17Z" level=debug msg="node registered" node=0xfaF739D4853f73fd005B4ec7310aAdC9B7c7A70a operator=0x4CcB6C4Cd5196A5EC4Ea35326f4eAA635ee17BA2 prefix="diva/process/block_events/v0"
+time="2024-05-25T11:25:17Z" level=debug msg="processed events" from_block=5 prefix="diva/process/block_events/v0" to_block=11
+time="2024-05-25T11:25:29Z" level=debug msg="new slot" prefix="diva/process/slots/v0" remaining_slots=20 slot=12 timeframe=576460752303423487
+time="2024-05-25T11:25:29Z" level=debug msg="new head" block=12 prefix="diva/process/web3/v0"
+time="2024-05-25T11:25:29Z" level=debug msg="collateral deposited/withdrawn" keyshares_to_be_total=9 keyshares_total=0 last_updated_timeframe=0 operator_address=0x4CcB6C4Cd5196A5EC4Ea35326f4eAA635ee17BA2 prefix="diva/process/block_events/v0"
+time="2024-05-25T11:25:29Z" level=debug msg="processed events" from_block=12 prefix="diva/process/block_events/v0" to_block=12
+time="2024-05-25T11:25:36Z" level=debug msg="new node discovered" peer_id=16Uiu2HAm6DyUuQbVVohVjkNXgmpHGSUxG2VGHccsrUUZS8JNiUyo prefix="divanet/process/network/v0" remote_maddr=[/ip4/172.16.4.24/tcp/5050]
+time="2024-05-25T11:25:41Z" level=debug msg="new slot" prefix="diva/process/slots/v0" remaining_slots=19 slot=13 timeframe=576460752303423487
+time="2024-05-25T11:25:41Z" level=debug msg="new head" block=13 prefix="diva/process/web3/v0"
+time="2024-05-25T11:25:41Z" level=debug msg="processed events" from_block=13 prefix="diva/process/block_events/v0" to_block=13
+time="2024-05-25T11:25:53Z" level=debug msg="new slot" prefix="diva/process/slots/v0" remaining_slots=18 slot=14 timeframe=576460752303423487
+time="2024-05-25T11:25:53Z" level=debug msg="new head" block=14 prefix="diva/process/web3/v0"
+time="2024-05-25T11:25:53Z" level=debug msg="operator registered" operator=0x91bc2Dd660e3009e495F1aC75e6DAE91E564cc90 prefix="diva/process/block_events/v0"
+time="2024-05-25T11:25:53Z" level=debug msg="node registered" node=0x15dCD6F51CB2F78c53c047C1e9bE14e75E297474 operator=0x91bc2Dd660e3009e495F1aC75e6DAE91E564cc90 prefix="diva/process/block_events/v0"
+time="2024-05-25T11:25:53Z" level=debug msg="processed events" from_block=13 prefix="diva/process/block_events/v0" to_block=14
+time="2024-05-25T11:26:05Z" level=debug msg="new slot" prefix="diva/process/slots/v0" remaining_slots=17 slot=15 timeframe=576460752303423487
+time="2024-05-25T11:26:05Z" level=debug msg="new head" block=15 prefix="diva/process/web3/v0"
+time="2024-05-25T11:26:05Z" level=debug msg="collateral deposited/withdrawn" keyshares_to_be_total=9 keyshares_total=0 last_updated_timeframe=0 operator_address=0x91bc2Dd660e3009e495F1aC75e6DAE91E564cc90 prefix="diva/process/block_events/v0"
+time="2024-05-25T11:26:05Z" level=debug msg="processed events" from_block=15 prefix="diva/process/block_events/v0" to_block=15
+time="2024-05-25T11:26:08Z" level=debug msg="new node discovered" peer_id=16Uiu2HAmT1gjLuUWCQrHhrKWY4py5b8JK8heHygr4XDLoHowrg5v prefix="divanet/process/network/v0" remote_maddr=[/ip4/172.16.4.25/tcp/5050]
+time="2024-05-25T11:26:17Z" level=debug msg="new slot" prefix="diva/process/slots/v0" remaining_slots=16 slot=16 timeframe=576460752303423487
+time="2024-05-25T11:26:17Z" level=debug msg="new head" block=16 prefix="diva/process/web3/v0"
+time="2024-05-25T11:26:17Z" level=debug msg="processed events" from_block=16 prefix="diva/process/block_events/v0" to_block=16
+time="2024-05-25T11:26:29Z" level=debug msg="new slot" prefix="diva/process/slots/v0" remaining_slots=15 slot=17 timeframe=576460752303423487
+time="2024-05-25T11:26:29Z" level=debug msg="new head" block=17 prefix="diva/process/web3/v0"
+time="2024-05-25T11:26:29Z" level=debug msg="operator registered" operator=0x55bc7005d449c5271F91d4E436ec672311d7A259 prefix="diva/process/block_events/v0"
+time="2024-05-25T11:26:29Z" level=debug msg="node registered" node=0x483f2db8072A8053F9Df5E8F937525Fc4aaD4ab5 operator=0x55bc7005d449c5271F91d4E436ec672311d7A259 prefix="diva/process/block_events/v0"
+time="2024-05-25T11:26:29Z" level=debug msg="processed events" from_block=16 prefix="diva/process/block_events/v0" to_block=17
+time="2024-05-25T11:26:41Z" level=debug msg="new slot" prefix="diva/process/slots/v0" remaining_slots=14 slot=18 timeframe=576460752303423487
+time="2024-05-25T11:26:41Z" level=debug msg="new head" block=18 prefix="diva/process/web3/v0"
+time="2024-05-25T11:26:41Z" level=debug msg="collateral deposited/withdrawn" keyshares_to_be_total=9 keyshares_total=0 last_updated_timeframe=0 operator_address=0x55bc7005d449c5271F91d4E436ec672311d7A259 prefix="diva/process/block_events/v0"
+time="2024-05-25T11:26:41Z" level=debug msg="processed events" from_block=18 prefix="diva/process/block_events/v0" to_block=18
+time="2024-05-25T11:26:47Z" level=debug msg="new node discovered" peer_id=16Uiu2HAkwWB3rUbCGxdABS7ZSLpCK3X9k8BzwLrtbF2dgvQZwRQa prefix="divanet/process/network/v0" remote_maddr=[/ip4/172.16.4.26/tcp/5050]
+time="2024-05-25T11:26:53Z" level=debug msg="new slot" prefix="diva/process/slots/v0" remaining_slots=13 slot=19 timeframe=576460752303423487
+time="2024-05-25T11:26:53Z" level=debug msg="new head" block=19 prefix="diva/process/web3/v0"
+time="2024-05-25T11:26:53Z" level=debug msg="processed events" from_block=19 prefix="diva/process/block_events/v0" to_block=19
+time="2024-05-25T11:27:05Z" level=debug msg="new slot" prefix="diva/process/slots/v0" remaining_slots=12 slot=20 timeframe=576460752303423487
+time="2024-05-25T11:27:05Z" level=debug msg="new head" block=20 prefix="diva/process/web3/v0"
+time="2024-05-25T11:27:05Z" level=debug msg="operator registered" operator=0xFd70C095066c9b6b0530Ba9E11897B19Bdc8a3bA prefix="diva/process/block_events/v0"
+time="2024-05-25T11:27:05Z" level=debug msg="node registered" node=0xc088D49c11cF01B5b5Cf81b4cf040Fa7b75f2Ea5 operator=0xFd70C095066c9b6b0530Ba9E11897B19Bdc8a3bA prefix="diva/process/block_events/v0"
+time="2024-05-25T11:27:05Z" level=debug msg="processed events" from_block=19 prefix="diva/process/block_events/v0" to_block=20
+time="2024-05-25T11:27:17Z" level=debug msg="new slot" prefix="diva/process/slots/v0" remaining_slots=11 slot=21 timeframe=576460752303423487
+time="2024-05-25T11:27:17Z" level=debug msg="new head" block=21 prefix="diva/process/web3/v0"
+time="2024-05-25T11:27:17Z" level=debug msg="collateral deposited/withdrawn" keyshares_to_be_total=9 keyshares_total=0 last_updated_timeframe=0 operator_address=0xFd70C095066c9b6b0530Ba9E11897B19Bdc8a3bA prefix="diva/process/block_events/v0"
+time="2024-05-25T11:27:17Z" level=debug msg="processed events" from_block=21 prefix="diva/process/block_events/v0" to_block=21
+time="2024-05-25T11:27:19Z" level=debug msg="new node discovered" peer_id=16Uiu2HAmP3VVaa5ki9mCD9yAbVhpw5ErJ3yAkwuswqCk4iQNAuBq prefix="divanet/process/network/v0" remote_maddr=[/ip4/172.16.4.27/tcp/5050]
+time="2024-05-25T11:27:29Z" level=debug msg="new slot" prefix="diva/process/slots/v0" remaining_slots=10 slot=22 timeframe=576460752303423487
+time="2024-05-25T11:27:29Z" level=debug msg="new head" block=22 prefix="diva/process/web3/v0"
+time="2024-05-25T11:27:29Z" level=debug msg="processed events" from_block=22 prefix="diva/process/block_events/v0" to_block=22
+time="2024-05-25T11:27:41Z" level=debug msg="new slot" prefix="diva/process/slots/v0" remaining_slots=9 slot=23 timeframe=576460752303423487
+time="2024-05-25T11:27:41Z" level=debug msg="new head" block=23 prefix="diva/process/web3/v0"
+time="2024-05-25T11:27:41Z" level=debug msg="operator registered" operator=0x490FBF52538456E5E433818f6e725C28e63eE3f8 prefix="diva/process/block_events/v0"
+time="2024-05-25T11:27:41Z" level=debug msg="node registered" node=0x66207632c750a2FF438b293826bd580DEE85DE6E operator=0x490FBF52538456E5E433818f6e725C28e63eE3f8 prefix="diva/process/block_events/v0"
+time="2024-05-25T11:27:41Z" level=debug msg="processed events" from_block=22 prefix="diva/process/block_events/v0" to_block=23
+time="2024-05-25T11:27:53Z" level=debug msg="new slot" prefix="diva/process/slots/v0" remaining_slots=8 slot=24 timeframe=576460752303423487
+time="2024-05-25T11:27:53Z" level=debug msg="new head" block=24 prefix="diva/process/web3/v0"
+time="2024-05-25T11:27:53Z" level=debug msg="pending validator created" block=24 prefix="diva/process/block_events/v0" validator_id=1
+time="2024-05-25T11:27:53Z" level=debug msg="collateral deposited/withdrawn" keyshares_to_be_total=9 keyshares_total=0 last_updated_timeframe=0 operator_address=0x490FBF52538456E5E433818f6e725C28e63eE3f8 prefix="diva/process/block_events/v0"
+time="2024-05-25T11:27:53Z" level=debug msg="processed events" from_block=24 prefix="diva/process/block_events/v0" to_block=24
+time="2024-05-25T11:27:53Z" level=debug msg="join collector started" pending_validator_id=1 prefix="diva/process/dkg_coordinator_manager/v0/$a/$nm"
+time="2024-05-25T11:27:53Z" level=debug msg="participant joined" node=0xfaF739D4853f73fd005B4ec7310aAdC9B7c7A70a operator=0x4CcB6C4Cd5196A5EC4Ea35326f4eAA635ee17BA2 participants_count=1 pending_validator_id=1 prefix="diva/process/dkg_coordinator_manager/v0/$a/$nm"
+time="2024-05-25T11:27:53Z" level=debug msg="participant joined" node=0xc088D49c11cF01B5b5Cf81b4cf040Fa7b75f2Ea5 operator=0xFd70C095066c9b6b0530Ba9E11897B19Bdc8a3bA participants_count=2 pending_validator_id=1 prefix="diva/process/dkg_coordinator_manager/v0/$a/$nm"
+time="2024-05-25T11:27:53Z" level=debug msg="participant joined" node=0x483f2db8072A8053F9Df5E8F937525Fc4aaD4ab5 operator=0x55bc7005d449c5271F91d4E436ec672311d7A259 participants_count=3 pending_validator_id=1 prefix="diva/process/dkg_coordinator_manager/v0/$a/$nm"
+time="2024-05-25T11:27:53Z" level=debug msg="participant joined" node=0x15dCD6F51CB2F78c53c047C1e9bE14e75E297474 operator=0x91bc2Dd660e3009e495F1aC75e6DAE91E564cc90 participants_count=4 pending_validator_id=1 prefix="diva/process/dkg_coordinator_manager/v0/$a/$nm"
+time="2024-05-25T11:27:53Z" level=debug msg="participant joined" node=0x66207632c750a2FF438b293826bd580DEE85DE6E operator=0x490FBF52538456E5E433818f6e725C28e63eE3f8 participants_count=5 pending_validator_id=1 prefix="diva/process/dkg_coordinator_manager/v0/$a/$nm"
+time="2024-05-25T11:28:05Z" level=debug msg="new slot" prefix="diva/process/slots/v0" remaining_slots=7 slot=25 timeframe=576460752303423487
+time="2024-05-25T11:28:05Z" level=debug msg="new head" block=25 prefix="diva/process/web3/v0"
+time="2024-05-25T11:28:05Z" level=debug msg="processed events" from_block=25 prefix="diva/process/block_events/v0" to_block=25
+time="2024-05-25T11:28:17Z" level=debug msg="new slot" prefix="diva/process/slots/v0" remaining_slots=6 slot=26 timeframe=576460752303423487
+time="2024-05-25T11:28:17Z" level=debug msg="new head" block=26 prefix="diva/process/web3/v0"
+time="2024-05-25T11:28:17Z" level=debug msg="processed events" from_block=25 prefix="diva/process/block_events/v0" to_block=26
+time="2024-05-25T11:28:29Z" level=debug msg="new slot" prefix="diva/process/slots/v0" remaining_slots=5 slot=27 timeframe=576460752303423487
+time="2024-05-25T11:28:29Z" level=debug msg="new head" block=27 prefix="diva/process/web3/v0"
+time="2024-05-25T11:28:29Z" level=debug msg="processed events" from_block=25 prefix="diva/process/block_events/v0" to_block=27
+time="2024-05-25T11:28:41Z" level=debug msg="new slot" prefix="diva/process/slots/v0" remaining_slots=4 slot=28 timeframe=576460752303423487
+time="2024-05-25T11:28:41Z" level=debug msg="new head" block=28 prefix="diva/process/web3/v0"
+time="2024-05-25T11:28:41Z" level=debug msg="processed events" from_block=25 prefix="diva/process/block_events/v0" to_block=28
+time="2024-05-25T11:28:53Z" level=debug msg="new slot" prefix="diva/process/slots/v0" remaining_slots=3 slot=29 timeframe=576460752303423487
+time="2024-05-25T11:28:53Z" level=debug msg="new head" block=29 prefix="diva/process/web3/v0"
+time="2024-05-25T11:28:53Z" level=debug msg="processed events" from_block=25 prefix="diva/process/block_events/v0" to_block=29
+time="2024-05-25T11:29:05Z" level=debug msg="new slot" prefix="diva/process/slots/v0" remaining_slots=2 slot=30 timeframe=576460752303423487
+time="2024-05-25T11:29:05Z" level=debug msg="new head" block=30 prefix="diva/process/web3/v0"
+time="2024-05-25T11:29:05Z" level=debug msg="processed events" from_block=25 prefix="diva/process/block_events/v0" to_block=30
+time="2024-05-25T11:29:17Z" level=debug msg="new slot" prefix="diva/process/slots/v0" remaining_slots=1 slot=31 timeframe=576460752303423487
+time="2024-05-25T11:29:17Z" level=debug msg="new head" block=31 prefix="diva/process/web3/v0"
+time="2024-05-25T11:29:17Z" level=debug msg="processed events" from_block=25 prefix="diva/process/block_events/v0" to_block=31
+debug.Stack(): goroutine 3799 [running]:
+runtime/debug.Stack()
+	/usr/local/go/src/runtime/debug/stack.go:24 +0x5e
+github.com/asynkron/protoactor-go/actor.(*actorContext).EscalateFailure(0xc00195c3c0, {0x191f820, 0xc001724d38}, {0x165c6c0, 0x3571e80})
+	/root/go/pkg/mod/github.com/asynkron/protoactor-go@v0.0.0-20240413045429-76c172a71a16/actor/actor_context.go:709 +0x1d3
+github.com/asynkron/protoactor-go/actor.(*defaultMailbox).run.func1()
+	/root/go/pkg/mod/github.com/asynkron/protoactor-go@v0.0.0-20240413045429-76c172a71a16/actor/mailbox.go:132 +0x58
+panic({0x191f820?, 0xc001724d38?})
+	/usr/local/go/src/runtime/panic.go:770 +0x132
+github.com/shamirlabs/diva/process/dkg/coordinator.(*DKGCoordinatorJoinCollectorActor).createDKG(0xc001d17c70, {0x2761b00, 0xc001aa1c40})
+	/root/diva/process/dkg/coordinator/dkg_coordinator.join_collector.actor.go:275 +0x16e6
+github.com/shamirlabs/diva/process/dkg/coordinator.(*DKGCoordinatorJoinCollectorActor).finishDKG(0xc001aa1c40?, {0x2761b00, 0xc001aa1c40})
+	/root/diva/process/dkg/coordinator/dkg_coordinator.join_collector.actor.go:168 +0x27a
+github.com/shamirlabs/diva/process/dkg/coordinator.(*DKGCoordinatorJoinCollectorActor).Receive(0xc001d17c70, {0x2761b00, 0xc001aa1c40})
+	/root/diva/process/dkg/coordinator/dkg_coordinator.join_collector.actor.go:104 +0x3ce
+github.com/shamirlabs/synapse/system.(*SystemManager).SpawnActor.WrapActor.func1({0x27602f8, 0xc00195c3c0})
+	/root/go/pkg/mod/github.com/shamirlabs/synapse@v0.2.1/system/system.go:199 +0x62e
+github.com/asynkron/protoactor-go/actor.ReceiveFunc.Receive(0x0?, {0x27602f8?, 0xc00195c3c0?})
+	/root/go/pkg/mod/github.com/asynkron/protoactor-go@v0.0.0-20240413045429-76c172a71a16/actor/message.go:19 +0x26
+github.com/asynkron/protoactor-go/actor.(*actorContext).defaultReceive(0xc00195c3c0)
+	/root/go/pkg/mod/github.com/asynkron/protoactor-go@v0.0.0-20240413045429-76c172a71a16/actor/actor_context.go:372 +0x98
+github.com/asynkron/protoactor-go/actor.(*actorContext).processMessage(0xc00195c3c0, {0x165c6c0, 0x3571e80})
+	/root/go/pkg/mod/github.com/asynkron/protoactor-go@v0.0.0-20240413045429-76c172a71a16/actor/actor_context.go:527 +0xf9
+github.com/asynkron/protoactor-go/actor.(*actorContext).InvokeUserMessage(0xc00195c3c0, {0x165c6c0, 0x3571e80})
+	/root/go/pkg/mod/github.com/asynkron/protoactor-go@v0.0.0-20240413045429-76c172a71a16/actor/actor_context.go:505 +0x478
+github.com/asynkron/protoactor-go/actor.(*defaultMailbox).run(0xc00195c480)
+	/root/go/pkg/mod/github.com/asynkron/protoactor-go@v0.0.0-20240413045429-76c172a71a16/actor/mailbox.go:169 +0x22f
+github.com/asynkron/protoactor-go/actor.(*defaultMailbox).processMessages(0xc00195c480)
+	/root/go/pkg/mod/github.com/asynkron/protoactor-go@v0.0.0-20240413045429-76c172a71a16/actor/mailbox.go:105 +0x25
+created by github.com/asynkron/protoactor-go/actor.goroutineDispatcher.Schedule in goroutine 3797
+	/root/go/pkg/mod/github.com/asynkron/protoactor-go@v0.0.0-20240413045429-76c172a71a16/actor/dispatcher.go:13 +0x16
+
+[Supervision] Actor: Address:"nonhost"  Id:"diva/process/dkg_coordinator_manager/v0/$a/$nm"  failed with message: &{}  exception: runtime error: slice bounds out of range [:5] with capacity 0
+time="2024-05-25T11:29:29Z" level=debug msg="new slot" prefix="diva/process/slots/v0" remaining_slots=32 slot=32 timeframe=0
+time="2024-05-25T11:29:29Z" level=info msg="new timeframe started" prefix="diva/process/slots/v0" timeframe=0
+[2m11:29AM[0m [92mINF[0m [ACTOR] Recovering [2mlib=[0mProto.Actor [2msystem=[0mhZSAzoqvtUgNPoFuCqGrYg [2mself=[0m"Address:\"nonhost\"  Id:\"diva/process/dkg_coordinator_manager/v0/$a/$nm\"" [2mreason=[0m"runtime error: slice bounds out of range [:5] with capacity 0"
+[2m11:29AM[0m [91mERR[0m [Supervision] [2mlib=[0mProto.Actor [2msystem=[0mhZSAzoqvtUgNPoFuCqGrYg [2mactor=[0m"Address:\"nonhost\"  Id:\"diva/process/dkg_coordinator_manager/v0/$a/$nm\"" [2mmessage=[0m&{} [2mexception=[0m"runtime error: slice bounds out of range [:5] with capacity 0"
+time="2024-05-25T11:29:29Z" level=debug msg="join collector started" pending_validator_id=1 prefix="diva/process/dkg_coordinator_manager/v0/$a/$nm"
+time="2024-05-25T11:29:29Z" level=debug msg="new head" block=32 prefix="diva/process/web3/v0"
+time="2024-05-25T11:29:29Z" level=debug msg="processed events" from_block=25 prefix="diva/process/block_events/v0" to_block=32
+time="2024-05-25T11:29:41Z" level=debug msg="new slot" prefix="diva/process/slots/v0" remaining_slots=31 slot=33 timeframe=0
+time="2024-05-25T11:29:41Z" level=debug msg="new head" block=33 prefix="diva/process/web3/v0"
+time="2024-05-25T11:29:41Z" level=debug msg="processed events" from_block=25 prefix="diva/process/block_events/v0" to_block=33
+time="2024-05-25T11:29:53Z" level=debug msg="new slot" prefix="diva/process/slots/v0" remaining_slots=30 slot=34 timeframe=0
+time="2024-05-25T11:29:53Z" level=debug msg="new head" block=34 prefix="diva/process/web3/v0"
+time="2024-05-25T11:29:53Z" level=debug msg="processed events" from_block=25 prefix="diva/process/block_events/v0" to_block=34
+time="2024-05-25T11:30:05Z" level=debug msg="new slot" prefix="diva/process/slots/v0" remaining_slots=29 slot=35 timeframe=0
+time="2024-05-25T11:30:05Z" level=debug msg="new head" block=35 prefix="diva/process/web3/v0"
+time="2024-05-25T11:30:05Z" level=debug msg="processed events" from_block=25 prefix="diva/process/block_events/v0" to_block=35
+time="2024-05-25T11:30:17Z" level=debug msg="new slot" prefix="diva/process/slots/v0" remaining_slots=28 slot=36 timeframe=0
+time="2024-05-25T11:30:17Z" level=debug msg="new head" block=36 prefix="diva/process/web3/v0"
+time="2024-05-25T11:30:17Z" level=debug msg="processed events" from_block=25 prefix="diva/process/block_events/v0" to_block=36
+time="2024-05-25T11:30:29Z" level=debug msg="new slot" prefix="diva/process/slots/v0" remaining_slots=27 slot=37 timeframe=0
+time="2024-05-25T11:30:29Z" level=debug msg="new head" block=37 prefix="diva/process/web3/v0"
+time="2024-05-25T11:30:29Z" level=debug msg="processed events" from_block=25 prefix="diva/process/block_events/v0" to_block=37
+time="2024-05-25T11:30:41Z" level=debug msg="new slot" prefix="diva/process/slots/v0" remaining_slots=26 slot=38 timeframe=0
+time="2024-05-25T11:30:41Z" level=debug msg="new head" block=38 prefix="diva/process/web3/v0"
+time="2024-05-25T11:30:41Z" level=debug msg="processed events" from_block=25 prefix="diva/process/block_events/v0" to_block=38
+time="2024-05-25T11:30:53Z" level=debug msg="new slot" prefix="diva/process/slots/v0" remaining_slots=25 slot=39 timeframe=0
+time="2024-05-25T11:30:53Z" level=debug msg="new head" block=39 prefix="diva/process/web3/v0"
+time="2024-05-25T11:30:53Z" level=debug msg="processed events" from_block=25 prefix="diva/process/block_events/v0" to_block=39
+time="2024-05-25T11:31:05Z" level=debug msg="new slot" prefix="diva/process/slots/v0" remaining_slots=24 slot=40 timeframe=0
+[2m11:31AM[0m [92mINF[0m [ACTOR] Recovering [2mlib=[0mProto.Actor [2msystem=[0mhZSAzoqvtUgNPoFuCqGrYg [2mself=[0m"Address:\"nonhost\"  Id:\"diva/process/dkg_coordinator_manager/v0/$a/$nm\"" [2mreason=[0m"runtime error: slice bounds out of range [:5] with capacity 0"
+debug.Stack(): goroutine 3919 [running]:
+runtime/debug.Stack()
+	/usr/local/go/src/runtime/debug/stack.go:24 +0x5e
+[2m11:31AM[0m [91mERR[0m [Supervision] [2mlib=[0mProto.Actor [2msystem=[0mhZSAzoqvtUgNPoFuCqGrYg [2mactor=[0m"Address:\"nonhost\"  Id:\"diva/process/dkg_coordinator_manager/v0/$a/$nm\"" [2mmessage=[0m&{} [2mexception=[0m"runtime error: slice bounds out of range [:5] with capacity 0"
+github.com/asynkron/protoactor-go/actor.(*actorContext).EscalateFailure(0xc00195c3c0, {0x191f820, 0xc001793878}, {0x165c6c0, 0x3571e80})
+time="2024-05-25T11:31:05Z" level=debug msg="join collector started" pending_validator_id=1 prefix="diva/process/dkg_coordinator_manager/v0/$a/$nm"
+	/root/go/pkg/mod/github.com/asynkron/protoactor-go@v0.0.0-20240413045429-76c172a71a16/actor/actor_context.go:709 +0x1d3
+github.com/asynkron/protoactor-go/actor.(*defaultMailbox).run.func1()
+	/root/go/pkg/mod/github.com/asynkron/protoactor-go@v0.0.0-20240413045429-76c172a71a16/actor/mailbox.go:132 +0x58
+panic({0x191f820?, 0xc001793878?})
+	/usr/local/go/src/runtime/panic.go:770 +0x132
+github.com/shamirlabs/diva/process/dkg/coordinator.(*DKGCoordinatorJoinCollectorActor).createDKG(0xc001d17c70, {0x2761b00, 0xc000d88b00})
+	/root/diva/process/dkg/coordinator/dkg_coordinator.join_collector.actor.go:275 +0x16e6
+github.com/shamirlabs/diva/process/dkg/coordinator.(*DKGCoordinatorJoinCollectorActor).finishDKG(0xc000d88b00?, {0x2761b00, 0xc000d88b00})
+	/root/diva/process/dkg/coordinator/dkg_coordinator.join_collector.actor.go:168 +0x27a
+github.com/shamirlabs/diva/process/dkg/coordinator.(*DKGCoordinatorJoinCollectorActor).Receive(0xc001d17c70, {0x2761b00, 0xc000d88b00})
+	/root/diva/process/dkg/coordinator/dkg_coordinator.join_collector.actor.go:104 +0x3ce
+github.com/shamirlabs/synapse/system.(*SystemManager).SpawnActor.WrapActor.func1({0x27602f8, 0xc00195c3c0})
+	/root/go/pkg/mod/github.com/shamirlabs/synapse@v0.2.1/system/system.go:199 +0x62e
+github.com/asynkron/protoactor-go/actor.ReceiveFunc.Receive(0xc001b40a80?, {0x27602f8?, 0xc00195c3c0?})
+	/root/go/pkg/mod/github.com/asynkron/protoactor-go@v0.0.0-20240413045429-76c172a71a16/actor/message.go:19 +0x26
+github.com/asynkron/protoactor-go/actor.(*actorContext).defaultReceive(0xc00195c3c0)
+	/root/go/pkg/mod/github.com/asynkron/protoactor-go@v0.0.0-20240413045429-76c172a71a16/actor/actor_context.go:372 +0x98
+github.com/asynkron/protoactor-go/actor.(*actorContext).processMessage(0xc00195c3c0, {0x165c6c0, 0x3571e80})
+	/root/go/pkg/mod/github.com/asynkron/protoactor-go@v0.0.0-20240413045429-76c172a71a16/actor/actor_context.go:527 +0xf9
+github.com/asynkron/protoactor-go/actor.(*actorContext).InvokeUserMessage(0xc00195c3c0, {0x165c6c0, 0x3571e80})
+	/root/go/pkg/mod/github.com/asynkron/protoactor-go@v0.0.0-20240413045429-76c172a71a16/actor/actor_context.go:505 +0x478
+github.com/asynkron/protoactor-go/actor.(*defaultMailbox).run(0xc00195c480)
+	/root/go/pkg/mod/github.com/asynkron/protoactor-go@v0.0.0-20240413045429-76c172a71a16/actor/mailbox.go:169 +0x22f
+github.com/asynkron/protoactor-go/actor.(*defaultMailbox).processMessages(0xc00195c480)
+	/root/go/pkg/mod/github.com/asynkron/protoactor-go@v0.0.0-20240413045429-76c172a71a16/actor/mailbox.go:105 +0x25
+created by github.com/asynkron/protoactor-go/actor.goroutineDispatcher.Schedule in goroutine 3918
+	/root/go/pkg/mod/github.com/asynkron/protoactor-go@v0.0.0-20240413045429-76c172a71a16/actor/dispatcher.go:13 +0x16
+
+[Supervision] Actor: Address:"nonhost"  Id:"diva/process/dkg_coordinator_manager/v0/$a/$nm"  failed with message: &{}  exception: runtime error: slice bounds out of range [:5] with capacity 0
+time="2024-05-25T11:31:05Z" level=debug msg="new head" block=40 prefix="diva/process/web3/v0"
+time="2024-05-25T11:31:05Z" level=debug msg="processed events" from_block=25 prefix="diva/process/block_events/v0" to_block=40
+time="2024-05-25T11:31:17Z" level=debug msg="new slot" prefix="diva/process/slots/v0" remaining_slots=23 slot=41 timeframe=0
+time="2024-05-25T11:31:17Z" level=debug msg="new head" block=41 prefix="diva/process/web3/v0"
+time="2024-05-25T11:31:17Z" level=debug msg="processed events" from_block=25 prefix="diva/process/block_events/v0" to_block=41
+time="2024-05-25T11:31:29Z" level=debug msg="new slot" prefix="diva/process/slots/v0" remaining_slots=22 slot=42 timeframe=0
+time="2024-05-25T11:31:29Z" level=debug msg="new head" block=42 prefix="diva/process/web3/v0"
+time="2024-05-25T11:31:29Z" level=debug msg="processed events" from_block=25 prefix="diva/process/block_events/v0" to_block=42
+time="2024-05-25T11:31:41Z" level=debug msg="new slot" prefix="diva/process/slots/v0" remaining_slots=21 slot=43 timeframe=0
+time="2024-05-25T11:31:41Z" level=debug msg="new head" block=43 prefix="diva/process/web3/v0"
+time="2024-05-25T11:31:41Z" level=debug msg="processed events" from_block=25 prefix="diva/process/block_events/v0" to_block=43
+time="2024-05-25T11:31:53Z" level=debug msg="new slot" prefix="diva/process/slots/v0" remaining_slots=20 slot=44 timeframe=0
+time="2024-05-25T11:31:53Z" level=debug msg="new head" block=44 prefix="diva/process/web3/v0"
+time="2024-05-25T11:31:53Z" level=debug msg="processed events" from_block=25 prefix="diva/process/block_events/v0" to_block=44
+time="2024-05-25T11:32:05Z" level=debug msg="new slot" prefix="diva/process/slots/v0" remaining_slots=19 slot=45 timeframe=0
+time="2024-05-25T11:32:05Z" level=debug msg="new head" block=45 prefix="diva/process/web3/v0"
+time="2024-05-25T11:32:05Z" level=debug msg="processed events" from_block=25 prefix="diva/process/block_events/v0" to_block=45
+time="2024-05-25T11:32:17Z" level=debug msg="new slot" prefix="diva/process/slots/v0" remaining_slots=18 slot=46 timeframe=0
+time="2024-05-25T11:32:17Z" level=debug msg="new head" block=46 prefix="diva/process/web3/v0"
+time="2024-05-25T11:32:17Z" level=debug msg="processed events" from_block=25 prefix="diva/process/block_events/v0" to_block=46
+time="2024-05-25T11:32:29Z" level=debug msg="new slot" prefix="diva/process/slots/v0" remaining_slots=17 slot=47 timeframe=0
+time="2024-05-25T11:32:41Z" level=debug msg="new slot" prefix="diva/process/slots/v0" remaining_slots=16 slot=48 timeframe=0
+[2m11:32AM[0m [92mINF[0m [ACTOR] Recovering [2mlib=[0mProto.Actor [2msystem=[0mhZSAzoqvtUgNPoFuCqGrYg [2mself=[0m"Address:\"nonhost\"  Id:\"diva/process/dkg_coordinator_manager/v0/$a/$nm\"" [2mreason=[0m"runtime error: slice bounds out of range [:5] with capacity 0"
+[2m11:32AM[0m [91mERR[0m [Supervision] [2mlib=[0mProto.Actor [2msystem=[0mhZSAzoqvtUgNPoFuCqGrYg [2mactor=[0m"Address:\"nonhost\"  Id:\"diva/process/dkg_coordinator_manager/v0/$a/$nm\"" [2mmessage=[0m&{} [2mexception=[0m"runtime error: slice bounds out of range [:5] with capacity 0"
+debug.Stack(): goroutine 4296 [running]:
+runtime/debug.Stack()
+	/usr/local/go/src/runtime/debug/stack.go:24 +0x5e
+github.com/asynkron/protoactor-go/actor.(*actorContext).EscalateFailure(0xc00195c3c0, {0x191f820, 0xc001724318}, {0x165c6c0, 0x3571e80})
+	/root/go/pkg/mod/github.com/asynkron/protoactor-go@v0.0.0-20240413045429-76c172a71a16/actor/actor_context.go:709 +0x1d3
+github.com/asynkron/protoactor-go/actor.(*defaultMailbox).run.func1()
+	/root/go/pkg/mod/github.com/asynkron/protoactor-go@v0.0.0-20240413045429-76c172a71a16/actor/mailbox.go:132 +0x58
+panic({0x191f820?, 0xc001724318?})
+	/usr/local/go/src/runtime/panic.go:770 +0x132
+github.com/shamirlabs/diva/process/dkg/coordinator.(*DKGCoordinatorJoinCollectorActor).createDKG(0xc001d17c70, {0x2761b00, 0xc0006b0e00})
+	/root/diva/process/dkg/coordinator/dkg_coordinator.join_collector.actor.go:275 +0x16e6
+github.com/shamirlabs/diva/process/dkg/coordinator.(*DKGCoordinatorJoinCollectorActor).finishDKG(0xc0006b0e00?, {0x2761b00, 0xc0006b0e00})
+	/root/diva/process/dkg/coordinator/dkg_coordinator.join_collector.actor.go:168 +0x27a
+github.com/shamirlabs/diva/process/dkg/coordinator.(*DKGCoordinatorJoinCollectorActor).Receive(0xc001d17c70, {0x2761b00, 0xc0006b0e00})
+	/root/diva/process/dkg/coordinator/dkg_coordinator.join_collector.actor.go:104 +0x3ce
+github.com/shamirlabs/synapse/system.(*SystemManager).SpawnActor.WrapActor.func1({0x27602f8, 0xc00195c3c0})
+	/root/go/pkg/mod/github.com/shamirlabs/synapse@v0.2.1/system/system.go:199 +0x62e
+github.com/asynkron/protoactor-go/actor.ReceiveFunc.Receive(0x0?, {0x27602f8?, 0xc00195c3c0?})
+	/root/go/pkg/mod/github.com/asynkron/protoactor-go@v0.0.0-20240413045429-76c172a71a16/actor/message.go:19 +0x26
+github.com/asynkron/protoactor-go/actor.(*actorContext).defaultReceive(0xc00195c3c0)
+	/root/go/pkg/mod/github.com/asynkron/protoactor-go@v0.0.0-20240413045429-76c172a71a16/actor/actor_context.go:372 +0x98
+github.com/asynkron/protoactor-go/actor.(*actorContext).processMessage(0xc00195c3c0, {0x165c6c0, 0x3571e80})
+time="2024-05-25T11:32:41Z" level=debug msg="join collector started" pending_validator_id=1 prefix="diva/process/dkg_coordinator_manager/v0/$a/$nm"
+	/root/go/pkg/mod/github.com/asynkron/protoactor-go@v0.0.0-20240413045429-76c172a71a16/actor/actor_context.go:527 +0xf9
+github.com/asynkron/protoactor-go/actor.(*actorContext).InvokeUserMessage(0xc00195c3c0, {0x165c6c0, 0x3571e80})
+	/root/go/pkg/mod/github.com/asynkron/protoactor-go@v0.0.0-20240413045429-76c172a71a16/actor/actor_context.go:505 +0x478
+github.com/asynkron/protoactor-go/actor.(*defaultMailbox).run(0xc00195c480)
+	/root/go/pkg/mod/github.com/asynkron/protoactor-go@v0.0.0-20240413045429-76c172a71a16/actor/mailbox.go:169 +0x22f
+github.com/asynkron/protoactor-go/actor.(*defaultMailbox).processMessages(0xc00195c480)
+	/root/go/pkg/mod/github.com/asynkron/protoactor-go@v0.0.0-20240413045429-76c172a71a16/actor/mailbox.go:105 +0x25
+created by github.com/asynkron/protoactor-go/actor.goroutineDispatcher.Schedule in goroutine 4295
+	/root/go/pkg/mod/github.com/asynkron/protoactor-go@v0.0.0-20240413045429-76c172a71a16/actor/dispatcher.go:13 +0x16
+
+[Supervision] Actor: Address:"nonhost"  Id:"diva/process/dkg_coordinator_manager/v0/$a/$nm"  failed with message: &{}  exception: runtime error: slice bounds out of range [:5] with capacity 0
+time="2024-05-25T11:32:41Z" level=debug msg="new head" block=47 prefix="diva/process/web3/v0"
+time="2024-05-25T11:32:41Z" level=debug msg="processed events" from_block=25 prefix="diva/process/block_events/v0" to_block=47
+time="2024-05-25T11:32:53Z" level=debug msg="new slot" prefix="diva/process/slots/v0" remaining_slots=15 slot=49 timeframe=0
+time="2024-05-25T11:32:53Z" level=debug msg="new head" block=48 prefix="diva/process/web3/v0"
+time="2024-05-25T11:32:53Z" level=debug msg="processed events" from_block=25 prefix="diva/process/block_events/v0" to_block=48
+time="2024-05-25T11:33:05Z" level=debug msg="new slot" prefix="diva/process/slots/v0" remaining_slots=14 slot=50 timeframe=0
+time="2024-05-25T11:33:05Z" level=debug msg="new head" block=49 prefix="diva/process/web3/v0"
+time="2024-05-25T11:33:05Z" level=debug msg="processed events" from_block=25 prefix="diva/process/block_events/v0" to_block=49
+time="2024-05-25T11:33:17Z" level=debug msg="new slot" prefix="diva/process/slots/v0" remaining_slots=13 slot=51 timeframe=0
+time="2024-05-25T11:33:17Z" level=debug msg="new head" block=50 prefix="diva/process/web3/v0"
+time="2024-05-25T11:33:17Z" level=debug msg="processed events" from_block=25 prefix="diva/process/block_events/v0" to_block=50
+time="2024-05-25T11:33:29Z" level=debug msg="new slot" prefix="diva/process/slots/v0" remaining_slots=12 slot=52 timeframe=0
+time="2024-05-25T11:33:29Z" level=debug msg="new head" block=51 prefix="diva/process/web3/v0"
+time="2024-05-25T11:33:29Z" level=debug msg="processed events" from_block=25 prefix="diva/process/block_events/v0" to_block=51
+time="2024-05-25T11:33:41Z" level=debug msg="new slot" prefix="diva/process/slots/v0" remaining_slots=11 slot=53 timeframe=0
+time="2024-05-25T11:33:41Z" level=debug msg="new head" block=52 prefix="diva/process/web3/v0"
+time="2024-05-25T11:33:41Z" level=debug msg="processed events" from_block=25 prefix="diva/process/block_events/v0" to_block=52
+time="2024-05-25T11:33:53Z" level=debug msg="new slot" prefix="diva/process/slots/v0" remaining_slots=10 slot=54 timeframe=0
+time="2024-05-25T11:33:53Z" level=debug msg="new head" block=53 prefix="diva/process/web3/v0"
+time="2024-05-25T11:33:53Z" level=debug msg="processed events" from_block=25 prefix="diva/process/block_events/v0" to_block=53
+time="2024-05-25T11:34:05Z" level=debug msg="new slot" prefix="diva/process/slots/v0" remaining_slots=9 slot=55 timeframe=0
+time="2024-05-25T11:34:05Z" level=debug msg="new head" block=54 prefix="diva/process/web3/v0"
+time="2024-05-25T11:34:05Z" level=debug msg="processed events" from_block=25 prefix="diva/process/block_events/v0" to_block=54
+time="2024-05-25T11:34:17Z" level=debug msg="new slot" prefix="diva/process/slots/v0" remaining_slots=8 slot=56 timeframe=0
+[2m11:34AM[0m [92mINF[0m [ACTOR] Recovering [2mlib=[0mProto.Actor [2msystem=[0mhZSAzoqvtUgNPoFuCqGrYg [2mself=[0m"Address:\"nonhost\"  Id:\"diva/process/dkg_coordinator_manager/v0/$a/$nm\"" [2mreason=[0m"runtime error: slice bounds out of range [:5] with capacity 0"
+[2m11:34AM[0m [91mERR[0m [Supervision] [2mlib=[0mProto.Actor [2msystem=[0mhZSAzoqvtUgNPoFuCqGrYg [2mactor=[0m"Address:\"nonhost\"  Id:\"diva/process/dkg_coordinator_manager/v0/$a/$nm\"" [2mmessage=[0m&{} [2mexception=[0m"runtime error: slice bounds out of range [:5] with capacity 0"
+debug.Stack(): goroutine 4565 [running]:
+runtime/debug.Stack()
+time="2024-05-25T11:34:17Z" level=debug msg="join collector started" pending_validator_id=1 prefix="diva/process/dkg_coordinator_manager/v0/$a/$nm"
+	/usr/local/go/src/runtime/debug/stack.go:24 +0x5e
+github.com/asynkron/protoactor-go/actor.(*actorContext).EscalateFailure(0xc00195c3c0, {0x191f820, 0xc0026508e8}, {0x165c6c0, 0x3571e80})
+	/root/go/pkg/mod/github.com/asynkron/protoactor-go@v0.0.0-20240413045429-76c172a71a16/actor/actor_context.go:709 +0x1d3
+github.com/asynkron/protoactor-go/actor.(*defaultMailbox).run.func1()
+	/root/go/pkg/mod/github.com/asynkron/protoactor-go@v0.0.0-20240413045429-76c172a71a16/actor/mailbox.go:132 +0x58
+panic({0x191f820?, 0xc0026508e8?})
+	/usr/local/go/src/runtime/panic.go:770 +0x132
+github.com/shamirlabs/diva/process/dkg/coordinator.(*DKGCoordinatorJoinCollectorActor).createDKG(0xc001d17c70, {0x2761b00, 0xc001823740})
+	/root/diva/process/dkg/coordinator/dkg_coordinator.join_collector.actor.go:275 +0x16e6
+github.com/shamirlabs/diva/process/dkg/coordinator.(*DKGCoordinatorJoinCollectorActor).finishDKG(0xc001823740?, {0x2761b00, 0xc001823740})
+	/root/diva/process/dkg/coordinator/dkg_coordinator.join_collector.actor.go:168 +0x27a
+github.com/shamirlabs/diva/process/dkg/coordinator.(*DKGCoordinatorJoinCollectorActor).Receive(0xc001d17c70, {0x2761b00, 0xc001823740})
+	/root/diva/process/dkg/coordinator/dkg_coordinator.join_collector.actor.go:104 +0x3ce
+github.com/shamirlabs/synapse/system.(*SystemManager).SpawnActor.WrapActor.func1({0x27602f8, 0xc00195c3c0})
+	/root/go/pkg/mod/github.com/shamirlabs/synapse@v0.2.1/system/system.go:199 +0x62e
+github.com/asynkron/protoactor-go/actor.ReceiveFunc.Receive(0x41d378?, {0x27602f8?, 0xc00195c3c0?})
+	/root/go/pkg/mod/github.com/asynkron/protoactor-go@v0.0.0-20240413045429-76c172a71a16/actor/message.go:19 +0x26
+github.com/asynkron/protoactor-go/actor.(*actorContext).defaultReceive(0xc00195c3c0)
+	/root/go/pkg/mod/github.com/asynkron/protoactor-go@v0.0.0-20240413045429-76c172a71a16/actor/actor_context.go:372 +0x98
+github.com/asynkron/protoactor-go/actor.(*actorContext).processMessage(0xc00195c3c0, {0x165c6c0, 0x3571e80})
+	/root/go/pkg/mod/github.com/asynkron/protoactor-go@v0.0.0-20240413045429-76c172a71a16/actor/actor_context.go:527 +0xf9
+github.com/asynkron/protoactor-go/actor.(*actorContext).InvokeUserMessage(0xc00195c3c0, {0x165c6c0, 0x3571e80})
+	/root/go/pkg/mod/github.com/asynkron/protoactor-go@v0.0.0-20240413045429-76c172a71a16/actor/actor_context.go:505 +0x478
+github.com/asynkron/protoactor-go/actor.(*defaultMailbox).run(0xc00195c480)
+	/root/go/pkg/mod/github.com/asynkron/protoactor-go@v0.0.0-20240413045429-76c172a71a16/actor/mailbox.go:169 +0x22f
+github.com/asynkron/protoactor-go/actor.(*defaultMailbox).processMessages(0xc00195c480)
+	/root/go/pkg/mod/github.com/asynkron/protoactor-go@v0.0.0-20240413045429-76c172a71a16/actor/mailbox.go:105 +0x25
+created by github.com/asynkron/protoactor-go/actor.goroutineDispatcher.Schedule in goroutine 4564
+	/root/go/pkg/mod/github.com/asynkron/protoactor-go@v0.0.0-20240413045429-76c172a71a16/actor/dispatcher.go:13 +0x16
+
+[Supervision] Actor: Address:"nonhost"  Id:"diva/process/dkg_coordinator_manager/v0/$a/$nm"  failed with message: &{}  exception: runtime error: slice bounds out of range [:5] with capacity 0
+time="2024-05-25T11:34:17Z" level=debug msg="new head" block=55 prefix="diva/process/web3/v0"
+time="2024-05-25T11:34:17Z" level=debug msg="processed events" from_block=25 prefix="diva/process/block_events/v0" to_block=55
+time="2024-05-25T11:34:29Z" level=debug msg="new slot" prefix="diva/process/slots/v0" remaining_slots=7 slot=57 timeframe=0
+time="2024-05-25T11:34:29Z" level=debug msg="new head" block=56 prefix="diva/process/web3/v0"
+time="2024-05-25T11:34:29Z" level=debug msg="processed events" from_block=25 prefix="diva/process/block_events/v0" to_block=56
+time="2024-05-25T11:34:41Z" level=debug msg="new slot" prefix="diva/process/slots/v0" remaining_slots=6 slot=58 timeframe=0
+time="2024-05-25T11:34:41Z" level=debug msg="new head" block=57 prefix="diva/process/web3/v0"
+time="2024-05-25T11:34:41Z" level=debug msg="processed events" from_block=25 prefix="diva/process/block_events/v0" to_block=57
+time="2024-05-25T11:34:53Z" level=debug msg="new slot" prefix="diva/process/slots/v0" remaining_slots=5 slot=59 timeframe=0
+time="2024-05-25T11:34:53Z" level=debug msg="new head" block=58 prefix="diva/process/web3/v0"
+time="2024-05-25T11:34:53Z" level=debug msg="processed events" from_block=25 prefix="diva/process/block_events/v0" to_block=58
+time="2024-05-25T11:35:05Z" level=debug msg="new slot" prefix="diva/process/slots/v0" remaining_slots=4 slot=60 timeframe=0
+time="2024-05-25T11:35:05Z" level=debug msg="new head" block=59 prefix="diva/process/web3/v0"
+time="2024-05-25T11:35:05Z" level=debug msg="processed events" from_block=25 prefix="diva/process/block_events/v0" to_block=59
+time="2024-05-25T11:35:17Z" level=debug msg="new slot" prefix="diva/process/slots/v0" remaining_slots=3 slot=61 timeframe=0
+time="2024-05-25T11:35:17Z" level=debug msg="new head" block=60 prefix="diva/process/web3/v0"
+time="2024-05-25T11:35:17Z" level=debug msg="processed events" from_block=25 prefix="diva/process/block_events/v0" to_block=60
+time="2024-05-25T11:35:29Z" level=debug msg="new slot" prefix="diva/process/slots/v0" remaining_slots=2 slot=62 timeframe=0
+time="2024-05-25T11:35:29Z" level=debug msg="new head" block=61 prefix="diva/process/web3/v0"
+time="2024-05-25T11:35:29Z" level=debug msg="processed events" from_block=25 prefix="diva/process/block_events/v0" to_block=61
+time="2024-05-25T11:35:41Z" level=debug msg="new slot" prefix="diva/process/slots/v0" remaining_slots=1 slot=63 timeframe=0
+time="2024-05-25T11:35:41Z" level=debug msg="new head" block=62 prefix="diva/process/web3/v0"
+time="2024-05-25T11:35:41Z" level=debug msg="processed events" from_block=25 prefix="diva/process/block_events/v0" to_block=62
+time="2024-05-25T11:35:53Z" level=debug msg="new slot" prefix="diva/process/slots/v0" remaining_slots=32 slot=64 timeframe=1
+time="2024-05-25T11:35:53Z" level=info msg="new timeframe started" prefix="diva/process/slots/v0" timeframe=1
+[2m11:35AM[0m [92mINF[0m [ACTOR] Recovering [2mlib=[0mProto.Actor [2msystem=[0mhZSAzoqvtUgNPoFuCqGrYg [2mself=[0m"Address:\"nonhost\"  Id:\"diva/process/dkg_coordinator_manager/v0/$a/$nm\"" [2mreason=[0m"runtime error: slice bounds out of range [:5] with capacity 0"
+[2m11:35AM[0m [91mERR[0m [Supervision] [2mlib=[0mProto.Actor [2msystem=[0mhZSAzoqvtUgNPoFuCqGrYg [2mactor=[0m"Address:\"nonhost\"  Id:\"diva/process/dkg_coordinator_manager/v0/$a/$nm\"" [2mmessage=[0m&{} [2mexception=[0m"runtime error: slice bounds out of range [:5] with capacity 0"
+debug.Stack(): goroutine 4830 [running]:
+runtime/debug.Stack()
+	/usr/local/go/src/runtime/debug/stack.go:24 +0x5e
+github.com/asynkron/protoactor-go/actor.(*actorContext).EscalateFailure(0xc00195c3c0, {0x191f820, 0xc0000475d8}, {0x165c6c0, 0x3571e80})
+	/root/go/pkg/mod/github.com/asynkron/protoactor-go@v0.0.0-20240413045429-76c172a71a16/actor/actor_context.go:709 +0x1d3
+github.com/asynkron/protoactor-go/actor.(*defaultMailbox).run.func1()
+	/root/go/pkg/mod/github.com/asynkron/protoactor-go@v0.0.0-20240413045429-76c172a71a16/actor/mailbox.go:132 +0x58
+panic({0x191f820?, 0xc0000475d8?})
+	/usr/local/go/src/runtime/panic.go:770 +0x132
+github.com/shamirlabs/diva/process/dkg/coordinator.(*DKGCoordinatorJoinCollectorActor).createDKG(0xc001d17c70, {0x2761b00, 0xc001aa0100})
+	/root/diva/process/dkg/coordinator/dkg_coordinator.join_collector.actor.go:275 +0x16e6
+github.com/shamirlabs/diva/process/dkg/coordinator.(*DKGCoordinatorJoinCollectorActor).finishDKG(0xc001aa0100?, {0x2761b00, 0xc001aa0100})
+	/root/diva/process/dkg/coordinator/dkg_coordinator.join_collector.actor.go:168 +0x27a
+github.com/shamirlabs/diva/process/dkg/coordinator.(*DKGCoordinatorJoinCollectorActor).Receive(0xc001d17c70, {0x2761b00, 0xc001aa0100})
+	/root/diva/process/dkg/coordinator/dkg_coordinator.join_collector.actor.go:104 +0x3ce
+github.com/shamirlabs/synapse/system.(*SystemManager).SpawnActor.WrapActor.func1({0x27602f8, 0xc00195c3c0})
+	/root/go/pkg/mod/github.com/shamirlabs/synapse@v0.2.1/system/system.go:199 +0x62e
+github.com/asynkron/protoactor-go/actor.ReceiveFunc.Receive(0x0?, {0x27602f8?, 0xc00195c3c0?})
+	/root/go/pkg/mod/github.com/asynkron/protoactor-go@v0.0.0-20240413045429-76c172a71a16/actor/message.go:19 +0x26
+github.com/asynkron/protoactor-go/actor.(*actorContext).defaultReceive(0xc00195c3c0)
+	/root/go/pkg/mod/github.com/asynkron/protoactor-go@v0.0.0-20240413045429-76c172a71a16/actor/actor_context.go:372 +0x98
+github.com/asynkron/protoactor-go/actor.(*actorContext).processMessage(0xc00195c3c0, {0x165c6c0, 0x3571e80})
+	/root/go/pkg/mod/github.com/asynkron/protoactor-go@v0.0.0-20240413045429-76c172a71a16/actor/actor_context.go:527 +0xf9
+time="2024-05-25T11:35:53Z" level=debug msg="join collector started" pending_validator_id=1 prefix="diva/process/dkg_coordinator_manager/v0/$a/$nm"
+github.com/asynkron/protoactor-go/actor.(*actorContext).InvokeUserMessage(0xc00195c3c0, {0x165c6c0, 0x3571e80})
+	/root/go/pkg/mod/github.com/asynkron/protoactor-go@v0.0.0-20240413045429-76c172a71a16/actor/actor_context.go:505 +0x478
+github.com/asynkron/protoactor-go/actor.(*defaultMailbox).run(0xc00195c480)
+	/root/go/pkg/mod/github.com/asynkron/protoactor-go@v0.0.0-20240413045429-76c172a71a16/actor/mailbox.go:169 +0x22f
+github.com/asynkron/protoactor-go/actor.(*defaultMailbox).processMessages(0xc00195c480)
+	/root/go/pkg/mod/github.com/asynkron/protoactor-go@v0.0.0-20240413045429-76c172a71a16/actor/mailbox.go:105 +0x25
+created by github.com/asynkron/protoactor-go/actor.goroutineDispatcher.Schedule in goroutine 4828
+	/root/go/pkg/mod/github.com/asynkron/protoactor-go@v0.0.0-20240413045429-76c172a71a16/actor/dispatcher.go:13 +0x16
+
+[Supervision] Actor: Address:"nonhost"  Id:"diva/process/dkg_coordinator_manager/v0/$a/$nm"  failed with message: &{}  exception: runtime error: slice bounds out of range [:5] with capacity 0
+time="2024-05-25T11:35:53Z" level=debug msg="new head" block=63 prefix="diva/process/web3/v0"
+time="2024-05-25T11:35:53Z" level=debug msg="processed events" from_block=25 prefix="diva/process/block_events/v0" to_block=63
+time="2024-05-25T11:36:05Z" level=debug msg="new slot" prefix="diva/process/slots/v0" remaining_slots=31 slot=65 timeframe=1
+time="2024-05-25T11:36:05Z" level=debug msg="new head" block=64 prefix="diva/process/web3/v0"
+time="2024-05-25T11:36:05Z" level=debug msg="processed events" from_block=25 prefix="diva/process/block_events/v0" to_block=64
+time="2024-05-25T11:36:17Z" level=debug msg="new slot" prefix="diva/process/slots/v0" remaining_slots=30 slot=66 timeframe=1
+time="2024-05-25T11:36:17Z" level=debug msg="new head" block=65 prefix="diva/process/web3/v0"
+time="2024-05-25T11:36:17Z" level=debug msg="processed events" from_block=25 prefix="diva/process/block_events/v0" to_block=65
+time="2024-05-25T11:36:29Z" level=debug msg="new slot" prefix="diva/process/slots/v0" remaining_slots=29 slot=67 timeframe=1
+time="2024-05-25T11:36:29Z" level=debug msg="new head" block=66 prefix="diva/process/web3/v0"
+time="2024-05-25T11:36:29Z" level=debug msg="processed events" from_block=25 prefix="diva/process/block_events/v0" to_block=66
+time="2024-05-25T11:36:41Z" level=debug msg="new slot" prefix="diva/process/slots/v0" remaining_slots=28 slot=68 timeframe=1
+time="2024-05-25T11:36:41Z" level=debug msg="new head" block=67 prefix="diva/process/web3/v0"
+time="2024-05-25T11:36:41Z" level=debug msg="processed events" from_block=25 prefix="diva/process/block_events/v0" to_block=67
+time="2024-05-25T11:36:53Z" level=debug msg="new slot" prefix="diva/process/slots/v0" remaining_slots=27 slot=69 timeframe=1
+time="2024-05-25T11:36:53Z" level=debug msg="new head" block=68 prefix="diva/process/web3/v0"
+time="2024-05-25T11:36:53Z" level=debug msg="processed events" from_block=25 prefix="diva/process/block_events/v0" to_block=68
+time="2024-05-25T11:37:05Z" level=debug msg="new slot" prefix="diva/process/slots/v0" remaining_slots=26 slot=70 timeframe=1
+time="2024-05-25T11:37:05Z" level=debug msg="new head" block=69 prefix="diva/process/web3/v0"
+time="2024-05-25T11:37:05Z" level=debug msg="processed events" from_block=25 prefix="diva/process/block_events/v0" to_block=69
+time="2024-05-25T11:37:17Z" level=debug msg="new slot" prefix="diva/process/slots/v0" remaining_slots=25 slot=71 timeframe=1
+time="2024-05-25T11:37:17Z" level=debug msg="new head" block=70 prefix="diva/process/web3/v0"
+time="2024-05-25T11:37:17Z" level=debug msg="processed events" from_block=25 prefix="diva/process/block_events/v0" to_block=70
+time="2024-05-25T11:37:29Z" level=debug msg="new slot" prefix="diva/process/slots/v0" remaining_slots=24 slot=72 timeframe=1
+debug.Stack(): goroutine 5194 [running]:
+runtime/debug.Stack()
+	/usr/local/go/src/runtime/debug/stack.go:24 +0x5e
+github.com/asynkron/protoactor-go/actor.(*actorContext).EscalateFailure(0xc00195c3c0, {0x191f820, 0xc001a16be8}, {0x165c6c0, 0x3571e80})
+	/root/go/pkg/mod/github.com/asynkron/protoactor-go@v0.0.0-20240413045429-76c172a71a16/actor/actor_context.go:709 +0x1d3
+github.com/asynkron/protoactor-go/actor.(*defaultMailbox).run.func1()
+	/root/go/pkg/mod/github.com/asynkron/protoactor-go@v0.0.0-20240413045429-76c172a71a16/actor/mailbox.go:132 +0x58
+panic({0x191f820?, 0xc001a16be8?})
+	/usr/local/go/src/runtime/panic.go:770 +0x132
+github.com/shamirlabs/diva/process/dkg/coordinator.(*DKGCoordinatorJoinCollectorActor).createDKG(0xc001d17c70, {0x2761b00, 0xc000838c40})
+	/root/diva/process/dkg/coordinator/dkg_coordinator.join_collector.actor.go:275 +0x16e6
+github.com/shamirlabs/diva/process/dkg/coordinator.(*DKGCoordinatorJoinCollectorActor).finishDKG(0xc000838c40?, {0x2761b00, 0xc000838c40})
+	/root/diva/process/dkg/coordinator/dkg_coordinator.join_collector.actor.go:168 +0x27a
+github.com/shamirlabs/diva/process/dkg/coordinator.(*DKGCoordinatorJoinCollectorActor).Receive(0xc001d17c70, {0x2761b00, 0xc000838c40})
+	/root/diva/process/dkg/coordinator/dkg_coordinator.join_collector.actor.go:104 +0x3ce
+github.com/shamirlabs/synapse/system.(*SystemManager).SpawnActor.WrapActor.func1({0x27602f8, 0xc00195c3c0})
+	/root/go/pkg/mod/github.com/shamirlabs/synapse@v0.2.1/system/system.go:199 +0x62e
+github.com/asynkron/protoactor-go/actor.ReceiveFunc.Receive(0x10?, {0x27602f8?, 0xc00195c3c0?})
+	/root/go/pkg/mod/github.com/asynkron/protoactor-go@v0.0.0-20240413045429-76c172a71a16/actor/message.go:19 +0x26
+github.com/asynkron/protoactor-go/actor.(*actorContext).defaultReceive(0xc00195c3c0)
+	/root/go/pkg/mod/github.com/asynkron/protoactor-go@v0.0.0-20240413045429-76c172a71a16/actor/actor_context.go:372 +0x98
+github.com/asynkron/protoactor-go/actor.(*actorContext).processMessage(0xc00195c3c0, {0x165c6c0, 0x3571e80})
+	/root/go/pkg/mod/github.com/asynkron/protoactor-go@v0.0.0-20240413045429-76c172a71a16/actor/actor_context.go:527 +0xf9
+github.com/asynkron/protoactor-go/actor.(*actorContext).InvokeUserMessage(0xc00195c3c0, {0x165c6c0, 0x3571e80})
+	/root/go/pkg/mod/github.com/asynkron/protoactor-go@v0.0.0-20240413045429-76c172a71a16/actor/actor_context.go:505 +0x478
+github.com/asynkron/protoactor-go/actor.(*defaultMailbox).run(0xc00195c480)
+	/root/go/pkg/mod/github.com/asynkron/protoactor-go@v0.0.0-20240413045429-76c172a71a16/actor/mailbox.go:169 +0x22f
+github.com/asynkron/protoactor-go/actor.(*defaultMailbox).processMessages(0xc00195c480)
+	/root/go/pkg/mod/github.com/asynkron/protoactor-go@v0.0.0-20240413045429-76c172a71a16/actor/mailbox.go:105 +0x25
+created by github.com/asynkron/protoactor-go/actor.goroutineDispatcher.Schedule in goroutine 5193
+	/root/go/pkg/mod/github.com/asynkron/protoactor-go@v0.0.0-20240413045429-76c172a71a16/actor/dispatcher.go:13 +0x16
+
+[Supervision] Actor: Address:"nonhost"  Id:"diva/process/dkg_coordinator_manager/v0/$a/$nm"  failed with message: &{}  exception: runtime error: slice bounds out of range [:5] with capacity 0
+[2m11:37AM[0m [92mINF[0m [ACTOR] Recovering [2mlib=[0mProto.Actor [2msystem=[0mhZSAzoqvtUgNPoFuCqGrYg [2mself=[0m"Address:\"nonhost\"  Id:\"diva/process/dkg_coordinator_manager/v0/$a/$nm\"" [2mreason=[0m"runtime error: slice bounds out of range [:5] with capacity 0"
+[2m11:37AM[0m [91mERR[0m [Supervision] [2mlib=[0mProto.Actor [2msystem=[0mhZSAzoqvtUgNPoFuCqGrYg [2mactor=[0m"Address:\"nonhost\"  Id:\"diva/process/dkg_coordinator_manager/v0/$a/$nm\"" [2mmessage=[0m&{} [2mexception=[0m"runtime error: slice bounds out of range [:5] with capacity 0"
+time="2024-05-25T11:37:29Z" level=debug msg="join collector started" pending_validator_id=1 prefix="diva/process/dkg_coordinator_manager/v0/$a/$nm"
+time="2024-05-25T11:37:29Z" level=debug msg="new head" block=71 prefix="diva/process/web3/v0"
+time="2024-05-25T11:37:29Z" level=debug msg="processed events" from_block=25 prefix="diva/process/block_events/v0" to_block=71
+time="2024-05-25T11:37:41Z" level=debug msg="new slot" prefix="diva/process/slots/v0" remaining_slots=23 slot=73 timeframe=1
+time="2024-05-25T11:37:41Z" level=debug msg="new head" block=72 prefix="diva/process/web3/v0"
+time="2024-05-25T11:37:41Z" level=debug msg="processed events" from_block=25 prefix="diva/process/block_events/v0" to_block=72
+time="2024-05-25T11:37:53Z" level=debug msg="new slot" prefix="diva/process/slots/v0" remaining_slots=22 slot=74 timeframe=1
+time="2024-05-25T11:37:53Z" level=debug msg="new head" block=73 prefix="diva/process/web3/v0"
+time="2024-05-25T11:37:53Z" level=debug msg="processed events" from_block=25 prefix="diva/process/block_events/v0" to_block=73
+time="2024-05-25T11:38:05Z" level=debug msg="new slot" prefix="diva/process/slots/v0" remaining_slots=21 slot=75 timeframe=1
+time="2024-05-25T11:38:05Z" level=debug msg="new head" block=74 prefix="diva/process/web3/v0"
+time="2024-05-25T11:38:05Z" level=debug msg="processed events" from_block=25 prefix="diva/process/block_events/v0" to_block=74
+time="2024-05-25T11:38:17Z" level=debug msg="new slot" prefix="diva/process/slots/v0" remaining_slots=20 slot=76 timeframe=1
+time="2024-05-25T11:38:17Z" level=debug msg="new head" block=75 prefix="diva/process/web3/v0"
+time="2024-05-25T11:38:17Z" level=debug msg="processed events" from_block=25 prefix="diva/process/block_events/v0" to_block=75
+time="2024-05-25T11:38:29Z" level=debug msg="new slot" prefix="diva/process/slots/v0" remaining_slots=19 slot=77 timeframe=1
+time="2024-05-25T11:38:29Z" level=debug msg="new head" block=76 prefix="diva/process/web3/v0"
+time="2024-05-25T11:38:29Z" level=debug msg="processed events" from_block=25 prefix="diva/process/block_events/v0" to_block=76
+time="2024-05-25T11:38:41Z" level=debug msg="new slot" prefix="diva/process/slots/v0" remaining_slots=18 slot=78 timeframe=1
+time="2024-05-25T11:38:41Z" level=debug msg="new head" block=77 prefix="diva/process/web3/v0"
+time="2024-05-25T11:38:41Z" level=debug msg="processed events" from_block=25 prefix="diva/process/block_events/v0" to_block=77
+time="2024-05-25T11:38:53Z" level=debug msg="new slot" prefix="diva/process/slots/v0" remaining_slots=17 slot=79 timeframe=1
+time="2024-05-25T11:38:53Z" level=debug msg="new head" block=78 prefix="diva/process/web3/v0"
+time="2024-05-25T11:38:53Z" level=debug msg="processed events" from_block=25 prefix="diva/process/block_events/v0" to_block=78
+time="2024-05-25T11:39:05Z" level=debug msg="new slot" prefix="diva/process/slots/v0" remaining_slots=16 slot=80 timeframe=1
+[2m11:39AM[0m [92mINF[0m [ACTOR] Recovering [2mlib=[0mProto.Actor [2msystem=[0mhZSAzoqvtUgNPoFuCqGrYg [2mself=[0m"Address:\"nonhost\"  Id:\"diva/process/dkg_coordinator_manager/v0/$a/$nm\"" [2mreason=[0m"runtime error: slice bounds out of range [:5] with capacity 0"
+[2m11:39AM[0m [91mERR[0m [Supervision] [2mlib=[0mProto.Actor [2msystem=[0mhZSAzoqvtUgNPoFuCqGrYg [2mactor=[0m"Address:\"nonhost\"  Id:\"diva/process/dkg_coordinator_manager/v0/$a/$nm\"" [2mmessage=[0m&{} [2mexception=[0m"runtime error: slice bounds out of range [:5] with capacity 0"
+time="2024-05-25T11:39:05Z" level=debug msg="join collector started" pending_validator_id=1 prefix="diva/process/dkg_coordinator_manager/v0/$a/$nm"
+debug.Stack(): goroutine 5405 [running]:
+runtime/debug.Stack()
+	/usr/local/go/src/runtime/debug/stack.go:24 +0x5e
+github.com/asynkron/protoactor-go/actor.(*actorContext).EscalateFailure(0xc00195c3c0, {0x191f820, 0xc002650f48}, {0x165c6c0, 0x3571e80})
+	/root/go/pkg/mod/github.com/asynkron/protoactor-go@v0.0.0-20240413045429-76c172a71a16/actor/actor_context.go:709 +0x1d3
+github.com/asynkron/protoactor-go/actor.(*defaultMailbox).run.func1()
+	/root/go/pkg/mod/github.com/asynkron/protoactor-go@v0.0.0-20240413045429-76c172a71a16/actor/mailbox.go:132 +0x58
+panic({0x191f820?, 0xc002650f48?})
+	/usr/local/go/src/runtime/panic.go:770 +0x132
+github.com/shamirlabs/diva/process/dkg/coordinator.(*DKGCoordinatorJoinCollectorActor).createDKG(0xc001d17c70, {0x2761b00, 0xc001736a80})
+	/root/diva/process/dkg/coordinator/dkg_coordinator.join_collector.actor.go:275 +0x16e6
+github.com/shamirlabs/diva/process/dkg/coordinator.(*DKGCoordinatorJoinCollectorActor).finishDKG(0xc001736a80?, {0x2761b00, 0xc001736a80})
+	/root/diva/process/dkg/coordinator/dkg_coordinator.join_collector.actor.go:168 +0x27a
+github.com/shamirlabs/diva/process/dkg/coordinator.(*DKGCoordinatorJoinCollectorActor).Receive(0xc001d17c70, {0x2761b00, 0xc001736a80})
+	/root/diva/process/dkg/coordinator/dkg_coordinator.join_collector.actor.go:104 +0x3ce
+github.com/shamirlabs/synapse/system.(*SystemManager).SpawnActor.WrapActor.func1({0x27602f8, 0xc00195c3c0})
+	/root/go/pkg/mod/github.com/shamirlabs/synapse@v0.2.1/system/system.go:199 +0x62e
+github.com/asynkron/protoactor-go/actor.ReceiveFunc.Receive(0x3571e80?, {0x27602f8?, 0xc00195c3c0?})
+	/root/go/pkg/mod/github.com/asynkron/protoactor-go@v0.0.0-20240413045429-76c172a71a16/actor/message.go:19 +0x26
+github.com/asynkron/protoactor-go/actor.(*actorContext).defaultReceive(0xc00195c3c0)
+	/root/go/pkg/mod/github.com/asynkron/protoactor-go@v0.0.0-20240413045429-76c172a71a16/actor/actor_context.go:372 +0x98
+github.com/asynkron/protoactor-go/actor.(*actorContext).processMessage(0xc00195c3c0, {0x165c6c0, 0x3571e80})
+	/root/go/pkg/mod/github.com/asynkron/protoactor-go@v0.0.0-20240413045429-76c172a71a16/actor/actor_context.go:527 +0xf9
+github.com/asynkron/protoactor-go/actor.(*actorContext).InvokeUserMessage(0xc00195c3c0, {0x165c6c0, 0x3571e80})
+	/root/go/pkg/mod/github.com/asynkron/protoactor-go@v0.0.0-20240413045429-76c172a71a16/actor/actor_context.go:505 +0x478
+github.com/asynkron/protoactor-go/actor.(*defaultMailbox).run(0xc00195c480)
+	/root/go/pkg/mod/github.com/asynkron/protoactor-go@v0.0.0-20240413045429-76c172a71a16/actor/mailbox.go:169 +0x22f
+github.com/asynkron/protoactor-go/actor.(*defaultMailbox).processMessages(0xc00195c480)
+	/root/go/pkg/mod/github.com/asynkron/protoactor-go@v0.0.0-20240413045429-76c172a71a16/actor/mailbox.go:105 +0x25
+created by github.com/asynkron/protoactor-go/actor.goroutineDispatcher.Schedule in goroutine 5404
+	/root/go/pkg/mod/github.com/asynkron/protoactor-go@v0.0.0-20240413045429-76c172a71a16/actor/dispatcher.go:13 +0x16
+
+[Supervision] Actor: Address:"nonhost"  Id:"diva/process/dkg_coordinator_manager/v0/$a/$nm"  failed with message: &{}  exception: runtime error: slice bounds out of range [:5] with capacity 0
+time="2024-05-25T11:39:05Z" level=debug msg="new head" block=79 prefix="diva/process/web3/v0"
+time="2024-05-25T11:39:05Z" level=debug msg="processed events" from_block=25 prefix="diva/process/block_events/v0" to_block=79
+time="2024-05-25T11:39:17Z" level=debug msg="new slot" prefix="diva/process/slots/v0" remaining_slots=15 slot=81 timeframe=1
+time="2024-05-25T11:39:17Z" level=debug msg="new head" block=80 prefix="diva/process/web3/v0"
+time="2024-05-25T11:39:17Z" level=debug msg="processed events" from_block=25 prefix="diva/process/block_events/v0" to_block=80
+time="2024-05-25T11:39:29Z" level=debug msg="new slot" prefix="diva/process/slots/v0" remaining_slots=14 slot=82 timeframe=1
+time="2024-05-25T11:39:29Z" level=debug msg="new head" block=81 prefix="diva/process/web3/v0"
+time="2024-05-25T11:39:29Z" level=debug msg="processed events" from_block=25 prefix="diva/process/block_events/v0" to_block=81
+time="2024-05-25T11:39:41Z" level=debug msg="new slot" prefix="diva/process/slots/v0" remaining_slots=13 slot=83 timeframe=1
+time="2024-05-25T11:39:41Z" level=debug msg="new head" block=82 prefix="diva/process/web3/v0"
+time="2024-05-25T11:39:41Z" level=debug msg="processed events" from_block=25 prefix="diva/process/block_events/v0" to_block=82
+time="2024-05-25T11:39:53Z" level=debug msg="new slot" prefix="diva/process/slots/v0" remaining_slots=12 slot=84 timeframe=1
+time="2024-05-25T11:39:53Z" level=debug msg="new head" block=83 prefix="diva/process/web3/v0"
+time="2024-05-25T11:39:53Z" level=debug msg="processed events" from_block=25 prefix="diva/process/block_events/v0" to_block=83
+time="2024-05-25T11:40:05Z" level=debug msg="new slot" prefix="diva/process/slots/v0" remaining_slots=11 slot=85 timeframe=1
+time="2024-05-25T11:40:05Z" level=debug msg="new head" block=84 prefix="diva/process/web3/v0"
+time="2024-05-25T11:40:05Z" level=debug msg="processed events" from_block=25 prefix="diva/process/block_events/v0" to_block=84
+time="2024-05-25T11:40:17Z" level=debug msg="new slot" prefix="diva/process/slots/v0" remaining_slots=10 slot=86 timeframe=1
+time="2024-05-25T11:40:17Z" level=debug msg="new head" block=85 prefix="diva/process/web3/v0"
+time="2024-05-25T11:40:17Z" level=debug msg="processed events" from_block=25 prefix="diva/process/block_events/v0" to_block=85
+time="2024-05-25T11:40:29Z" level=debug msg="new slot" prefix="diva/process/slots/v0" remaining_slots=9 slot=87 timeframe=1
+time="2024-05-25T11:40:29Z" level=debug msg="new head" block=86 prefix="diva/process/web3/v0"
+time="2024-05-25T11:40:29Z" level=debug msg="processed events" from_block=25 prefix="diva/process/block_events/v0" to_block=86
+debug.Stack(): goroutine 5720 [running]:
+runtime/debug.Stack()
+	/usr/local/go/src/runtime/debug/stack.go:24 +0x5e
+github.com/asynkron/protoactor-go/actor.(*actorContext).EscalateFailure(0xc00195c3c0, {0x191f820, 0xc000046db0}, {0x165c6c0, 0x3571e80})
+	/root/go/pkg/mod/github.com/asynkron/protoactor-go@v0.0.0-20240413045429-76c172a71a16/actor/actor_context.go:709 +0x1d3
+github.com/asynkron/protoactor-go/actor.(*defaultMailbox).run.func1()
+	/root/go/pkg/mod/github.com/asynkron/protoactor-go@v0.0.0-20240413045429-76c172a71a16/actor/mailbox.go:132 +0x58
+panic({0x191f820?, 0xc000046db0?})
+	/usr/local/go/src/runtime/panic.go:770 +0x132
+github.com/shamirlabs/diva/process/dkg/coordinator.(*DKGCoordinatorJoinCollectorActor).createDKG(0xc001d17c70, {0x2761b00, 0xc00076e880})
+	/root/diva/process/dkg/coordinator/dkg_coordinator.join_collector.actor.go:275 +0x16e6
+github.com/shamirlabs/diva/process/dkg/coordinator.(*DKGCoordinatorJoinCollectorActor).finishDKG(0xc00076e880?, {0x2761b00, 0xc00076e880})
+	/root/diva/process/dkg/coordinator/dkg_coordinator.join_collector.actor.go:168 +0x27a
+github.com/shamirlabs/diva/process/dkg/coordinator.(*DKGCoordinatorJoinCollectorActor).Receive(0xc001d17c70, {0x2761b00, 0xc00076e880})
+	/root/diva/process/dkg/coordinator/dkg_coordinator.join_collector.actor.go:104 +0x3ce
+github.com/shamirlabs/synapse/system.(*SystemManager).SpawnActor.WrapActor.func1({0x27602f8, 0xc00195c3c0})
+	/root/go/pkg/mod/github.com/shamirlabs/synapse@v0.2.1/system/system.go:199 +0x62e
+github.com/asynkron/protoactor-go/actor.ReceiveFunc.Receive(0x0?, {0x27602f8?, 0xc00195c3c0?})
+	/root/go/pkg/mod/github.com/asynkron/protoactor-go@v0.0.0-20240413045429-76c172a71a16/actor/message.go:19 +0x26
+github.com/asynkron/protoactor-go/actor.(*actorContext).defaultReceive(0xc00195c3c0)
+	/root/go/pkg/mod/github.com/asynkron/protoactor-go@v0.0.0-20240413045429-76c172a71a16/actor/actor_context.go:372 +0x98
+github.com/asynkron/protoactor-go/actor.(*actorContext).processMessage(0xc00195c3c0, {0x165c6c0, 0x3571e80})
+	/root/go/pkg/mod/github.com/asynkron/protoactor-go@v0.0.0-20240413045429-76c172a71a16/actor/actor_context.go:527 +0xf9
+github.com/asynkron/protoactor-go/actor.(*actorContext).InvokeUserMessage(0xc00195c3c0, {0x165c6c0, 0x3571e80})
+time="2024-05-25T11:40:41Z" level=debug msg="new slot" prefix="diva/process/slots/v0" remaining_slots=8 slot=88 timeframe=1
+	/root/go/pkg/mod/github.com/asynkron/protoactor-go@v0.0.0-20240413045429-76c172a71a16/actor/actor_context.go:505 +0x478
+github.com/asynkron/protoactor-go/actor.(*defaultMailbox).run(0xc00195c480)
+[2m11:40AM[0m [92mINF[0m [ACTOR] Recovering [2mlib=[0mProto.Actor [2msystem=[0mhZSAzoqvtUgNPoFuCqGrYg [2mself=[0m"Address:\"nonhost\"  Id:\"diva/process/dkg_coordinator_manager/v0/$a/$nm\"" [2mreason=[0m"runtime error: slice bounds out of range [:5] with capacity 0"
+	/root/go/pkg/mod/github.com/asynkron/protoactor-go@v0.0.0-20240413045429-76c172a71a16/actor/mailbox.go:169 +0x22f
+[2m11:40AM[0m [91mERR[0m [Supervision] [2mlib=[0mProto.Actor [2msystem=[0mhZSAzoqvtUgNPoFuCqGrYg [2mactor=[0m"Address:\"nonhost\"  Id:\"diva/process/dkg_coordinator_manager/v0/$a/$nm\"" [2mmessage=[0m&{} [2mexception=[0m"runtime error: slice bounds out of range [:5] with capacity 0"
+github.com/asynkron/protoactor-go/actor.(*defaultMailbox).processMessages(0xc00195c480)
+time="2024-05-25T11:40:41Z" level=debug msg="join collector started" pending_validator_id=1 prefix="diva/process/dkg_coordinator_manager/v0/$a/$nm"
+	/root/go/pkg/mod/github.com/asynkron/protoactor-go@v0.0.0-20240413045429-76c172a71a16/actor/mailbox.go:105 +0x25
+created by github.com/asynkron/protoactor-go/actor.goroutineDispatcher.Schedule in goroutine 5719
+	/root/go/pkg/mod/github.com/asynkron/protoactor-go@v0.0.0-20240413045429-76c172a71a16/actor/dispatcher.go:13 +0x16
+
+[Supervision] Actor: Address:"nonhost"  Id:"diva/process/dkg_coordinator_manager/v0/$a/$nm"  failed with message: &{}  exception: runtime error: slice bounds out of range [:5] with capacity 0
+time="2024-05-25T11:40:41Z" level=debug msg="new head" block=87 prefix="diva/process/web3/v0"
+time="2024-05-25T11:40:41Z" level=debug msg="processed events" from_block=25 prefix="diva/process/block_events/v0" to_block=87
+time="2024-05-25T11:40:53Z" level=debug msg="new slot" prefix="diva/process/slots/v0" remaining_slots=7 slot=89 timeframe=1
+time="2024-05-25T11:40:53Z" level=debug msg="new head" block=88 prefix="diva/process/web3/v0"
+time="2024-05-25T11:40:53Z" level=debug msg="processed events" from_block=25 prefix="diva/process/block_events/v0" to_block=88
+time="2024-05-25T11:41:05Z" level=debug msg="new slot" prefix="diva/process/slots/v0" remaining_slots=6 slot=90 timeframe=1
+time="2024-05-25T11:41:05Z" level=debug msg="new head" block=89 prefix="diva/process/web3/v0"
+time="2024-05-25T11:41:05Z" level=debug msg="processed events" from_block=25 prefix="diva/process/block_events/v0" to_block=89
+time="2024-05-25T11:41:17Z" level=debug msg="new slot" prefix="diva/process/slots/v0" remaining_slots=5 slot=91 timeframe=1
+time="2024-05-25T11:41:29Z" level=debug msg="new slot" prefix="diva/process/slots/v0" remaining_slots=4 slot=92 timeframe=1
+time="2024-05-25T11:41:29Z" level=debug msg="new head" block=90 prefix="diva/process/web3/v0"
+time="2024-05-25T11:41:29Z" level=debug msg="processed events" from_block=25 prefix="diva/process/block_events/v0" to_block=90
+time="2024-05-25T11:41:41Z" level=debug msg="new slot" prefix="diva/process/slots/v0" remaining_slots=3 slot=93 timeframe=1
+time="2024-05-25T11:41:41Z" level=debug msg="new head" block=91 prefix="diva/process/web3/v0"
+time="2024-05-25T11:41:41Z" level=debug msg="processed events" from_block=25 prefix="diva/process/block_events/v0" to_block=91
+time="2024-05-25T11:41:53Z" level=debug msg="new slot" prefix="diva/process/slots/v0" remaining_slots=2 slot=94 timeframe=1
+time="2024-05-25T11:41:53Z" level=debug msg="new head" block=92 prefix="diva/process/web3/v0"
+time="2024-05-25T11:41:53Z" level=debug msg="processed events" from_block=25 prefix="diva/process/block_events/v0" to_block=92
+time="2024-05-25T11:42:05Z" level=debug msg="new slot" prefix="diva/process/slots/v0" remaining_slots=1 slot=95 timeframe=1
+time="2024-05-25T11:42:05Z" level=debug msg="new head" block=93 prefix="diva/process/web3/v0"
+time="2024-05-25T11:42:05Z" level=debug msg="processed events" from_block=25 prefix="diva/process/block_events/v0" to_block=93
+time="2024-05-25T11:42:17Z" level=debug msg="new slot" prefix="diva/process/slots/v0" remaining_slots=32 slot=96 timeframe=2
+time="2024-05-25T11:42:17Z" level=info msg="new timeframe started" prefix="diva/process/slots/v0" timeframe=2
+time="2024-05-25T11:42:17Z" level=debug msg="dkg finished" dkg_id=f15ae81e-5a85-4559-9fc6-3674c886a7fa pending_validator_id=1 prefix="diva/process/dkg_coordinator_manager/v0/$a/$nm"
+time="2024-05-25T11:42:17Z" level=debug msg="contribution collector started" dkg_id=f15ae81e-5a85-4559-9fc6-3674c886a7fa prefix="diva/process/dkg_coordinator_manager/v0/$a"
+time="2024-05-25T11:42:17Z" level=debug msg=GRPC endpoint="/dkg.DKGCoordinatorService/Join" prefix="divanet/process/network/v0" remote_addr=0x15dCD6F51CB2F78c53c047C1e9bE14e75E297474
+time="2024-05-25T11:42:17Z" level=debug msg=GRPC endpoint="/dkg.DKGCoordinatorService/Join" prefix="divanet/process/network/v0" remote_addr=0x66207632c750a2FF438b293826bd580DEE85DE6E
+time="2024-05-25T11:42:17Z" level=debug msg=GRPC endpoint="/dkg.DKGCoordinatorService/Join" prefix="divanet/process/network/v0" remote_addr=0xfaF739D4853f73fd005B4ec7310aAdC9B7c7A70a
+time="2024-05-25T11:42:17Z" level=debug msg=GRPC endpoint="/dkg.DKGCoordinatorService/Join" prefix="divanet/process/network/v0" remote_addr=0xc088D49c11cF01B5b5Cf81b4cf040Fa7b75f2Ea5
+time="2024-05-25T11:42:17Z" level=debug msg=GRPC endpoint="/dkg.DKGCoordinatorService/Join" prefix="divanet/process/network/v0" remote_addr=0x483f2db8072A8053F9Df5E8F937525Fc4aaD4ab5
+time="2024-05-25T11:42:17Z" level=debug msg="contribution received" dkg_id=f15ae81e-5a85-4559-9fc6-3674c886a7fa node=0x66207632c750a2FF438b293826bd580DEE85DE6E prefix="diva/process/dkg_coordinator_manager/v0/$a/$x9"
+time="2024-05-25T11:42:17Z" level=debug msg="participant joined" node=0xfaF739D4853f73fd005B4ec7310aAdC9B7c7A70a operator=0x4CcB6C4Cd5196A5EC4Ea35326f4eAA635ee17BA2 participants_count=1 pending_validator_id=1 prefix="diva/process/dkg_coordinator_manager/v0/$a/$nm"
+time="2024-05-25T11:42:17Z" level=debug msg="participant joined" node=0x15dCD6F51CB2F78c53c047C1e9bE14e75E297474 operator=0x91bc2Dd660e3009e495F1aC75e6DAE91E564cc90 participants_count=2 pending_validator_id=1 prefix="diva/process/dkg_coordinator_manager/v0/$a/$nm"
+time="2024-05-25T11:42:17Z" level=debug msg="participant joined" node=0x483f2db8072A8053F9Df5E8F937525Fc4aaD4ab5 operator=0x55bc7005d449c5271F91d4E436ec672311d7A259 participants_count=3 pending_validator_id=1 prefix="diva/process/dkg_coordinator_manager/v0/$a/$nm"
+time="2024-05-25T11:42:17Z" level=debug msg="contribution received" dkg_id=f15ae81e-5a85-4559-9fc6-3674c886a7fa node=0x483f2db8072A8053F9Df5E8F937525Fc4aaD4ab5 prefix="diva/process/dkg_coordinator_manager/v0/$a/$x9"
+time="2024-05-25T11:42:17Z" level=debug msg="contribution received" dkg_id=f15ae81e-5a85-4559-9fc6-3674c886a7fa node=0x15dCD6F51CB2F78c53c047C1e9bE14e75E297474 prefix="diva/process/dkg_coordinator_manager/v0/$a/$x9"
+time="2024-05-25T11:42:17Z" level=debug msg="contribution received" dkg_id=f15ae81e-5a85-4559-9fc6-3674c886a7fa node=0xc088D49c11cF01B5b5Cf81b4cf040Fa7b75f2Ea5 prefix="diva/process/dkg_coordinator_manager/v0/$a/$x9"
+time="2024-05-25T11:42:17Z" level=debug msg="contribution received" dkg_id=f15ae81e-5a85-4559-9fc6-3674c886a7fa node=0xfaF739D4853f73fd005B4ec7310aAdC9B7c7A70a prefix="diva/process/dkg_coordinator_manager/v0/$a/$x9"
+time="2024-05-25T11:42:17Z" level=debug msg=GRPC endpoint="/dkg.DKGCoordinatorService/SubmitContributions" prefix="divanet/process/network/v0" remote_addr=0x66207632c750a2FF438b293826bd580DEE85DE6E
+time="2024-05-25T11:42:17Z" level=debug msg=GRPC endpoint="/dkg.DKGCoordinatorService/SubmitContributions" prefix="divanet/process/network/v0" remote_addr=0x483f2db8072A8053F9Df5E8F937525Fc4aaD4ab5
+time="2024-05-25T11:42:17Z" level=debug msg=GRPC endpoint="/dkg.DKGCoordinatorService/SubmitContributions" prefix="divanet/process/network/v0" remote_addr=0x15dCD6F51CB2F78c53c047C1e9bE14e75E297474
+time="2024-05-25T11:42:17Z" level=debug msg="all contribution sent back" dkg_id=f15ae81e-5a85-4559-9fc6-3674c886a7fa prefix="diva/process/dkg_coordinator_manager/v0/$a/$x9"
+time="2024-05-25T11:42:17Z" level=debug msg=GRPC endpoint="/dkg.DKGCoordinatorService/SubmitContributions" prefix="divanet/process/network/v0" remote_addr=0xc088D49c11cF01B5b5Cf81b4cf040Fa7b75f2Ea5
+time="2024-05-25T11:42:17Z" level=debug msg=GRPC endpoint="/dkg.DKGCoordinatorService/SubmitContributions" prefix="divanet/process/network/v0" remote_addr=0xfaF739D4853f73fd005B4ec7310aAdC9B7c7A70a
+time="2024-05-25T11:42:17Z" level=debug msg="signatures collector started" dkg_id=f15ae81e-5a85-4559-9fc6-3674c886a7fa prefix="diva/process/dkg_coordinator_manager/v0/$a"
+time="2024-05-25T11:42:17Z" level=debug msg="participant joined" node=0xc088D49c11cF01B5b5Cf81b4cf040Fa7b75f2Ea5 operator=0xFd70C095066c9b6b0530Ba9E11897B19Bdc8a3bA participants_count=4 pending_validator_id=1 prefix="diva/process/dkg_coordinator_manager/v0/$a/$nm"
+time="2024-05-25T11:42:17Z" level=debug msg="participant joined" node=0x66207632c750a2FF438b293826bd580DEE85DE6E operator=0x490FBF52538456E5E433818f6e725C28e63eE3f8 participants_count=5 pending_validator_id=1 prefix="diva/process/dkg_coordinator_manager/v0/$a/$nm"
+time="2024-05-25T11:42:17Z" level=debug msg="signatures received" bls_index=0x0200000000000000000000000000000000000000000000000000000000000000 dkg_id=f15ae81e-5a85-4559-9fc6-3674c886a7fa node=0xfaF739D4853f73fd005B4ec7310aAdC9B7c7A70a prefix="diva/process/dkg_coordinator_manager/v0/$a/$xd"
+time="2024-05-25T11:42:17Z" level=debug msg=GRPC endpoint="/dkg.DKGCoordinatorService/SubmitSignatures" prefix="divanet/process/network/v0" remote_addr=0xfaF739D4853f73fd005B4ec7310aAdC9B7c7A70a
+time="2024-05-25T11:42:17Z" level=debug msg="signatures received" bls_index=0x0100000000000000000000000000000000000000000000000000000000000000 dkg_id=f15ae81e-5a85-4559-9fc6-3674c886a7fa node=0x66207632c750a2FF438b293826bd580DEE85DE6E prefix="diva/process/dkg_coordinator_manager/v0/$a/$xd"
+time="2024-05-25T11:42:17Z" level=debug msg=GRPC endpoint="/dkg.DKGCoordinatorService/SubmitSignatures" prefix="divanet/process/network/v0" remote_addr=0x66207632c750a2FF438b293826bd580DEE85DE6E
+time="2024-05-25T11:42:17Z" level=debug msg="signatures received" bls_index=0x0300000000000000000000000000000000000000000000000000000000000000 dkg_id=f15ae81e-5a85-4559-9fc6-3674c886a7fa node=0x483f2db8072A8053F9Df5E8F937525Fc4aaD4ab5 prefix="diva/process/dkg_coordinator_manager/v0/$a/$xd"
+time="2024-05-25T11:42:17Z" level=debug msg=GRPC endpoint="/dkg.DKGCoordinatorService/SubmitSignatures" prefix="divanet/process/network/v0" remote_addr=0x483f2db8072A8053F9Df5E8F937525Fc4aaD4ab5
+time="2024-05-25T11:42:17Z" level=debug msg="signatures received" bls_index=0x0500000000000000000000000000000000000000000000000000000000000000 dkg_id=f15ae81e-5a85-4559-9fc6-3674c886a7fa node=0xc088D49c11cF01B5b5Cf81b4cf040Fa7b75f2Ea5 prefix="diva/process/dkg_coordinator_manager/v0/$a/$xd"
+time="2024-05-25T11:42:17Z" level=debug msg=GRPC endpoint="/dkg.DKGCoordinatorService/SubmitSignatures" prefix="divanet/process/network/v0" remote_addr=0xc088D49c11cF01B5b5Cf81b4cf040Fa7b75f2Ea5
+time="2024-05-25T11:42:17Z" level=debug msg="signatures received" bls_index=0x0400000000000000000000000000000000000000000000000000000000000000 dkg_id=f15ae81e-5a85-4559-9fc6-3674c886a7fa node=0x15dCD6F51CB2F78c53c047C1e9bE14e75E297474 prefix="diva/process/dkg_coordinator_manager/v0/$a/$xd"
+time="2024-05-25T11:42:17Z" level=debug msg="all signatures received" dkg_id=f15ae81e-5a85-4559-9fc6-3674c886a7fa prefix="diva/process/dkg_coordinator_manager/v0/$a/$xd"
+time="2024-05-25T11:42:17Z" level=debug msg=GRPC endpoint="/dkg.DKGCoordinatorService/SubmitSignatures" prefix="divanet/process/network/v0" remote_addr=0x15dCD6F51CB2F78c53c047C1e9bE14e75E297474
+time="2024-05-25T11:42:17Z" level=debug msg="dht value put" key="0.pending_validators=1" prefix="*network.putValueTask$xo"
+time="2024-05-25T11:42:17Z" level=debug msg="new head" block=94 prefix="diva/process/web3/v0"
+time="2024-05-25T11:42:17Z" level=debug msg="processed events" from_block=25 prefix="diva/process/block_events/v0" to_block=94
+time="2024-05-25T11:42:29Z" level=debug msg="new slot" prefix="diva/process/slots/v0" remaining_slots=31 slot=97 timeframe=2
+time="2024-05-25T11:42:29Z" level=debug msg="new head" block=95 prefix="diva/process/web3/v0"
+time="2024-05-25T11:42:29Z" level=debug msg="processed events" from_block=25 prefix="diva/process/block_events/v0" to_block=95
+time="2024-05-25T11:42:41Z" level=debug msg="new slot" prefix="diva/process/slots/v0" remaining_slots=30 slot=98 timeframe=2
+time="2024-05-25T11:42:41Z" level=debug msg="new head" block=96 prefix="diva/process/web3/v0"
+time="2024-05-25T11:42:41Z" level=debug msg="processed events" from_block=25 prefix="diva/process/block_events/v0" to_block=96
+time="2024-05-25T11:42:53Z" level=debug msg="new slot" prefix="diva/process/slots/v0" remaining_slots=29 slot=99 timeframe=2
+time="2024-05-25T11:42:53Z" level=debug msg="new head" block=97 prefix="diva/process/web3/v0"
+time="2024-05-25T11:42:53Z" level=debug msg="processed events" from_block=25 prefix="diva/process/block_events/v0" to_block=97
+time="2024-05-25T11:43:05Z" level=debug msg="new slot" prefix="diva/process/slots/v0" remaining_slots=28 slot=100 timeframe=2
+time="2024-05-25T11:43:05Z" level=debug msg="new head" block=98 prefix="diva/process/web3/v0"
+time="2024-05-25T11:43:05Z" level=debug msg="processed events" from_block=25 prefix="diva/process/block_events/v0" to_block=98
+time="2024-05-25T11:43:17Z" level=debug msg="new slot" prefix="diva/process/slots/v0" remaining_slots=27 slot=101 timeframe=2
+time="2024-05-25T11:43:17Z" level=debug msg="new head" block=99 prefix="diva/process/web3/v0"
+time="2024-05-25T11:43:17Z" level=debug msg="processed events" from_block=25 prefix="diva/process/block_events/v0" to_block=99
+time="2024-05-25T11:43:29Z" level=debug msg="new slot" prefix="diva/process/slots/v0" remaining_slots=26 slot=102 timeframe=2
+time="2024-05-25T11:43:29Z" level=debug msg="new head" block=100 prefix="diva/process/web3/v0"
+time="2024-05-25T11:43:29Z" level=debug msg="processed events" from_block=25 prefix="diva/process/block_events/v0" to_block=100
+time="2024-05-25T11:43:41Z" level=debug msg="new slot" prefix="diva/process/slots/v0" remaining_slots=25 slot=103 timeframe=2
+time="2024-05-25T11:43:41Z" level=debug msg="new head" block=101 prefix="diva/process/web3/v0"
+time="2024-05-25T11:43:41Z" level=debug msg="processed events" from_block=25 prefix="diva/process/block_events/v0" to_block=101
+time="2024-05-25T11:43:53Z" level=debug msg="new slot" prefix="diva/process/slots/v0" remaining_slots=24 slot=104 timeframe=2
+time="2024-05-25T11:43:53Z" level=debug msg="no better DKG created" pending_validator_id=1 prefix="diva/process/dkg_coordinator_manager/v0/$a/$nm"
+time="2024-05-25T11:43:53Z" level=error msg=GRPC endpoint="/dkg.DKGCoordinatorService/Join" error="cannot create a better DKG" prefix="divanet/process/network/v0" remote_addr=0xc088D49c11cF01B5b5Cf81b4cf040Fa7b75f2Ea5
+time="2024-05-25T11:43:53Z" level=error msg=GRPC endpoint="/dkg.DKGCoordinatorService/Join" error="cannot create a better DKG" prefix="divanet/process/network/v0" remote_addr=0xfaF739D4853f73fd005B4ec7310aAdC9B7c7A70a
+time="2024-05-25T11:43:53Z" level=error msg=GRPC endpoint="/dkg.DKGCoordinatorService/Join" error="cannot create a better DKG" prefix="divanet/process/network/v0" remote_addr=0x66207632c750a2FF438b293826bd580DEE85DE6E
+time="2024-05-25T11:43:53Z" level=error msg=GRPC endpoint="/dkg.DKGCoordinatorService/Join" error="cannot create a better DKG" prefix="divanet/process/network/v0" remote_addr=0x15dCD6F51CB2F78c53c047C1e9bE14e75E297474
+time="2024-05-25T11:43:53Z" level=error msg=GRPC endpoint="/dkg.DKGCoordinatorService/Join" error="cannot create a better DKG" prefix="divanet/process/network/v0" remote_addr=0x483f2db8072A8053F9Df5E8F937525Fc4aaD4ab5
+time="2024-05-25T11:43:53Z" level=debug msg="participant joined" node=0x483f2db8072A8053F9Df5E8F937525Fc4aaD4ab5 operator=0x55bc7005d449c5271F91d4E436ec672311d7A259 participants_count=1 pending_validator_id=1 prefix="diva/process/dkg_coordinator_manager/v0/$a/$nm"
+time="2024-05-25T11:43:53Z" level=debug msg="new head" block=102 prefix="diva/process/web3/v0"
+time="2024-05-25T11:43:53Z" level=debug msg="processed events" from_block=25 prefix="diva/process/block_events/v0" to_block=102
+time="2024-05-25T11:43:53Z" level=debug msg="participant joined" node=0xc088D49c11cF01B5b5Cf81b4cf040Fa7b75f2Ea5 operator=0xFd70C095066c9b6b0530Ba9E11897B19Bdc8a3bA participants_count=2 pending_validator_id=1 prefix="diva/process/dkg_coordinator_manager/v0/$a/$nm"
+time="2024-05-25T11:43:53Z" level=debug msg="participant joined" node=0x66207632c750a2FF438b293826bd580DEE85DE6E operator=0x490FBF52538456E5E433818f6e725C28e63eE3f8 participants_count=3 pending_validator_id=1 prefix="diva/process/dkg_coordinator_manager/v0/$a/$nm"
+time="2024-05-25T11:44:05Z" level=debug msg="new slot" prefix="diva/process/slots/v0" remaining_slots=23 slot=105 timeframe=2
+time="2024-05-25T11:44:05Z" level=debug msg="new head" block=103 prefix="diva/process/web3/v0"
+time="2024-05-25T11:44:05Z" level=debug msg="processed events" from_block=25 prefix="diva/process/block_events/v0" to_block=103
+time="2024-05-25T11:44:17Z" level=debug msg="new slot" prefix="diva/process/slots/v0" remaining_slots=22 slot=106 timeframe=2
+time="2024-05-25T11:44:17Z" level=debug msg="new head" block=104 prefix="diva/process/web3/v0"
+time="2024-05-25T11:44:17Z" level=debug msg="processed events" from_block=25 prefix="diva/process/block_events/v0" to_block=104
+time="2024-05-25T11:44:29Z" level=debug msg="new slot" prefix="diva/process/slots/v0" remaining_slots=21 slot=107 timeframe=2
+time="2024-05-25T11:44:29Z" level=debug msg="new head" block=105 prefix="diva/process/web3/v0"
+time="2024-05-25T11:44:29Z" level=debug msg="processed events" from_block=25 prefix="diva/process/block_events/v0" to_block=105
+time="2024-05-25T11:44:41Z" level=debug msg="new slot" prefix="diva/process/slots/v0" remaining_slots=20 slot=108 timeframe=2
+time="2024-05-25T11:44:41Z" level=debug msg="participant joined" node=0xfaF739D4853f73fd005B4ec7310aAdC9B7c7A70a operator=0x4CcB6C4Cd5196A5EC4Ea35326f4eAA635ee17BA2 participants_count=4 pending_validator_id=1 prefix="diva/process/dkg_coordinator_manager/v0/$a/$nm"
+time="2024-05-25T11:44:41Z" level=debug msg="participant joined" node=0x15dCD6F51CB2F78c53c047C1e9bE14e75E297474 operator=0x91bc2Dd660e3009e495F1aC75e6DAE91E564cc90 participants_count=5 pending_validator_id=1 prefix="diva/process/dkg_coordinator_manager/v0/$a/$nm"
+time="2024-05-25T11:44:41Z" level=debug msg="new head" block=106 prefix="diva/process/web3/v0"
+time="2024-05-25T11:44:41Z" level=debug msg="processed events" from_block=25 prefix="diva/process/block_events/v0" to_block=106
+time="2024-05-25T11:44:53Z" level=debug msg="new slot" prefix="diva/process/slots/v0" remaining_slots=19 slot=109 timeframe=2
+time="2024-05-25T11:44:53Z" level=debug msg="new head" block=107 prefix="diva/process/web3/v0"
+time="2024-05-25T11:44:53Z" level=debug msg="processed events" from_block=25 prefix="diva/process/block_events/v0" to_block=107
+time="2024-05-25T11:45:05Z" level=debug msg="new slot" prefix="diva/process/slots/v0" remaining_slots=18 slot=110 timeframe=2
+time="2024-05-25T11:45:05Z" level=debug msg="new head" block=108 prefix="diva/process/web3/v0"
+time="2024-05-25T11:45:05Z" level=debug msg="processed events" from_block=25 prefix="diva/process/block_events/v0" to_block=108
+time="2024-05-25T11:45:17Z" level=debug msg="new slot" prefix="diva/process/slots/v0" remaining_slots=17 slot=111 timeframe=2
+time="2024-05-25T11:45:17Z" level=debug msg="new head" block=109 prefix="diva/process/web3/v0"
+time="2024-05-25T11:45:17Z" level=debug msg="processed events" from_block=25 prefix="diva/process/block_events/v0" to_block=109
+time="2024-05-25T11:45:29Z" level=debug msg="new slot" prefix="diva/process/slots/v0" remaining_slots=16 slot=112 timeframe=2
+time="2024-05-25T11:45:29Z" level=debug msg="no better DKG created" pending_validator_id=1 prefix="diva/process/dkg_coordinator_manager/v0/$a/$nm"
+time="2024-05-25T11:45:29Z" level=error msg=GRPC endpoint="/dkg.DKGCoordinatorService/Join" error="cannot create a better DKG" prefix="divanet/process/network/v0" remote_addr=0x15dCD6F51CB2F78c53c047C1e9bE14e75E297474
+time="2024-05-25T11:45:29Z" level=error msg=GRPC endpoint="/dkg.DKGCoordinatorService/Join" error="cannot create a better DKG" prefix="divanet/process/network/v0" remote_addr=0x483f2db8072A8053F9Df5E8F937525Fc4aaD4ab5
+time="2024-05-25T11:45:29Z" level=error msg=GRPC endpoint="/dkg.DKGCoordinatorService/Join" error="cannot create a better DKG" prefix="divanet/process/network/v0" remote_addr=0xc088D49c11cF01B5b5Cf81b4cf040Fa7b75f2Ea5
+time="2024-05-25T11:45:29Z" level=error msg=GRPC endpoint="/dkg.DKGCoordinatorService/Join" error="cannot create a better DKG" prefix="divanet/process/network/v0" remote_addr=0x66207632c750a2FF438b293826bd580DEE85DE6E
+time="2024-05-25T11:45:29Z" level=error msg=GRPC endpoint="/dkg.DKGCoordinatorService/Join" error="cannot create a better DKG" prefix="divanet/process/network/v0" remote_addr=0xfaF739D4853f73fd005B4ec7310aAdC9B7c7A70a
+time="2024-05-25T11:45:29Z" level=debug msg="participant joined" node=0x483f2db8072A8053F9Df5E8F937525Fc4aaD4ab5 operator=0x55bc7005d449c5271F91d4E436ec672311d7A259 participants_count=1 pending_validator_id=1 prefix="diva/process/dkg_coordinator_manager/v0/$a/$nm"
+time="2024-05-25T11:45:29Z" level=debug msg="new head" block=110 prefix="diva/process/web3/v0"
+time="2024-05-25T11:45:29Z" level=debug msg="processed events" from_block=25 prefix="diva/process/block_events/v0" to_block=110
+time="2024-05-25T11:45:29Z" level=debug msg="participant joined" node=0xc088D49c11cF01B5b5Cf81b4cf040Fa7b75f2Ea5 operator=0xFd70C095066c9b6b0530Ba9E11897B19Bdc8a3bA participants_count=2 pending_validator_id=1 prefix="diva/process/dkg_coordinator_manager/v0/$a/$nm"
+time="2024-05-25T11:45:29Z" level=debug msg="participant joined" node=0x66207632c750a2FF438b293826bd580DEE85DE6E operator=0x490FBF52538456E5E433818f6e725C28e63eE3f8 participants_count=3 pending_validator_id=1 prefix="diva/process/dkg_coordinator_manager/v0/$a/$nm"
+time="2024-05-25T11:45:41Z" level=debug msg="new slot" prefix="diva/process/slots/v0" remaining_slots=15 slot=113 timeframe=2
+time="2024-05-25T11:45:41Z" level=debug msg="new head" block=111 prefix="diva/process/web3/v0"
+time="2024-05-25T11:45:41Z" level=debug msg="processed events" from_block=25 prefix="diva/process/block_events/v0" to_block=111
+time="2024-05-25T11:45:53Z" level=debug msg="new slot" prefix="diva/process/slots/v0" remaining_slots=14 slot=114 timeframe=2
+time="2024-05-25T11:45:53Z" level=debug msg="new head" block=112 prefix="diva/process/web3/v0"
+time="2024-05-25T11:45:53Z" level=debug msg="processed events" from_block=25 prefix="diva/process/block_events/v0" to_block=112
+time="2024-05-25T11:46:05Z" level=debug msg="new slot" prefix="diva/process/slots/v0" remaining_slots=13 slot=115 timeframe=2
+time="2024-05-25T11:46:05Z" level=debug msg="new head" block=113 prefix="diva/process/web3/v0"
+time="2024-05-25T11:46:05Z" level=debug msg="processed events" from_block=25 prefix="diva/process/block_events/v0" to_block=113
+time="2024-05-25T11:46:17Z" level=debug msg="new slot" prefix="diva/process/slots/v0" remaining_slots=12 slot=116 timeframe=2
+time="2024-05-25T11:46:17Z" level=debug msg="participant joined" node=0xfaF739D4853f73fd005B4ec7310aAdC9B7c7A70a operator=0x4CcB6C4Cd5196A5EC4Ea35326f4eAA635ee17BA2 participants_count=4 pending_validator_id=1 prefix="diva/process/dkg_coordinator_manager/v0/$a/$nm"
+time="2024-05-25T11:46:17Z" level=debug msg="participant joined" node=0x15dCD6F51CB2F78c53c047C1e9bE14e75E297474 operator=0x91bc2Dd660e3009e495F1aC75e6DAE91E564cc90 participants_count=5 pending_validator_id=1 prefix="diva/process/dkg_coordinator_manager/v0/$a/$nm"
+time="2024-05-25T11:46:17Z" level=debug msg="new head" block=114 prefix="diva/process/web3/v0"
+time="2024-05-25T11:46:17Z" level=debug msg="processed events" from_block=25 prefix="diva/process/block_events/v0" to_block=114
+time="2024-05-25T11:46:29Z" level=debug msg="new slot" prefix="diva/process/slots/v0" remaining_slots=11 slot=117 timeframe=2
+time="2024-05-25T11:46:29Z" level=debug msg="new head" block=115 prefix="diva/process/web3/v0"
+time="2024-05-25T11:46:29Z" level=debug msg="processed events" from_block=25 prefix="diva/process/block_events/v0" to_block=115
+time="2024-05-25T11:46:41Z" level=debug msg="new slot" prefix="diva/process/slots/v0" remaining_slots=10 slot=118 timeframe=2
+time="2024-05-25T11:46:41Z" level=debug msg="new head" block=116 prefix="diva/process/web3/v0"
+time="2024-05-25T11:46:41Z" level=debug msg="processed events" from_block=25 prefix="diva/process/block_events/v0" to_block=116
+time="2024-05-25T11:46:53Z" level=debug msg="new slot" prefix="diva/process/slots/v0" remaining_slots=9 slot=119 timeframe=2
+time="2024-05-25T11:46:53Z" level=debug msg="new head" block=117 prefix="diva/process/web3/v0"
+time="2024-05-25T11:46:53Z" level=debug msg="processed events" from_block=25 prefix="diva/process/block_events/v0" to_block=117
+time="2024-05-25T11:47:05Z" level=debug msg="new slot" prefix="diva/process/slots/v0" remaining_slots=8 slot=120 timeframe=2
+time="2024-05-25T11:47:05Z" level=debug msg="no better DKG created" pending_validator_id=1 prefix="diva/process/dkg_coordinator_manager/v0/$a/$nm"
+time="2024-05-25T11:47:05Z" level=error msg=GRPC endpoint="/dkg.DKGCoordinatorService/Join" error="cannot create a better DKG" prefix="divanet/process/network/v0" remote_addr=0x483f2db8072A8053F9Df5E8F937525Fc4aaD4ab5
+time="2024-05-25T11:47:05Z" level=error msg=GRPC endpoint="/dkg.DKGCoordinatorService/Join" error="cannot create a better DKG" prefix="divanet/process/network/v0" remote_addr=0x66207632c750a2FF438b293826bd580DEE85DE6E
+time="2024-05-25T11:47:05Z" level=error msg=GRPC endpoint="/dkg.DKGCoordinatorService/Join" error="cannot create a better DKG" prefix="divanet/process/network/v0" remote_addr=0x15dCD6F51CB2F78c53c047C1e9bE14e75E297474
+time="2024-05-25T11:47:05Z" level=error msg=GRPC endpoint="/dkg.DKGCoordinatorService/Join" error="cannot create a better DKG" prefix="divanet/process/network/v0" remote_addr=0xc088D49c11cF01B5b5Cf81b4cf040Fa7b75f2Ea5
+time="2024-05-25T11:47:05Z" level=error msg=GRPC endpoint="/dkg.DKGCoordinatorService/Join" error="cannot create a better DKG" prefix="divanet/process/network/v0" remote_addr=0xfaF739D4853f73fd005B4ec7310aAdC9B7c7A70a
+time="2024-05-25T11:47:05Z" level=debug msg="participant joined" node=0x483f2db8072A8053F9Df5E8F937525Fc4aaD4ab5 operator=0x55bc7005d449c5271F91d4E436ec672311d7A259 participants_count=1 pending_validator_id=1 prefix="diva/process/dkg_coordinator_manager/v0/$a/$nm"
+time="2024-05-25T11:47:05Z" level=debug msg="new head" block=118 prefix="diva/process/web3/v0"
+time="2024-05-25T11:47:05Z" level=debug msg="processed events" from_block=25 prefix="diva/process/block_events/v0" to_block=118
+time="2024-05-25T11:47:05Z" level=debug msg="participant joined" node=0xc088D49c11cF01B5b5Cf81b4cf040Fa7b75f2Ea5 operator=0xFd70C095066c9b6b0530Ba9E11897B19Bdc8a3bA participants_count=2 pending_validator_id=1 prefix="diva/process/dkg_coordinator_manager/v0/$a/$nm"
+time="2024-05-25T11:47:05Z" level=debug msg="participant joined" node=0x66207632c750a2FF438b293826bd580DEE85DE6E operator=0x490FBF52538456E5E433818f6e725C28e63eE3f8 participants_count=3 pending_validator_id=1 prefix="diva/process/dkg_coordinator_manager/v0/$a/$nm"

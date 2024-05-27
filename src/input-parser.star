@@ -26,19 +26,18 @@ def diva_input_parser(plan, input_args):
     total_part = 0
     diva_eth_nodes = 0
     diva_eth_start_index = 0
-    diva_eth_start_found=0
-    part_index=0
+    diva_eth_start_found = 0
+
     if "participants" in input_args:
         for participant in input_args["participants"]:
             if "validator_count" in participant:
-                total_val +=  (participant["validator_count"]*participant["count"]) if participant["count"] else participant["validator_count"]
+                total_val += participant["validator_count"]
                 if participant["validator_count"] == 0:
                     diva_eth_nodes += participant["count"]
                     diva_eth_start_found = 1
-            total_part += participant["count"] if participant["count"] else 1
-            part_index += 1
-            if diva_eth_start_found != 0:
-                diva_eth_start_index =part_index
+        total_part += participant["count"] if participant["count"] else 1
+        if diva_eth_start_found == 0:
+            diva_eth_start_index += 1
 
     input_args["diva_eth_start_index"] = diva_eth_start_index
     input_args["diva_eth_nodes"] = diva_eth_nodes

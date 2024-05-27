@@ -14,13 +14,13 @@ address = "0xc6b02336ed0c282789747F6bd5E0d59A99D3dE16"
 initial_implementation = "0x63e6DDE6763C3466C7b45Be880f7eE5dC2ca3E25"
 
 [contracts.implementations]
-"0x63e6DDE6763C3466C7b45Be880f7eE5dC2ca3E25" = "688c3270fe2ebec298f8400eaf8f8e9150c4d35528f43a6564dcc5ad0b96e97e"
+"0x63e6DDE6763C3466C7b45Be880f7eE5dC2ca3E25" = "d40c3cf9e41bb1bf594b26d26a8ec8becba66625dcf2138a854d8a23f5a1a6f2"
 
 [[contracts]]
 proxy = true
 contract_name = "operator_manager"
-address = "0x373E0B8B80A15cdf587C1263654c6B5edd195a43"
-initial_implementation = "0x23217be1b5767Cc8D8a4de6de43ed4587BFa335e"
+address = "0x23217be1b5767Cc8D8a4de6de43ed4587BFa335e"
+initial_implementation = "0x373E0B8B80A15cdf587C1263654c6B5edd195a43"
 
 [contracts.implementations]
-"0x23217be1b5767Cc8D8a4de6de43ed4587BFa335e" = "0816379793ee77d893972ad7cdae878a3192f0da4591b575bb0c7fb4a827e8e5"
+"0x373E0B8B80A15cdf587C1263654c6B5edd195a43" = "0b6f3c0ef9d1ed0a17f6e89f3daa8f01e471e4315d13b50c3c2b3da25f246f42"

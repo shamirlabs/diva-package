@@ -24,8 +24,8 @@ for pcap_file in "$test_dir"/*.pcap; do
     rm "$pcap_file"
 done
 
-rm $test_dir/*.log
-rm $test_dir/*.csv
+#rm $test_dir/*.log
+#rm $test_dir/*.csv
 
 for container in "${!containers[@]}"; do
     while IFS= read -r container_info; do

@@ -1,12 +1,10 @@
-DIVA_SC_SERVICE_NAME = "diva-smartcontract-deployer"
-DIVA_SC_REGISTER_NAME = "diva-smartcontract-register"
 utils = import_module("./utils.star")
 constants = import_module("./constants.star")
 
 
 def init(plan, el_url, sender_priv):
     plan.add_service(
-        name=DIVA_SC_SERVICE_NAME,
+        name=constants.DIVA_SC_SERVICE_NAME,
         config=ServiceConfig(
             image=constants.DIVA_SC_IMAGE,
             env_vars={"CUSTOM_URL": el_url, "CUSTOM_PRIVATE_KEY": sender_priv},
@@ -15,14 +13,13 @@ def init(plan, el_url, sender_priv):
     )
 
 
-def deploy(plan, el_rpc, delay_sc, chainID, sc_verif):
+def deploy(plan, el_rpc, delay_sc, chainID, sc_verif,genesis_time):
     plan.exec(
-        service_name=DIVA_SC_SERVICE_NAME,
+        service_name=constants.DIVA_SC_SERVICE_NAME,
         recipe=ExecRecipe(command=["sleep", "0"]),
     )
-
     fund = plan.wait(
-        service_name=DIVA_SC_SERVICE_NAME,
+        service_name=constants.DIVA_SC_SERVICE_NAME,
         recipe=ExecRecipe(
             command=[
                 "/bin/sh",
@@ -38,7 +35,7 @@ def deploy(plan, el_rpc, delay_sc, chainID, sc_verif):
     )
 
     create2factory = plan.wait(
-        service_name=DIVA_SC_SERVICE_NAME,
+        service_name=constants.DIVA_SC_SERVICE_NAME,
         recipe=ExecRecipe(
             command=[
                 "/bin/sh",
@@ -52,14 +49,13 @@ def deploy(plan, el_rpc, delay_sc, chainID, sc_verif):
         interval = "3s",
         timeout = "3m",         
     )
-
     deploy = plan.wait(
-        service_name=DIVA_SC_SERVICE_NAME,
+        service_name=constants.DIVA_SC_SERVICE_NAME,
         recipe=ExecRecipe(
             command=[
                 "/bin/sh",
                 "-c",
-                "TEST=true forge script scripts/Deploy.s.sol -vv  --rpc-url={0} --broadcast --private-key=bcdf20249abf0ed6d944c0288fad489e33f66b3960d9e6229c1cd214ed3bbe31".format(el_rpc)
+                "NETWORK_ID=3151908 MIN_WITHDRAWAL_REQUEST_AMOUNT=\"0.1 ether\" MAX_WITHDRAWAL_REQUEST_AMOUNT=\"100 ether\" MAX_WITHDRAWAL_REQUEST_FULFILLMENT_AMOUNT=10 WITHDRAWAL_FEE=\"0.03 ether\" OPERATORS_FEE=1000 ERA_DURATION=225 SECONDS_PER_SLOT=12 ETH2_DEPOSIT_CONTRACT=0x4242424242424242424242424242424242424242 DEPLOYER_ADDRESS=0x8943545177806ED17B9F23F0a21ee5948eCaa776 TEST=true DEFAULT_EPOCHS_PER_TIMEFRAME=1 GENESIS_TIME_NETWORK={0} forge script scripts/Deploy.s.sol -vv  --rpc-url={1} --broadcast --private-key=bcdf20249abf0ed6d944c0288fad489e33f66b3960d9e6229c1cd214ed3bbe31 --legacy".format(genesis_time, el_rpc)
             ]
         ),
         field="code", 
@@ -69,7 +65,7 @@ def deploy(plan, el_rpc, delay_sc, chainID, sc_verif):
         timeout = "3m",        
     )
     validator_manager = plan.exec(
-        service_name=DIVA_SC_SERVICE_NAME,
+        service_name=constants.DIVA_SC_SERVICE_NAME,
         recipe=ExecRecipe(
             command=[
                 "/bin/sh",
@@ -84,14 +80,25 @@ def deploy(plan, el_rpc, delay_sc, chainID, sc_verif):
 
 def fund(plan, el_rpc, address):
     plan.exec(
-        service_name=DIVA_SC_SERVICE_NAME,
+        service_name=constants.DIVA_SC_SERVICE_NAME,
         recipe=ExecRecipe(
             command=[
                 "/bin/sh",
                 "-c",
-                "cast send {0} --value \"0.1 ether\" --private-key bcdf20249abf0ed6d944c0288fad489e33f66b3960d9e6229c1cd214ed3bbe31 --rpc-url {1}".format(
+                "cast send {0} --value \"100 ether\" --private-key bcdf20249abf0ed6d944c0288fad489e33f66b3960d9e6229c1cd214ed3bbe31 --rpc-url {1}".format(
                     address,el_rpc
                 ),
+            ]
+        ),
+    )
+def collateral(plan, el_rpc, priv_key,value):
+    plan.exec(
+        service_name=constants.DIVA_SC_SERVICE_NAME,
+        recipe=ExecRecipe(
+            command=[
+                "/bin/sh",
+                "-c",
+                "DEPLOYER_ADDRESS=0x8943545177806ED17B9F23F0a21ee5948eCaa776 COLLATERAL_AMOUNT=\"{0} ether\" forge script scripts/testnet/AddCollateral.s.sol -vvv --rpc-url={1} --broadcast --private-key {2}".format(value,el_rpc,priv_key)
             ]
         ),
     )
@@ -99,7 +106,7 @@ def fund(plan, el_rpc, address):
 
 def new_key(plan):
     result = plan.exec(
-        service_name=DIVA_SC_SERVICE_NAME,
+        service_name=constants.DIVA_SC_SERVICE_NAME,
         recipe=ExecRecipe(
             command=[
                 "/bin/sh",
@@ -118,19 +125,40 @@ def new_key(plan):
     return address, private_key
 
 def register(plan, node_address, node_private_key, el_rpc, operator_private_key):
-    plan.print(node_address)
-    plan.print(node_private_key)
-    plan.print(el_rpc)
-    plan.print(operator_private_key)
     result = plan.exec(
-        service_name=DIVA_SC_SERVICE_NAME,
+        service_name=constants.DIVA_SC_SERVICE_NAME,
         recipe=ExecRecipe(
             command=[
                 "/bin/sh",
                 "-c",
-                "NODE_ADDRESS={0} NODE_PRIVATE_KEY={1} forge script ./scripts/testnet/RegisterNode.s.sol -vvv --rpc-url={2} --broadcast --private-key {3}".format(
+                "NODE_ADDRESS={0} NODE_PRIVATE_KEY={1} DEPLOYER_ADDRESS=0x8943545177806ED17B9F23F0a21ee5948eCaa776 forge script scripts/testnet/RegisterNode.s.sol -vvv --rpc-url={2} --broadcast --private-key {3}".format(
                     node_address, node_private_key, el_rpc,operator_private_key
                 )
             ],
         ),
     )
+
+def get_coord_dkg(plan, el_rpc, coord_dkg_url):
+    result = plan.exec(
+        service_name=constants.DIVA_SC_SERVICE_NAME,
+        recipe=ExecRecipe(
+            command=[
+                "/bin/sh",
+                "-c",
+                "node scripts/testnet/getCoordDKG.js {1} {0} bcdf20249abf0ed6d944c0288fad489e33f66b3960d9e6229c1cd214ed3bbe31 ".format(
+                    el_rpc, (coord_dkg_url+"/api/v1/coordinator/dkgs")
+                )
+            ],
+        ),
+    )
+    #node scripts/testnet/getCoordDKG.js http://diva-bootnode-coordinator:30000/api/v1/coordinator/dkgs
+    #pending - 1 timeframe after
+    #DEPLOYER_ADDRESS=0x8943545177806ED17B9F23F0a21ee5948eCaa776 forge script scripts/testnet/ProposeAggregationSet.s.sol -vvv --rpc-url=http://el-2-geth-nimbus:8545/ --broadcast --private-key bcdf20249abf0ed6d944c0288fad489e33f66b3960d9e6229c1cd214ed3bbe31 --legacy
+    #register  after propse 1 timeframe
+    #DEPLOYER_ADDRESS=0x8943545177806ED17B9F23F0a21ee5948eCaa776 forge script scripts/testnet/RegisterValidator.s.sol -vvv --rpc-url=http://el-2-geth-nimbus:8545/ --broadcast --private-key bcdf20249abf0ed6d944c0288fad489e33f66b3960d9e6229c1cd214ed3bbe31 --legacy  
+    # activate val no importa
+    #DEPLOYER_ADDRESS=0x8943545177806ED17B9F23F0a21ee5948eCaa776 DEPLOYER_PRIVATE_KEY=bcdf20249abf0ed6d944c0288fad489e33f66b3960d9e6229c1cd214ed3bbe31 forge script scripts/testnet/ActivateValidator.s.sol -vvv --rpc-url=http://el-2-geth-nimbus:8545/ --broadcast --private-key bcdf20249abf0ed6d944c0288fad489e33f66b3960d9e6229c1cd214ed3bbe31 --legacy  
+
+
+    #./eth2-val-tools deposit-data --fork-version="0x10000038" --withdrawals-mnemonic="giant issue aisle success illegal bike spike question tent bar rely arctic volcano long crawl hungry vocal artwork sniff fantasy very lucky have athlete" --validators-mnemonic="giant issue aisle success illegal bike spike question tent bar rely arctic volcano long crawl hungry vocal artwork sniff fantasy very lucky have athlete" --source-max=1 --source-min=0
+    #{"account":"m/12381/3600/0/0/0","deposit_data_root":"e4c2ebc78b8bfd3e5f1f6224a029ee37c24bc7ff7c8ebcd8156c9d4446461939","pubkey":"aaf6c1251e73fb600624937760fef218aace5b253bf068ed45398aeb29d821e4d2899343ddcbbe37cb3f6cf500dff26c","signature":"a001e41c00714481850760321da53091e4b14cba89857b53a06daa2696ffaa4ea3a4270ec791c1320d801e40bdf98365114d36cf88cb650110a5fb5e5d56cf9b6b2d13eb4f168c210ac1c33a9917d41f0682fff53bf780f525c819e914debae6","value":32000000000,"version":1,"withdrawal_credentials":"0048281f02e108ec495e48a25d2adb4732df75bf5750c060ff31c864c053d28d"}

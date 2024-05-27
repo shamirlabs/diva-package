@@ -1,6 +1,6 @@
 # Images
-DIVA_SERVER_IMAGE = "diva-server:18"
-DIVA_SC_IMAGE = "diva-sc:10"
+DIVA_SERVER_IMAGE = "diva-server:31"
+DIVA_SC_IMAGE = "diva-sc:29"
 DIVA_CLI_IMAGE = "diva-cli:1"
 OPERATOR_UI_IMAGE = "diva/operator-ui:latest"
 W3S_CONSENSYS = "consensys/web3signer:23.9.0"
@@ -11,6 +11,8 @@ PRYSM_IMAGE = "gcr.io/prysmaticlabs/prysm/validator:latest"
 DIVA_BOOTNODE_NAME = "diva-bootnode-coordinator"
 DIVA_DEPLOYER_CLI_NAME = "diva-cli-deployer"
 DIVA_CLI_NAME = "diva-cli"
+DIVA_SC_SERVICE_NAME = "diva-smartcontract-deployer"
+DIVA_SC_REGISTER_NAME = "diva-smartcontract-register"
 
 # Diva API endpoints
 DIVA_INFO_ENDPOINT ="/api/v1/node/info"

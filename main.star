@@ -1,7 +1,9 @@
-ethereum_package_official = import_module(
+ethereum_package_shamir = import_module(
     "github.com/kurtosis-tech/ethereum-package/main.star"
+
 )
-ethereum_package_shamir = import_module("../ethereum-package/main.star")
+
+ethereum_package_official = import_module("github.com/shamirlabs/ethereum-package@deposit_queue/main.star")
 genesis_constants = import_module(
     "github.com/shamirlabs/ethereum-package/src/prelaunch_data_generator/genesis_constants/genesis_constants.star"
 )
@@ -45,6 +47,7 @@ def run(plan, args):
     public_ports = diva_args["diva_params"]["options"]["public_ports"]
     diva_nodes = diva_args["diva_params"]["diva_nodes"]
     diva_val_type = diva_args["diva_params"]["diva_val_type"]
+    debug_nodes= diva_args["diva_params"]["options"]["debug_nodes"]
     delay_sc = "0"
     utils.initUtils(plan)
     if deploy_eth:
@@ -86,7 +89,7 @@ def run(plan, args):
     smart_contract_address = constants.DIVA_SC
 
     if deploy_diva_sc:
-        diva_sc.deploy(plan, el_rpc_uri_0, delay_sc, network_id, sc_verif)
+        diva_sc.deploy(plan, el_rpc_uri_0, delay_sc, network_id, sc_verif,genesis_time)
 
     if deploy_diva or deploy_diva_coord_boot:
         diva_cli.start_cli(plan)
@@ -149,6 +152,7 @@ def run(plan, args):
                 verify_fee_recipient,
                 network_id,
                 eth_connection_enabled,
+                debug_nodes
             )
             diva_urls.append(node_url)
             signer_urls.append(signer_url)
@@ -163,7 +167,10 @@ def run(plan, args):
                 diva_sc.fund(plan, el_rpc_uri, operator_address)
                 node_priv_key = utils.get_diva_field(plan, service_name_node, constants.DIVA_ID_ENDPOINT, "secret_key")
                 diva_sc.register(
-                    plan, node_address, node_priv_key, el_rpc_uri,operator_private_key
+                    plan, node_address, node_priv_key, el_rpc_uri, operator_private_key
+                )                
+                diva_sc.collateral(
+                    plan, el_rpc_uri,operator_private_key, 7
                 )
     if deploy_operator_ui:
         diva_operator_ui.launch(plan)
@@ -232,3 +239,7 @@ def run(plan, args):
                     verify_fee_recipient,
                     mev,
                 )
+    
+    if True:
+        diva_sc.get_coord_dkg(plan, el_rpc_uri, bootnode_url)
+      
