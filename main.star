@@ -95,9 +95,6 @@ def run(plan, args):
         diva_cli.start_cli(plan)
 
     if deploy_diva_coord_boot:
-        cl_uri_0, el_rpc_uri_0, el_ws_uri_0 = utils.get_eth_urls(
-            ethereum_network.all_participants, diva_args, 0
-        )
         bootnode, bootnode_url = diva_server.start_bootnode(
             plan,
             el_ws_uri_0,
@@ -135,15 +132,12 @@ def run(plan, args):
         diva_addresses = []
         signer_urls = []
         for index in range(0, diva_nodes):
-            cl_uri, el_rpc_uri, el_ws_uri = utils.get_eth_urls(
-                ethereum_network.all_participants, diva_args, index
-            )
             service_name_node = "diva{0}".format(index + 1)
             node, node_url, signer_url = diva_server.start_node(
                 plan,
                 service_name_node,
-                el_ws_uri,
-                cl_uri,
+                el_ws_uri_0,
+                cl_uri_0,
                 smart_contract_address,
                 bootnode_peer_id,
                 genesis_validators_root,
@@ -190,16 +184,13 @@ def run(plan, args):
             diva_cli.deploy(plan, stop_index_val - start_index_val)
 
         if use_w3s:
-            cl_uri, el_rpc_uri, el_ws_uri = utils.get_eth_urls(
-                ethereum_network.all_participants, diva_args, 0
-            )        
             w3s_url = w3s.start_node(plan, start_index_val, stop_index_val)
             if diva_val_type == "prysm":
                 prysm.launch(
                     plan,
                     "val0",
                     w3s_url,
-                    cl_uri,
+                    cl_uri_0,
                     smart_contract_address,
                     verify_fee_recipient,
                     mev,
@@ -209,22 +200,19 @@ def run(plan, args):
                     plan,
                     "val0",
                     w3s_url,
-                    cl_uri,
+                    cl_uri_0,
                     smart_contract_address,
                     verify_fee_recipient,
                     mev,
                 )
     if deploy_diva and not use_w3s:
         for index in range(0, diva_nodes):
-            cl_uri, el_rpc_uri, el_ws_uri = utils.get_eth_urls(
-                ethereum_network.all_participants, diva_args, index
-            )
             if diva_val_type == "prysm":
                 prysm.launch(
                     plan,
                     "val{0}".format(index + 1),
                     signer_urls[index],
-                    cl_uri,
+                    cl_uri_0,
                     smart_contract_address,
                     verify_fee_recipient,
                     mev,
@@ -234,7 +222,7 @@ def run(plan, args):
                     plan,
                     "val{0}".format(index + 1),
                     signer_urls[index],
-                    cl_uri,
+                    cl_uri_0,
                     smart_contract_address,
                     verify_fee_recipient,
                     mev,

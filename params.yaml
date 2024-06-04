@@ -13,13 +13,13 @@ diva_params:
   distribution: "[]"                    # Array-index is node-index and array value is number of keyshares, if empty will be randomly distributed
   
   options:
-    deploy_eth: true
-    deploy_diva_nodes: true
+    deploy_eth: false
+    deploy_diva_nodes: false
     deploy_diva_sc: true
     private_pools_only: false           # TODO: validar diva_sc and eth_true and nodes_true
-    deploy_diva_coord_boot: true
+    deploy_diva_coord_boot: false
     deploy_operator_ui: false
-    charge_pre_genesis_keys: true
+    charge_pre_genesis_keys: false
     public_ports: false
     verify_fee_recipient: false
     eth_connection_enabled: true
