@@ -1,6 +1,6 @@
 # Images
-DIVA_SERVER_IMAGE = "diva-server:31"
-DIVA_SC_IMAGE = "diva-sc:29"
+DIVA_SERVER_IMAGE = "diva-server:min"
+DIVA_SC_IMAGE = "diva-sc:min"
 DIVA_CLI_IMAGE = "diva-cli:1"
 OPERATOR_UI_IMAGE = "diva/operator-ui:latest"
 W3S_CONSENSYS = "consensys/web3signer:23.9.0"
@@ -22,15 +22,15 @@ DIVA_API_KEY = "diva"
 DIVA_VAULT_PASSWORD = DIVA_API_KEY
 
 # External Network
-HOST = "135.181.X.X"
-EL_WS_PORT = "32802"
-EL_HTTP_PORT = "32803"
-CL_PORT = "32811"
+HOST = "18.184.9.141"
+EL_WS_PORT = "33791"
+EL_HTTP_PORT = "33792"
+CL_PORT = "33795"
 EXEC_EXPL_PORT = "2878"
 DIVA_SC = "0xDeC3326BE4BaDb9A1fA7Be473Ef8370dA775889a"
 BOOTNODE_PORT = "30000"
 DIVA_VAL_INDEX_START = 64 # when deploy divas to existing eth-network
-
+BOOT_PEER_ID= "16Uiu2HAkwXpxB3ypfcpG629vrDEq5rfeVk2eDa1sWZ8chpjLhNyj"
 # Diva specifics
 PREGENESIS_VAL_SEED = "giant issue aisle success illegal bike spike question tent bar rely arctic volcano long crawl hungry vocal artwork sniff fantasy very lucky have athlete"
 

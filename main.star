@@ -1,9 +1,9 @@
-ethereum_package_shamir = import_module(
+ethereum_package_official = import_module(
     "github.com/kurtosis-tech/ethereum-package/main.star"
 
 )
 
-ethereum_package_official = import_module("github.com/shamirlabs/ethereum-package@deposit_queue/main.star")
+ethereum_package_shamir = import_module("github.com/shamirlabs/ethereum-package@deposit_queue/main.star")
 genesis_constants = import_module(
     "github.com/shamirlabs/ethereum-package/src/prelaunch_data_generator/genesis_constants/genesis_constants.star"
 )
@@ -33,21 +33,20 @@ def run(plan, args):
     deploy_operator_ui = diva_args["diva_params"]["options"]["deploy_operator_ui"]
     verify_fee_recipient = diva_args["diva_params"]["options"]["verify_fee_recipient"]
     private_pools_only = diva_args["diva_params"]["options"]["private_pools_only"]
-    charge_pre_genesis_keys = diva_args["diva_params"]["options"][
-        "charge_pre_genesis_keys"
-    ]
+    charge_pre_genesis_keys = (diva_args["diva_params"]["diva_validators"]) > 0
     mev = diva_args["mev_type"] != None
     use_w3s = diva_args["diva_params"]["use_w3s"]
     eth_connection_enabled = diva_args["diva_params"]["options"][
         "eth_connection_enabled"
     ]
-    start_index_val = int(diva_args["eth_validator_count"]) - 1
+    start_index_val = int(diva_args["diva_eth_start_index"]) - 1
     diva_validators = diva_args["diva_params"]["diva_validators"]
     distribution = diva_args["diva_params"]["distribution"]
     public_ports = diva_args["diva_params"]["options"]["public_ports"]
     diva_nodes = diva_args["diva_params"]["diva_nodes"]
     diva_val_type = diva_args["diva_params"]["diva_val_type"]
     debug_nodes= diva_args["diva_params"]["options"]["debug_nodes"]
+    minimal = diva_args["network_params"]["preset"]=="minimal"
     delay_sc = "0"
     utils.initUtils(plan)
     if deploy_eth:
@@ -58,7 +57,7 @@ def run(plan, args):
         else:
             ethereum_package = ethereum_package_official
 
-        ethereum_network = ethereum_package.run(plan, diva_args)
+        ethereum_network = ethereum_package.run(plan, args)
 
         plan.print("Succesfully launched an Ethereum Network")
         cl_uri_0, el_rpc_uri_0, el_ws_uri_0 = utils.get_eth_urls(
@@ -81,10 +80,9 @@ def run(plan, args):
 
     stop_index_val = start_index_val + diva_validators
 
-    if deploy_diva_sc :
-        diva_sc.init(
-            plan, el_rpc_uri_0, genesis_constants.PRE_FUNDED_ACCOUNTS[1].private_key
-        )
+    diva_sc.init(
+        plan, el_rpc_uri_0, genesis_constants.PRE_FUNDED_ACCOUNTS[1].private_key
+    )
 
     smart_contract_address = constants.DIVA_SC
 
@@ -105,6 +103,8 @@ def run(plan, args):
             public_ports,
             network_id,
             eth_connection_enabled,
+            debug_nodes,
+            minimal,
         )
         diva_cli.generate_identity(plan, bootnode_url)
         bootnode_address = utils.get_diva_field(
@@ -117,13 +117,14 @@ def run(plan, args):
     if deploy_diva:
         bootonde_url = "http://{0}:{1}".format(constants.HOST, constants.BOOTNODE_PORT)
         bootnode_ip = constants.HOST
-
+        bootnode_peer_id = constants.BOOT_PEER_ID
         if deploy_diva_coord_boot:
             bootnode_ip = bootnode.ip_address
 
-        bootnode_peer_id = utils.get_diva_field(
-            plan, constants.DIVA_BOOTNODE_NAME, constants.DIVA_INFO_ENDPOINT,"network_settings.peer_id"
-        )
+            bootnode_peer_id = utils.get_diva_field(
+                plan, constants.DIVA_BOOTNODE_NAME, constants.DIVA_INFO_ENDPOINT,"network_settings.peer_id"
+            )
+
 
         plan.print("Starting DIVA nodes")
 
@@ -146,7 +147,8 @@ def run(plan, args):
                 verify_fee_recipient,
                 network_id,
                 eth_connection_enabled,
-                debug_nodes
+                debug_nodes,
+                minimal
             )
             diva_urls.append(node_url)
             signer_urls.append(signer_url)
@@ -158,13 +160,13 @@ def run(plan, args):
                     operator_address,
                     operator_private_key,
                 ) = diva_sc.new_key(plan)
-                diva_sc.fund(plan, el_rpc_uri, operator_address)
+                diva_sc.fund(plan, el_rpc_uri_0, operator_address)
                 node_priv_key = utils.get_diva_field(plan, service_name_node, constants.DIVA_ID_ENDPOINT, "secret_key")
                 diva_sc.register(
-                    plan, node_address, node_priv_key, el_rpc_uri, operator_private_key
+                    plan, node_address, node_priv_key, el_rpc_uri_0, operator_private_key
                 )                
                 diva_sc.collateral(
-                    plan, el_rpc_uri,operator_private_key, 7
+                    plan, el_rpc_uri_0,operator_private_key, 7
                 )
     if deploy_operator_ui:
         diva_operator_ui.launch(plan)
@@ -228,6 +230,6 @@ def run(plan, args):
                     mev,
                 )
     
-    if True:
-        diva_sc.get_coord_dkg(plan, el_rpc_uri, bootnode_url)
+    if False:
+        diva_sc.get_coord_dkg(plan, el_rpc_uri_0, bootnode_url)
       

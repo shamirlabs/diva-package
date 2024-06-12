@@ -27,30 +27,34 @@ def diva_input_parser(plan, input_args):
     diva_eth_nodes = 0
     diva_eth_start_index = 0
     diva_eth_start_found = 0
+    network_params = input_args["network_params"]
 
     if "participants" in input_args:
         for participant in input_args["participants"]:
             if "validator_count" in participant:
-                total_val += participant["validator_count"]
+                total_val_clients= participant["count"] if participant["count"] else 1
+                total_val += participant["validator_count"]*total_val_clients
                 if participant["validator_count"] == 0:
                     diva_eth_nodes += participant["count"]
                     diva_eth_start_found = 1
-        total_part += participant["count"] if participant["count"] else 1
-        if diva_eth_start_found == 0:
-            diva_eth_start_index += 1
+            total_part += participant["count"] if participant["count"] else 1
+            if diva_eth_start_found == 0:
+                diva_eth_start_index += 1
+            if  "preset" in network_params:
+                participant["cl_image"] = ""
+
 
     input_args["diva_eth_start_index"] = diva_eth_start_index
     input_args["diva_eth_nodes"] = diva_eth_nodes
+    
 
-    if input_args["network_params"]["preregistered_validator_count"] == -1:
-        if "network_params" in input_args:
-            network_params = input_args["network_params"]
-            if "preregistered_validator_count" in network_params:
+    if "preregistered_validator_count" in network_params :
+        if input_args["network_params"]["preregistered_validator_count"] == -1:
+            if "network_params" in input_args:
                 network_params["preregistered_validator_count"] = (
                     total_val + input_args["diva_params"]["diva_validators"]
                 )
 
-    input_args["eth_validator_count"] = total_val
     diva_validators = input_args["diva_params"]["diva_validators"]
     diva_nodes = input_args["diva_params"]["diva_nodes"]
     if input_args["network_params"]["genesis_delay"] == -1:

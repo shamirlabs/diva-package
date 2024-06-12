@@ -12,6 +12,8 @@ def start_bootnode(
     expose_public,
     chain_id,
     clients_enabled,
+    debug_mode,
+    minimal
 ):
     public_ports = {}
     if expose_public:
@@ -41,6 +43,9 @@ def start_bootnode(
         "--insecure-api",
         "--enable-coordinator",
     ]
+    if minimal:
+        cmd.append("--slot-duration=6")
+        cmd.append("--slots-per-epoch=8")
 
     if clients_enabled:
         cmd.append("--execution-client-url={0}".format(el_url))
@@ -89,7 +94,8 @@ def start_node(
     verify_fee_recipient,
     chain_id,
     clients_enabled,
-    debug_nodes,
+    debug_mode,
+    minimal,
 ):
 
     ports={
@@ -99,49 +105,32 @@ def start_node(
             }
 
 
-    cmd=[]
 
-    if debug_nodes:   
-        cmd = [
-            "--db=/var/diva/config/diva.db",
-            "--w3s-address=0.0.0.0",
-            "--log-level=debug",
-            "--swagger-ui-enabled",
-            "--bootnode-address=/ip4/{0}/tcp/5050/p2p/{1}".format(
-                bootnode_ip_address, bootnode_peer_id
-            ),
-            "--master-key={0}".format(constants.DIVA_API_KEY),
-            "--genesis-fork-version=0x10000038",
-            "--gvr={0}".format(genesis_validators_root),
-            "--deposit-contract=0x4242424242424242424242424242424242424242",
-            "--chain-id={0}".format(chain_id),
-            "--genesis-time={0}".format(genesis_time),
-            "--insecure-api",
-        ]
-        ports["debugger"] = PortSpec(number=40000, transport_protocol="TCP",wait=None)
-    else:
-        cmd = [
-            "--db=/var/diva/config/diva.db",
-            "--w3s-address=0.0.0.0",
-            "--log-level=debug",
-            "--swagger-ui-enabled",
-            "--bootnode-address=/ip4/{0}/tcp/5050/p2p/{1}".format(
-                bootnode_ip_address, bootnode_peer_id
-            ),
-            "--master-key={0}".format(constants.DIVA_API_KEY),
-            "--genesis-fork-version=0x10000038",
-            "--gvr={0}".format(genesis_validators_root),
-            "--deposit-contract=0x4242424242424242424242424242424242424242",
-            "--chain-id={0}".format(chain_id),
-            "--genesis-time={0}".format(genesis_time),
-            "--insecure-api",
-        ]
+    cmd = [
+        "--db=/var/diva/config/diva.db",
+        "--w3s-address=0.0.0.0",
+        "--log-level=debug",
+        "--swagger-ui-enabled",
+        "--bootnode-address=/ip4/{0}/tcp/5050/p2p/{1}".format(
+            bootnode_ip_address, bootnode_peer_id
+        ),
+        "--master-key={0}".format(constants.DIVA_API_KEY),
+        "--genesis-fork-version=0x10000038",
+        "--gvr={0}".format(genesis_validators_root),
+        "--deposit-contract=0x4242424242424242424242424242424242424242",
+        "--chain-id={0}".format(chain_id),
+        "--genesis-time={0}".format(genesis_time),
+        "--insecure-api",
+    ]
     if clients_enabled:
         cmd.append("--execution-client-url={0}".format(el_url))
         cmd.append("--consensus-client-url={0}".format(cl_url))
         cmd.append("--deployment-contracts-config-file=/var/diva/params/contracts.toml")
-        #cmd.append("--contract=0x15482d1b8E550CcFD512fC0F9c4b82CBaf0323fC")
-        
+
+    if minimal:
+        cmd.append("--slot-duration=6")
+        cmd.append("--slots-per-epoch=8")
+
 
     if verify_fee_recipient:
         cmd.append("--verify-fee-recipient")

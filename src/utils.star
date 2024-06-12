@@ -114,27 +114,30 @@ def get_chain_id(plan, beacon_url):
 
 
 def get_eth_urls(all_participants, diva_args, index_total):
+    # index fixed to 0, todo: distribute url btw diva_eth_nodes
     if index_total != 0:
         index = index_total % diva_args["diva_eth_nodes"]
     else:
         index = 0
 
+
+    diva_args["diva_eth_start_index"]=0
     el_ip_addr = all_participants[
-        diva_args["diva_eth_start_index"] + index
+        0
     ].el_context.ip_addr
     el_ws_port = all_participants[
-        diva_args["diva_eth_start_index"] + index
+        0
     ].el_context.ws_port_num
     el_rpc_port = all_participants[
-        diva_args["diva_eth_start_index"] + index
+        0
     ].el_context.rpc_port_num
     el_rpc_uri = "http://{0}:{1}".format(el_ip_addr, el_rpc_port)
     el_ws_uri = "ws://{0}:{1}".format(el_ip_addr, el_ws_port)
     cl_ip_addr = all_participants[
-        diva_args["diva_eth_start_index"] + index
+        0
     ].cl_context.ip_addr
     cl_http_port_num = all_participants[
-        diva_args["diva_eth_start_index"] + index
+        0
     ].cl_context.http_port
     cl_uri = "http://{0}:{1}".format(cl_ip_addr, cl_http_port_num)
 
