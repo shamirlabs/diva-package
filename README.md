@@ -24,9 +24,10 @@ kurtosis engine restart
 
 
 Configuration for the Diva package deployment can be defined in two files:
+```
     - params.yaml          # Contains arguments defining the deployment itself, including parameters for both the Ethereum package and the Diva package services.
     - src/constants.star   # Used to set protocol-specific information or link one deployment to another.
-
+```
 
 ### Params.yaml
 ``````
@@ -157,6 +158,9 @@ If you want to deploy a service that requires a dependency, for expample, you wa
 git clone https://github.com/shamirlabs/diva-package
 cd diva-package
 ```
+
+[Optional] Set your pipeline preferences in `params.yaml` as described above
+
 
 In `/src/constants.star` You need to set the following docker images. If they are privates make sure you have them in your local docker registry or you are logged in in the remote one:
 ```
