@@ -158,7 +158,7 @@ git clone https://github.com/shamirlabs/diva-package
 cd diva-package
 ```
 
-In `/src/constants.star` You need to set the following docker images:
+In `/src/constants.star` You need to set the following docker images. If they are privates make sure you have them in your local docker registry or you are logged in in the remote one:
 ```
 DIVA_SERVER_IMAGE = "diva-server:min"
 DIVA_SC_IMAGE = "diva-sc:min"
