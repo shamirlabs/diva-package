@@ -171,12 +171,6 @@ kurtosis run . --enclave enclaveName --args-file params.yaml --production
 ```
 
 
-If you want to kill your enclave:
-
-```
-kurtosis rm enclaveName -f
-```
-
 ### Prefunded accounts
 For your convenience, some of the prefunded accounts -pub/priv keys- in the eth-package can be found bellow:
 
@@ -210,4 +204,7 @@ systemctl restart kurtosis
 systemctl restart docker
 ```
 
+Make sure you tag your images with different versions as the local docker registry sometimes don't get updated with the latest (although it should bc hash was different)
+
 Do you still have issues, pls check the above Upgrade Kurtosis section
+
