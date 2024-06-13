@@ -1,0 +1,146 @@
+version: "3.9"
+services:
+  geth-init:
+    image: ethereum/client-go:v1.13.15
+    user: root
+    volumes:
+      - ./data/geth:/data/geth/execution-data
+      - ./data/network-configs/genesis.json:/network-configs/network-configs/genesis.json
+    command: "init --state.scheme=path --datadir=/data/geth/execution-data /network-configs/network-configs/genesis.json"
+
+  geth:
+    image: ethereum/client-go:v1.13.15
+    container_name: geth
+    user: root
+    volumes:
+      - ./data/geth:/data/geth/execution-data
+      - ./data/network-configs/genesis.json:/network-configs/network-configs/genesis.json
+      - ./jwt:/opt/config
+    ports:
+      - "30303:30303/tcp"
+      - "30303:30303/udp"
+      - "8545:8545"
+      - "8546:8546"
+    command: >
+      --state.scheme=path     
+      --networkid=3151908 
+      --verbosity=3
+      --datadir=/data/geth/execution-data 
+      --http 
+      --http.addr=0.0.0.0 
+      --http.vhosts=* 
+      --http.corsdomain=* 
+      --http.api=admin,engine,net,eth,web3,debug,personal,txpool
+      --ws 
+      --ws.addr=0.0.0.0 
+      --ws.port=8546 
+      --ws.api=admin,engine,net,eth,web3,debug,personal,txpool 
+      --ws.origins=* 
+      --allow-insecure-unlock 
+      --authrpc.port=8551 
+      --authrpc.addr=0.0.0.0 
+      --authrpc.vhosts=* 
+      --authrpc.jwtsecret=/opt/config/jwtsecret
+      --syncmode=full 
+      --rpc.allow-unprotected-txs
+      --nat=extip:178.63.87.57
+      --discovery.port=30303 
+      --port=30303
+      --rpc.enabledeprecatedpersonal
+      --rpc.gascap=0
+      --bootnodes=enode://d1bbb67515463573d9478e0625bb48459cc673f03670a4496468ee3bcbccd69ac55e1a20887b166afddd343d3cb07e08162a0fc52ccb9c84019f3635d5f069af@95.216.242.244:30000
+    depends_on:
+      - geth-init
+    restart: always
+  prysm:
+    user: root
+    image: gcr.io/prysmaticlabs/prysm/beacon-chain:latest
+    container_name: prysm
+    volumes:
+      - ./data:/config
+      - ./jwt:/jwt
+    command: >
+      --accept-terms-of-use=true
+      --datadir=/data/prysm/beacon-data/
+      --execution-endpoint=http://geth:8551
+      --rpc-host=0.0.0.0
+      --rpc-port=4000
+      --grpc-gateway-host=0.0.0.0
+      --grpc-gateway-corsdomain=*
+      --grpc-gateway-port=3500
+      --p2p-host-ip=116.202.198.47
+      --p2p-tcp-port=13000
+      --p2p-udp-port=13000
+      --min-sync-peers=1
+      --verbosity=info
+      --slots-per-archive-point=32
+      --suggested-fee-recipient=0x8943545177806ED17B9F23F0a21ee5948eCaa776
+      --subscribe-all-subnets=true
+      --jwt-secret=/jwt/jwtsecret
+      --enable-debug-rpc-endpoints=true
+      --disable-monitoring=false
+      --monitoring-host=0.0.0.0
+      --monitoring-port=8080
+      --p2p-static-id=true
+      --chain-config-file=/config/network-configs/config.yaml
+      --genesis-state=/config/network-configs/genesis.ssz
+      --contract-deployment-block=0
+      --bootstrap-node=enr:-MS4QE7v3yWeJV_RwUgQblaCGdnOGAoJWwT4ZtiuqMrkp9b1T37jAapRyh1aukCE1CldyiVXNsChnl8xPWVzq7-VcykDh2F0dG5ldHOIAAAAAAAAAACEZXRoMpBPtyXhUAAAOP__________gmlkgnY0gmlwhF_Y8vSEcXVpY4J1MolzZWNwMjU2azGhAqbheIW5I6GPwphYOOJIh68hkHoUkbVCLUbFJ24fSKctiHN5bmNuZXRzAIN0Y3CCdTGDdWRwgnUx
+    depends_on:        
+      - geth
+    ports:
+      - "9000:9000"
+      - "9190:9190"  
+      - "3500:3500"
+    restart: always
+
+  postgres:
+    image: postgres:13
+    environment:
+      POSTGRES_DB: blockscout
+      POSTGRES_USER: blockscout
+      POSTGRES_PASSWORD: blockscout
+      POSTGRES_EXTRA_CONFIGS: "max_connections=1000"
+    ports:
+      - "5432:5432"
+    deploy:
+      resources:
+        limits:
+          cpus: '1.0'
+          memory: 1024M
+        reservations:
+          cpus: '0.1'
+          memory: 256M
+
+  blockscout:
+    image: blockscout/blockscout:6.6.0
+    depends_on:
+      - postgres
+    environment:
+      DATABASE_URL: postgres://blockscout:blockscout@postgres:5432/blockscout
+      ETHEREUM_JSONRPC_HTTP_URL: http://geth:8545/
+      ETHEREUM_JSONRPC_TRACE_URL: http://geth:8545/
+      COIN: ETH
+      MICROSERVICE_SC_VERIFIER_ENABLED: "true"
+      MICROSERVICE_SC_VERIFIER_URL: http://geth:8545
+      MICROSERVICE_SC_VERIFIER_TYPE: sc_verifier
+      INDEXER_DISABLE_PENDING_TRANSACTIONS_FETCHER: "true"
+      ECTO_USE_SSL: "false"
+      NETWORK: Kurtosis
+      SUBNETWORK: Kurtosis
+      API_V2_ENABLED: "true"
+      PORT: "4000"
+      SECRET_KEY_BASE: 56NtB48ear7+wMSf0IQuWDAAazhpb31qyc7GiyspBP2vh7t5zlCsF5QDv76chXeN
+    ports:
+      - "80:4000"
+    deploy:
+      resources:
+        limits:
+          cpus: '1.0'
+          memory: 2048M
+        reservations:
+          cpus: '0.1'
+          memory: 1024M
+    command: >
+      /bin/sh -c "bin/blockscout eval 'Elixir.Explorer.ReleaseTasks.create_and_migrate()' && bin/blockscout start"
+
