@@ -146,8 +146,9 @@ Kurtosis can sequentially deploy the following services for a Diva package setup
 - deploy of operator-ui
 - validator-clients
 
-Services can be skipped as needed, but required services/dependencies must be provided by another means, configured in constants.star.
+You can select the services you want to deploy by setting the file `./params.yaml`
 
+If you want to deploy a service that requires a dependency, for expample, you want to deploy DIVA_SC and you dont want to raise a new devnet but just deploy it on an existing one, you must set the required dependency addresses (Eth clients addresses) on `src/constants.star`.
 
 
 ## Using the Diva Package
@@ -157,9 +158,23 @@ git clone https://github.com/shamirlabs/diva-package
 cd diva-package
 ```
 
+In `/src/constants.star` You need to set the following docker images:
+```
+DIVA_SERVER_IMAGE = "diva-server:min"
+DIVA_SC_IMAGE = "diva-sc:min"
+DIVA_CLI_IMAGE = "diva-cli:1"
+```
+
+To run your settings:
+```
+kurtosis run . --enclave enclaveName --args-file params.yaml --production
+```
+
+
+If you want to kill your enclave:
 
 ```
-kurtosis run . --enclave enclaveName --production
+kurtosis rm enclaveName -f
 ```
 
 ### Prefunded accounts
