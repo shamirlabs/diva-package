@@ -1,5 +1,5 @@
 ethereum_package_official = import_module(
-    "github.com/kurtosis-tech/ethereum-package/main.star"
+    "github.com/ethpandaops/ethereum-package/main.star"
 
 )
 
@@ -57,7 +57,7 @@ def run(plan, args):
         else:
             ethereum_package = ethereum_package_official
 
-        ethereum_network = ethereum_package.run(plan, args)
+        ethereum_network = ethereum_package.run(plan, diva_args)
 
         plan.print("Succesfully launched an Ethereum Network")
         cl_uri_0, el_rpc_uri_0, el_ws_uri_0 = utils.get_eth_urls(
