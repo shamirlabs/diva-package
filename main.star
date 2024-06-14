@@ -1,6 +1,5 @@
 ethereum_package_official = import_module(
     "github.com/ethpandaops/ethereum-package/main.star"
-
 )
 
 ethereum_package_shamir = import_module("github.com/shamirlabs/ethereum-package@deposit_queue/main.star")
@@ -43,6 +42,7 @@ def run(plan, args):
     diva_validators = diva_args["diva_params"]["diva_validators"]
     distribution = diva_args["diva_params"]["distribution"]
     public_ports = diva_args["diva_params"]["options"]["public_ports"]
+    deposit_operators_eth = diva_args["diva_params"]["options"]["deposit_operators_eth"]
     diva_nodes = diva_args["diva_params"]["diva_nodes"]
     diva_val_type = diva_args["diva_params"]["diva_val_type"]
     debug_nodes= diva_args["diva_params"]["options"]["debug_nodes"]
@@ -112,7 +112,7 @@ def run(plan, args):
         )
 
         if deploy_diva_sc:
-            diva_sc.fund(plan, el_rpc_uri_0, bootnode_address)
+            diva_sc.fund(plan, el_rpc_uri_0, bootnode_address,1)
 
     if deploy_diva:
         bootonde_url = "http://{0}:{1}".format(constants.HOST, constants.BOOTNODE_PORT)
@@ -160,13 +160,13 @@ def run(plan, args):
                     operator_address,
                     operator_private_key,
                 ) = diva_sc.new_key(plan)
-                diva_sc.fund(plan, el_rpc_uri_0, operator_address)
+                diva_sc.fund(plan, el_rpc_uri_0, operator_address, deposit_operators_eth)
                 node_priv_key = utils.get_diva_field(plan, service_name_node, constants.DIVA_ID_ENDPOINT, "secret_key")
                 diva_sc.register(
                     plan, node_address, node_priv_key, el_rpc_uri_0, operator_private_key
                 )                
                 diva_sc.collateral(
-                    plan, el_rpc_uri_0,operator_private_key, 7
+                    plan, el_rpc_uri_0,operator_private_key, deposit_operators_eth
                 )
     if deploy_operator_ui:
         diva_operator_ui.launch(plan)

@@ -78,15 +78,15 @@ def deploy(plan, el_rpc, delay_sc, chainID, sc_verif,genesis_time):
     
 
 
-def fund(plan, el_rpc, address):
+def fund(plan, el_rpc, address,deposit_operators_eth):
     plan.exec(
         service_name=constants.DIVA_SC_SERVICE_NAME,
         recipe=ExecRecipe(
             command=[
                 "/bin/sh",
                 "-c",
-                "cast send {0} --value \"100 ether\" --private-key bcdf20249abf0ed6d944c0288fad489e33f66b3960d9e6229c1cd214ed3bbe31 --rpc-url {1}".format(
-                    address,el_rpc
+                "cast send {0} --value \"{2} ether\" --private-key bcdf20249abf0ed6d944c0288fad489e33f66b3960d9e6229c1cd214ed3bbe31 --rpc-url {1}".format(
+                    address,el_rpc,(deposit_operators_eth+1)
                 ),
             ]
         ),

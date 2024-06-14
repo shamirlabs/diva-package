@@ -1,0 +1,40 @@
+version: '3.8'
+
+services:
+
+  diva:
+    image: diva-server:mulit-coord
+    platform: linux/amd64
+    container_name: diva
+    hostname: diva
+    restart: unless-stopped
+    command:
+      - '--db=/opt/diva/data/diva.db'
+      - '--w3s-address=0.0.0.0'
+      - '--execution-client-url=ws://88.99.57.154:8546'
+      - '--consensus-client-url=http://88.99.57.154:3500'
+      - '--master-key=diva'
+      - '--genesis-time=1718191398'
+      - '--gvr=0xd1ec305b97bf6336571c2348e4a8bf173684b0cdb7e55f7e6554d51f8478b5a3'
+      - '--genesis-fork-version=0x10000038'
+      - '--deposit-contract=0x4242424242424242424242424242424242424242'
+      - '--chain-id=3151908'
+      - '--bootnode-address='
+    environment:
+      - DIVA_VAULT_PASSWORD=${DIVA_VAULT_PASSWORD}
+      - OTEL_EXPORTER_JAEGER_AGENT_HOST=jaeger
+      - OTEL_EXPORTER_JAEGER_AGENT_PORT=6831
+    volumes:
+      - ./.diva/data/:/opt/diva/data/
+    ports:
+      - "5050:5050"
+      - "30000:30000"
+
+
+  operator-ui:
+    image: diva/operator-ui:v24.3.2
+    platform: linux/amd64
+    container_name: operator-ui
+    restart: unless-stopped
+    ports:
+      - "80:80"

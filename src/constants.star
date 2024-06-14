@@ -1,6 +1,6 @@
 # Images
-DIVA_SERVER_IMAGE = "diva-server:min"
-DIVA_SC_IMAGE = "diva-sc:min"
+DIVA_SERVER_IMAGE = "ghcr.io/shamirlabs/diva:v24.5.0-12-g3f323ae1"
+DIVA_SC_IMAGE = "diva-sc:32"
 DIVA_CLI_IMAGE = "diva-cli:1"
 OPERATOR_UI_IMAGE = "diva/operator-ui:latest"
 W3S_CONSENSYS = "consensys/web3signer:23.9.0"

@@ -7,7 +7,7 @@ get_container() {
             echo "$(docker ps | grep "$1" | awk '{print $1}')"
             ;;
         bc)
-            echo "$(docker ps | grep "cl-2" | awk '{print $1}')"
+            echo "$(docker ps | grep "cl-" | awk '{print $1}')"
             ;;
         *)
             echo "Error: Alias de contenedor desconocido"
