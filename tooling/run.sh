@@ -1,7 +1,7 @@
 #!/bin/bash
 
-kurtosis enclave rm diva2 -f
-kurtosis run --enclave diva2 .. --args-file ../params.yaml --production
+kurtosis enclave rm eth -f
+kurtosis run --enclave eth .. --args-file ../params.yaml --production
 container_info=$(docker ps | grep -E 'dora|beaconchain-frontend')
 
 host_port=$(echo "$container_info" | awk -F'[ :>-]+' '{for (i=1; i<=NF; i++) if ($i ~ /0.0.0.0/) print $(i+1)}')

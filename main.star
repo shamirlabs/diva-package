@@ -18,6 +18,7 @@ prysm = import_module("./src/prysm.star")
 utils = import_module("./src/utils.star")
 input_parser = import_module("./src/input-parser.star")
 w3s = import_module("./src/w3s.star")
+oracle = import_module("./src/oracle.star")
 
 
 def run(plan, args):
@@ -47,6 +48,10 @@ def run(plan, args):
     diva_val_type = diva_args["diva_params"]["diva_val_type"]
     debug_nodes= diva_args["diva_params"]["options"]["debug_nodes"]
     minimal = diva_args["network_params"]["preset"]=="minimal"
+
+    deploy_oracle= diva_args["diva_params"]["options"]["deploy_oracle"]
+
+
     delay_sc = "0"
     utils.initUtils(plan)
     if deploy_eth:
@@ -79,6 +84,18 @@ def run(plan, args):
         start_index_val = constants.DIVA_VAL_INDEX_START
 
     stop_index_val = start_index_val + diva_validators
+
+
+    if deploy_oracle:
+        oracle.start_oracle(
+            plan,
+            el_ws_uri_0,
+            cl_uri_0,
+            network_id,
+            minimal,
+            genesis_time,
+            genesis_validators_root
+        )
 
     diva_sc.init(
         plan, el_rpc_uri_0, genesis_constants.PRE_FUNDED_ACCOUNTS[1].private_key
