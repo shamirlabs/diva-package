@@ -181,7 +181,7 @@ def init_accounting(plan, el_rpc):
             command=[
                 "/bin/sh",
                 "-c",
-                "forge script scripts/TakeSnapshot.s.sol -vvvv --rpc-url={0} --broadcast --private-key {1}".format(
+                "forge script scripts/SubmitReport.s.sol -vvvv --rpc-url={0} --broadcast --private-key {1}".format(
                 el_rpc,deployer_private_key
                 )
             ],
@@ -193,7 +193,7 @@ def init_accounting(plan, el_rpc):
             command=[
                 "/bin/sh",
                 "-c",
-                "forge script scripts/TakeSnapshot.s.sol -vvvv --rpc-url={0} --broadcast --private-key {1}".format(
+                "forge script scripts/UpdateEra.s.sol -vvvv --rpc-url={0} --broadcast --private-key {1}".format(
                 el_rpc,deployer_private_key
                 )
             ],
@@ -202,7 +202,7 @@ def init_accounting(plan, el_rpc):
 
     #DKG 
     #node scripts/testnet/getCoordDKG.js http://diva-bootnode-coordinator:30000/api/v1/coordinator/dkgs
-    #pending - 1 timeframe after
+    #pending - 2 timeframe after
     #DEPLOYER_ADDRESS=0x8943545177806ED17B9F23F0a21ee5948eCaa776 forge script scripts/testnet/ProposeAggregationSet.s.sol -vvv --rpc-url=http://el-2-geth-nimbus:8545/ --broadcast --private-key bcdf20249abf0ed6d944c0288fad489e33f66b3960d9e6229c1cd214ed3bbe31 --legacy
     #register  after propse 1 timeframe
     #DEPLOYER_ADDRESS=0x8943545177806ED17B9F23F0a21ee5948eCaa776 forge script scripts/testnet/RegisterValidator.s.sol -vvv --rpc-url=http://el-2-geth-nimbus:8545/ --broadcast --private-key bcdf20249abf0ed6d944c0288fad489e33f66b3960d9e6229c1cd214ed3bbe31 --legacy  

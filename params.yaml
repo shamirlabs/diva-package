@@ -7,7 +7,7 @@ network_params:
   preset: minimal
 
 diva_params:
-  diva_validators: 1
+  diva_validators: 0
   diva_nodes: 5
   diva_val_type: prysm
   distribution: "[]"                    # Array-index is node-index and array value is number of keyshares, if empty will be randomly distributed
@@ -52,4 +52,4 @@ persistent: false
 mev_type: null
 port_publisher:
   public_port_start: 30000
-  nat_exit_ip: 65.109.109.62
+  nat_exit_ip: auto
