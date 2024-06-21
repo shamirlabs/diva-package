@@ -13,7 +13,7 @@ def init(plan, el_url, sender_priv):
     )
 
 
-def deploy(plan, el_rpc, delay_sc, chainID, sc_verif,genesis_time):
+def deploy(plan, el_rpc, delay_sc, chainID, sc_verif,genesis_time, minimal):
     plan.exec(
         service_name=constants.DIVA_SC_SERVICE_NAME,
         recipe=ExecRecipe(command=["sleep", "0"]),
@@ -49,14 +49,23 @@ def deploy(plan, el_rpc, delay_sc, chainID, sc_verif,genesis_time):
         interval = "3s",
         timeout = "3m",         
     )
+    if minimal:
+        command=[
+            "/bin/sh",
+            "-c",
+            "SLOTS_PER_EPOCH=8 SECONDS_PER_SLOT=6 ERA_DURATION=10 NETWORK_ID=3151908 MIN_WITHDRAWAL_REQUEST_AMOUNT=\"0.1 ether\" MAX_WITHDRAWAL_REQUEST_AMOUNT=\"100 ether\" MAX_WITHDRAWAL_REQUEST_FULFILLMENT_AMOUNT=10 WITHDRAWAL_FEE=\"0.03 ether\" OPERATORS_FEE=1000 ERA_DURATION=225 SECONDS_PER_SLOT=12 ETH2_DEPOSIT_CONTRACT=0x4242424242424242424242424242424242424242 DEPLOYER_ADDRESS=0x8943545177806ED17B9F23F0a21ee5948eCaa776 TEST=true DEFAULT_EPOCHS_PER_TIMEFRAME=1 GENESIS_TIME_NETWORK={0} forge script scripts/Deploy.s.sol -vv  --rpc-url={1} --broadcast --private-key=bcdf20249abf0ed6d944c0288fad489e33f66b3960d9e6229c1cd214ed3bbe31 --legacy".format(genesis_time, el_rpc)
+        ]    
+    else:
+        command=[
+            "/bin/sh",
+            "-c",
+            "NETWORK_ID=3151908 MIN_WITHDRAWAL_REQUEST_AMOUNT=\"0.1 ether\" MAX_WITHDRAWAL_REQUEST_AMOUNT=\"100 ether\" MAX_WITHDRAWAL_REQUEST_FULFILLMENT_AMOUNT=10 WITHDRAWAL_FEE=\"0.03 ether\" OPERATORS_FEE=1000 ERA_DURATION=225 SECONDS_PER_SLOT=12 ETH2_DEPOSIT_CONTRACT=0x4242424242424242424242424242424242424242 DEPLOYER_ADDRESS=0x8943545177806ED17B9F23F0a21ee5948eCaa776 TEST=true DEFAULT_EPOCHS_PER_TIMEFRAME=1 GENESIS_TIME_NETWORK={0} forge script scripts/Deploy.s.sol -vv  --rpc-url={1} --broadcast --private-key=bcdf20249abf0ed6d944c0288fad489e33f66b3960d9e6229c1cd214ed3bbe31 --legacy".format(genesis_time, el_rpc)
+        ]
+
     deploy = plan.wait(
         service_name=constants.DIVA_SC_SERVICE_NAME,
         recipe=ExecRecipe(
-            command=[
-                "/bin/sh",
-                "-c",
-                "NETWORK_ID=3151908 MIN_WITHDRAWAL_REQUEST_AMOUNT=\"0.1 ether\" MAX_WITHDRAWAL_REQUEST_AMOUNT=\"100 ether\" MAX_WITHDRAWAL_REQUEST_FULFILLMENT_AMOUNT=10 WITHDRAWAL_FEE=\"0.03 ether\" OPERATORS_FEE=1000 ERA_DURATION=225 SECONDS_PER_SLOT=12 ETH2_DEPOSIT_CONTRACT=0x4242424242424242424242424242424242424242 DEPLOYER_ADDRESS=0x8943545177806ED17B9F23F0a21ee5948eCaa776 TEST=true DEFAULT_EPOCHS_PER_TIMEFRAME=1 GENESIS_TIME_NETWORK={0} forge script scripts/Deploy.s.sol -vv  --rpc-url={1} --broadcast --private-key=bcdf20249abf0ed6d944c0288fad489e33f66b3960d9e6229c1cd214ed3bbe31 --legacy".format(genesis_time, el_rpc)
-            ]
+            command=command
         ),
         field="code", 
         assertion="==", 

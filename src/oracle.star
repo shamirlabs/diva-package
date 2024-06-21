@@ -31,11 +31,7 @@ def start_oracle(
             max_cpu=1000
         )
     )
-    oracle= plan.add_service(
-        name="oracle-app",
-        config=ServiceConfig(
-            image=constants.DIVA_ORACLE_IMAGE,  
-            env_vars = {
+    env_vars = {
                 "CONSENSUS_CLIENT_ADDRESS": cl_url,
                 "EXECUTION_CLIENT_ADDRESS": el_url,
                 "ACCOUNTING_MANAGER_CONTRACT_ADDRESS": "0x076eB2080f312DE95b8423AD8fF8b00a8505c895",
@@ -45,7 +41,6 @@ def start_oracle(
                 "BALANCE_VERIFIER_CONTRACT_ADDRESS": "0xaEBa55e07C3a3471030b190e7EE8Ee87567e878c",
                 "EPOCH_START": "0",
                 "EPOCHS_RANGE_LIMIT": "2",  # 225 epochs : 1 day
-                "SLOTS_PER_EPOCH": "32",
                 "KEY_SHARES_PER_VALIDATOR": "5",
                 "ORACLE_PRIVATE_KEY": "f296c7802555da2a5a662be70e078cbd38b44f96f8615ae529da41122ce8db05",
                 "CHAIN_ID": "{0}".format(chain_id),
@@ -65,7 +60,22 @@ def start_oracle(
                 "FORK_VERSION": "0x10000038",
                 "GVR":  "{0}".format(gvr),
                 "DEPOSIT_CONTRACT_HEX":"0x4242424242424242424242424242424242424242",
-            },
+            }
+
+    if minimal:
+        env_vars.update({
+            "SLOTS_PER_EPOCH": "32",
+            })
+    else:
+        env_vars.update({
+            "SLOTS_PER_EPOCH": "8",
+            })        
+            
+    oracle= plan.add_service(
+        name="oracle-app",
+        config=ServiceConfig(
+            image=constants.DIVA_ORACLE_IMAGE,  
+            env_vars = env_vars,
         ),
     )
 

@@ -65,6 +65,7 @@ def run(plan, args):
         ethereum_network = ethereum_package.run(plan, diva_args)
 
         plan.print("Succesfully launched an Ethereum Network")
+        
         cl_uri_0, el_rpc_uri_0, el_ws_uri_0 = utils.get_eth_urls(
             ethereum_network.all_participants, diva_args, 0
         )
@@ -104,7 +105,7 @@ def run(plan, args):
     smart_contract_address = constants.DIVA_SC
 
     if deploy_diva_sc:
-        diva_sc.deploy(plan, el_rpc_uri_0, delay_sc, network_id, sc_verif,genesis_time)
+        diva_sc.deploy(plan, el_rpc_uri_0, delay_sc, network_id, sc_verif, genesis_time, minimal)
 
     if deploy_diva or deploy_diva_coord_boot:
         diva_cli.start_cli(plan)

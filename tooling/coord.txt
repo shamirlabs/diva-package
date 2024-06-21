@@ -1,0 +1,626 @@
+[39m[39m┌[0m[0m[39m[39m─[0m[0m[39m[39m─[0m[0m[39m[39m─[0m[0m[39m[39m─[0m[0m[39m[39m─[0m[0m[39m[39m─[0m[0m[39m[39m─[0m[0m[39m[39m─[0m[0m[39m[39m─[0m[0m[39m[39m─[0m[0m[39m[39m─[0m[0m[39m[39m─[0m[0m[39m[39m─[0m[0m[39m[39m─[0m[0m[39m[39m─[0m[0m[39m[39m─[0m[0m[39m[39m─[0m[0m[39m[39m─[0m[0m[39m[39m─[0m[0m[39m[39m─[0m[0m[39m[39m─[0m[0m[39m[39m─[0m[0m[39m[39m─[0m[0m[39m[39m─[0m[0m[39m[39m─[0m[0m[39m[39m─[0m[0m[39m[39m─[0m[0m[39m[39m─[0m[0m[39m[39m─[0m[0m[39m[39m─[0m[0m[39m[39m─[0m[0m[39m[39m─[0m[0m[39m[39m─[0m[0m[39m[39m─[0m[0m[39m[39m─[0m[0m[39m[39m─[0m[0m[39m[39m─[0m[0m[39m[39m─[0m[0m[39m[39m─[0m[0m[39m[39m─[0m[0m[39m[39m─[0m[0m[39m[39m─[0m[0m[39m[39m─[0m[0m[39m[39m─[0m[0m[39m[39m─[0m[0m[39m[39m─[0m[0m[39m[39m─[0m[0m[39m[39m─[0m[0m[39m[39m─[0m[0m[39m[39m─[0m[0m[39m[39m─[0m[0m[39m[39m─[0m[0m[39m[39m─[0m[0m[39m[39m┐[0m[0m
+[39m[39m|[0m[0m [39m[39m[0m[0m                                                    [39m[39m|[0m[0m
+[39m[39m|[0m[0m [39m[39m[49m[49m                                      [0m[39m[0m[39m[0m[39m[0m[39m [0m[0m             [39m[39m|[0m[0m
+[39m[39m|[0m[0m [39m[39m[49m[49m[97;1m[97;1m     ██████  ██ ██    ██  █████       [0m[39m[49m[0m[39m[49m[0m[39m[0m[39m[0m[39m[0m[39m [0m[0m             [39m[39m|[0m[0m
+[39m[39m|[0m[0m [39m[39m[49m[49m[97;1m[97;1m     ██   ██ ██ ██    ██ ██   ██      [0m[39m[49m[0m[39m[49m[0m[39m[0m[39m[0m[39m[0m[39m [0m[0m             [39m[39m|[0m[0m
+[39m[39m|[0m[0m [39m[39m[49m[49m[97;1m[97;1m     ██   ██ ██ ██    ██ ███████      [0m[39m[49m[0m[39m[49m[0m[39m[0m[39m[0m[39m[0m[39m [0m[0m             [39m[39m|[0m[0m
+[39m[39m|[0m[0m [39m[39m[49m[49m[97;1m[97;1m     ██   ██ ██  ██  ██  ██   ██      [0m[39m[49m[0m[39m[49m[0m[39m[0m[39m[0m[39m[0m[39m [0m[0m             [39m[39m|[0m[0m
+[39m[39m|[0m[0m [39m[39m[49m[49m[97;1m[97;1m     ██████  ██   ████   ██   ██      [0m[39m[49m[0m[39m[49m[0m[39m[0m[39m[0m[39m[0m[39m [0m[0m             [39m[39m|[0m[0m
+[39m[39m|[0m[0m [39m[39m[49m[49m[97;1m[97;1m                                      [0m[39m[49m[0m[39m[49m[0m[39m[0m[39m[0m[39m[0m[39m [0m[0m             [39m[39m|[0m[0m
+[39m[39m|[0m[0m [39m[39m[49m[49m                                      [0m[39m[0m[39m [0m[0m             [39m[39m|[0m[0m
+[39m[39m|[0m[0m [39m[39mLogging level           [90m[90m | [0m[39m[0m[39m[32;1m[32;1mdebug[0m[39m[0m[39m[0m[39m[0m[39m                    [0m[0m[39m[39m|[0m[0m
+[39m[39m|[0m[0m [39m[39mBoltDB                  [90m[90m | [0m[39m[0m[39m[32;1m[32;1m/var/diva/config/diva.db[0m[39m[0m[39m[0m[39m[0m[39m [0m[0m[39m[39m|[0m[0m
+[39m[39m|[0m[0m [39m[39mdiva API                [90m[90m | [0m[39m[0m[39m[32;1m[32;1m0.0.0.0:30000[0m[39m[0m[39m[0m[39m[0m[39m            [0m[0m[39m[39m|[0m[0m
+[39m[39m|[0m[0m [39m[39mSwagger UI              [90m[90m | [0m[39m[0m[39m[32;1m[32;1menabled[0m[39m[0m[39m[0m[39m[0m[39m                  [0m[0m[39m[39m|[0m[0m
+[39m[39m|[0m[0m [39m[39mWeb3Signer API          [90m[90m | [0m[39m[0m[39m[32;1m[32;1m0.0.0.0:9000[0m[39m[0m[39m[0m[39m[0m[39m             [0m[0m[39m[39m|[0m[0m
+[39m[39m|[0m[0m [39m[39mP2P network address     [90m[90m | [0m[39m[0m[39m[32;1m[32;1m0.0.0.0:5050[0m[39m[0m[39m[0m[39m[0m[39m             [0m[0m[39m[39m|[0m[0m
+[39m[39m|[0m[0m [39m[39mdiva contract address   [90m[90m | [0m[39m[0m[39m[97;2m[97;2mdisabled[0m[39m[0m[39m[0m[39m[0m[39m                 [0m[0m[39m[39m|[0m[0m
+[39m[39m|[0m[0m [39m[39mExecution client address[90m[90m | [0m[39m[0m[39m[32;1m[32;1mws://172.16.0.11:8546[0m[39m[0m[39m[0m[39m[0m[39m    [0m[0m[39m[39m|[0m[0m
+[39m[39m|[0m[0m [39m[39mConsensus client address[90m[90m | [0m[39m[0m[39m[32;1m[32;1mhttp://172.16.0.13:3500[0m[39m[0m[39m[0m[39m[0m[39m  [0m[0m[39m[39m|[0m[0m
+[39m[39m|[0m[0m [39m[39mDKG coordination enabled[90m[90m | [0m[39m[0m[39m[32;1m[32;1mtrue[0m[39m[0m[39m                     [0m[0m[39m[39m|[0m[0m
+[39m[39m|[0m[0m [39m[39m[0m[0m                                                    [39m[39m|[0m[0m
+[39m[39m|[0m[0m [39m[39m[0m[0m                                                    [39m[39m|[0m[0m
+[39m[39m└[0m[0m[39m[39m─[0m[0m[39m[39m─[0m[0m[39m[39m─[0m[0m[39m[39m─[0m[0m[39m[39m─[0m[0m[39m[39m─[0m[0m[39m[39m─[0m[0m[39m[39m─[0m[0m[39m[39m─[0m[0m[39m[39m─[0m[0m[39m[39m─[0m[0m[39m[39m─[0m[0m[39m[39m─[0m[0m[39m[39m─[0m[0m[39m[39m─[0m[0m[39m[39m─[0m[0m[39m[39m─[0m[0m[39m[39m─[0m[0m[39m[39m─[0m[0m[39m[39m─[0m[0m[39m[39m─[0m[0m[39m[39m─[0m[0m[39m[39m─[0m[0m[39m[39m─[0m[0m[39m[39m─[0m[0m[39m[39m─[0m[0m[39m[39m─[0m[0m[39m[39m─[0m[0m[39m[39m─[0m[0m[39m[39m─[0m[0m[39m[39m─[0m[0m[39m[39m─[0m[0m[39m[39m─[0m[0m[39m[39m─[0m[0m[39m[39m─[0m[0m[39m[39m─[0m[0m[39m[39m─[0m[0m[39m[39m─[0m[0m[39m[39m─[0m[0m[39m[39m─[0m[0m[39m[39m─[0m[0m[39m[39m─[0m[0m[39m[39m─[0m[0m[39m[39m─[0m[0m[39m[39m─[0m[0m[39m[39m─[0m[0m[39m[39m─[0m[0m[39m[39m─[0m[0m[39m[39m─[0m[0m[39m[39m─[0m[0m[39m[39m─[0m[0m[39m[39m─[0m[0m[39m[39m─[0m[0m[39m[39m┘[0m[0m
+time="2024-06-21T09:39:31Z" level=info msg="divaproto plugin installed" cc_url="http://172.16.0.13:3500" cc_version= chain_id=3151908 ec_url="ws://172.16.0.11:8546" ec_version="Geth/v1.13.15-stable-c5ba367e/linux-amd64/go1.21.9" genesis_fork_version=0x10000038 genesis_time=1718962675 genesis_validators_root=0x7674392cba81eb085b83b9b68c5b45870afa6d739645efab36ebd43a13a39e2b prefix=divaproto.plugin slot_duration=6s slots_per_epoch=8
+time="2024-06-21T09:39:31Z" level=debug msg="skipping divanet plugin initialization: missing identity" prefix=divanet.plugin
+[2m9:39AM[0m [92mINF[0m actor system started [2mlib=[0mProto.Actor [2msystem=[0mRKFJnYRaWC4RAY63dC6fji [2mid=[0mRKFJnYRaWC4RAY63dC6fji
+time="2024-06-21T09:39:31Z" level=info msg="running diva client" prefix=DivaInitializer version=v24.5.0-15-g5c029483
+time="2024-06-21T09:39:31Z" level=info msg="enabled master api" api_key=diva prefix=DivaInitializer
+time="2024-06-21T09:39:31Z" level=debug msg="starting http server" prefix=process.DivaApiProcess
+[39m[39m┌[0m[0m[39m[39m─[0m[0m[39m[39m─[0m[0m[39m[39m─[0m[0m[39m[39m─[0m[0m[39m[39m─[0m[0m[39m[39m─[0m[0m[39m[39m─[0m[0m[39m[39m─[0m[0m[39m[39m─[0m[0m[39m[39m─[0m[0m[39m[39m─[0m[0m[39m[39m─[0m[0m[39m[39m─[0m[0m[39m[39m─[0m[0m[39m[39m─[0m[0m[39m[39m─[0m[0m[39m[39m─[0m[0m[39m[39m─[0m[0m[39m[39m─[0m[0m[39m[39m─[0m[0m[39m[39m─[0m[0m[39m[39m─[0m[0m[39m[39m─[0m[0m[39m[39m─[0m[0m[39m[39m─[0m[0m[39m[39m─[0m[0m[39m[39m─[0m[0m[39m[39m─[0m[0m[39m[39m─[0m[0m[39m[39m─[0m[0m[39m[39m─[0m[0m[39m[39m─[0m[0m[39m[39m─[0m[0m[39m[39m─[0m[0m[39m[39m─[0m[0m[39m[39m─[0m[0m[39m[39m─[0m[0m[39m[39m─[0m[0m[39m[39m─[0m[0m[39m[39m─[0m[0m[39m[39m─[0m[0m[39m[39m─[0m[0m[39m[39m─[0m[0m[39m[39m─[0m[0m[39m[39m─[0m[0m[39m[39m─[0m[0m[39m[39m─[0m[0m[39m[39m─[0m[0m[39m[39m─[0m[0m[39m[39m─[0m[0m[39m[39m─[0m[0m[39m[39m─[0m[0m[39m[39m─[0m[0m[39m[39m┐[0m[0m
+[39m[39m|[0m[0m [39m[39m[0m[0m                                                    [39m[39m|[0m[0m
+[39m[39m|[0m[0m [39m[39m[49m[49m                                      [0m[39m[0m[39m[0m[39m[0m[39m [0m[0m             [39m[39m|[0m[0m
+[39m[39m|[0m[0m [39m[39m[49m[49m[97;1m[97;1m     ██████  ██ ██    ██  █████       [0m[39m[49m[0m[39m[49m[0m[39m[0m[39m[0m[39m[0m[39m [0m[0m             [39m[39m|[0m[0m
+[39m[39m|[0m[0m [39m[39m[49m[49m[97;1m[97;1m     ██   ██ ██ ██    ██ ██   ██      [0m[39m[49m[0m[39m[49m[0m[39m[0m[39m[0m[39m[0m[39m [0m[0m             [39m[39m|[0m[0m
+[39m[39m|[0m[0m [39m[39m[49m[49m[97;1m[97;1m     ██   ██ ██ ██    ██ ███████      [0m[39m[49m[0m[39m[49m[0m[39m[0m[39m[0m[39m[0m[39m [0m[0m             [39m[39m|[0m[0m
+[39m[39m|[0m[0m [39m[39m[49m[49m[97;1m[97;1m     ██   ██ ██  ██  ██  ██   ██      [0m[39m[49m[0m[39m[49m[0m[39m[0m[39m[0m[39m[0m[39m [0m[0m             [39m[39m|[0m[0m
+[39m[39m|[0m[0m [39m[39m[49m[49m[97;1m[97;1m     ██████  ██   ████   ██   ██      [0m[39m[49m[0m[39m[49m[0m[39m[0m[39m[0m[39m[0m[39m [0m[0m             [39m[39m|[0m[0m
+[39m[39m|[0m[0m [39m[39m[49m[49m[97;1m[97;1m                                      [0m[39m[49m[0m[39m[49m[0m[39m[0m[39m[0m[39m[0m[39m [0m[0m             [39m[39m|[0m[0m
+[39m[39m|[0m[0m [39m[39m[49m[49m                                      [0m[39m[0m[39m [0m[0m             [39m[39m|[0m[0m
+[39m[39m|[0m[0m [39m[39mLogging level           [90m[90m | [0m[39m[0m[39m[32;1m[32;1mdebug[0m[39m[0m[39m[0m[39m[0m[39m                    [0m[0m[39m[39m|[0m[0m
+[39m[39m|[0m[0m [39m[39mBoltDB                  [90m[90m | [0m[39m[0m[39m[32;1m[32;1m/var/diva/config/diva.db[0m[39m[0m[39m[0m[39m[0m[39m [0m[0m[39m[39m|[0m[0m
+[39m[39m|[0m[0m [39m[39mdiva API                [90m[90m | [0m[39m[0m[39m[32;1m[32;1m0.0.0.0:30000[0m[39m[0m[39m[0m[39m[0m[39m            [0m[0m[39m[39m|[0m[0m
+[39m[39m|[0m[0m [39m[39mSwagger UI              [90m[90m | [0m[39m[0m[39m[32;1m[32;1menabled[0m[39m[0m[39m[0m[39m[0m[39m                  [0m[0m[39m[39m|[0m[0m
+[39m[39m|[0m[0m [39m[39mWeb3Signer API          [90m[90m | [0m[39m[0m[39m[32;1m[32;1m0.0.0.0:9000[0m[39m[0m[39m[0m[39m[0m[39m             [0m[0m[39m[39m|[0m[0m
+[39m[39m|[0m[0m [39m[39mP2P network address     [90m[90m | [0m[39m[0m[39m[32;1m[32;1m0.0.0.0:5050[0m[39m[0m[39m[0m[39m[0m[39m             [0m[0m[39m[39m|[0m[0m
+[39m[39m|[0m[0m [39m[39mdiva contract address   [90m[90m | [0m[39m[0m[39m[97;2m[97;2mdisabled[0m[39m[0m[39m[0m[39m[0m[39m                 [0m[0m[39m[39m|[0m[0m
+[39m[39m|[0m[0m [39m[39mExecution client address[90m[90m | [0m[39m[0m[39m[32;1m[32;1mws://172.16.0.11:8546[0m[39m[0m[39m[0m[39m[0m[39m    [0m[0m[39m[39m|[0m[0m
+[39m[39m|[0m[0m [39m[39mConsensus client address[90m[90m | [0m[39m[0m[39m[32;1m[32;1mhttp://172.16.0.13:3500[0m[39m[0m[39m[0m[39m[0m[39m  [0m[0m[39m[39m|[0m[0m
+[39m[39m|[0m[0m [39m[39mDKG coordination enabled[90m[90m | [0m[39m[0m[39m[32;1m[32;1mtrue[0m[39m[0m[39m                     [0m[0m[39m[39m|[0m[0m
+[39m[39m|[0m[0m [39m[39m[0m[0m                                                    [39m[39m|[0m[0m
+[39m[39m|[0m[0m [39m[39m[0m[0m                                                    [39m[39m|[0m[0m
+[39m[39m└[0m[0m[39m[39m─[0m[0m[39m[39m─[0m[0m[39m[39m─[0m[0m[39m[39m─[0m[0m[39m[39m─[0m[0m[39m[39m─[0m[0m[39m[39m─[0m[0m[39m[39m─[0m[0m[39m[39m─[0m[0m[39m[39m─[0m[0m[39m[39m─[0m[0m[39m[39m─[0m[0m[39m[39m─[0m[0m[39m[39m─[0m[0m[39m[39m─[0m[0m[39m[39m─[0m[0m[39m[39m─[0m[0m[39m[39m─[0m[0m[39m[39m─[0m[0m[39m[39m─[0m[0m[39m[39m─[0m[0m[39m[39m─[0m[0m[39m[39m─[0m[0m[39m[39m─[0m[0m[39m[39m─[0m[0m[39m[39m─[0m[0m[39m[39m─[0m[0m[39m[39m─[0m[0m[39m[39m─[0m[0m[39m[39m─[0m[0m[39m[39m─[0m[0m[39m[39m─[0m[0m[39m[39m─[0m[0m[39m[39m─[0m[0m[39m[39m─[0m[0m[39m[39m─[0m[0m[39m[39m─[0m[0m[39m[39m─[0m[0m[39m[39m─[0m[0m[39m[39m─[0m[0m[39m[39m─[0m[0m[39m[39m─[0m[0m[39m[39m─[0m[0m[39m[39m─[0m[0m[39m[39m─[0m[0m[39m[39m─[0m[0m[39m[39m─[0m[0m[39m[39m─[0m[0m[39m[39m─[0m[0m[39m[39m─[0m[0m[39m[39m─[0m[0m[39m[39m─[0m[0m[39m[39m─[0m[0m[39m[39m┘[0m[0m
+time="2024-06-21T09:39:32Z" level=info msg="divaproto plugin installed" cc_url="http://172.16.0.13:3500" cc_version= chain_id=3151908 ec_url="ws://172.16.0.11:8546" ec_version="Geth/v1.13.15-stable-c5ba367e/linux-amd64/go1.21.9" genesis_fork_version=0x10000038 genesis_time=1718962675 genesis_validators_root=0x7674392cba81eb085b83b9b68c5b45870afa6d739645efab36ebd43a13a39e2b prefix=divaproto.plugin slot_duration=6s slots_per_epoch=8
+[2m9:39AM[0m [92mINF[0m actor system started [2mlib=[0mProto.Actor [2msystem=[0mbtarif9SR6rW7ZkAxwWDVV [2mid=[0mbtarif9SR6rW7ZkAxwWDVV
+time="2024-06-21T09:39:32Z" level=info msg="running diva client" prefix=DivaInitializer version=v24.5.0-15-g5c029483
+time="2024-06-21T09:39:32Z" level=info msg="enabled master api" api_key=diva prefix=DivaInitializer
+time="2024-06-21T09:39:32Z" level=debug msg="starting http server" prefix=process.DivaApiProcess
+panic: runtime error: invalid memory address or nil pointer dereference
+[signal SIGSEGV: segmentation violation code=0x1 addr=0x50 pc=0x90c75c]
+
+goroutine 1 [running]:
+github.com/asynkron/protoactor-go/actor.(*PID).ref(0x0, 0xc000052ae0)
+	/root/go/pkg/mod/github.com/asynkron/protoactor-go@v0.0.0-20240413045429-76c172a71a16/actor/pid.go:28 +0x1c
+github.com/asynkron/protoactor-go/actor.(*PID).sendUserMessage(0x0, 0x28?, {0x1673780, 0xc001733890})
+	/root/go/pkg/mod/github.com/asynkron/protoactor-go@v0.0.0-20240413045429-76c172a71a16/actor/pid.go:49 +0x25
+github.com/asynkron/protoactor-go/actor.(*RootContext).sendUserMessage(0xb58165?, 0x0?, {0x1673780?, 0xc001733890?})
+	/root/go/pkg/mod/github.com/asynkron/protoactor-go@v0.0.0-20240413045429-76c172a71a16/actor/root_context.go:148 +0xb8
+github.com/asynkron/protoactor-go/actor.(*RootContext).Request(...)
+	/root/go/pkg/mod/github.com/asynkron/protoactor-go@v0.0.0-20240413045429-76c172a71a16/actor/root_context.go:117
+github.com/shamirlabs/synapse/system.(*taskPoolManagerActor).ProcessTaskSync(...)
+	/root/go/pkg/mod/github.com/shamirlabs/synapse@v0.5.3/system/task_worker_pool_manager.go:86
+github.com/shamirlabs/synapse/system.(*taskManager).Result(0xc001733860)
+	/root/go/pkg/mod/github.com/shamirlabs/synapse@v0.5.3/system/task_manager.go:94 +0xdd
+github.com/shamirlabs/synapse/system.RunSystemTask[...]({0x2766100, 0xc0004266e0?}, {0x2742ec0?, 0x35917a0?})
+	/root/go/pkg/mod/github.com/shamirlabs/synapse@v0.5.3/system/util.go:14 +0x4b
+main.initProcesses({0x276aac0, 0xc00011e680}, {0x277c5a0, 0xc000458af0})
+	/root/diva/cmd/server/initializer.go:191 +0x95c
+main.(*serverCommandHandler).Run.NewDivaInitializer.func18({0x276aac0, 0xc00011e680})
+	/root/diva/cmd/server/initializer.go:54 +0x149
+github.com/shamirlabs/synapse/system.runInitializer(0xc0004266e0, 0xc00037f578)
+	/root/go/pkg/mod/github.com/shamirlabs/synapse@v0.5.3/system/initializer_manager.go:16 +0x15e
+github.com/shamirlabs/synapse/system.(*SystemManager).Run(0xc0004266e0, 0xc00037f578)
+	/root/go/pkg/mod/github.com/shamirlabs/synapse@v0.5.3/system/system_manager.go:37 +0xf1
+github.com/shamirlabs/synapse/app.NewAppContext({{0x1a2c27c, 0x4}, {0x2741e50, 0x14}, 0xc000470330, 0x1, {0xc0001107c0, 0x2, 0x2}, {0xc0004e6488, ...}, ...}, ...)
+	/root/go/pkg/mod/github.com/shamirlabs/synapse@v0.5.3/app/context.go:80 +0x5a5
+github.com/shamirlabs/synapse/app.(*SynapseApplication).Start(0xc0002800a0, 0x3c?)
+	/root/go/pkg/mod/github.com/shamirlabs/synapse@v0.5.3/app/application.go:31 +0x7b
+main.(*serverCommandHandler).Run(0xc000499910, 0xc0004a7880?)
+	/root/diva/cmd/server/cmd.go:309 +0x2885
+github.com/shamirlabs/diva/cmd/cmdutils.CommandBuilder.BuildWithConfig.func2(0xc0001a2908, {0xc0004a9b00, 0x0, 0x12})
+	/root/diva/cmd/cmdutils/cmd_builder.go:108 +0x216
+github.com/spf13/cobra.(*Command).execute(0xc0001a2908, {0xc000040290, 0x12, 0x13})
+	/root/go/pkg/mod/github.com/spf13/cobra@v1.8.0/command.go:987 +0xab1
+github.com/spf13/cobra.(*Command).ExecuteC(0xc0001a2908)
+	/root/go/pkg/mod/github.com/spf13/cobra@v1.8.0/command.go:1115 +0x3ff
+github.com/spf13/cobra.(*Command).Execute(...)
+	/root/go/pkg/mod/github.com/spf13/cobra@v1.8.0/command.go:1039
+main.main()
+	/root/diva/cmd/server/main.go:58 +0x685
+[39m[39m┌[0m[0m[39m[39m─[0m[0m[39m[39m─[0m[0m[39m[39m─[0m[0m[39m[39m─[0m[0m[39m[39m─[0m[0m[39m[39m─[0m[0m[39m[39m─[0m[0m[39m[39m─[0m[0m[39m[39m─[0m[0m[39m[39m─[0m[0m[39m[39m─[0m[0m[39m[39m─[0m[0m[39m[39m─[0m[0m[39m[39m─[0m[0m[39m[39m─[0m[0m[39m[39m─[0m[0m[39m[39m─[0m[0m[39m[39m─[0m[0m[39m[39m─[0m[0m[39m[39m─[0m[0m[39m[39m─[0m[0m[39m[39m─[0m[0m[39m[39m─[0m[0m[39m[39m─[0m[0m[39m[39m─[0m[0m[39m[39m─[0m[0m[39m[39m─[0m[0m[39m[39m─[0m[0m[39m[39m─[0m[0m[39m[39m─[0m[0m[39m[39m─[0m[0m[39m[39m─[0m[0m[39m[39m─[0m[0m[39m[39m─[0m[0m[39m[39m─[0m[0m[39m[39m─[0m[0m[39m[39m─[0m[0m[39m[39m─[0m[0m[39m[39m─[0m[0m[39m[39m─[0m[0m[39m[39m─[0m[0m[39m[39m─[0m[0m[39m[39m─[0m[0m[39m[39m─[0m[0m[39m[39m─[0m[0m[39m[39m─[0m[0m[39m[39m─[0m[0m[39m[39m─[0m[0m[39m[39m─[0m[0m[39m[39m─[0m[0m[39m[39m─[0m[0m[39m[39m─[0m[0m[39m[39m─[0m[0m[39m[39m┐[0m[0m
+[39m[39m|[0m[0m [39m[39m[0m[0m                                                    [39m[39m|[0m[0m
+[39m[39m|[0m[0m [39m[39m[49m[49m                                      [0m[39m[0m[39m[0m[39m[0m[39m [0m[0m             [39m[39m|[0m[0m
+[39m[39m|[0m[0m [39m[39m[49m[49m[97;1m[97;1m     ██████  ██ ██    ██  █████       [0m[39m[49m[0m[39m[49m[0m[39m[0m[39m[0m[39m[0m[39m [0m[0m             [39m[39m|[0m[0m
+[39m[39m|[0m[0m [39m[39m[49m[49m[97;1m[97;1m     ██   ██ ██ ██    ██ ██   ██      [0m[39m[49m[0m[39m[49m[0m[39m[0m[39m[0m[39m[0m[39m [0m[0m             [39m[39m|[0m[0m
+[39m[39m|[0m[0m [39m[39m[49m[49m[97;1m[97;1m     ██   ██ ██ ██    ██ ███████      [0m[39m[49m[0m[39m[49m[0m[39m[0m[39m[0m[39m[0m[39m [0m[0m             [39m[39m|[0m[0m
+[39m[39m|[0m[0m [39m[39m[49m[49m[97;1m[97;1m     ██   ██ ██  ██  ██  ██   ██      [0m[39m[49m[0m[39m[49m[0m[39m[0m[39m[0m[39m[0m[39m [0m[0m             [39m[39m|[0m[0m
+[39m[39m|[0m[0m [39m[39m[49m[49m[97;1m[97;1m     ██████  ██   ████   ██   ██      [0m[39m[49m[0m[39m[49m[0m[39m[0m[39m[0m[39m[0m[39m [0m[0m             [39m[39m|[0m[0m
+[39m[39m|[0m[0m [39m[39m[49m[49m[97;1m[97;1m                                      [0m[39m[49m[0m[39m[49m[0m[39m[0m[39m[0m[39m[0m[39m [0m[0m             [39m[39m|[0m[0m
+[39m[39m|[0m[0m [39m[39m[49m[49m                                      [0m[39m[0m[39m [0m[0m             [39m[39m|[0m[0m
+[39m[39m|[0m[0m [39m[39mLogging level           [90m[90m | [0m[39m[0m[39m[32;1m[32;1mdebug[0m[39m[0m[39m[0m[39m[0m[39m                    [0m[0m[39m[39m|[0m[0m
+[39m[39m|[0m[0m [39m[39mBoltDB                  [90m[90m | [0m[39m[0m[39m[32;1m[32;1m/var/diva/config/diva.db[0m[39m[0m[39m[0m[39m[0m[39m [0m[0m[39m[39m|[0m[0m
+[39m[39m|[0m[0m [39m[39mdiva API                [90m[90m | [0m[39m[0m[39m[32;1m[32;1m0.0.0.0:30000[0m[39m[0m[39m[0m[39m[0m[39m            [0m[0m[39m[39m|[0m[0m
+[39m[39m|[0m[0m [39m[39mSwagger UI              [90m[90m | [0m[39m[0m[39m[32;1m[32;1menabled[0m[39m[0m[39m[0m[39m[0m[39m                  [0m[0m[39m[39m|[0m[0m
+[39m[39m|[0m[0m [39m[39mWeb3Signer API          [90m[90m | [0m[39m[0m[39m[32;1m[32;1m0.0.0.0:9000[0m[39m[0m[39m[0m[39m[0m[39m             [0m[0m[39m[39m|[0m[0m
+[39m[39m|[0m[0m [39m[39mP2P network address     [90m[90m | [0m[39m[0m[39m[32;1m[32;1m0.0.0.0:5050[0m[39m[0m[39m[0m[39m[0m[39m             [0m[0m[39m[39m|[0m[0m
+[39m[39m|[0m[0m [39m[39mdiva contract address   [90m[90m | [0m[39m[0m[39m[97;2m[97;2mdisabled[0m[39m[0m[39m[0m[39m[0m[39m                 [0m[0m[39m[39m|[0m[0m
+[39m[39m|[0m[0m [39m[39mExecution client address[90m[90m | [0m[39m[0m[39m[32;1m[32;1mws://172.16.0.11:8546[0m[39m[0m[39m[0m[39m[0m[39m    [0m[0m[39m[39m|[0m[0m
+[39m[39m|[0m[0m [39m[39mConsensus client address[90m[90m | [0m[39m[0m[39m[32;1m[32;1mhttp://172.16.0.13:3500[0m[39m[0m[39m[0m[39m[0m[39m  [0m[0m[39m[39m|[0m[0m
+[39m[39m|[0m[0m [39m[39mDKG coordination enabled[90m[90m | [0m[39m[0m[39m[32;1m[32;1mtrue[0m[39m[0m[39m                     [0m[0m[39m[39m|[0m[0m
+[39m[39m|[0m[0m [39m[39m[0m[0m                                                    [39m[39m|[0m[0m
+[39m[39m|[0m[0m [39m[39m[0m[0m                                                    [39m[39m|[0m[0m
+[39m[39m└[0m[0m[39m[39m─[0m[0m[39m[39m─[0m[0m[39m[39m─[0m[0m[39m[39m─[0m[0m[39m[39m─[0m[0m[39m[39m─[0m[0m[39m[39m─[0m[0m[39m[39m─[0m[0m[39m[39m─[0m[0m[39m[39m─[0m[0m[39m[39m─[0m[0m[39m[39m─[0m[0m[39m[39m─[0m[0m[39m[39m─[0m[0m[39m[39m─[0m[0m[39m[39m─[0m[0m[39m[39m─[0m[0m[39m[39m─[0m[0m[39m[39m─[0m[0m[39m[39m─[0m[0m[39m[39m─[0m[0m[39m[39m─[0m[0m[39m[39m─[0m[0m[39m[39m─[0m[0m[39m[39m─[0m[0m[39m[39m─[0m[0m[39m[39m─[0m[0m[39m[39m─[0m[0m[39m[39m─[0m[0m[39m[39m─[0m[0m[39m[39m─[0m[0m[39m[39m─[0m[0m[39m[39m─[0m[0m[39m[39m─[0m[0m[39m[39m─[0m[0m[39m[39m─[0m[0m[39m[39m─[0m[0m[39m[39m─[0m[0m[39m[39m─[0m[0m[39m[39m─[0m[0m[39m[39m─[0m[0m[39m[39m─[0m[0m[39m[39m─[0m[0m[39m[39m─[0m[0m[39m[39m─[0m[0m[39m[39m─[0m[0m[39m[39m─[0m[0m[39m[39m─[0m[0m[39m[39m─[0m[0m[39m[39m─[0m[0m[39m[39m─[0m[0m[39m[39m─[0m[0m[39m[39m─[0m[0m[39m[39m┘[0m[0m
+time="2024-06-21T09:39:33Z" level=info msg="divaproto plugin installed" cc_url="http://172.16.0.13:3500" cc_version= chain_id=3151908 ec_url="ws://172.16.0.11:8546" ec_version="Geth/v1.13.15-stable-c5ba367e/linux-amd64/go1.21.9" genesis_fork_version=0x10000038 genesis_time=1718962675 genesis_validators_root=0x7674392cba81eb085b83b9b68c5b45870afa6d739645efab36ebd43a13a39e2b prefix=divaproto.plugin slot_duration=6s slots_per_epoch=8
+[2m9:39AM[0m [92mINF[0m actor system started [2mlib=[0mProto.Actor [2msystem=[0m4zNwW6456D4XVHGeQd92bZ [2mid=[0m4zNwW6456D4XVHGeQd92bZ
+time="2024-06-21T09:39:33Z" level=info msg="running diva client" prefix=DivaInitializer version=v24.5.0-15-g5c029483
+time="2024-06-21T09:39:33Z" level=info msg="enabled master api" api_key=diva prefix=DivaInitializer
+time="2024-06-21T09:39:33Z" level=debug msg="starting http server" prefix=process.DivaApiProcess
+time="2024-06-21T09:39:33Z" level=debug msg="NewHead watcher started" prefix=chain.ChainProcess
+time="2024-06-21T09:39:33Z" level=info msg="divanet plugin initialized" network_id=0xc0002a2c30 peer_id=16Uiu2HAky8o3QJTg2DRUmX2cgVzyBTTPsebNTWS4VwzpEHaFBBu8 prefix=network.NetworkProcess
+time="2024-06-21T09:39:33Z" level=debug msg="grpc server registered" name=dkg.DKGCoordinatorService prefix=network.NetworkProcess
+time="2024-06-21T09:39:33Z" level=debug msg="grpc server registered" name=publicpublicpartialsignerv1.v1.PartialSigningService prefix=network.NetworkProcess
+time="2024-06-21T09:39:33Z" level=info msg="pubsub actor started" prefix=pubsub.PubsubProcess
+time="2024-06-21T09:39:33Z" level=debug msg="grpc server starting" prefix=DKGCoordinatorServiceGRPCAdapter
+time="2024-06-21T09:39:33Z" level=debug msg="grpc server starting" prefix=PublicPartialSigningServiceGRPCServerV1Adapter
+time="2024-06-21T09:39:33Z" level=info msg="web3 signer api started" prefix=Web3SignerAdapter
+time="2024-06-21T09:39:37Z" level=error msg="error getting finalized block" error="finalized block not found" prefix=chain.ChainProcess
+time="2024-06-21T09:39:42Z" level=debug msg="new node discovered" peer_id=16Uiu2HAmPqckmP8AtCP5xNtMByMUapM9z2KZQXvMFT62Zfu2LDrV prefix=network.NetworkProcess remote_maddr=[/ip4/172.16.0.24/tcp/5050]
+time="2024-06-21T09:39:43Z" level=error msg="error getting finalized block" error="finalized block not found" prefix=chain.ChainProcess
+time="2024-06-21T09:39:43Z" level=debug msg="dht key advertised" ns="3151908.node_address=0xCbcf98022A671156Ea933F0bCc1E3F35D95C79D9" prefix=network.NetworkProcess
+time="2024-06-21T09:39:43Z" level=debug msg="dht key advertised" ns=3151908.coordinators prefix=network.NetworkProcess
+time="2024-06-21T09:39:49Z" level=error msg="error getting finalized block" error="finalized block not found" prefix=chain.ChainProcess
+time="2024-06-21T09:39:55Z" level=error msg="error getting finalized block" error="finalized block not found" prefix=chain.ChainProcess
+time="2024-06-21T09:40:01Z" level=error msg="error getting finalized block" error="finalized block not found" prefix=chain.ChainProcess
+time="2024-06-21T09:40:07Z" level=error msg="error getting finalized block" error="finalized block not found" prefix=chain.ChainProcess
+time="2024-06-21T09:40:13Z" level=error msg="error getting finalized block" error="finalized block not found" prefix=chain.ChainProcess
+time="2024-06-21T09:40:19Z" level=error msg="error getting finalized block" error="finalized block not found" prefix=chain.ChainProcess
+time="2024-06-21T09:40:25Z" level=error msg="error getting finalized block" error="finalized block not found" prefix=chain.ChainProcess
+time="2024-06-21T09:40:27Z" level=debug msg="new node discovered" peer_id=16Uiu2HAmKaKDTJcp7nUvTLKiceYQGdcJZxGehYzPnXezhgjG5Ar6 prefix=network.NetworkProcess remote_maddr=[/ip4/172.16.0.26/tcp/5050]
+time="2024-06-21T09:40:31Z" level=error msg="error getting finalized block" error="finalized block not found" prefix=chain.ChainProcess
+time="2024-06-21T09:40:37Z" level=error msg="error getting finalized block" error="finalized block not found" prefix=chain.ChainProcess
+time="2024-06-21T09:40:43Z" level=error msg="error getting finalized block" error="finalized block not found" prefix=chain.ChainProcess
+time="2024-06-21T09:40:49Z" level=error msg="error getting finalized block" error="finalized block not found" prefix=chain.ChainProcess
+time="2024-06-21T09:40:55Z" level=error msg="error getting finalized block" error="finalized block not found" prefix=chain.ChainProcess
+time="2024-06-21T09:40:58Z" level=debug msg="new node discovered" peer_id=16Uiu2HAm5B4rUvcTJ7cwhArewErsacESNGUJ6mtAKzm6ELX4a9Z8 prefix=network.NetworkProcess remote_maddr=[/ip4/172.16.0.27/tcp/5050]
+time="2024-06-21T09:41:01Z" level=error msg="error getting finalized block" error="finalized block not found" prefix=chain.ChainProcess
+time="2024-06-21T09:41:07Z" level=debug msg="node parameters synced" prefix=process.Web3Process
+time="2024-06-21T09:41:07Z" level=debug msg="processed events" from_block=14 prefix=process.BlockEventsProcess to_block=16
+time="2024-06-21T09:41:07Z" level=debug msg="past events processed" prefix=process.BlockEventsProcess
+time="2024-06-21T09:41:13Z" level=debug msg="new head" block=33 prefix=process.Web3Process
+time="2024-06-21T09:41:13Z" level=info msg="node is synced" prefix=process.Web3Process
+time="2024-06-21T09:41:19Z" level=debug msg="new slot" prefix=process.SlotsProcess remaining_slots=6 slot=34 timeframe=0
+time="2024-06-21T09:41:19Z" level=debug msg="new head" block=34 prefix=process.Web3Process
+time="2024-06-21T09:41:19Z" level=debug msg="processed events" from_block=14 prefix=process.BlockEventsProcess to_block=16
+time="2024-06-21T09:41:25Z" level=debug msg="new head" block=35 prefix=process.Web3Process
+time="2024-06-21T09:41:25Z" level=debug msg="processed events" from_block=14 prefix=process.BlockEventsProcess to_block=16
+time="2024-06-21T09:41:30Z" level=debug msg="new node discovered" peer_id=16Uiu2HAmTLN2yh6FE4f1JDyWPd5QoAS8nWxHz7rJtJrUfLXKXDAa prefix=network.NetworkProcess remote_maddr=[/ip4/172.16.0.28/tcp/5050]
+time="2024-06-21T09:41:31Z" level=debug msg="new slot" prefix=process.SlotsProcess remaining_slots=4 slot=36 timeframe=0
+time="2024-06-21T09:41:31Z" level=debug msg="new head" block=36 prefix=process.Web3Process
+time="2024-06-21T09:41:31Z" level=debug msg="processed events" from_block=14 prefix=process.BlockEventsProcess to_block=16
+time="2024-06-21T09:41:37Z" level=debug msg="new head" block=37 prefix=process.Web3Process
+time="2024-06-21T09:41:37Z" level=debug msg="processed events" from_block=14 prefix=process.BlockEventsProcess to_block=16
+time="2024-06-21T09:41:43Z" level=debug msg="new slot" prefix=process.SlotsProcess remaining_slots=2 slot=38 timeframe=0
+time="2024-06-21T09:41:43Z" level=debug msg="new head" block=38 prefix=process.Web3Process
+time="2024-06-21T09:41:43Z" level=debug msg="processed events" from_block=14 prefix=process.BlockEventsProcess to_block=16
+time="2024-06-21T09:41:49Z" level=debug msg="new head" block=39 prefix=process.Web3Process
+time="2024-06-21T09:41:49Z" level=debug msg="processed events" from_block=14 prefix=process.BlockEventsProcess to_block=16
+time="2024-06-21T09:41:55Z" level=debug msg="new slot" prefix=process.SlotsProcess remaining_slots=8 slot=40 timeframe=1
+time="2024-06-21T09:41:55Z" level=debug msg="new timeframe started" prefix=process.SlotsProcess timeframe=1
+time="2024-06-21T09:41:55Z" level=debug msg="new head" block=40 prefix=process.Web3Process
+time="2024-06-21T09:41:55Z" level=debug msg="operator registered" operator=0x3dcD742502B0310F3a16421b738a30cd0B5d7796 prefix=process.BlockEventsProcess
+time="2024-06-21T09:41:55Z" level=debug msg="node registered" node=0x5534C2546D6aBA4d56039a067A43380D17487179 operator=0x3dcD742502B0310F3a16421b738a30cd0B5d7796 prefix=process.BlockEventsProcess
+time="2024-06-21T09:41:55Z" level=debug msg="pending validator created" generation_timeframe=0 prefix=process.BlockEventsProcess validator_id=1
+time="2024-06-21T09:41:55Z" level=debug msg="pending validator created" generation_timeframe=0 prefix=process.BlockEventsProcess validator_id=2
+time="2024-06-21T09:41:55Z" level=debug msg="collateral deposited/withdrawn" keyshares_to_be_total=162 keyshares_total=0 last_updated_timeframe=0 operator_address=0x3dcD742502B0310F3a16421b738a30cd0B5d7796 prefix=process.BlockEventsProcess
+time="2024-06-21T09:41:55Z" level=debug msg="processed events" from_block=14 prefix=process.BlockEventsProcess to_block=24
+time="2024-06-21T09:41:55Z" level=debug msg="join collector started" pending_validator_id=2 prefix=processdkgcoordinator.DKGCoordinatorJoinCollectorActor
+time="2024-06-21T09:41:55Z" level=debug msg="join collector started" pending_validator_id=1 prefix=processdkgcoordinator.DKGCoordinatorJoinCollectorActor
+time="2024-06-21T09:41:55Z" level=debug msg="participant joined" node=0x5534C2546D6aBA4d56039a067A43380D17487179 operator=0x3dcD742502B0310F3a16421b738a30cd0B5d7796 participants_count=1 pending_validator_id=1 prefix=processdkgcoordinator.DKGCoordinatorJoinCollectorActor
+time="2024-06-21T09:41:55Z" level=debug msg="participant joined" node=0x5534C2546D6aBA4d56039a067A43380D17487179 operator=0x3dcD742502B0310F3a16421b738a30cd0B5d7796 participants_count=1 pending_validator_id=2 prefix=processdkgcoordinator.DKGCoordinatorJoinCollectorActor
+time="2024-06-21T09:41:55Z" level=debug msg="new node discovered" peer_id=16Uiu2HAmHeowCywUVLsz8ByXrUhmWhEGeCTD5GGncyQz8xVnXDgh prefix=network.NetworkProcess remote_maddr=[/ip4/172.16.0.29/tcp/5050]
+time="2024-06-21T09:42:01Z" level=debug msg="new head" block=41 prefix=process.Web3Process
+time="2024-06-21T09:42:01Z" level=error msg="error handling events" error="getting unprocessed block interval: block events already handled (block_number: 24)" prefix=process.BlockEventsProcess
+time="2024-06-21T09:42:07Z" level=debug msg="new slot" prefix=process.SlotsProcess remaining_slots=6 slot=42 timeframe=1
+time="2024-06-21T09:42:07Z" level=debug msg="new head" block=42 prefix=process.Web3Process
+time="2024-06-21T09:42:07Z" level=error msg="error handling events" error="getting unprocessed block interval: block events already handled (block_number: 24)" prefix=process.BlockEventsProcess
+time="2024-06-21T09:42:13Z" level=debug msg="new head" block=43 prefix=process.Web3Process
+time="2024-06-21T09:42:13Z" level=error msg="error handling events" error="getting unprocessed block interval: block events already handled (block_number: 24)" prefix=process.BlockEventsProcess
+time="2024-06-21T09:42:19Z" level=debug msg="new slot" prefix=process.SlotsProcess remaining_slots=4 slot=44 timeframe=1
+time="2024-06-21T09:42:19Z" level=debug msg="new head" block=44 prefix=process.Web3Process
+time="2024-06-21T09:42:19Z" level=error msg="error handling events" error="getting unprocessed block interval: block events already handled (block_number: 24)" prefix=process.BlockEventsProcess
+time="2024-06-21T09:42:25Z" level=debug msg="new head" block=45 prefix=process.Web3Process
+time="2024-06-21T09:42:25Z" level=error msg="error handling events" error="getting unprocessed block interval: block events already handled (block_number: 24)" prefix=process.BlockEventsProcess
+time="2024-06-21T09:42:31Z" level=debug msg="new slot" prefix=process.SlotsProcess remaining_slots=2 slot=46 timeframe=1
+time="2024-06-21T09:42:31Z" level=debug msg="new head" block=46 prefix=process.Web3Process
+time="2024-06-21T09:42:31Z" level=error msg="error handling events" error="getting unprocessed block interval: block events already handled (block_number: 24)" prefix=process.BlockEventsProcess
+time="2024-06-21T09:42:37Z" level=debug msg="new head" block=47 prefix=process.Web3Process
+time="2024-06-21T09:42:37Z" level=error msg="error handling events" error="getting unprocessed block interval: block events already handled (block_number: 24)" prefix=process.BlockEventsProcess
+time="2024-06-21T09:42:43Z" level=debug msg="new slot" prefix=process.SlotsProcess remaining_slots=8 slot=48 timeframe=2
+time="2024-06-21T09:42:43Z" level=debug msg="new timeframe started" prefix=process.SlotsProcess timeframe=2
+time="2024-06-21T09:42:43Z" level=debug msg="not enough participants" participants=1 pending_validator_id=2 prefix=processdkgcoordinator.DKGCoordinatorJoinCollectorActor
+time="2024-06-21T09:42:43Z" level=debug msg="join collector stopped" pending_validator_id=2 prefix=processdkgcoordinator.DKGCoordinatorJoinCollectorActor
+time="2024-06-21T09:42:43Z" level=debug msg="not enough participants" participants=1 pending_validator_id=1 prefix=processdkgcoordinator.DKGCoordinatorJoinCollectorActor
+time="2024-06-21T09:42:43Z" level=debug msg="join collector stopped" pending_validator_id=1 prefix=processdkgcoordinator.DKGCoordinatorJoinCollectorActor
+[2m9:42AM[0m [92mINF[0m [DeadLetter] [2mlib=[0mProto.Actor [2msystem=[0m4zNwW6456D4XVHGeQd92bZ [2mpid=[0m"Address:\"nonhost\" Id:\"DKGCoordinatorManagerProcess$2q/$4i/$8n\"" [2mmessage=[0m"&{result:<nil> err:0x33d88e0 continuation:0x14a8b20}" [2msender=[0m<nil>
+[2m9:42AM[0m [92mINF[0m [DeadLetter] [2mlib=[0mProto.Actor [2msystem=[0m4zNwW6456D4XVHGeQd92bZ [2mpid=[0m"Address:\"nonhost\" Id:\"DKGCoordinatorManagerProcess$2q/$4i/$8m\"" [2mmessage=[0m"&{result:<nil> err:0x33d88e0 continuation:0x14a8b20}" [2msender=[0m<nil>
+time="2024-06-21T09:42:43Z" level=debug msg="new head" block=48 prefix=process.Web3Process
+time="2024-06-21T09:42:43Z" level=debug msg="operator registered" operator=0xAc72618e7ABa8dE68012b2d679920b0f51005199 prefix=process.BlockEventsProcess
+time="2024-06-21T09:42:43Z" level=debug msg="node registered" node=0x5e75cb4411AFF0561a62F5737D675529897669f3 operator=0xAc72618e7ABa8dE68012b2d679920b0f51005199 prefix=process.BlockEventsProcess
+time="2024-06-21T09:42:43Z" level=debug msg="pending validator created" generation_timeframe=0 prefix=process.BlockEventsProcess validator_id=3
+time="2024-06-21T09:42:43Z" level=debug msg="pending validator created" generation_timeframe=0 prefix=process.BlockEventsProcess validator_id=4
+time="2024-06-21T09:42:43Z" level=debug msg="collateral deposited/withdrawn" keyshares_to_be_total=162 keyshares_total=0 last_updated_timeframe=0 operator_address=0xAc72618e7ABa8dE68012b2d679920b0f51005199 prefix=process.BlockEventsProcess
+time="2024-06-21T09:42:43Z" level=debug msg="processed events" from_block=25 prefix=process.BlockEventsProcess to_block=32
+time="2024-06-21T09:42:43Z" level=debug msg="join collector started" pending_validator_id=4 prefix=processdkgcoordinator.DKGCoordinatorJoinCollectorActor
+time="2024-06-21T09:42:43Z" level=debug msg="join collector started" pending_validator_id=3 prefix=processdkgcoordinator.DKGCoordinatorJoinCollectorActor
+time="2024-06-21T09:42:43Z" level=debug msg="participant joined" node=0x5534C2546D6aBA4d56039a067A43380D17487179 operator=0x3dcD742502B0310F3a16421b738a30cd0B5d7796 participants_count=1 pending_validator_id=4 prefix=processdkgcoordinator.DKGCoordinatorJoinCollectorActor
+time="2024-06-21T09:42:43Z" level=debug msg="participant joined" node=0x5534C2546D6aBA4d56039a067A43380D17487179 operator=0x3dcD742502B0310F3a16421b738a30cd0B5d7796 participants_count=1 pending_validator_id=3 prefix=processdkgcoordinator.DKGCoordinatorJoinCollectorActor
+time="2024-06-21T09:42:43Z" level=debug msg="participant joined" node=0x5e75cb4411AFF0561a62F5737D675529897669f3 operator=0xAc72618e7ABa8dE68012b2d679920b0f51005199 participants_count=2 pending_validator_id=3 prefix=processdkgcoordinator.DKGCoordinatorJoinCollectorActor
+time="2024-06-21T09:42:43Z" level=debug msg="participant joined" node=0x5e75cb4411AFF0561a62F5737D675529897669f3 operator=0xAc72618e7ABa8dE68012b2d679920b0f51005199 participants_count=2 pending_validator_id=4 prefix=processdkgcoordinator.DKGCoordinatorJoinCollectorActor
+time="2024-06-21T09:42:49Z" level=debug msg="new head" block=49 prefix=process.Web3Process
+time="2024-06-21T09:42:49Z" level=debug msg="processed events" from_block=31 prefix=process.BlockEventsProcess to_block=32
+time="2024-06-21T09:42:55Z" level=debug msg="new slot" prefix=process.SlotsProcess remaining_slots=6 slot=50 timeframe=2
+time="2024-06-21T09:42:55Z" level=debug msg="new head" block=50 prefix=process.Web3Process
+time="2024-06-21T09:42:55Z" level=debug msg="processed events" from_block=31 prefix=process.BlockEventsProcess to_block=32
+time="2024-06-21T09:43:01Z" level=debug msg="new head" block=51 prefix=process.Web3Process
+time="2024-06-21T09:43:01Z" level=debug msg="processed events" from_block=31 prefix=process.BlockEventsProcess to_block=32
+time="2024-06-21T09:43:07Z" level=debug msg="new slot" prefix=process.SlotsProcess remaining_slots=4 slot=52 timeframe=2
+time="2024-06-21T09:43:07Z" level=debug msg="new head" block=52 prefix=process.Web3Process
+time="2024-06-21T09:43:07Z" level=debug msg="processed events" from_block=31 prefix=process.BlockEventsProcess to_block=32
+time="2024-06-21T09:43:13Z" level=debug msg="new head" block=53 prefix=process.Web3Process
+time="2024-06-21T09:43:13Z" level=debug msg="processed events" from_block=31 prefix=process.BlockEventsProcess to_block=32
+time="2024-06-21T09:43:19Z" level=debug msg="new slot" prefix=process.SlotsProcess remaining_slots=2 slot=54 timeframe=2
+time="2024-06-21T09:43:19Z" level=debug msg="new head" block=54 prefix=process.Web3Process
+time="2024-06-21T09:43:19Z" level=debug msg="processed events" from_block=31 prefix=process.BlockEventsProcess to_block=32
+time="2024-06-21T09:43:25Z" level=debug msg="new head" block=55 prefix=process.Web3Process
+time="2024-06-21T09:43:25Z" level=debug msg="processed events" from_block=31 prefix=process.BlockEventsProcess to_block=32
+time="2024-06-21T09:43:31Z" level=debug msg="new slot" prefix=process.SlotsProcess remaining_slots=8 slot=56 timeframe=3
+time="2024-06-21T09:43:31Z" level=debug msg="new timeframe started" prefix=process.SlotsProcess timeframe=3
+time="2024-06-21T09:43:31Z" level=debug msg="not enough participants" participants=2 pending_validator_id=4 prefix=processdkgcoordinator.DKGCoordinatorJoinCollectorActor
+time="2024-06-21T09:43:31Z" level=debug msg="join collector stopped" pending_validator_id=4 prefix=processdkgcoordinator.DKGCoordinatorJoinCollectorActor
+time="2024-06-21T09:43:31Z" level=debug msg="not enough participants" participants=2 pending_validator_id=3 prefix=processdkgcoordinator.DKGCoordinatorJoinCollectorActor
+time="2024-06-21T09:43:31Z" level=debug msg="join collector stopped" pending_validator_id=3 prefix=processdkgcoordinator.DKGCoordinatorJoinCollectorActor
+[2m9:43AM[0m [92mINF[0m [DeadLetter] [2mlib=[0mProto.Actor [2msystem=[0m4zNwW6456D4XVHGeQd92bZ [2mpid=[0m"Address:\"nonhost\" Id:\"DKGCoordinatorManagerProcess$2q/$4i/$8H\"" [2mmessage=[0m"&{result:<nil> err:0x33d88e0 continuation:0x14a8b20}" [2msender=[0m<nil>
+[2m9:43AM[0m [92mINF[0m [DeadLetter] [2mlib=[0mProto.Actor [2msystem=[0m4zNwW6456D4XVHGeQd92bZ [2mpid=[0m"Address:\"nonhost\" Id:\"DKGCoordinatorManagerProcess$2q/$4i/$8H\"" [2mmessage=[0m"&{result:<nil> err:0x33d88e0 continuation:0x14a8b20}" [2msender=[0m<nil>
+time="2024-06-21T09:43:31Z" level=debug msg="new head" block=56 prefix=process.Web3Process
+time="2024-06-21T09:43:31Z" level=debug msg="operator registered" operator=0x2f98F214098159C4d7164DCC0cfA2B563c4f7645 prefix=process.BlockEventsProcess
+time="2024-06-21T09:43:31Z" level=debug msg="node registered" node=0xA670Bfc54eEDecE8A1150b66f70aBe0b5782A0dC operator=0x2f98F214098159C4d7164DCC0cfA2B563c4f7645 prefix=process.BlockEventsProcess
+time="2024-06-21T09:43:31Z" level=debug msg="pending validator created" generation_timeframe=0 prefix=process.BlockEventsProcess validator_id=5
+time="2024-06-21T09:43:31Z" level=debug msg="pending validator created" generation_timeframe=0 prefix=process.BlockEventsProcess validator_id=6
+time="2024-06-21T09:43:31Z" level=debug msg="collateral deposited/withdrawn" keyshares_to_be_total=162 keyshares_total=0 last_updated_timeframe=0 operator_address=0x2f98F214098159C4d7164DCC0cfA2B563c4f7645 prefix=process.BlockEventsProcess
+time="2024-06-21T09:43:31Z" level=debug msg="operator registered" operator=0xf63a178861fAF5F6a305D2e56f0DeaE78cD8BB1d prefix=process.BlockEventsProcess
+time="2024-06-21T09:43:31Z" level=debug msg="node registered" node=0x2cF3B70C8779D36B7ef79F3088AaE79Dc9ca35B7 operator=0xf63a178861fAF5F6a305D2e56f0DeaE78cD8BB1d prefix=process.BlockEventsProcess
+time="2024-06-21T09:43:31Z" level=debug msg="join collector started" pending_validator_id=6 prefix=processdkgcoordinator.DKGCoordinatorJoinCollectorActor
+time="2024-06-21T09:43:31Z" level=debug msg="join collector started" pending_validator_id=5 prefix=processdkgcoordinator.DKGCoordinatorJoinCollectorActor
+time="2024-06-21T09:43:31Z" level=debug msg="pending validator created" generation_timeframe=0 prefix=process.BlockEventsProcess validator_id=7
+time="2024-06-21T09:43:31Z" level=debug msg="pending validator created" generation_timeframe=0 prefix=process.BlockEventsProcess validator_id=8
+time="2024-06-21T09:43:31Z" level=debug msg="collateral deposited/withdrawn" keyshares_to_be_total=162 keyshares_total=0 last_updated_timeframe=0 operator_address=0xf63a178861fAF5F6a305D2e56f0DeaE78cD8BB1d prefix=process.BlockEventsProcess
+time="2024-06-21T09:43:31Z" level=debug msg="processed events" from_block=31 prefix=process.BlockEventsProcess to_block=40
+time="2024-06-21T09:43:31Z" level=debug msg="join collector started" pending_validator_id=8 prefix=processdkgcoordinator.DKGCoordinatorJoinCollectorActor
+time="2024-06-21T09:43:31Z" level=debug msg="join collector started" pending_validator_id=7 prefix=processdkgcoordinator.DKGCoordinatorJoinCollectorActor
+time="2024-06-21T09:43:31Z" level=debug msg="participant joined" node=0x5e75cb4411AFF0561a62F5737D675529897669f3 operator=0xAc72618e7ABa8dE68012b2d679920b0f51005199 participants_count=1 pending_validator_id=6 prefix=processdkgcoordinator.DKGCoordinatorJoinCollectorActor
+time="2024-06-21T09:43:31Z" level=debug msg="participant joined" node=0x5e75cb4411AFF0561a62F5737D675529897669f3 operator=0xAc72618e7ABa8dE68012b2d679920b0f51005199 participants_count=1 pending_validator_id=8 prefix=processdkgcoordinator.DKGCoordinatorJoinCollectorActor
+time="2024-06-21T09:43:31Z" level=debug msg="participant joined" node=0x5534C2546D6aBA4d56039a067A43380D17487179 operator=0x3dcD742502B0310F3a16421b738a30cd0B5d7796 participants_count=2 pending_validator_id=6 prefix=processdkgcoordinator.DKGCoordinatorJoinCollectorActor
+time="2024-06-21T09:43:31Z" level=debug msg="participant joined" node=0x5e75cb4411AFF0561a62F5737D675529897669f3 operator=0xAc72618e7ABa8dE68012b2d679920b0f51005199 participants_count=1 pending_validator_id=7 prefix=processdkgcoordinator.DKGCoordinatorJoinCollectorActor
+time="2024-06-21T09:43:31Z" level=debug msg="participant joined" node=0x5534C2546D6aBA4d56039a067A43380D17487179 operator=0x3dcD742502B0310F3a16421b738a30cd0B5d7796 participants_count=1 pending_validator_id=5 prefix=processdkgcoordinator.DKGCoordinatorJoinCollectorActor
+time="2024-06-21T09:43:31Z" level=debug msg="participant joined" node=0x5534C2546D6aBA4d56039a067A43380D17487179 operator=0x3dcD742502B0310F3a16421b738a30cd0B5d7796 participants_count=2 pending_validator_id=8 prefix=processdkgcoordinator.DKGCoordinatorJoinCollectorActor
+time="2024-06-21T09:43:31Z" level=debug msg="participant joined" node=0x5534C2546D6aBA4d56039a067A43380D17487179 operator=0x3dcD742502B0310F3a16421b738a30cd0B5d7796 participants_count=2 pending_validator_id=7 prefix=processdkgcoordinator.DKGCoordinatorJoinCollectorActor
+time="2024-06-21T09:43:31Z" level=debug msg="participant joined" node=0x2cF3B70C8779D36B7ef79F3088AaE79Dc9ca35B7 operator=0xf63a178861fAF5F6a305D2e56f0DeaE78cD8BB1d participants_count=3 pending_validator_id=7 prefix=processdkgcoordinator.DKGCoordinatorJoinCollectorActor
+time="2024-06-21T09:43:31Z" level=debug msg="participant joined" node=0xA670Bfc54eEDecE8A1150b66f70aBe0b5782A0dC operator=0x2f98F214098159C4d7164DCC0cfA2B563c4f7645 participants_count=2 pending_validator_id=5 prefix=processdkgcoordinator.DKGCoordinatorJoinCollectorActor
+time="2024-06-21T09:43:31Z" level=debug msg="participant joined" node=0xA670Bfc54eEDecE8A1150b66f70aBe0b5782A0dC operator=0x2f98F214098159C4d7164DCC0cfA2B563c4f7645 participants_count=4 pending_validator_id=7 prefix=processdkgcoordinator.DKGCoordinatorJoinCollectorActor
+time="2024-06-21T09:43:31Z" level=debug msg="participant joined" node=0xA670Bfc54eEDecE8A1150b66f70aBe0b5782A0dC operator=0x2f98F214098159C4d7164DCC0cfA2B563c4f7645 participants_count=3 pending_validator_id=6 prefix=processdkgcoordinator.DKGCoordinatorJoinCollectorActor
+time="2024-06-21T09:43:31Z" level=debug msg="participant joined" node=0x5e75cb4411AFF0561a62F5737D675529897669f3 operator=0xAc72618e7ABa8dE68012b2d679920b0f51005199 participants_count=3 pending_validator_id=5 prefix=processdkgcoordinator.DKGCoordinatorJoinCollectorActor
+time="2024-06-21T09:43:31Z" level=debug msg="participant joined" node=0x2cF3B70C8779D36B7ef79F3088AaE79Dc9ca35B7 operator=0xf63a178861fAF5F6a305D2e56f0DeaE78cD8BB1d participants_count=3 pending_validator_id=8 prefix=processdkgcoordinator.DKGCoordinatorJoinCollectorActor
+time="2024-06-21T09:43:31Z" level=debug msg="participant joined" node=0xA670Bfc54eEDecE8A1150b66f70aBe0b5782A0dC operator=0x2f98F214098159C4d7164DCC0cfA2B563c4f7645 participants_count=4 pending_validator_id=8 prefix=processdkgcoordinator.DKGCoordinatorJoinCollectorActor
+[2m9:43AM[0m [92mINF[0m [DeadLetter] [2mlib=[0mProto.Actor [2msystem=[0m4zNwW6456D4XVHGeQd92bZ [2mthrottled=[0m1
+time="2024-06-21T09:43:37Z" level=debug msg="new head" block=57 prefix=process.Web3Process
+time="2024-06-21T09:43:37Z" level=debug msg="processed events" from_block=40 prefix=process.BlockEventsProcess to_block=40
+time="2024-06-21T09:43:43Z" level=debug msg="new slot" prefix=process.SlotsProcess remaining_slots=6 slot=58 timeframe=3
+time="2024-06-21T09:43:43Z" level=debug msg="new head" block=58 prefix=process.Web3Process
+time="2024-06-21T09:43:43Z" level=debug msg="processed events" from_block=40 prefix=process.BlockEventsProcess to_block=40
+time="2024-06-21T09:43:49Z" level=debug msg="new head" block=59 prefix=process.Web3Process
+time="2024-06-21T09:43:49Z" level=debug msg="processed events" from_block=40 prefix=process.BlockEventsProcess to_block=40
+time="2024-06-21T09:43:55Z" level=debug msg="new slot" prefix=process.SlotsProcess remaining_slots=4 slot=60 timeframe=3
+time="2024-06-21T09:43:55Z" level=debug msg="participant joined" node=0x2cF3B70C8779D36B7ef79F3088AaE79Dc9ca35B7 operator=0xf63a178861fAF5F6a305D2e56f0DeaE78cD8BB1d participants_count=4 pending_validator_id=6 prefix=processdkgcoordinator.DKGCoordinatorJoinCollectorActor
+time="2024-06-21T09:43:55Z" level=debug msg="participant joined" node=0x2cF3B70C8779D36B7ef79F3088AaE79Dc9ca35B7 operator=0xf63a178861fAF5F6a305D2e56f0DeaE78cD8BB1d participants_count=4 pending_validator_id=5 prefix=processdkgcoordinator.DKGCoordinatorJoinCollectorActor
+time="2024-06-21T09:43:55Z" level=debug msg="new head" block=60 prefix=process.Web3Process
+time="2024-06-21T09:43:55Z" level=debug msg="processed events" from_block=40 prefix=process.BlockEventsProcess to_block=40
+time="2024-06-21T09:44:01Z" level=debug msg="new head" block=61 prefix=process.Web3Process
+time="2024-06-21T09:44:01Z" level=debug msg="processed events" from_block=40 prefix=process.BlockEventsProcess to_block=40
+time="2024-06-21T09:44:07Z" level=debug msg="new slot" prefix=process.SlotsProcess remaining_slots=2 slot=62 timeframe=3
+time="2024-06-21T09:44:07Z" level=debug msg="new head" block=62 prefix=process.Web3Process
+time="2024-06-21T09:44:07Z" level=debug msg="processed events" from_block=40 prefix=process.BlockEventsProcess to_block=40
+time="2024-06-21T09:44:13Z" level=debug msg="new head" block=63 prefix=process.Web3Process
+time="2024-06-21T09:44:13Z" level=debug msg="processed events" from_block=40 prefix=process.BlockEventsProcess to_block=40
+time="2024-06-21T09:44:19Z" level=debug msg="new slot" prefix=process.SlotsProcess remaining_slots=8 slot=64 timeframe=4
+time="2024-06-21T09:44:19Z" level=debug msg="new timeframe started" prefix=process.SlotsProcess timeframe=4
+time="2024-06-21T09:44:19Z" level=debug msg="not enough participants" participants=4 pending_validator_id=8 prefix=processdkgcoordinator.DKGCoordinatorJoinCollectorActor
+time="2024-06-21T09:44:19Z" level=debug msg="join collector stopped" pending_validator_id=8 prefix=processdkgcoordinator.DKGCoordinatorJoinCollectorActor
+time="2024-06-21T09:44:19Z" level=debug msg="not enough participants" participants=4 pending_validator_id=5 prefix=processdkgcoordinator.DKGCoordinatorJoinCollectorActor
+time="2024-06-21T09:44:19Z" level=debug msg="join collector stopped" pending_validator_id=5 prefix=processdkgcoordinator.DKGCoordinatorJoinCollectorActor
+time="2024-06-21T09:44:19Z" level=debug msg="not enough participants" participants=4 pending_validator_id=6 prefix=processdkgcoordinator.DKGCoordinatorJoinCollectorActor
+time="2024-06-21T09:44:19Z" level=debug msg="join collector stopped" pending_validator_id=6 prefix=processdkgcoordinator.DKGCoordinatorJoinCollectorActor
+time="2024-06-21T09:44:19Z" level=debug msg="not enough participants" participants=4 pending_validator_id=7 prefix=processdkgcoordinator.DKGCoordinatorJoinCollectorActor
+time="2024-06-21T09:44:19Z" level=debug msg="join collector stopped" pending_validator_id=7 prefix=processdkgcoordinator.DKGCoordinatorJoinCollectorActor
+[2m9:44AM[0m [92mINF[0m [DeadLetter] [2mlib=[0mProto.Actor [2msystem=[0m4zNwW6456D4XVHGeQd92bZ [2mpid=[0m"Address:\"nonhost\" Id:\"DKGCoordinatorManagerProcess$2q/$4i/$9T\"" [2mmessage=[0m"&{result:<nil> err:0x33d88e0 continuation:0x14a8b20}" [2msender=[0m<nil>
+[2m9:44AM[0m [92mINF[0m [DeadLetter] [2mlib=[0mProto.Actor [2msystem=[0m4zNwW6456D4XVHGeQd92bZ [2mpid=[0m"Address:\"nonhost\" Id:\"DKGCoordinatorManagerProcess$2q/$4i/$9T\"" [2mmessage=[0m"&{result:<nil> err:0x33d88e0 continuation:0x14a8b20}" [2msender=[0m<nil>
+time="2024-06-21T09:44:19Z" level=debug msg="new head" block=64 prefix=process.Web3Process
+time="2024-06-21T09:44:19Z" level=debug msg="operator registered" operator=0xEEB7148dbAcDF457fF36D4E35BDd9e8d9a8B9087 prefix=process.BlockEventsProcess
+time="2024-06-21T09:44:19Z" level=debug msg="node registered" node=0x7Bb6d6F6bF45328DE54a90fb1Bfb649f36a5D8f0 operator=0xEEB7148dbAcDF457fF36D4E35BDd9e8d9a8B9087 prefix=process.BlockEventsProcess
+time="2024-06-21T09:44:19Z" level=debug msg="pending validator created" generation_timeframe=0 prefix=process.BlockEventsProcess validator_id=9
+time="2024-06-21T09:44:19Z" level=debug msg="pending validator created" generation_timeframe=0 prefix=process.BlockEventsProcess validator_id=10
+time="2024-06-21T09:44:19Z" level=debug msg="collateral deposited/withdrawn" keyshares_to_be_total=162 keyshares_total=0 last_updated_timeframe=0 operator_address=0xEEB7148dbAcDF457fF36D4E35BDd9e8d9a8B9087 prefix=process.BlockEventsProcess
+time="2024-06-21T09:44:19Z" level=debug msg="processed events" from_block=40 prefix=process.BlockEventsProcess to_block=48
+time="2024-06-21T09:44:19Z" level=debug msg="join collector started" pending_validator_id=10 prefix=processdkgcoordinator.DKGCoordinatorJoinCollectorActor
+time="2024-06-21T09:44:19Z" level=debug msg="join collector started" pending_validator_id=9 prefix=processdkgcoordinator.DKGCoordinatorJoinCollectorActor
+time="2024-06-21T09:44:19Z" level=debug msg="participant joined" node=0xA670Bfc54eEDecE8A1150b66f70aBe0b5782A0dC operator=0x2f98F214098159C4d7164DCC0cfA2B563c4f7645 participants_count=1 pending_validator_id=10 prefix=processdkgcoordinator.DKGCoordinatorJoinCollectorActor
+time="2024-06-21T09:44:19Z" level=debug msg="participant joined" node=0x2cF3B70C8779D36B7ef79F3088AaE79Dc9ca35B7 operator=0xf63a178861fAF5F6a305D2e56f0DeaE78cD8BB1d participants_count=2 pending_validator_id=10 prefix=processdkgcoordinator.DKGCoordinatorJoinCollectorActor
+time="2024-06-21T09:44:19Z" level=debug msg="participant joined" node=0x5e75cb4411AFF0561a62F5737D675529897669f3 operator=0xAc72618e7ABa8dE68012b2d679920b0f51005199 participants_count=1 pending_validator_id=9 prefix=processdkgcoordinator.DKGCoordinatorJoinCollectorActor
+time="2024-06-21T09:44:19Z" level=debug msg="participant joined" node=0x2cF3B70C8779D36B7ef79F3088AaE79Dc9ca35B7 operator=0xf63a178861fAF5F6a305D2e56f0DeaE78cD8BB1d participants_count=2 pending_validator_id=9 prefix=processdkgcoordinator.DKGCoordinatorJoinCollectorActor
+time="2024-06-21T09:44:19Z" level=debug msg="participant joined" node=0xA670Bfc54eEDecE8A1150b66f70aBe0b5782A0dC operator=0x2f98F214098159C4d7164DCC0cfA2B563c4f7645 participants_count=3 pending_validator_id=9 prefix=processdkgcoordinator.DKGCoordinatorJoinCollectorActor
+time="2024-06-21T09:44:19Z" level=debug msg="participant joined" node=0x5534C2546D6aBA4d56039a067A43380D17487179 operator=0x3dcD742502B0310F3a16421b738a30cd0B5d7796 participants_count=4 pending_validator_id=9 prefix=processdkgcoordinator.DKGCoordinatorJoinCollectorActor
+time="2024-06-21T09:44:19Z" level=debug msg="participant joined" node=0x5e75cb4411AFF0561a62F5737D675529897669f3 operator=0xAc72618e7ABa8dE68012b2d679920b0f51005199 participants_count=3 pending_validator_id=10 prefix=processdkgcoordinator.DKGCoordinatorJoinCollectorActor
+time="2024-06-21T09:44:19Z" level=debug msg="participant joined" node=0x5534C2546D6aBA4d56039a067A43380D17487179 operator=0x3dcD742502B0310F3a16421b738a30cd0B5d7796 participants_count=4 pending_validator_id=10 prefix=processdkgcoordinator.DKGCoordinatorJoinCollectorActor
+time="2024-06-21T09:44:19Z" level=debug msg="participant joined" node=0x7Bb6d6F6bF45328DE54a90fb1Bfb649f36a5D8f0 operator=0xEEB7148dbAcDF457fF36D4E35BDd9e8d9a8B9087 participants_count=5 pending_validator_id=9 prefix=processdkgcoordinator.DKGCoordinatorJoinCollectorActor
+time="2024-06-21T09:44:19Z" level=debug msg="participant joined" node=0x7Bb6d6F6bF45328DE54a90fb1Bfb649f36a5D8f0 operator=0xEEB7148dbAcDF457fF36D4E35BDd9e8d9a8B9087 participants_count=5 pending_validator_id=10 prefix=processdkgcoordinator.DKGCoordinatorJoinCollectorActor
+[2m9:44AM[0m [92mINF[0m [DeadLetter] [2mlib=[0mProto.Actor [2msystem=[0m4zNwW6456D4XVHGeQd92bZ [2mthrottled=[0m13
+time="2024-06-21T09:44:25Z" level=debug msg="new head" block=65 prefix=process.Web3Process
+time="2024-06-21T09:44:25Z" level=debug msg="processed events" from_block=44 prefix=process.BlockEventsProcess to_block=48
+time="2024-06-21T09:44:31Z" level=debug msg="new slot" prefix=process.SlotsProcess remaining_slots=6 slot=66 timeframe=4
+time="2024-06-21T09:44:31Z" level=debug msg="new head" block=66 prefix=process.Web3Process
+time="2024-06-21T09:44:31Z" level=debug msg="processed events" from_block=44 prefix=process.BlockEventsProcess to_block=48
+time="2024-06-21T09:44:37Z" level=debug msg="new head" block=67 prefix=process.Web3Process
+time="2024-06-21T09:44:37Z" level=debug msg="processed events" from_block=44 prefix=process.BlockEventsProcess to_block=48
+time="2024-06-21T09:44:43Z" level=debug msg="new slot" prefix=process.SlotsProcess remaining_slots=4 slot=68 timeframe=4
+time="2024-06-21T09:44:43Z" level=debug msg="new head" block=68 prefix=process.Web3Process
+time="2024-06-21T09:44:43Z" level=debug msg="processed events" from_block=44 prefix=process.BlockEventsProcess to_block=48
+time="2024-06-21T09:44:49Z" level=debug msg="new head" block=69 prefix=process.Web3Process
+time="2024-06-21T09:44:49Z" level=debug msg="processed events" from_block=44 prefix=process.BlockEventsProcess to_block=48
+time="2024-06-21T09:44:55Z" level=debug msg="new slot" prefix=process.SlotsProcess remaining_slots=2 slot=70 timeframe=4
+time="2024-06-21T09:44:55Z" level=debug msg="new head" block=70 prefix=process.Web3Process
+time="2024-06-21T09:44:55Z" level=debug msg="processed events" from_block=44 prefix=process.BlockEventsProcess to_block=48
+time="2024-06-21T09:45:01Z" level=debug msg="new head" block=71 prefix=process.Web3Process
+time="2024-06-21T09:45:01Z" level=debug msg="processed events" from_block=44 prefix=process.BlockEventsProcess to_block=48
+time="2024-06-21T09:45:07Z" level=debug msg="new slot" prefix=process.SlotsProcess remaining_slots=8 slot=72 timeframe=5
+time="2024-06-21T09:45:07Z" level=debug msg="new timeframe started" prefix=process.SlotsProcess timeframe=5
+time="2024-06-21T09:45:07Z" level=debug msg="joining stage finished" dkg_id=e46b6541-977a-48cb-8224-412d229b39d9 pending_validator_id=10 prefix=processdkgcoordinator.DKGCoordinatorJoinCollectorActor
+time="2024-06-21T09:45:07Z" level=debug msg="join collector stopped" pending_validator_id=10 prefix=processdkgcoordinator.DKGCoordinatorJoinCollectorActor
+[2m9:45AM[0m [92mINF[0m [DeadLetter] [2mlib=[0mProto.Actor [2msystem=[0m4zNwW6456D4XVHGeQd92bZ [2mpid=[0m"Address:\"nonhost\" Id:\"DKGCoordinatorManagerProcess$2q/$4i/$b3\"" [2mmessage=[0m"&{result:<nil> err:0x33d88e0 continuation:0x14a8b20}" [2msender=[0m<nil>
+time="2024-06-21T09:45:07Z" level=debug msg="contribution collector started" dkg_id=e46b6541-977a-48cb-8224-412d229b39d9 prefix=processdkgcoordinator.DKGCoordinatorContributionsCollectorActor
+[2m9:45AM[0m [92mINF[0m [DeadLetter] [2mlib=[0mProto.Actor [2msystem=[0m4zNwW6456D4XVHGeQd92bZ [2mpid=[0m"Address:\"nonhost\" Id:\"DKGCoordinatorManagerProcess$2q/$4i/$b3\"" [2mmessage=[0m"&{result:<nil> err:0x33d88e0 continuation:0x14a8b20}" [2msender=[0m<nil>
+time="2024-06-21T09:45:07Z" level=debug msg="joining stage finished" dkg_id=f8d0ab33-8961-4940-bbc6-bca11028b1f3 pending_validator_id=9 prefix=processdkgcoordinator.DKGCoordinatorJoinCollectorActor
+time="2024-06-21T09:45:07Z" level=debug msg="join collector stopped" pending_validator_id=9 prefix=processdkgcoordinator.DKGCoordinatorJoinCollectorActor
+time="2024-06-21T09:45:07Z" level=debug msg="contribution collector started" dkg_id=f8d0ab33-8961-4940-bbc6-bca11028b1f3 prefix=processdkgcoordinator.DKGCoordinatorContributionsCollectorActor
+time="2024-06-21T09:45:07Z" level=debug msg="contribution received" dkg_id=f8d0ab33-8961-4940-bbc6-bca11028b1f3 node=0xA670Bfc54eEDecE8A1150b66f70aBe0b5782A0dC prefix=processdkgcoordinator.DKGCoordinatorContributionsCollectorActor
+time="2024-06-21T09:45:07Z" level=debug msg="contribution received" dkg_id=e46b6541-977a-48cb-8224-412d229b39d9 node=0xA670Bfc54eEDecE8A1150b66f70aBe0b5782A0dC prefix=processdkgcoordinator.DKGCoordinatorContributionsCollectorActor
+time="2024-06-21T09:45:07Z" level=debug msg="contribution received" dkg_id=e46b6541-977a-48cb-8224-412d229b39d9 node=0x7Bb6d6F6bF45328DE54a90fb1Bfb649f36a5D8f0 prefix=processdkgcoordinator.DKGCoordinatorContributionsCollectorActor
+time="2024-06-21T09:45:07Z" level=debug msg="contribution received" dkg_id=f8d0ab33-8961-4940-bbc6-bca11028b1f3 node=0x7Bb6d6F6bF45328DE54a90fb1Bfb649f36a5D8f0 prefix=processdkgcoordinator.DKGCoordinatorContributionsCollectorActor
+time="2024-06-21T09:45:07Z" level=debug msg="contribution received" dkg_id=e46b6541-977a-48cb-8224-412d229b39d9 node=0x5e75cb4411AFF0561a62F5737D675529897669f3 prefix=processdkgcoordinator.DKGCoordinatorContributionsCollectorActor
+time="2024-06-21T09:45:07Z" level=debug msg="contribution received" dkg_id=f8d0ab33-8961-4940-bbc6-bca11028b1f3 node=0x5534C2546D6aBA4d56039a067A43380D17487179 prefix=processdkgcoordinator.DKGCoordinatorContributionsCollectorActor
+time="2024-06-21T09:45:07Z" level=debug msg="contribution received" dkg_id=e46b6541-977a-48cb-8224-412d229b39d9 node=0x2cF3B70C8779D36B7ef79F3088AaE79Dc9ca35B7 prefix=processdkgcoordinator.DKGCoordinatorContributionsCollectorActor
+time="2024-06-21T09:45:07Z" level=debug msg="contribution received" dkg_id=f8d0ab33-8961-4940-bbc6-bca11028b1f3 node=0x5e75cb4411AFF0561a62F5737D675529897669f3 prefix=processdkgcoordinator.DKGCoordinatorContributionsCollectorActor
+time="2024-06-21T09:45:07Z" level=debug msg="contribution received" dkg_id=e46b6541-977a-48cb-8224-412d229b39d9 node=0x5534C2546D6aBA4d56039a067A43380D17487179 prefix=processdkgcoordinator.DKGCoordinatorContributionsCollectorActor
+time="2024-06-21T09:45:07Z" level=debug msg="new head" block=72 prefix=process.Web3Process
+time="2024-06-21T09:45:07Z" level=debug msg="processed events" from_block=44 prefix=process.BlockEventsProcess to_block=56
+time="2024-06-21T09:45:07Z" level=debug msg="contribution stage finished" dkg_id=e46b6541-977a-48cb-8224-412d229b39d9 prefix=processdkgcoordinator.DKGCoordinatorContributionsCollectorActor
+time="2024-06-21T09:45:07Z" level=debug msg="signature collector started" dkg_id=e46b6541-977a-48cb-8224-412d229b39d9 prefix=processdkgcoordinator.DKGCoordinatorSignaturesCollectorActor
+time="2024-06-21T09:45:07Z" level=debug msg="contribution received" dkg_id=f8d0ab33-8961-4940-bbc6-bca11028b1f3 node=0x2cF3B70C8779D36B7ef79F3088AaE79Dc9ca35B7 prefix=processdkgcoordinator.DKGCoordinatorContributionsCollectorActor
+time="2024-06-21T09:45:07Z" level=debug msg="contribution stage finished" dkg_id=f8d0ab33-8961-4940-bbc6-bca11028b1f3 prefix=processdkgcoordinator.DKGCoordinatorContributionsCollectorActor
+time="2024-06-21T09:45:07Z" level=debug msg="signature collector started" dkg_id=f8d0ab33-8961-4940-bbc6-bca11028b1f3 prefix=processdkgcoordinator.DKGCoordinatorSignaturesCollectorActor
+time="2024-06-21T09:45:07Z" level=debug msg="signatures received" bls_index=0x0300000000000000000000000000000000000000000000000000000000000000 dkg_id=e46b6541-977a-48cb-8224-412d229b39d9 node=0x5e75cb4411AFF0561a62F5737D675529897669f3 prefix=processdkgcoordinator.DKGCoordinatorSignaturesCollectorActor
+time="2024-06-21T09:45:07Z" level=debug msg="signatures received" bls_index=0x0300000000000000000000000000000000000000000000000000000000000000 dkg_id=f8d0ab33-8961-4940-bbc6-bca11028b1f3 node=0x5e75cb4411AFF0561a62F5737D675529897669f3 prefix=processdkgcoordinator.DKGCoordinatorSignaturesCollectorActor
+time="2024-06-21T09:45:07Z" level=debug msg="signatures received" bls_index=0x0400000000000000000000000000000000000000000000000000000000000000 dkg_id=e46b6541-977a-48cb-8224-412d229b39d9 node=0x7Bb6d6F6bF45328DE54a90fb1Bfb649f36a5D8f0 prefix=processdkgcoordinator.DKGCoordinatorSignaturesCollectorActor
+time="2024-06-21T09:45:07Z" level=debug msg="signatures received" bls_index=0x0400000000000000000000000000000000000000000000000000000000000000 dkg_id=f8d0ab33-8961-4940-bbc6-bca11028b1f3 node=0x7Bb6d6F6bF45328DE54a90fb1Bfb649f36a5D8f0 prefix=processdkgcoordinator.DKGCoordinatorSignaturesCollectorActor
+time="2024-06-21T09:45:07Z" level=debug msg="signatures received" bls_index=0x0200000000000000000000000000000000000000000000000000000000000000 dkg_id=e46b6541-977a-48cb-8224-412d229b39d9 node=0x5534C2546D6aBA4d56039a067A43380D17487179 prefix=processdkgcoordinator.DKGCoordinatorSignaturesCollectorActor
+time="2024-06-21T09:45:07Z" level=debug msg="signatures received" bls_index=0x0200000000000000000000000000000000000000000000000000000000000000 dkg_id=f8d0ab33-8961-4940-bbc6-bca11028b1f3 node=0x5534C2546D6aBA4d56039a067A43380D17487179 prefix=processdkgcoordinator.DKGCoordinatorSignaturesCollectorActor
+time="2024-06-21T09:45:07Z" level=debug msg="signatures received" bls_index=0x0100000000000000000000000000000000000000000000000000000000000000 dkg_id=e46b6541-977a-48cb-8224-412d229b39d9 node=0xA670Bfc54eEDecE8A1150b66f70aBe0b5782A0dC prefix=processdkgcoordinator.DKGCoordinatorSignaturesCollectorActor
+time="2024-06-21T09:45:07Z" level=debug msg="signatures received" bls_index=0x0100000000000000000000000000000000000000000000000000000000000000 dkg_id=f8d0ab33-8961-4940-bbc6-bca11028b1f3 node=0xA670Bfc54eEDecE8A1150b66f70aBe0b5782A0dC prefix=processdkgcoordinator.DKGCoordinatorSignaturesCollectorActor
+time="2024-06-21T09:45:07Z" level=debug msg="signatures received" bls_index=0x0500000000000000000000000000000000000000000000000000000000000000 dkg_id=e46b6541-977a-48cb-8224-412d229b39d9 node=0x2cF3B70C8779D36B7ef79F3088AaE79Dc9ca35B7 prefix=processdkgcoordinator.DKGCoordinatorSignaturesCollectorActor
+time="2024-06-21T09:45:07Z" level=debug msg="signatures stage finished" dkg_id=e46b6541-977a-48cb-8224-412d229b39d9 prefix=processdkgcoordinator.DKGCoordinatorSignaturesCollectorActor
+time="2024-06-21T09:45:07Z" level=debug msg="signature collector stopped" dkg_id=e46b6541-977a-48cb-8224-412d229b39d9 prefix=processdkgcoordinator.DKGCoordinatorSignaturesCollectorActor
+time="2024-06-21T09:45:07Z" level=debug msg="contribution collector stopped" dkg_id=e46b6541-977a-48cb-8224-412d229b39d9 prefix=processdkgcoordinator.DKGCoordinatorContributionsCollectorActor
+time="2024-06-21T09:45:07Z" level=debug msg="signatures received" bls_index=0x0500000000000000000000000000000000000000000000000000000000000000 dkg_id=f8d0ab33-8961-4940-bbc6-bca11028b1f3 node=0x2cF3B70C8779D36B7ef79F3088AaE79Dc9ca35B7 prefix=processdkgcoordinator.DKGCoordinatorSignaturesCollectorActor
+time="2024-06-21T09:45:07Z" level=debug msg="signatures stage finished" dkg_id=f8d0ab33-8961-4940-bbc6-bca11028b1f3 prefix=processdkgcoordinator.DKGCoordinatorSignaturesCollectorActor
+time="2024-06-21T09:45:07Z" level=debug msg="signature collector stopped" dkg_id=f8d0ab33-8961-4940-bbc6-bca11028b1f3 prefix=processdkgcoordinator.DKGCoordinatorSignaturesCollectorActor
+time="2024-06-21T09:45:07Z" level=debug msg="contribution collector stopped" dkg_id=f8d0ab33-8961-4940-bbc6-bca11028b1f3 prefix=processdkgcoordinator.DKGCoordinatorContributionsCollectorActor
+[2m9:45AM[0m [92mINF[0m [DeadLetter] [2mlib=[0mProto.Actor [2msystem=[0m4zNwW6456D4XVHGeQd92bZ [2mthrottled=[0m6
+time="2024-06-21T09:45:13Z" level=debug msg="new head" block=73 prefix=process.Web3Process
+time="2024-06-21T09:45:13Z" level=debug msg="processed events" from_block=44 prefix=process.BlockEventsProcess to_block=56
+time="2024-06-21T09:45:19Z" level=debug msg="new slot" prefix=process.SlotsProcess remaining_slots=6 slot=74 timeframe=5
+time="2024-06-21T09:45:19Z" level=debug msg="new head" block=74 prefix=process.Web3Process
+time="2024-06-21T09:45:19Z" level=debug msg="processed events" from_block=44 prefix=process.BlockEventsProcess to_block=56
+time="2024-06-21T09:45:25Z" level=debug msg="new head" block=75 prefix=process.Web3Process
+time="2024-06-21T09:45:25Z" level=debug msg="processed events" from_block=44 prefix=process.BlockEventsProcess to_block=56
+time="2024-06-21T09:45:31Z" level=debug msg="new slot" prefix=process.SlotsProcess remaining_slots=4 slot=76 timeframe=5
+time="2024-06-21T09:45:31Z" level=debug msg="new head" block=76 prefix=process.Web3Process
+time="2024-06-21T09:45:31Z" level=debug msg="processed events" from_block=44 prefix=process.BlockEventsProcess to_block=56
+time="2024-06-21T09:45:37Z" level=debug msg="new head" block=77 prefix=process.Web3Process
+time="2024-06-21T09:45:37Z" level=debug msg="processed events" from_block=44 prefix=process.BlockEventsProcess to_block=56
+time="2024-06-21T09:45:43Z" level=debug msg="new slot" prefix=process.SlotsProcess remaining_slots=2 slot=78 timeframe=5
+time="2024-06-21T09:45:43Z" level=debug msg="new head" block=78 prefix=process.Web3Process
+time="2024-06-21T09:45:43Z" level=debug msg="processed events" from_block=44 prefix=process.BlockEventsProcess to_block=56
+time="2024-06-21T09:45:49Z" level=debug msg="new head" block=79 prefix=process.Web3Process
+time="2024-06-21T09:45:49Z" level=debug msg="processed events" from_block=44 prefix=process.BlockEventsProcess to_block=56
+time="2024-06-21T09:45:55Z" level=debug msg="new slot" prefix=process.SlotsProcess remaining_slots=8 slot=80 timeframe=6
+time="2024-06-21T09:45:55Z" level=debug msg="new timeframe started" prefix=process.SlotsProcess timeframe=6
+time="2024-06-21T09:45:55Z" level=debug msg="new head" block=80 prefix=process.Web3Process
+time="2024-06-21T09:45:55Z" level=debug msg="processed events" from_block=44 prefix=process.BlockEventsProcess to_block=64
+time="2024-06-21T09:46:01Z" level=debug msg="new head" block=81 prefix=process.Web3Process
+time="2024-06-21T09:46:01Z" level=debug msg="processed events" from_block=44 prefix=process.BlockEventsProcess to_block=64
+time="2024-06-21T09:46:07Z" level=debug msg="new slot" prefix=process.SlotsProcess remaining_slots=6 slot=82 timeframe=6
+time="2024-06-21T09:46:07Z" level=debug msg="new head" block=82 prefix=process.Web3Process
+time="2024-06-21T09:46:07Z" level=debug msg="processed events" from_block=44 prefix=process.BlockEventsProcess to_block=64
+time="2024-06-21T09:46:13Z" level=debug msg="new head" block=83 prefix=process.Web3Process
+time="2024-06-21T09:46:13Z" level=debug msg="processed events" from_block=44 prefix=process.BlockEventsProcess to_block=64
+time="2024-06-21T09:46:19Z" level=debug msg="new slot" prefix=process.SlotsProcess remaining_slots=4 slot=84 timeframe=6
+time="2024-06-21T09:46:19Z" level=debug msg="new head" block=84 prefix=process.Web3Process
+time="2024-06-21T09:46:19Z" level=debug msg="processed events" from_block=44 prefix=process.BlockEventsProcess to_block=64
+time="2024-06-21T09:46:25Z" level=debug msg="new head" block=85 prefix=process.Web3Process
+time="2024-06-21T09:46:25Z" level=debug msg="processed events" from_block=44 prefix=process.BlockEventsProcess to_block=64
+time="2024-06-21T09:46:31Z" level=debug msg="new slot" prefix=process.SlotsProcess remaining_slots=2 slot=86 timeframe=6
+time="2024-06-21T09:46:31Z" level=debug msg="new head" block=86 prefix=process.Web3Process
+time="2024-06-21T09:46:31Z" level=debug msg="processed events" from_block=44 prefix=process.BlockEventsProcess to_block=64
+time="2024-06-21T09:46:37Z" level=debug msg="new head" block=87 prefix=process.Web3Process
+time="2024-06-21T09:46:37Z" level=debug msg="processed events" from_block=44 prefix=process.BlockEventsProcess to_block=64
+time="2024-06-21T09:46:43Z" level=debug msg="new slot" prefix=process.SlotsProcess remaining_slots=8 slot=88 timeframe=7
+time="2024-06-21T09:46:43Z" level=debug msg="new timeframe started" prefix=process.SlotsProcess timeframe=7
+time="2024-06-21T09:46:43Z" level=debug msg="new head" block=88 prefix=process.Web3Process
+time="2024-06-21T09:46:43Z" level=debug msg="processed events" from_block=44 prefix=process.BlockEventsProcess to_block=72
+time="2024-06-21T09:46:49Z" level=debug msg="new head" block=89 prefix=process.Web3Process
+time="2024-06-21T09:46:49Z" level=debug msg="processed events" from_block=44 prefix=process.BlockEventsProcess to_block=72
+time="2024-06-21T09:46:55Z" level=debug msg="new slot" prefix=process.SlotsProcess remaining_slots=6 slot=90 timeframe=7
+time="2024-06-21T09:46:55Z" level=debug msg="new head" block=90 prefix=process.Web3Process
+time="2024-06-21T09:46:55Z" level=debug msg="processed events" from_block=44 prefix=process.BlockEventsProcess to_block=72
+time="2024-06-21T09:47:01Z" level=debug msg="new head" block=91 prefix=process.Web3Process
+time="2024-06-21T09:47:01Z" level=debug msg="processed events" from_block=44 prefix=process.BlockEventsProcess to_block=72
+time="2024-06-21T09:47:07Z" level=debug msg="new slot" prefix=process.SlotsProcess remaining_slots=4 slot=92 timeframe=7
+time="2024-06-21T09:47:07Z" level=debug msg="new head" block=92 prefix=process.Web3Process
+time="2024-06-21T09:47:07Z" level=debug msg="processed events" from_block=44 prefix=process.BlockEventsProcess to_block=72
+time="2024-06-21T09:47:13Z" level=debug msg="new head" block=93 prefix=process.Web3Process
+time="2024-06-21T09:47:13Z" level=debug msg="processed events" from_block=44 prefix=process.BlockEventsProcess to_block=72
+time="2024-06-21T09:47:19Z" level=debug msg="new slot" prefix=process.SlotsProcess remaining_slots=2 slot=94 timeframe=7
+time="2024-06-21T09:47:19Z" level=debug msg="new head" block=94 prefix=process.Web3Process
+time="2024-06-21T09:47:19Z" level=debug msg="processed events" from_block=44 prefix=process.BlockEventsProcess to_block=72
+time="2024-06-21T09:47:25Z" level=debug msg="new head" block=95 prefix=process.Web3Process
+time="2024-06-21T09:47:25Z" level=debug msg="processed events" from_block=44 prefix=process.BlockEventsProcess to_block=72
+time="2024-06-21T09:47:31Z" level=debug msg="new slot" prefix=process.SlotsProcess remaining_slots=8 slot=96 timeframe=8
+time="2024-06-21T09:47:31Z" level=debug msg="new timeframe started" prefix=process.SlotsProcess timeframe=8
+time="2024-06-21T09:47:31Z" level=debug msg="new head" block=96 prefix=process.Web3Process
+time="2024-06-21T09:47:31Z" level=debug msg="processed events" from_block=44 prefix=process.BlockEventsProcess to_block=80
+time="2024-06-21T09:47:37Z" level=debug msg="new head" block=97 prefix=process.Web3Process
+time="2024-06-21T09:47:37Z" level=debug msg="processed events" from_block=44 prefix=process.BlockEventsProcess to_block=80
+time="2024-06-21T09:47:43Z" level=debug msg="new slot" prefix=process.SlotsProcess remaining_slots=6 slot=98 timeframe=8
+time="2024-06-21T09:47:43Z" level=debug msg="new head" block=98 prefix=process.Web3Process
+time="2024-06-21T09:47:43Z" level=debug msg="processed events" from_block=44 prefix=process.BlockEventsProcess to_block=80
+time="2024-06-21T09:47:49Z" level=debug msg="new head" block=99 prefix=process.Web3Process
+time="2024-06-21T09:47:49Z" level=debug msg="processed events" from_block=44 prefix=process.BlockEventsProcess to_block=80
+time="2024-06-21T09:47:55Z" level=debug msg="new slot" prefix=process.SlotsProcess remaining_slots=4 slot=100 timeframe=8
+time="2024-06-21T09:47:55Z" level=debug msg="new head" block=100 prefix=process.Web3Process
+time="2024-06-21T09:47:55Z" level=debug msg="processed events" from_block=44 prefix=process.BlockEventsProcess to_block=80
+time="2024-06-21T09:48:01Z" level=debug msg="new head" block=101 prefix=process.Web3Process
+time="2024-06-21T09:48:01Z" level=debug msg="processed events" from_block=44 prefix=process.BlockEventsProcess to_block=80
+time="2024-06-21T09:48:07Z" level=debug msg="new slot" prefix=process.SlotsProcess remaining_slots=2 slot=102 timeframe=8
+time="2024-06-21T09:48:07Z" level=debug msg="new head" block=102 prefix=process.Web3Process
+time="2024-06-21T09:48:07Z" level=debug msg="processed events" from_block=44 prefix=process.BlockEventsProcess to_block=80
+time="2024-06-21T09:48:13Z" level=debug msg="new head" block=103 prefix=process.Web3Process
+time="2024-06-21T09:48:13Z" level=debug msg="processed events" from_block=44 prefix=process.BlockEventsProcess to_block=80
+time="2024-06-21T09:48:19Z" level=debug msg="new slot" prefix=process.SlotsProcess remaining_slots=8 slot=104 timeframe=9
+time="2024-06-21T09:48:19Z" level=debug msg="new timeframe started" prefix=process.SlotsProcess timeframe=9
+time="2024-06-21T09:48:19Z" level=debug msg="new head" block=104 prefix=process.Web3Process
+time="2024-06-21T09:48:19Z" level=debug msg="processed events" from_block=44 prefix=process.BlockEventsProcess to_block=88
+time="2024-06-21T09:48:25Z" level=debug msg="new head" block=105 prefix=process.Web3Process
+time="2024-06-21T09:48:25Z" level=debug msg="processed events" from_block=44 prefix=process.BlockEventsProcess to_block=88
+time="2024-06-21T09:48:31Z" level=debug msg="new slot" prefix=process.SlotsProcess remaining_slots=6 slot=106 timeframe=9
+time="2024-06-21T09:48:31Z" level=debug msg="new head" block=106 prefix=process.Web3Process
+time="2024-06-21T09:48:31Z" level=debug msg="processed events" from_block=44 prefix=process.BlockEventsProcess to_block=88
+time="2024-06-21T09:48:37Z" level=debug msg="new head" block=107 prefix=process.Web3Process
+time="2024-06-21T09:48:37Z" level=debug msg="processed events" from_block=44 prefix=process.BlockEventsProcess to_block=88
+time="2024-06-21T09:48:43Z" level=debug msg="new slot" prefix=process.SlotsProcess remaining_slots=4 slot=108 timeframe=9
+time="2024-06-21T09:48:43Z" level=debug msg="new head" block=108 prefix=process.Web3Process
+time="2024-06-21T09:48:43Z" level=debug msg="processed events" from_block=44 prefix=process.BlockEventsProcess to_block=88
+time="2024-06-21T09:48:49Z" level=debug msg="new head" block=109 prefix=process.Web3Process
+time="2024-06-21T09:48:49Z" level=debug msg="processed events" from_block=44 prefix=process.BlockEventsProcess to_block=88
+time="2024-06-21T09:48:55Z" level=debug msg="new slot" prefix=process.SlotsProcess remaining_slots=2 slot=110 timeframe=9
+time="2024-06-21T09:48:55Z" level=debug msg="new head" block=110 prefix=process.Web3Process
+time="2024-06-21T09:48:55Z" level=debug msg="processed events" from_block=44 prefix=process.BlockEventsProcess to_block=88
+time="2024-06-21T09:49:07Z" level=debug msg="new slot" prefix=process.SlotsProcess remaining_slots=8 slot=112 timeframe=10
+time="2024-06-21T09:49:07Z" level=debug msg="new timeframe started" prefix=process.SlotsProcess timeframe=10
+time="2024-06-21T09:49:07Z" level=debug msg="new head" block=111 prefix=process.Web3Process
+time="2024-06-21T09:49:07Z" level=debug msg="processed events" from_block=44 prefix=process.BlockEventsProcess to_block=96
+time="2024-06-21T09:49:13Z" level=debug msg="new head" block=112 prefix=process.Web3Process
+time="2024-06-21T09:49:13Z" level=debug msg="processed events" from_block=44 prefix=process.BlockEventsProcess to_block=96
+time="2024-06-21T09:49:19Z" level=debug msg="new slot" prefix=process.SlotsProcess remaining_slots=6 slot=114 timeframe=10
+time="2024-06-21T09:49:19Z" level=debug msg="new head" block=113 prefix=process.Web3Process
+time="2024-06-21T09:49:19Z" level=debug msg="processed events" from_block=44 prefix=process.BlockEventsProcess to_block=96
+time="2024-06-21T09:49:25Z" level=debug msg="new head" block=114 prefix=process.Web3Process
+time="2024-06-21T09:49:25Z" level=debug msg="processed events" from_block=44 prefix=process.BlockEventsProcess to_block=96
+time="2024-06-21T09:49:31Z" level=debug msg="new slot" prefix=process.SlotsProcess remaining_slots=4 slot=116 timeframe=10
+time="2024-06-21T09:49:31Z" level=debug msg="new head" block=115 prefix=process.Web3Process
+time="2024-06-21T09:49:31Z" level=debug msg="processed events" from_block=44 prefix=process.BlockEventsProcess to_block=96
+time="2024-06-21T09:49:37Z" level=debug msg="new head" block=116 prefix=process.Web3Process
+time="2024-06-21T09:49:37Z" level=debug msg="processed events" from_block=44 prefix=process.BlockEventsProcess to_block=96
+time="2024-06-21T09:49:43Z" level=debug msg="new slot" prefix=process.SlotsProcess remaining_slots=2 slot=118 timeframe=10
+time="2024-06-21T09:49:43Z" level=debug msg="new head" block=117 prefix=process.Web3Process
+time="2024-06-21T09:49:43Z" level=debug msg="processed events" from_block=44 prefix=process.BlockEventsProcess to_block=96
+time="2024-06-21T09:49:49Z" level=debug msg="new head" block=118 prefix=process.Web3Process
+time="2024-06-21T09:49:49Z" level=debug msg="processed events" from_block=44 prefix=process.BlockEventsProcess to_block=96
+time="2024-06-21T09:49:55Z" level=debug msg="new slot" prefix=process.SlotsProcess remaining_slots=8 slot=120 timeframe=11
+time="2024-06-21T09:49:55Z" level=debug msg="new timeframe started" prefix=process.SlotsProcess timeframe=11
+time="2024-06-21T09:49:55Z" level=debug msg="new head" block=119 prefix=process.Web3Process
+time="2024-06-21T09:49:55Z" level=debug msg="processed events" from_block=44 prefix=process.BlockEventsProcess to_block=104
+time="2024-06-21T09:50:01Z" level=debug msg="new head" block=120 prefix=process.Web3Process
+time="2024-06-21T09:50:01Z" level=debug msg="processed events" from_block=44 prefix=process.BlockEventsProcess to_block=104
+time="2024-06-21T09:50:07Z" level=debug msg="new slot" prefix=process.SlotsProcess remaining_slots=6 slot=122 timeframe=11
+time="2024-06-21T09:50:07Z" level=debug msg="new head" block=121 prefix=process.Web3Process
+time="2024-06-21T09:50:07Z" level=debug msg="processed events" from_block=44 prefix=process.BlockEventsProcess to_block=104
+time="2024-06-21T09:50:13Z" level=debug msg="new head" block=122 prefix=process.Web3Process
+time="2024-06-21T09:50:13Z" level=debug msg="processed events" from_block=44 prefix=process.BlockEventsProcess to_block=104
+time="2024-06-21T09:50:19Z" level=debug msg="new slot" prefix=process.SlotsProcess remaining_slots=4 slot=124 timeframe=11
+time="2024-06-21T09:50:19Z" level=debug msg="new head" block=123 prefix=process.Web3Process
+time="2024-06-21T09:50:19Z" level=debug msg="processed events" from_block=44 prefix=process.BlockEventsProcess to_block=104
+time="2024-06-21T09:50:25Z" level=debug msg="new head" block=124 prefix=process.Web3Process
+time="2024-06-21T09:50:25Z" level=debug msg="processed events" from_block=44 prefix=process.BlockEventsProcess to_block=104
+time="2024-06-21T09:50:31Z" level=debug msg="new head" block=125 prefix=process.Web3Process
+time="2024-06-21T09:50:31Z" level=debug msg="new slot" prefix=process.SlotsProcess remaining_slots=2 slot=126 timeframe=11
+time="2024-06-21T09:50:31Z" level=debug msg="processed events" from_block=44 prefix=process.BlockEventsProcess to_block=104
+time="2024-06-21T09:50:37Z" level=debug msg="new head" block=126 prefix=process.Web3Process
+time="2024-06-21T09:50:37Z" level=debug msg="processed events" from_block=44 prefix=process.BlockEventsProcess to_block=104
+time="2024-06-21T09:50:43Z" level=debug msg="new slot" prefix=process.SlotsProcess remaining_slots=8 slot=128 timeframe=12
+time="2024-06-21T09:50:43Z" level=debug msg="new timeframe started" prefix=process.SlotsProcess timeframe=12
+time="2024-06-21T09:50:43Z" level=debug msg="new head" block=127 prefix=process.Web3Process
+time="2024-06-21T09:50:43Z" level=debug msg="processed events" from_block=44 prefix=process.BlockEventsProcess to_block=111
+time="2024-06-21T09:50:49Z" level=debug msg="new head" block=128 prefix=process.Web3Process
+time="2024-06-21T09:50:49Z" level=debug msg="processed events" from_block=44 prefix=process.BlockEventsProcess to_block=111
+time="2024-06-21T09:50:55Z" level=debug msg="new head" block=129 prefix=process.Web3Process
+time="2024-06-21T09:50:55Z" level=debug msg="processed events" from_block=44 prefix=process.BlockEventsProcess to_block=111
+time="2024-06-21T09:50:55Z" level=debug msg="new slot" prefix=process.SlotsProcess remaining_slots=6 slot=130 timeframe=12
+time="2024-06-21T09:51:01Z" level=debug msg="new head" block=130 prefix=process.Web3Process
+time="2024-06-21T09:51:01Z" level=debug msg="processed events" from_block=44 prefix=process.BlockEventsProcess to_block=111
+time="2024-06-21T09:51:07Z" level=debug msg="new head" block=131 prefix=process.Web3Process
+time="2024-06-21T09:51:07Z" level=debug msg="processed events" from_block=44 prefix=process.BlockEventsProcess to_block=111
+time="2024-06-21T09:51:07Z" level=debug msg="new slot" prefix=process.SlotsProcess remaining_slots=4 slot=132 timeframe=12
+time="2024-06-21T09:51:13Z" level=debug msg="new head" block=132 prefix=process.Web3Process
+time="2024-06-21T09:51:13Z" level=debug msg="processed events" from_block=44 prefix=process.BlockEventsProcess to_block=111
+time="2024-06-21T09:51:19Z" level=debug msg="new head" block=133 prefix=process.Web3Process
+time="2024-06-21T09:51:19Z" level=debug msg="processed events" from_block=44 prefix=process.BlockEventsProcess to_block=111
+time="2024-06-21T09:51:19Z" level=debug msg="new slot" prefix=process.SlotsProcess remaining_slots=2 slot=134 timeframe=12
+time="2024-06-21T09:51:25Z" level=debug msg="new head" block=134 prefix=process.Web3Process
+time="2024-06-21T09:51:25Z" level=debug msg="processed events" from_block=44 prefix=process.BlockEventsProcess to_block=111
+time="2024-06-21T09:51:31Z" level=debug msg="new slot" prefix=process.SlotsProcess remaining_slots=8 slot=136 timeframe=13
+time="2024-06-21T09:51:31Z" level=debug msg="new timeframe started" prefix=process.SlotsProcess timeframe=13
+time="2024-06-21T09:51:31Z" level=debug msg="new head" block=135 prefix=process.Web3Process
+time="2024-06-21T09:51:31Z" level=debug msg="processed events" from_block=44 prefix=process.BlockEventsProcess to_block=119
+time="2024-06-21T09:51:37Z" level=debug msg="new head" block=136 prefix=process.Web3Process
+time="2024-06-21T09:51:37Z" level=debug msg="processed events" from_block=44 prefix=process.BlockEventsProcess to_block=119
+time="2024-06-21T09:51:43Z" level=debug msg="new head" block=137 prefix=process.Web3Process
+time="2024-06-21T09:51:43Z" level=debug msg="processed events" from_block=44 prefix=process.BlockEventsProcess to_block=119
+time="2024-06-21T09:51:43Z" level=debug msg="new slot" prefix=process.SlotsProcess remaining_slots=6 slot=138 timeframe=13
+time="2024-06-21T09:51:49Z" level=debug msg="new head" block=138 prefix=process.Web3Process
+time="2024-06-21T09:51:49Z" level=debug msg="processed events" from_block=44 prefix=process.BlockEventsProcess to_block=119
+time="2024-06-21T09:51:55Z" level=debug msg="new head" block=139 prefix=process.Web3Process
+time="2024-06-21T09:51:55Z" level=debug msg="processed events" from_block=44 prefix=process.BlockEventsProcess to_block=119
+time="2024-06-21T09:51:55Z" level=debug msg="new slot" prefix=process.SlotsProcess remaining_slots=4 slot=140 timeframe=13
+time="2024-06-21T09:52:01Z" level=debug msg="new head" block=140 prefix=process.Web3Process
+time="2024-06-21T09:52:01Z" level=debug msg="processed events" from_block=44 prefix=process.BlockEventsProcess to_block=119
+time="2024-06-21T09:52:07Z" level=debug msg="new head" block=141 prefix=process.Web3Process
+time="2024-06-21T09:52:07Z" level=debug msg="processed events" from_block=44 prefix=process.BlockEventsProcess to_block=119
+time="2024-06-21T09:52:07Z" level=debug msg="new slot" prefix=process.SlotsProcess remaining_slots=2 slot=142 timeframe=13
+time="2024-06-21T09:52:13Z" level=debug msg="new head" block=142 prefix=process.Web3Process
+time="2024-06-21T09:52:13Z" level=debug msg="processed events" from_block=44 prefix=process.BlockEventsProcess to_block=119
+time="2024-06-21T09:52:19Z" level=debug msg="new slot" prefix=process.SlotsProcess remaining_slots=8 slot=144 timeframe=14
+time="2024-06-21T09:52:19Z" level=debug msg="new timeframe started" prefix=process.SlotsProcess timeframe=14
+time="2024-06-21T09:52:19Z" level=debug msg="new head" block=143 prefix=process.Web3Process
+time="2024-06-21T09:52:19Z" level=debug msg="processed events" from_block=44 prefix=process.BlockEventsProcess to_block=127
+time="2024-06-21T09:52:25Z" level=debug msg="new head" block=144 prefix=process.Web3Process
+time="2024-06-21T09:52:25Z" level=debug msg="processed events" from_block=44 prefix=process.BlockEventsProcess to_block=127
+time="2024-06-21T09:52:31Z" level=debug msg="new head" block=145 prefix=process.Web3Process
+time="2024-06-21T09:52:31Z" level=debug msg="processed events" from_block=44 prefix=process.BlockEventsProcess to_block=127
+time="2024-06-21T09:52:31Z" level=debug msg="new slot" prefix=process.SlotsProcess remaining_slots=6 slot=146 timeframe=14
+time="2024-06-21T09:52:37Z" level=debug msg="new head" block=146 prefix=process.Web3Process
+time="2024-06-21T09:52:37Z" level=debug msg="processed events" from_block=44 prefix=process.BlockEventsProcess to_block=127
+time="2024-06-21T09:52:43Z" level=debug msg="new head" block=147 prefix=process.Web3Process
+time="2024-06-21T09:52:43Z" level=debug msg="processed events" from_block=44 prefix=process.BlockEventsProcess to_block=127
+time="2024-06-21T09:52:43Z" level=debug msg="new slot" prefix=process.SlotsProcess remaining_slots=4 slot=148 timeframe=14
+time="2024-06-21T09:52:49Z" level=debug msg="new head" block=148 prefix=process.Web3Process
+time="2024-06-21T09:52:49Z" level=debug msg="processed events" from_block=44 prefix=process.BlockEventsProcess to_block=127
+time="2024-06-21T09:52:55Z" level=debug msg="new head" block=149 prefix=process.Web3Process
+time="2024-06-21T09:52:55Z" level=debug msg="processed events" from_block=44 prefix=process.BlockEventsProcess to_block=127
+time="2024-06-21T09:52:55Z" level=debug msg="new slot" prefix=process.SlotsProcess remaining_slots=2 slot=150 timeframe=14
+time="2024-06-21T09:53:01Z" level=debug msg="new head" block=150 prefix=process.Web3Process
+time="2024-06-21T09:53:01Z" level=debug msg="processed events" from_block=44 prefix=process.BlockEventsProcess to_block=127
+time="2024-06-21T09:53:07Z" level=debug msg="new slot" prefix=process.SlotsProcess remaining_slots=8 slot=152 timeframe=15
+time="2024-06-21T09:53:07Z" level=debug msg="new timeframe started" prefix=process.SlotsProcess timeframe=15
+time="2024-06-21T09:53:07Z" level=debug msg="new head" block=151 prefix=process.Web3Process
+time="2024-06-21T09:53:07Z" level=debug msg="processed events" from_block=44 prefix=process.BlockEventsProcess to_block=135
+time="2024-06-21T09:53:13Z" level=debug msg="new head" block=152 prefix=process.Web3Process
+time="2024-06-21T09:53:13Z" level=debug msg="processed events" from_block=44 prefix=process.BlockEventsProcess to_block=135
+time="2024-06-21T09:53:19Z" level=debug msg="new head" block=153 prefix=process.Web3Process
+time="2024-06-21T09:53:19Z" level=debug msg="processed events" from_block=44 prefix=process.BlockEventsProcess to_block=135
+time="2024-06-21T09:53:19Z" level=debug msg="new slot" prefix=process.SlotsProcess remaining_slots=6 slot=154 timeframe=15
+time="2024-06-21T09:53:25Z" level=debug msg="new head" block=154 prefix=process.Web3Process
+time="2024-06-21T09:53:25Z" level=debug msg="processed events" from_block=44 prefix=process.BlockEventsProcess to_block=135
+time="2024-06-21T09:53:31Z" level=debug msg="new head" block=155 prefix=process.Web3Process
+time="2024-06-21T09:53:31Z" level=debug msg="processed events" from_block=44 prefix=process.BlockEventsProcess to_block=135
+time="2024-06-21T09:53:31Z" level=debug msg="new slot" prefix=process.SlotsProcess remaining_slots=4 slot=156 timeframe=15
+time="2024-06-21T09:53:37Z" level=debug msg="new head" block=156 prefix=process.Web3Process
+time="2024-06-21T09:53:37Z" level=debug msg="processed events" from_block=44 prefix=process.BlockEventsProcess to_block=135
+time="2024-06-21T09:53:43Z" level=debug msg="new head" block=157 prefix=process.Web3Process
+time="2024-06-21T09:53:43Z" level=debug msg="processed events" from_block=44 prefix=process.BlockEventsProcess to_block=135
+time="2024-06-21T09:53:43Z" level=debug msg="new slot" prefix=process.SlotsProcess remaining_slots=2 slot=158 timeframe=15
+time="2024-06-21T09:53:49Z" level=debug msg="new head" block=158 prefix=process.Web3Process
+time="2024-06-21T09:53:49Z" level=debug msg="processed events" from_block=44 prefix=process.BlockEventsProcess to_block=135
+time="2024-06-21T09:53:55Z" level=debug msg="new slot" prefix=process.SlotsProcess remaining_slots=8 slot=160 timeframe=16
+time="2024-06-21T09:53:55Z" level=debug msg="new timeframe started" prefix=process.SlotsProcess timeframe=16
+time="2024-06-21T09:53:55Z" level=debug msg="new head" block=159 prefix=process.Web3Process
+time="2024-06-21T09:53:55Z" level=debug msg="processed events" from_block=44 prefix=process.BlockEventsProcess to_block=143
+time="2024-06-21T09:54:01Z" level=debug msg="new head" block=160 prefix=process.Web3Process
+time="2024-06-21T09:54:01Z" level=debug msg="processed events" from_block=44 prefix=process.BlockEventsProcess to_block=143

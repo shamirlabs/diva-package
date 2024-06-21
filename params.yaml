@@ -4,7 +4,7 @@ network_params:
   deneb_fork_epoch: 0
   electra_fork_epoch: 999999
   preregistered_validator_count: -1     # If -1, it is overwritten by DIVA
-  preset: mainnet
+  preset: minimal
 
 diva_params:
   diva_validators: 1
@@ -20,7 +20,7 @@ diva_params:
     deploy_oracle: false
 
     deposit_operators_eth: 70
-    private_pools_only: true           # TODO: validar diva_sc and eth_true and nodes_true
+    private_pools_only: false           # TODO: validar diva_sc and eth_true and nodes_true
     deploy_operator_ui: false
     public_ports: false
     verify_fee_recipient: false
@@ -52,4 +52,4 @@ persistent: false
 mev_type: null
 port_publisher:
   public_port_start: 30000
-  nat_exit_ip: auto
+  nat_exit_ip: 65.109.109.62
