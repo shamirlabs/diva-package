@@ -251,3 +251,5 @@ def run(plan, args):
     if False:
         diva_sc.get_coord_dkg(plan, el_rpc_uri_0, bootnode_url)
       
+    if True:
+        diva_sc.init_accounting(plan, el_rpc_uri_0)
