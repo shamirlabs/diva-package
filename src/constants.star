@@ -1,6 +1,6 @@
 # Images
 DIVA_SERVER_IMAGE = "ghcr.io/shamirlabs/diva:v24.5.0-16-g4fdfb5f0"
-DIVA_SC_IMAGE = "diva-sc:holesky-with-trusted-balance-verifier-diego-21junio10"
+DIVA_SC_IMAGE = "diva-sc:release_holesky_with_tr_min5"
 DIVA_CLI_IMAGE = "diva-cli:1"
 DIVA_ORACLE_IMAGE = "oracle:10"
 OPERATOR_UI_IMAGE = "diva/operator-ui:latest"

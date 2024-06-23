@@ -147,15 +147,22 @@ def register(plan, node_address, node_private_key, el_rpc, operator_private_key)
         ),
     )
 
-def get_coord_dkg(plan, el_rpc, coord_dkg_url):
+
+def get_coord_dkg(plan, coord_dkg_url, el_rpc, minimal, operators_priv):
+    deployer_private_key= "bcdf20249abf0ed6d944c0288fad489e33f66b3960d9e6229c1cd214ed3bbe31"
+
+    timeFrameDuration = 12*32
+    if minimal:
+        timeFrameDuration = 6*8
+    
     result = plan.exec(
         service_name=constants.DIVA_SC_SERVICE_NAME,
         recipe=ExecRecipe(
             command=[
                 "/bin/sh",
                 "-c",
-                "node scripts/testnet/getCoordDKG.js {1} {0} bcdf20249abf0ed6d944c0288fad489e33f66b3960d9e6229c1cd214ed3bbe31 ".format(
-                    el_rpc, (coord_dkg_url+"/api/v1/coordinator/dkgs")
+                "node scripts/testnet/submitterDKG.js {1} {0} {2} {3}".format(
+                    el_rpc, (coord_dkg_url+"/api/v1/coordinator/dkgs"),deployer_private_key, timeFrameDuration
                 )
             ],
         ),

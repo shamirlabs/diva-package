@@ -27,18 +27,14 @@ def run(plan, args):
 
     deploy_diva = diva_args["diva_params"]["options"]["deploy_diva_nodes"]
     deploy_diva_sc = diva_args["diva_params"]["options"]["deploy_diva_sc"]
-    deploy_diva_coord_boot = diva_args["diva_params"]["options"][
-        "deploy_diva_coord_boot"
-    ]
+    deploy_diva_coord_boot = diva_args["diva_params"]["options"]["deploy_diva_coord_boot"]
     deploy_operator_ui = diva_args["diva_params"]["options"]["deploy_operator_ui"]
     verify_fee_recipient = diva_args["diva_params"]["options"]["verify_fee_recipient"]
     private_pools_only = diva_args["diva_params"]["options"]["private_pools_only"]
     charge_pre_genesis_keys = (diva_args["diva_params"]["diva_validators"]) > 0
     mev = diva_args["mev_type"] != None
     use_w3s = diva_args["diva_params"]["use_w3s"]
-    eth_connection_enabled = diva_args["diva_params"]["options"][
-        "eth_connection_enabled"
-    ]
+    eth_connection_enabled = diva_args["diva_params"]["options"]["eth_connection_enabled"]
     start_index_val = int(diva_args["diva_eth_start_index"]) - 1
     diva_validators = diva_args["diva_params"]["diva_validators"]
     distribution = diva_args["diva_params"]["distribution"]
@@ -51,6 +47,9 @@ def run(plan, args):
 
     deploy_oracle= diva_args["diva_params"]["options"]["deploy_oracle"]
 
+    sc_init_snapshot= diva_args["diva_params"]["options"]["sc_init_snapshot"]
+    sc_dkg_submitter= diva_args["diva_params"]["options"]["sc_dkg_submitter"]
+    
 
     delay_sc = "0"
     utils.initUtils(plan)
@@ -150,6 +149,7 @@ def run(plan, args):
         validators_to_shutdown = []
         diva_addresses = []
         signer_urls = []
+        operators_priv =[]
         for index in range(0, diva_nodes):
             service_name_node = "diva{0}".format(index + 1)
             node, node_url, signer_url = diva_server.start_node(
@@ -178,6 +178,7 @@ def run(plan, args):
                     operator_address,
                     operator_private_key,
                 ) = diva_sc.new_key(plan)
+                operators_priv.append(operator_private_key)
                 diva_sc.fund(plan, el_rpc_uri_0, operator_address, deposit_operators_eth)
                 node_priv_key = utils.get_diva_field(plan, service_name_node, constants.DIVA_ID_ENDPOINT, "secret_key")
                 diva_sc.register(
@@ -248,8 +249,8 @@ def run(plan, args):
                     mev,
                 )
     
-    if False:
-        diva_sc.get_coord_dkg(plan, el_rpc_uri_0, bootnode_url)
-      
-    if True:
+    if sc_init_snapshot:
         diva_sc.init_accounting(plan, el_rpc_uri_0)
+        
+    if sc_dkg_submitter:
+        diva_sc.get_coord_dkg(plan, bootnode_url, el_rpc_uri_0, minimal, operators_priv)
