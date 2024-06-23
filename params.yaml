@@ -7,7 +7,7 @@ network_params:
   preset: minimal
 
 diva_params:
-  diva_validators: 0
+  diva_validators: 1
   diva_nodes: 5
   diva_val_type: nimbus
   distribution: "[]"                    # Array-index is node-index and array value is number of keyshares, if empty will be randomly distributed
@@ -17,7 +17,7 @@ diva_params:
     deploy_diva_nodes: true
     deploy_diva_coord_boot: true
     deploy_diva_sc: true
-    deploy_oracle: false
+    deploy_oracle: true
 
     deposit_operators_eth: 70
     sc_init_snapshot: true
@@ -36,6 +36,7 @@ participants:
     el_image: ethereum/client-go:v1.13.15
     cl_type: nimbus
     validator_count: 64
+    use_separate_vc: true
     count: 2
 # Ethereum nodes for diva connections
 # Nodes with 0 validators will be used by diva nodes and connections will be uniformely distributed between them

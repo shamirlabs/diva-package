@@ -1,7 +1,12 @@
 NIMBUS_IMAGE = "statusim/nimbus-validator-client:multiarch-v23.10.1"
+NIMBUS_IMAGE_MINIMAL = "ethpandaops/nimbus-validator-client:stable-minimal"
 
 
-def launch(plan, service_name, web3_signer_url, beacon_url, fee_recipient, verify_fee_recipient, mev):
+def launch(plan, service_name, web3_signer_url, beacon_url, fee_recipient, verify_fee_recipient, mev, minimal):
+
+    if minimal:
+        NIMBUS_IMAGE=NIMBUS_IMAGE_MINIMAL
+
     cmd=[
         "--doppelganger-detection=false",
         "--non-interactive",

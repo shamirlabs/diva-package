@@ -225,6 +225,7 @@ def run(plan, args):
                     smart_contract_address,
                     verify_fee_recipient,
                     mev,
+                    minimal
                 )
     if deploy_diva and not use_w3s:
         for index in range(0, diva_nodes):
@@ -247,10 +248,11 @@ def run(plan, args):
                     smart_contract_address,
                     verify_fee_recipient,
                     mev,
+                    minimal
                 )
     
     if sc_init_snapshot:
         diva_sc.init_accounting(plan, el_rpc_uri_0)
-        
+
     if sc_dkg_submitter:
         diva_sc.get_coord_dkg(plan, bootnode_url, el_rpc_uri_0, minimal, operators_priv)
