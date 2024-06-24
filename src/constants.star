@@ -1,12 +1,16 @@
 # Images
-DIVA_SERVER_IMAGE = "ghcr.io/shamirlabs/diva:v24.5.0-16-g4fdfb5f0"
+DIVA_SERVER_IMAGE = "ghcr.io/shamirlabs/diva:v24.6.0-2-g4fdfb5f0"
 DIVA_SC_IMAGE = "diva-sc:release_holesky_with_tr_min5"
 DIVA_CLI_IMAGE = "diva-cli:1"
 DIVA_ORACLE_IMAGE = "oracle:10"
 OPERATOR_UI_IMAGE = "diva/operator-ui:latest"
 W3S_CONSENSYS = "consensys/web3signer:23.9.0"
-NIMBUS_IMAGE = "statusim/nimbus-validator-client:multiarch-latest"
 PRYSM_IMAGE = "gcr.io/prysmaticlabs/prysm/validator:latest"
+PRYSM_IMAGE_MIN = "ethpandaops/prysm-validator:develop-minimal"
+NIMBUS_IMAGE = "statusim/nimbus-validator-client:multiarch-v23.10.1"
+NIMBUS_IMAGE_MINIMAL = "ethpandaops/nimbus-validator-client:stable-minimal"
+JAEGER_IMAGE = "jaegertracing/all-in-one:1.58.1"
+
 
 # Service names
 DIVA_BOOTNODE_NAME = "diva-bootnode-coordinator"

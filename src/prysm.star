@@ -9,6 +9,7 @@ def launch(
     fee_recipient,
     verify_fee_recipient,
     mev,
+    minimal
 ):
     files = {}
 
@@ -28,12 +29,14 @@ def launch(
         "--validators-external-signer-url={0}".format(web3_signer_url),
         "--enable-beacon-rest-api",
     ]
-
+    image=constants.PRYSM_IMAGE
+    if minimal:
+        image= constants.PRYSM_IMAGE_MIN
     plan.add_service(
         name=service_name,
         config=ServiceConfig(
             files=files,
-            image=constants.PRYSM_IMAGE,
+            image=image,
             cmd=cmd,
         ),
     )

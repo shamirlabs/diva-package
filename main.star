@@ -2,7 +2,7 @@ ethereum_package_official = import_module(
     "github.com/ethpandaops/ethereum-package/main.star"
 )
 
-ethereum_package_shamir = import_module("github.com/shamirlabs/ethereum-package@deposit_queue/main.star")
+ethereum_package_shamir = import_module("github.com/shamirlabs/ethereum-package@old_full_explorer/main.star")
 genesis_constants = import_module(
     "github.com/shamirlabs/ethereum-package/src/prelaunch_data_generator/genesis_constants/genesis_constants.star"
 )
@@ -19,6 +19,7 @@ utils = import_module("./src/utils.star")
 input_parser = import_module("./src/input-parser.star")
 w3s = import_module("./src/w3s.star")
 oracle = import_module("./src/oracle.star")
+jaeger = import_module("./src/jaeger.star")
 
 
 def run(plan, args):
@@ -53,6 +54,7 @@ def run(plan, args):
 
     delay_sc = "0"
     utils.initUtils(plan)
+    jaeguer_url= jaeger.start(plan)
     if deploy_eth:
         if deploy_diva_sc:
             delay_sc = "15"
@@ -122,6 +124,7 @@ def run(plan, args):
             eth_connection_enabled,
             debug_nodes,
             minimal,
+            jaeguer_url
         )
         diva_cli.generate_identity(plan, bootnode_url)
         bootnode_address = utils.get_diva_field(
@@ -166,7 +169,8 @@ def run(plan, args):
                 network_id,
                 eth_connection_enabled,
                 debug_nodes,
-                minimal
+                minimal,
+                jaeguer_url
             )
             diva_urls.append(node_url)
             signer_urls.append(signer_url)
@@ -215,6 +219,7 @@ def run(plan, args):
                     smart_contract_address,
                     verify_fee_recipient,
                     mev,
+                    minimal
                 )
             else:
                 nimbus.launch(
@@ -238,6 +243,7 @@ def run(plan, args):
                     smart_contract_address,
                     verify_fee_recipient,
                     mev,
+                    minimal
                 )
             else:
                 nimbus.launch(

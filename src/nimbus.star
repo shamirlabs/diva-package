@@ -1,11 +1,11 @@
-NIMBUS_IMAGE = "statusim/nimbus-validator-client:multiarch-v23.10.1"
-NIMBUS_IMAGE_MINIMAL = "ethpandaops/nimbus-validator-client:stable-minimal"
-
+constants = import_module("./constants.star")
 
 def launch(plan, service_name, web3_signer_url, beacon_url, fee_recipient, verify_fee_recipient, mev, minimal):
-
+    
+    image= constants.NIMBUS_IMAGE
+    
     if minimal:
-        NIMBUS_IMAGE=NIMBUS_IMAGE_MINIMAL
+        image=constants.NIMBUS_IMAGE_MINIMAL
 
     cmd=[
         "--doppelganger-detection=false",
@@ -22,12 +22,10 @@ def launch(plan, service_name, web3_signer_url, beacon_url, fee_recipient, verif
     else:
         cmd.append("--web3-signer-url={0}".format(web3_signer_url))
 
-
-
     plan.add_service(
         name=service_name,
         config=ServiceConfig(
-            image=NIMBUS_IMAGE,
+            image=image,
             cmd=cmd,
         )
     )

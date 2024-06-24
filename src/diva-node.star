@@ -13,7 +13,8 @@ def start_bootnode(
     chain_id,
     clients_enabled,
     debug_mode,
-    minimal
+    minimal,
+    jaeger
 ):
     public_ports = {}
     if expose_public:
@@ -33,6 +34,7 @@ def start_bootnode(
         "--w3s-address=0.0.0.0",
         "--log-level=debug",
         "--swagger-ui-enabled",
+        "--tracing=true",
         "--bootnode-address=",
         "--master-key={0}".format(constants.DIVA_API_KEY),
         "--genesis-fork-version=0x10000038",
@@ -40,7 +42,6 @@ def start_bootnode(
         "--deposit-contract=0x4242424242424242424242424242424242424242",
         "--chain-id={0}".format(chain_id),
         "--genesis-time={0}".format(genesis_time),
-        "--insecure-api",
         "--enable-coordinator",
     ]
     if minimal:
@@ -59,6 +60,7 @@ def start_bootnode(
             cmd=cmd,
             env_vars={
                 "DIVA_VAULT_PASSWORD": constants.DIVA_VAULT_PASSWORD,
+                "OTEL_EXPORTER_OTLP_ENDPOINT": jaeger,
             },
             ports={
                 "p2p-port": PortSpec(number=5050, transport_protocol="TCP", wait=None),
@@ -96,6 +98,7 @@ def start_node(
     clients_enabled,
     debug_mode,
     minimal,
+    jaeger,
 ):
 
     ports={
@@ -111,6 +114,7 @@ def start_node(
         "--w3s-address=0.0.0.0",
         "--log-level=debug",
         "--swagger-ui-enabled",
+        "--tracing=true",
         "--bootnode-address=/ip4/{0}/tcp/5050/p2p/{1}".format(
             bootnode_ip_address, bootnode_peer_id
         ),
@@ -120,7 +124,6 @@ def start_node(
         "--deposit-contract=0x4242424242424242424242424242424242424242",
         "--chain-id={0}".format(chain_id),
         "--genesis-time={0}".format(genesis_time),
-        "--insecure-api",
     ]
     if clients_enabled:
         cmd.append("--execution-client-url={0}".format(el_url))
@@ -144,7 +147,7 @@ def start_node(
             node_selectors={"diva_node": diva_node_name},
             env_vars={
                 "DIVA_VAULT_PASSWORD": constants.DIVA_VAULT_PASSWORD,
-                # TODO fill up jaeger configuration
+                "OTEL_EXPORTER_OTLP_ENDPOINT": jaeger,
             },
             ports={
                 "p2p-port": PortSpec(number=5050, transport_protocol="TCP", wait=None),
