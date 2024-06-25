@@ -83,22 +83,19 @@ def deploy(plan, el_rpc, delay_sc, chainID, sc_verif,genesis_time, minimal):
             ]
         ),
     )
+
 def fund(plan, el_rpc, op_addresses, deposit_value_eth):
-    commands = []
-    nonce=30
+    commands = []    
+    initial_command = "nonce=$(cast nonce 0x8943545177806ED17B9F23F0a21ee5948eCaa776 --rpc-url {0}); ".format(el_rpc)
     for address in op_addresses:
-        command = "cast send {0} --value \"{1} ether\" --private-key bcdf20249abf0ed6d944c0288fad489e33f66b3960d9e6229c1cd214ed3bbe31 --rpc-url {2} ".format(
-            address, deposit_value_eth + 1, el_rpc, nonce
+        command = " cast send {0} --value \"{1} ether\" --nonce $nonce --private-key bcdf20249abf0ed6d944c0288fad489e33f66b3960d9e6229c1cd214ed3bbe31 --rpc-url {2} & nonce=$(($nonce + 1));".format(
+            address, deposit_value_eth + 1, el_rpc
         )
-        if len(op_addresses) >1:
-            nonce += 1
-            command= command +  "--nonce {0} &".format(nonce)
-        else:
-            command= command +  " &"
         commands.append(command)
 
 
-    full_command = " ".join(commands) + " wait; [ $? -eq 0 ] || exit 1"
+    full_command = initial_command + " ".join(commands) + " wait; [ $? -eq 0 ] || exit 1"
+
     plan.print(full_command)
     res = plan.exec(
         service_name=constants.DIVA_SC_SERVICE_NAME,
@@ -185,20 +182,19 @@ def get_coord_dkg(plan, coord_dkg_url, el_rpc, minimal, operators_priv):
     timeFrameDuration = 12*32
     if minimal:
         timeFrameDuration = 6*8
-    
     result = plan.exec(
         service_name=constants.DIVA_SC_SERVICE_NAME,
         recipe=ExecRecipe(
             command=[
                 "/bin/sh",
                 "-c",
-                "node scripts/testnet/submitterDKG.js {1} {0} {2} {3}".format(
+                "node /app/scripts/testnet/submitterDKG.js {1} {0} {2} {3} &".format(
                     el_rpc, (coord_dkg_url+"/api/v1/coordinator/dkgs"),deployer_private_key, timeFrameDuration
                 )
             ],
         ),
     )
-
+    
 def init_accounting(plan, el_rpc):
     deployer_private_key= "bcdf20249abf0ed6d944c0288fad489e33f66b3960d9e6229c1cd214ed3bbe31"
     takeSnapshot = plan.exec(

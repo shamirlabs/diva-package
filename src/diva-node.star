@@ -42,6 +42,7 @@ def start_bootnode(
         "--chain-id={0}".format(chain_id),
         "--genesis-time={0}".format(genesis_time),
         "--enable-coordinator",
+        "--insecure-api"
     ]
     if minimal:
         cmd.append("--slot-duration=6")

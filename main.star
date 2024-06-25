@@ -20,6 +20,7 @@ input_parser = import_module("./src/input-parser.star")
 w3s = import_module("./src/w3s.star")
 oracle = import_module("./src/oracle.star")
 jaeger = import_module("./src/jaeger.star")
+diva_submitter = import_module("./src/diva-submitter.star")
 
 
 def run(plan, args):
@@ -287,4 +288,5 @@ def run(plan, args):
         diva_sc.init_accounting(plan, el_rpc_uri_0)
 
     if sc_dkg_submitter:
-        diva_sc.get_coord_dkg(plan, bootnode_url, el_rpc_uri_0, minimal, operator_private_keys)
+        diva_submitter.init(plan, el_rpc_uri_0, "bcdf20249abf0ed6d944c0288fad489e33f66b3960d9e6229c1cd214ed3bbe31" ,bootnode_url,minimal)
+        # diva_sc.get_coord_dkg(plan, bootnode_url, el_rpc_uri_0, minimal, operator_private_keys)

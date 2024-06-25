@@ -1,6 +1,7 @@
 # Images
 DIVA_SERVER_IMAGE = "ghcr.io/shamirlabs/diva:v24.6.0-2-g4fdfb5f0"
 DIVA_SC_IMAGE = "diva-sc:release_holesky_with_tr_min5"
+DIVA_SUBMITTER_IMAGE = "diva-sc:release-hol-min-cron6"
 DIVA_CLI_IMAGE = "diva-cli:1"
 DIVA_ORACLE_IMAGE = "oracle:10"
 OPERATOR_UI_IMAGE = "diva/operator-ui:latest"
@@ -14,6 +15,7 @@ JAEGER_IMAGE = "jaegertracing/all-in-one:1.58.1"
 
 # Service names
 DIVA_BOOTNODE_NAME = "diva-bootnode-coordinator"
+DIVA_SUBMITTER_NAME = "diva-submitter"
 DIVA_DEPLOYER_CLI_NAME = "diva-cli-deployer"
 DIVA_CLI_NAME = "diva-cli"
 DIVA_SC_SERVICE_NAME = "diva-smartcontract-deployer"
