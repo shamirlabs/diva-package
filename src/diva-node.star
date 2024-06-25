@@ -1,7 +1,6 @@
 constants = import_module("./constants.star")
 
 
-# Starts the BootNode / Coordinator Node
 def start_bootnode(
     plan,
     el_url,
@@ -82,8 +81,7 @@ def start_bootnode(
     return result, "http://{0}:{1}".format(result.name, constants.DIVA_API)
 
 
-# TODO parallelize this?
-def start_node(
+def start_node_config(
     plan,
     diva_node_name,
     el_url,
@@ -106,8 +104,6 @@ def start_node(
             "w3s-port": PortSpec(number=9000, transport_protocol="TCP", wait=None),
             "api-port": PortSpec(number=30000, transport_protocol="TCP"),
             }
-
-
 
     cmd = [
         "--db=/var/diva/config/diva.db",
@@ -139,33 +135,40 @@ def start_node(
         cmd.append("--verify-fee-recipient")
 
     contracts = plan.upload_files("./config/contracts.toml")
-    result = plan.add_service(
-        name=diva_node_name,
-        config=ServiceConfig(
-            image=constants.DIVA_SERVER_IMAGE,
-            cmd=cmd,
-            node_selectors={"diva_node": diva_node_name},
-            env_vars={
-                "DIVA_VAULT_PASSWORD": constants.DIVA_VAULT_PASSWORD,
-                "OTEL_EXPORTER_OTLP_ENDPOINT": jaeger,
-            },
-            ports={
-                "p2p-port": PortSpec(number=5050, transport_protocol="TCP", wait=None),
-                "w3s-port": PortSpec(number=9000, transport_protocol="TCP", wait=None),
-                "api-port": PortSpec(number=30000, transport_protocol="TCP"),
-                #"debugger": PortSpec(number=40000, transport_protocol="TCP"),
-            },
-            files={
-                "/var/diva": Directory(
-                    persistent_key="diva-db-{0}".format(diva_node_name)
-                ),
-                "/var/diva/params": contracts
-            },
-        ),
+  
+    config=ServiceConfig(
+        image=constants.DIVA_SERVER_IMAGE,
+        cmd=cmd,
+        node_selectors={"diva_node": diva_node_name},
+        env_vars={
+            "DIVA_VAULT_PASSWORD": constants.DIVA_VAULT_PASSWORD,
+            "OTEL_EXPORTER_OTLP_ENDPOINT": jaeger,
+        },
+        ports={
+            "p2p-port": PortSpec(number=5050, transport_protocol="TCP", wait=None),
+            "w3s-port": PortSpec(number=9000, transport_protocol="TCP", wait=None),
+            "api-port": PortSpec(number=30000, transport_protocol="TCP"),
+            #"debugger": PortSpec(number=40000, transport_protocol="TCP"),
+        },
+        files={
+            "/var/diva": Directory(
+                persistent_key="diva-db-{0}".format(diva_node_name)
+            ),
+            "/var/diva/params": contracts
+        },
+    )
+    
+    return (
+        config
     )
 
-    return (
-        result,
-        "http://{0}:30000".format(result.name),
-        "http://{0}:9000".format(result.name),
+
+def start_nodes(plan, nodes_config):
+    all_services = plan.add_services(
+        nodes_config,
+        description = "adding diva-nodes in pararell"
     )
+    return (
+        all_services
+    )
+

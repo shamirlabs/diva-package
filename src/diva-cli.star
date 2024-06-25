@@ -20,26 +20,30 @@ def start_cli(plan, configuration_tomls=None):
     )
 
 
-def generate_identity(plan, diva_server_url):
-    plan.print("Generating identity for {0}".format(diva_server_url))
-    plan.exec(
+def generate_identity(plan, diva_server_urls):
+    commands = []
+    for diva_server_url in diva_server_urls:
+        command = "export DIVA_SERVER_URL={0} && /usr/local/bin/diva identity generate &".format(
+                    diva_server_url
+                )
+        commands.append(command)
+    
+    full_command = " ".join(commands) + " wait; [ $? -eq 0 ] || exit 1"
+
+    res= plan.exec(
         service_name=constants.DIVA_CLI_NAME,
         acceptable_codes = [0, 1],
         recipe=ExecRecipe(
             command=[
                 "/bin/sh",
                 "-c",
-                "export DIVA_SERVER_URL={0} && /usr/local/bin/diva identity generate".format(
-                    diva_server_url
-                ),
+                full_command
             ]
         ),
     )
 
 
-# TODO parallelize this; this is currently being called in Kurtosis but
-# we can write a python script that creates a thread pool and runs migrate + deploy
-def deploy(plan, diva_validators):
+def deploy2(plan, diva_validators):
     for key_index in range(0, diva_validators):
         configuration_file = "/configuration/config-{0}/config-{1}.toml".format(
             0, key_index
@@ -61,6 +65,10 @@ def deploy(plan, diva_validators):
                 ]
             ),
         )
+        plan.print(
+            pool_name
+        )
+
         plan.exec(
             service_name=constants.DIVA_DEPLOYER_CLI_NAME,
             recipe=ExecRecipe(
@@ -71,3 +79,37 @@ def deploy(plan, diva_validators):
                 ]
             ),
         )
+
+
+def deploy(plan, diva_validators):
+    commandsMigrate = []
+    commandsDeploy = []
+    for key_index in range(0, diva_validators):
+        configuration_file = "/configuration/config-{0}/config-{1}.toml".format(
+            0, key_index
+        )
+        commandMigrate = "/usr/local/bin/diva pools migrate {0} | grep -o 'saved .*\\.json' &".format(configuration_file)
+        commandsMigrate.append(commandMigrate)
+        
+    full_commandMigrate = " ".join(commandsMigrate) + " wait; [ $? -eq 0 ] || exit 1"
+    deployAllCmd = 'for file in *.json; do /usr/local/bin/diva pools deploy "$file"; done'
+    plan.exec(
+        service_name=constants.DIVA_DEPLOYER_CLI_NAME,
+        recipe=ExecRecipe(
+            command=[
+                "/bin/sh",
+                "-c",
+                full_commandMigrate
+            ]
+        ),
+    )
+    plan.exec(
+        service_name=constants.DIVA_DEPLOYER_CLI_NAME,
+        recipe=ExecRecipe(
+            command=[
+                "/bin/sh",
+                "-c",
+                deployAllCmd
+            ]
+        ),
+    )

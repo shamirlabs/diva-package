@@ -17,13 +17,13 @@ diva_params:
     deploy_diva_nodes: true
     deploy_diva_coord_boot: true
     deploy_diva_sc: true
-    deploy_oracle: true
+    deploy_oracle: false
 
     deposit_operators_eth: 70
-    sc_init_snapshot: false
-    sc_dkg_submitter: false
+    sc_init_snapshot: true
+    sc_dkg_submitter: true
 
-    private_pools_only: true           # TODO: validar diva_sc and eth_true and nodes_true
+    private_pools_only: false           # TODO: validar diva_sc and eth_true and nodes_true
     deploy_operator_ui: false
     public_ports: false
     verify_fee_recipient: false

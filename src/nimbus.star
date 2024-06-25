@@ -22,10 +22,9 @@ def launch(plan, service_name, web3_signer_url, beacon_url, fee_recipient, verif
     else:
         cmd.append("--web3-signer-url={0}".format(web3_signer_url))
 
-    plan.add_service(
-        name=service_name,
-        config=ServiceConfig(
-            image=image,
-            cmd=cmd,
-        )
+
+    config=ServiceConfig(
+        image=image,
+        cmd=cmd,
     )
+    return config

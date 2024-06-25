@@ -30,13 +30,14 @@ def launch(
         "--enable-beacon-rest-api",
     ]
     image=constants.PRYSM_IMAGE
+    
     if minimal:
         image= constants.PRYSM_IMAGE_MIN
-    plan.add_service(
-        name=service_name,
-        config=ServiceConfig(
-            files=files,
-            image=image,
-            cmd=cmd,
-        ),
+    
+
+    config=ServiceConfig(
+        files=files,
+        image=image,
+        cmd=cmd,
     )
+    return config

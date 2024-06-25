@@ -42,7 +42,7 @@ def get_diva_field(plan, service_name, endpoint, field):
         field=field_n,
         assertion="!=",
         target_value="",
-        timeout="5s",
+        timeout="10s",
         recipe=recipe,
         service_name=service_name,
     )

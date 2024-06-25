@@ -126,13 +126,13 @@ def run(plan, args):
             minimal,
             jaeguer_url
         )
-        diva_cli.generate_identity(plan, bootnode_url)
+        diva_cli.generate_identity(plan, [bootnode_url])
         bootnode_address = utils.get_diva_field(
             plan, constants.DIVA_BOOTNODE_NAME,constants.DIVA_INFO_ENDPOINT, "node_address"
         )
 
         if deploy_diva_sc:
-            diva_sc.fund(plan, el_rpc_uri_0, bootnode_address,1)
+            diva_sc.fund(plan, el_rpc_uri_0, [bootnode_address] ,1)
 
     if deploy_diva:
         bootonde_url = "http://{0}:{1}".format(constants.HOST, constants.BOOTNODE_PORT)
@@ -150,12 +150,15 @@ def run(plan, args):
 
         diva_urls = []
         validators_to_shutdown = []
-        diva_addresses = []
+        node_addresses = []
+        node_priv_keys =[]
         signer_urls = []
-        operators_priv =[]
+        operator_private_keys =[]
+        op_addresses =[]
+        node_configs={}
         for index in range(0, diva_nodes):
             service_name_node = "diva{0}".format(index + 1)
-            node, node_url, signer_url = diva_server.start_node(
+            config = diva_server.start_node_config(
                 plan,
                 service_name_node,
                 el_ws_uri_0,
@@ -172,25 +175,40 @@ def run(plan, args):
                 minimal,
                 jaeguer_url
             )
+            node_configs[service_name_node]=config
+
+        diva_node_services= diva_server.start_nodes(plan, node_configs)
+        for service in diva_node_services.values():
+            node_url= "http://{0}:{1}".format(service.hostname, service.ports["api-port"].number)
             diva_urls.append(node_url)
+            signer_url= "http://{0}:{1}".format(service.hostname, service.ports["w3s-port"].number)
             signer_urls.append(signer_url)
-            diva_cli.generate_identity(plan, node_url)
-            node_address = utils.get_diva_field(plan, service_name_node, constants.DIVA_INFO_ENDPOINT, "node_address")
-            diva_addresses.append(node_address)
+            
+        diva_cli.generate_identity(plan, diva_urls)
+        
+        for service in diva_node_services.values():
+            node_address = utils.get_diva_field(plan, service.name, constants.DIVA_INFO_ENDPOINT, "node_address")
+            node_addresses.append(node_address)
             if not private_pools_only:
                 (
                     operator_address,
                     operator_private_key,
                 ) = diva_sc.new_key(plan)
-                operators_priv.append(operator_private_key)
-                diva_sc.fund(plan, el_rpc_uri_0, operator_address, deposit_operators_eth)
-                node_priv_key = utils.get_diva_field(plan, service_name_node, constants.DIVA_ID_ENDPOINT, "secret_key")
-                diva_sc.register(
-                    plan, node_address, node_priv_key, el_rpc_uri_0, operator_private_key
-                )                
-                diva_sc.collateral(
-                    plan, el_rpc_uri_0,operator_private_key, deposit_operators_eth
-                )
+
+                op_addresses.append(operator_address)
+                operator_private_keys.append(operator_private_key)
+                node_priv_key = utils.get_diva_field(plan, service.name, constants.DIVA_ID_ENDPOINT, "secret_key")
+                node_priv_keys.append(node_priv_key)
+
+        diva_sc.fund(plan, el_rpc_uri_0, op_addresses, deposit_operators_eth)
+
+        diva_sc.register(
+            plan, node_addresses, node_priv_keys, el_rpc_uri_0, operator_private_keys
+        )                
+
+        diva_sc.collateral(
+            plan, el_rpc_uri_0, operator_private_keys, deposit_operators_eth
+        )
     if deploy_operator_ui:
         diva_operator_ui.launch(plan)
 
@@ -200,7 +218,7 @@ def run(plan, args):
             configuration_tomls = keys.proccess_pregenesis_keys(
                 plan,
                 diva_urls,
-                diva_addresses,
+                node_addresses,
                 start_index_val,
                 stop_index_val,
                 distribution,
@@ -232,10 +250,15 @@ def run(plan, args):
                     mev,
                     minimal
                 )
+            node_configs[service_name_node]=config
+                
+    
     if deploy_diva and not use_w3s:
+        vc_configs={}
         for index in range(0, diva_nodes):
+            service_name_vc= "vc-diva-{1}-{0}".format((index + 1),diva_val_type)
             if diva_val_type == "prysm":
-                prysm.launch(
+                config=prysm.launch(
                     plan,
                     "val{0}".format(index + 1),
                     signer_urls[index],
@@ -246,7 +269,7 @@ def run(plan, args):
                     minimal
                 )
             else:
-                nimbus.launch(
+                config=nimbus.launch(
                     plan,
                     "val{0}".format(index + 1),
                     signer_urls[index],
@@ -256,9 +279,12 @@ def run(plan, args):
                     mev,
                     minimal
                 )
-    
+            vc_configs[service_name_vc]=config
+
+        plan.add_services(vc_configs)
+
     if sc_init_snapshot:
         diva_sc.init_accounting(plan, el_rpc_uri_0)
 
     if sc_dkg_submitter:
-        diva_sc.get_coord_dkg(plan, bootnode_url, el_rpc_uri_0, minimal, operators_priv)
+        diva_sc.get_coord_dkg(plan, bootnode_url, el_rpc_uri_0, minimal, operator_private_keys)

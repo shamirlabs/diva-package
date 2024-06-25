@@ -83,35 +83,55 @@ def deploy(plan, el_rpc, delay_sc, chainID, sc_verif,genesis_time, minimal):
             ]
         ),
     )
+def fund(plan, el_rpc, op_addresses, deposit_value_eth):
+    commands = []
+    nonce=30
+    for address in op_addresses:
+        command = "cast send {0} --value \"{1} ether\" --private-key bcdf20249abf0ed6d944c0288fad489e33f66b3960d9e6229c1cd214ed3bbe31 --rpc-url {2} ".format(
+            address, deposit_value_eth + 1, el_rpc, nonce
+        )
+        if len(op_addresses) >1:
+            nonce += 1
+            command= command +  "--nonce {0} &".format(nonce)
+        else:
+            command= command +  " &"
+        commands.append(command)
+
+
+    full_command = " ".join(commands) + " wait; [ $? -eq 0 ] || exit 1"
+    plan.print(full_command)
+    res = plan.exec(
+        service_name=constants.DIVA_SC_SERVICE_NAME,
+        recipe=ExecRecipe(
+            command=[
+                "/bin/sh",
+                "-c",
+                full_command
+            ]
+        ),
+    )
  
     
+def collateral(plan, el_rpc, priv_keys,value):
+    commands = []
 
+    for priv_key in priv_keys:
+        command =  "DEPLOYER_ADDRESS=0x8943545177806ED17B9F23F0a21ee5948eCaa776 COLLATERAL_AMOUNT=\"{0} ether\" forge script scripts/testnet/AddCollateral.s.sol -vvv --rpc-url={1} --broadcast --private-key {2} &".format(value,el_rpc,priv_key)
 
-def fund(plan, el_rpc, address,deposit_operators_eth):
+        commands.append(command)
+    
+        full_command = " ".join(commands) + " wait; [ $? -eq 0 ] || exit 1"
+    
     plan.exec(
         service_name=constants.DIVA_SC_SERVICE_NAME,
         recipe=ExecRecipe(
             command=[
                 "/bin/sh",
                 "-c",
-                "cast send {0} --value \"{2} ether\" --private-key bcdf20249abf0ed6d944c0288fad489e33f66b3960d9e6229c1cd214ed3bbe31 --rpc-url {1}".format(
-                    address,el_rpc,(deposit_operators_eth+1)
-                ),
+                full_command
             ]
         ),
     )
-def collateral(plan, el_rpc, priv_key,value):
-    plan.exec(
-        service_name=constants.DIVA_SC_SERVICE_NAME,
-        recipe=ExecRecipe(
-            command=[
-                "/bin/sh",
-                "-c",
-                "DEPLOYER_ADDRESS=0x8943545177806ED17B9F23F0a21ee5948eCaa776 COLLATERAL_AMOUNT=\"{0} ether\" forge script scripts/testnet/AddCollateral.s.sol -vvv --rpc-url={1} --broadcast --private-key {2}".format(value,el_rpc,priv_key)
-            ]
-        ),
-    )
-
 
 def new_key(plan):
     result = plan.exec(
@@ -133,19 +153,30 @@ def new_key(plan):
     private_key= result["extract.private_key"]
     return address, private_key
 
-def register(plan, node_address, node_private_key, el_rpc, operator_private_key):
-    result = plan.exec(
-        service_name=constants.DIVA_SC_SERVICE_NAME,
-        recipe=ExecRecipe(
-            command=[
-                "/bin/sh",
-                "-c",
-                "NODE_ADDRESS={0} NODE_PRIVATE_KEY={1} DEPLOYER_ADDRESS=0x8943545177806ED17B9F23F0a21ee5948eCaa776 forge script scripts/testnet/RegisterNode.s.sol -vvv --rpc-url={2} --broadcast --private-key {3}".format(
-                    node_address, node_private_key, el_rpc,operator_private_key
-                )
-            ],
-        ),
-    )
+def register(plan, node_addresses, node_private_keys, el_rpc, operator_private_keys):
+    commands = []
+    if len(node_addresses)>0 and len(node_addresses)==len(node_private_keys) and len(node_private_keys) == len(operator_private_keys):
+        for i in range(len(node_addresses)):
+            node_address = node_addresses[i]
+            node_private_key = node_private_keys[i]
+            operator_private_key = operator_private_keys[i]
+            command = "NODE_ADDRESS={0} NODE_PRIVATE_KEY={1} DEPLOYER_ADDRESS=0x8943545177806ED17B9F23F0a21ee5948eCaa776 forge script scripts/testnet/RegisterNode.s.sol -vvv --rpc-url={2} --broadcast --private-key {3} &".format(
+                node_address, node_private_key, el_rpc, operator_private_key
+            )
+            commands.append(command)
+
+            full_command = " ".join(commands) + " wait; [ $? -eq 0 ] || exit 1"
+
+        plan.exec(
+            service_name=constants.DIVA_SC_SERVICE_NAME,
+            recipe=ExecRecipe(
+                command=[
+                    "/bin/sh",
+                    "-c",
+                    full_command
+                ]
+            )
+        )
 
 
 def get_coord_dkg(plan, coord_dkg_url, el_rpc, minimal, operators_priv):
