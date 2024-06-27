@@ -20,8 +20,9 @@ input_parser = import_module("./src/input-parser.star")
 w3s = import_module("./src/w3s.star")
 oracle = import_module("./src/oracle.star")
 jaeger = import_module("./src/jaeger.star")
+diva_heartbeat = import_module("./src/diva-heartbeat.star")
 diva_submitter = import_module("./src/diva-submitter.star")
-
+diva_proofs = import_module("./src/diva-proofs.star")
 
 def run(plan, args):
     diva_args = input_parser.diva_input_parser(plan, args)
@@ -108,7 +109,7 @@ def run(plan, args):
 
     if deploy_diva_sc:
         diva_sc.deploy(plan, el_rpc_uri_0, delay_sc, network_id, sc_verif, genesis_time, minimal)
-
+        diva_heartbeat.start(plan,el_rpc_uri_0,el_ws_uri_0)
     if deploy_diva or deploy_diva_coord_boot:
         diva_cli.start_cli(plan)
 
@@ -179,6 +180,7 @@ def run(plan, args):
             node_configs[service_name_node]=config
 
         diva_node_services= diva_server.start_nodes(plan, node_configs)
+
         for service in diva_node_services.values():
             node_url= "http://{0}:{1}".format(service.hostname, service.ports["api-port"].number)
             diva_urls.append(node_url)
@@ -187,6 +189,11 @@ def run(plan, args):
             
         diva_cli.generate_identity(plan, diva_urls)
         
+        plan.exec(
+            service_name=constants.DIVA_SC_SERVICE_NAME,
+            recipe=ExecRecipe(command=["sleep", "1"]),
+        )
+
         for service in diva_node_services.values():
             node_address = utils.get_diva_field(plan, service.name, constants.DIVA_INFO_ENDPOINT, "node_address")
             node_addresses.append(node_address)
@@ -286,7 +293,7 @@ def run(plan, args):
 
     if sc_init_snapshot:
         diva_sc.init_accounting(plan, el_rpc_uri_0)
-
+        #diva_proofs.init(plan, cl_uri_0 )
     if sc_dkg_submitter:
         diva_submitter.init(plan, el_rpc_uri_0, "bcdf20249abf0ed6d944c0288fad489e33f66b3960d9e6229c1cd214ed3bbe31" ,bootnode_url,minimal)
-        # diva_sc.get_coord_dkg(plan, bootnode_url, el_rpc_uri_0, minimal, operator_private_keys)
+        #diva_sc.get_coord_dkg(plan, bootnode_url, el_rpc_uri_0, minimal, operator_private_keys)

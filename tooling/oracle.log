@@ -1,0 +1,1042 @@
+time="2024-06-26T09:43:50Z" level=info msg="divaproto plugin installed" cc_url="http://172.16.0.14:3500" cc_version= chain_id=3151908 ec_url="ws://172.16.0.12:8546" ec_version="Geth/v1.13.15-stable-c5ba367e/linux-amd64/go1.21.9" genesis_fork_version=0x10000038 genesis_validators_root=0x9c714f5515e091adccf066e945f10edc19fb6aefd132be221f7066caa17db73a prefix=divaproto.plugin
+[2m9:43AM[0m [92mINF[0m actor system started [2mlib=[0mProto.Actor [2msystem=[0mhoxkzYmvj8pzygbyP6riyz [2mid=[0mhoxkzYmvj8pzygbyP6riyz
+time="2024-06-26T09:43:50Z" level=info msg="Start Schedulers" prefix="oracle/Process$2"
+time="2024-06-26T09:43:50Z" level=info msg="Starting diva contract process" prefix="oracle/Process$2/oracle/*divacontract.Process$4"
+time="2024-06-26T09:43:50Z" level=info msg="Watching snapshot taken events" prefix="oracle/Process$2/oracle/*divacontract.Process$4"
+time="2024-06-26T09:43:50Z" level=info msg="Listening for snapshot taken events" prefix="oracle/Process$2/oracle/*divacontract.Process$4"
+time="2024-06-26T09:43:50Z" level=info msg="Fetching diva validators and operators" prefix="oracle/Process$2/oracle/*divacontract.Process$4"
+time="2024-06-26T09:43:50Z" level=error msg="Fetch Diva Validators And Operators Failure. %!w(*errors.errorString=&{no contract code at given address})" prefix="oracle/Process$2"
+[2m9:43AM[0m [92mINF[0m [ACTOR] Recovering [2mlib=[0mProto.Actor [2msystem=[0mhoxkzYmvj8pzygbyP6riyz [2mself=[0m"Address:\"nonhost\" Id:\"Process$2\"" [2mreason=[0m"no contract code at given address"
+[2m9:43AM[0m [91mERR[0m [Supervision] [2mlib=[0mProto.Actor [2msystem=[0mhoxkzYmvj8pzygbyP6riyz [2mactor=[0m"Address:\"nonhost\" Id:\"Process$2\"" [2mmessage=[0m"&{Error:no contract code at given address}" [2mexception=[0m"no contract code at given address"
+debug.Stack(): goroutine 84 [running]:
+runtime/debug.Stack()
+	/usr/local/go/src/runtime/debug/stack.go:24 +0x5e
+github.com/asynkron/protoactor-go/actor.(*actorContext).EscalateFailure(0xc0005bc420, {0x1079a00, 0x1e7c6c0}, {0xfefd80, 0xc0005a6450})
+time="2024-06-26T09:43:50Z" level=error msg="Supervisor Event Stream" child=Address:"nonhost" Id:"Process$2" directive=RestartDirective prefix="oracle/Process$2" reason="no contract code at given address"
+	/root/go/pkg/mod/github.com/asynkron/protoactor-go@v0.0.0-20240413045429-76c172a71a16/actor/actor_context.go:709 +0x1d3
+github.com/asynkron/protoactor-go/actor.(*defaultMailbox).run.func1()
+	/root/go/pkg/mod/github.com/asynkron/protoactor-go@v0.0.0-20240413045429-76c172a71a16/actor/mailbox.go:132 +0x58
+panic({0x1079a00?, 0x1e7c6c0?})
+	/usr/local/go/src/runtime/panic.go:770 +0x132
+github.com/shamirlabs/oracle/process/oracle.(*Process).Receive(0xc00013c000, {0x16554d8, 0xc0004fcd40})
+	/root/hive-mind-oracle/process/oracle/process.go:73 +0x1485
+github.com/shamirlabs/synapse/system.(*SystemManager).SpawnProcess.(*SystemManager).WrapActor.func1({0x1654838, 0xc0005bc420})
+	/root/go/pkg/mod/github.com/shamirlabs/synapse@v0.4.0/system/system.go:280 +0x67f
+github.com/asynkron/protoactor-go/actor.ReceiveFunc.Receive(0x1f71e00?, {0x1654838?, 0xc0005bc420?})
+	/root/go/pkg/mod/github.com/asynkron/protoactor-go@v0.0.0-20240413045429-76c172a71a16/actor/message.go:19 +0x26
+github.com/asynkron/protoactor-go/actor.(*actorContext).defaultReceive(0xc0005bc420)
+	/root/go/pkg/mod/github.com/asynkron/protoactor-go@v0.0.0-20240413045429-76c172a71a16/actor/actor_context.go:372 +0x98
+github.com/asynkron/protoactor-go/actor.(*actorContext).processMessage(0xc0005bc420, {0xfefd80, 0xc0005a6450})
+	/root/go/pkg/mod/github.com/asynkron/protoactor-go@v0.0.0-20240413045429-76c172a71a16/actor/actor_context.go:527 +0xf9
+github.com/asynkron/protoactor-go/actor.(*actorContext).InvokeUserMessage(0xc0005bc420, {0xfefd80, 0xc0005a6450})
+	/root/go/pkg/mod/github.com/asynkron/protoactor-go@v0.0.0-20240413045429-76c172a71a16/actor/actor_context.go:505 +0x45a
+github.com/asynkron/protoactor-go/actor.(*defaultMailbox).run(0xc0005bc480)
+	/root/go/pkg/mod/github.com/asynkron/protoactor-go@v0.0.0-20240413045429-76c172a71a16/actor/mailbox.go:169 +0x22f
+github.com/asynkron/protoactor-go/actor.(*defaultMailbox).processMessages(0xc0005bc480)
+	/root/go/pkg/mod/github.com/asynkron/protoactor-go@v0.0.0-20240413045429-76c172a71a16/actor/mailbox.go:105 +0x25
+created by github.com/asynkron/protoactor-go/actor.goroutineDispatcher.Schedule in goroutine 83
+	/root/go/pkg/mod/github.com/asynkron/protoactor-go@v0.0.0-20240413045429-76c172a71a16/actor/dispatcher.go:13 +0x16
+
+[Supervision] Actor: Address:"nonhost" Id:"Process$2"  failed with message: &{no contract code at given address}  exception: no contract code at given address
+panic: no contract code at given address [recovered]
+	panic: no contract code at given address
+
+goroutine 84 [running]:
+github.com/shamirlabs/oracle/process/oracle.(*Process).subscribeEventStream.func1({0xfef740?, 0xc0008840c0?})
+	/root/hive-mind-oracle/process/oracle/utils.go:258 +0x315
+github.com/asynkron/protoactor-go/eventstream.(*EventStream).Publish(0xc00044a100, {0xfef740, 0xc0008840c0})
+	/root/go/pkg/mod/github.com/asynkron/protoactor-go@v0.0.0-20240413045429-76c172a71a16/eventstream/eventstream.go:108 +0x1d8
+github.com/asynkron/protoactor-go/actor.logFailure(...)
+	/root/go/pkg/mod/github.com/asynkron/protoactor-go@v0.0.0-20240413045429-76c172a71a16/actor/supervision.go:25
+github.com/asynkron/protoactor-go/actor.(*oneForOneStrategy).HandleFailure(0x1e80e20, 0xc00055b320, {0x1641080, 0xc0005bc420}, 0xc0005bc4e0, 0xc0004e83c0, {0x1079a00, 0x1e7c6c0}, {0xfefd80, 0xc0005a6450})
+	/root/go/pkg/mod/github.com/asynkron/protoactor-go@v0.0.0-20240413045429-76c172a71a16/actor/strategy_one_for_one.go:39 +0x1bd
+github.com/asynkron/protoactor-go/actor.(*actorContext).handleRootFailure(...)
+	/root/go/pkg/mod/github.com/asynkron/protoactor-go@v0.0.0-20240413045429-76c172a71a16/actor/actor_context.go:572
+github.com/asynkron/protoactor-go/actor.(*actorContext).EscalateFailure(0xc0005bc420, {0x1079a00, 0x1e7c6c0}, {0xfefd80, 0xc0005a6450})
+	/root/go/pkg/mod/github.com/asynkron/protoactor-go@v0.0.0-20240413045429-76c172a71a16/actor/actor_context.go:727 +0x7a7
+github.com/asynkron/protoactor-go/actor.(*defaultMailbox).run.func1()
+	/root/go/pkg/mod/github.com/asynkron/protoactor-go@v0.0.0-20240413045429-76c172a71a16/actor/mailbox.go:132 +0x58
+panic({0x1079a00?, 0x1e7c6c0?})
+	/usr/local/go/src/runtime/panic.go:770 +0x132
+github.com/shamirlabs/oracle/process/oracle.(*Process).Receive(0xc00013c000, {0x16554d8, 0xc0004fcd40})
+	/root/hive-mind-oracle/process/oracle/process.go:73 +0x1485
+github.com/shamirlabs/synapse/system.(*SystemManager).SpawnProcess.(*SystemManager).WrapActor.func1({0x1654838, 0xc0005bc420})
+	/root/go/pkg/mod/github.com/shamirlabs/synapse@v0.4.0/system/system.go:280 +0x67f
+github.com/asynkron/protoactor-go/actor.ReceiveFunc.Receive(0x1f71e00?, {0x1654838?, 0xc0005bc420?})
+	/root/go/pkg/mod/github.com/asynkron/protoactor-go@v0.0.0-20240413045429-76c172a71a16/actor/message.go:19 +0x26
+github.com/asynkron/protoactor-go/actor.(*actorContext).defaultReceive(0xc0005bc420)
+	/root/go/pkg/mod/github.com/asynkron/protoactor-go@v0.0.0-20240413045429-76c172a71a16/actor/actor_context.go:372 +0x98
+github.com/asynkron/protoactor-go/actor.(*actorContext).processMessage(0xc0005bc420, {0xfefd80, 0xc0005a6450})
+	/root/go/pkg/mod/github.com/asynkron/protoactor-go@v0.0.0-20240413045429-76c172a71a16/actor/actor_context.go:527 +0xf9
+github.com/asynkron/protoactor-go/actor.(*actorContext).InvokeUserMessage(0xc0005bc420, {0xfefd80, 0xc0005a6450})
+	/root/go/pkg/mod/github.com/asynkron/protoactor-go@v0.0.0-20240413045429-76c172a71a16/actor/actor_context.go:505 +0x45a
+github.com/asynkron/protoactor-go/actor.(*defaultMailbox).run(0xc0005bc480)
+	/root/go/pkg/mod/github.com/asynkron/protoactor-go@v0.0.0-20240413045429-76c172a71a16/actor/mailbox.go:169 +0x22f
+github.com/asynkron/protoactor-go/actor.(*defaultMailbox).processMessages(0xc0005bc480)
+	/root/go/pkg/mod/github.com/asynkron/protoactor-go@v0.0.0-20240413045429-76c172a71a16/actor/mailbox.go:105 +0x25
+created by github.com/asynkron/protoactor-go/actor.goroutineDispatcher.Schedule in goroutine 83
+	/root/go/pkg/mod/github.com/asynkron/protoactor-go@v0.0.0-20240413045429-76c172a71a16/actor/dispatcher.go:13 +0x16
+time="2024-06-26T09:44:51Z" level=info msg="divaproto plugin installed" cc_url="http://172.16.0.14:3500" cc_version= chain_id=3151908 ec_url="ws://172.16.0.12:8546" ec_version="Geth/v1.13.15-stable-c5ba367e/linux-amd64/go1.21.9" genesis_fork_version=0x10000038 genesis_validators_root=0x9c714f5515e091adccf066e945f10edc19fb6aefd132be221f7066caa17db73a prefix=divaproto.plugin
+[2m9:44AM[0m [92mINF[0m actor system started [2mlib=[0mProto.Actor [2msystem=[0mFPiBZtKbEUrHKRVZDHiR9R [2mid=[0mFPiBZtKbEUrHKRVZDHiR9R
+time="2024-06-26T09:44:51Z" level=info msg="Start Schedulers" prefix="oracle/Process$2"
+time="2024-06-26T09:44:51Z" level=info msg="Starting diva contract process" prefix="oracle/Process$2/oracle/*divacontract.Process$4"
+time="2024-06-26T09:44:51Z" level=info msg="Watching snapshot taken events" prefix="oracle/Process$2/oracle/*divacontract.Process$4"
+time="2024-06-26T09:44:51Z" level=info msg="Listening for snapshot taken events" prefix="oracle/Process$2/oracle/*divacontract.Process$4"
+time="2024-06-26T09:44:51Z" level=info msg="Fetching diva validators and operators" prefix="oracle/Process$2/oracle/*divacontract.Process$4"
+time="2024-06-26T09:44:51Z" level=error msg="Fetch Diva Validators And Operators Failure. %!w(*errors.errorString=&{no contract code at given address})" prefix="oracle/Process$2"
+[2m9:44AM[0m [92mINF[0m [ACTOR] Recovering [2mlib=[0mProto.Actor [2msystem=[0mFPiBZtKbEUrHKRVZDHiR9R [2mself=[0m"Address:\"nonhost\" Id:\"Process$2\"" [2mreason=[0m"no contract code at given address"
+debug.Stack(): goroutine 29 [running]:
+runtime/debug.Stack()
+	/usr/local/go/src/runtime/debug/stack.go:24 +0x5e
+github.com/asynkron/protoactor-go/actor.(*actorContext).EscalateFailure(0xc0001432c0, {0x1079a00, 0x1e7c6c0}, {0xfefd80, 0xc00022e1d0})
+[2m9:44AM[0m [91mERR[0m [Supervision] [2mlib=[0mProto.Actor [2msystem=[0mFPiBZtKbEUrHKRVZDHiR9R [2mactor=[0m"Address:\"nonhost\" Id:\"Process$2\"" [2mmessage=[0m"&{Error:no contract code at given address}" [2mexception=[0m"no contract code at given address"
+	/root/go/pkg/mod/github.com/asynkron/protoactor-go@v0.0.0-20240413045429-76c172a71a16/actor/actor_context.go:709 +0x1d3
+time="2024-06-26T09:44:51Z" level=error msg="Supervisor Event Stream" child=Address:"nonhost" Id:"Process$2" directive=RestartDirective prefix="oracle/Process$2" reason="no contract code at given address"
+github.com/asynkron/protoactor-go/actor.(*defaultMailbox).run.func1()
+	/root/go/pkg/mod/github.com/asynkron/protoactor-go@v0.0.0-20240413045429-76c172a71a16/actor/mailbox.go:132 +0x58
+panic({0x1079a00?, 0x1e7c6c0?})
+	/usr/local/go/src/runtime/panic.go:770 +0x132
+github.com/shamirlabs/oracle/process/oracle.(*Process).Receive(0xc0001c6000, {0x16554d8, 0xc0000f6480})
+	/root/hive-mind-oracle/process/oracle/process.go:73 +0x1485
+github.com/shamirlabs/synapse/system.(*SystemManager).SpawnProcess.(*SystemManager).WrapActor.func1({0x1654838, 0xc0001432c0})
+	/root/go/pkg/mod/github.com/shamirlabs/synapse@v0.4.0/system/system.go:280 +0x67f
+github.com/asynkron/protoactor-go/actor.ReceiveFunc.Receive(0x0?, {0x1654838?, 0xc0001432c0?})
+	/root/go/pkg/mod/github.com/asynkron/protoactor-go@v0.0.0-20240413045429-76c172a71a16/actor/message.go:19 +0x26
+github.com/asynkron/protoactor-go/actor.(*actorContext).defaultReceive(0xc0001432c0)
+	/root/go/pkg/mod/github.com/asynkron/protoactor-go@v0.0.0-20240413045429-76c172a71a16/actor/actor_context.go:372 +0x98
+github.com/asynkron/protoactor-go/actor.(*actorContext).processMessage(0xc0001432c0, {0xfefd80, 0xc00022e1d0})
+	/root/go/pkg/mod/github.com/asynkron/protoactor-go@v0.0.0-20240413045429-76c172a71a16/actor/actor_context.go:527 +0xf9
+github.com/asynkron/protoactor-go/actor.(*actorContext).InvokeUserMessage(0xc0001432c0, {0xfefd80, 0xc00022e1d0})
+	/root/go/pkg/mod/github.com/asynkron/protoactor-go@v0.0.0-20240413045429-76c172a71a16/actor/actor_context.go:505 +0x45a
+github.com/asynkron/protoactor-go/actor.(*defaultMailbox).run(0xc000143320)
+	/root/go/pkg/mod/github.com/asynkron/protoactor-go@v0.0.0-20240413045429-76c172a71a16/actor/mailbox.go:169 +0x22f
+github.com/asynkron/protoactor-go/actor.(*defaultMailbox).processMessages(0xc000143320)
+	/root/go/pkg/mod/github.com/asynkron/protoactor-go@v0.0.0-20240413045429-76c172a71a16/actor/mailbox.go:105 +0x25
+created by github.com/asynkron/protoactor-go/actor.goroutineDispatcher.Schedule in goroutine 82
+	/root/go/pkg/mod/github.com/asynkron/protoactor-go@v0.0.0-20240413045429-76c172a71a16/actor/dispatcher.go:13 +0x16
+
+[Supervision] Actor: Address:"nonhost" Id:"Process$2"  failed with message: &{no contract code at given address}  exception: no contract code at given address
+panic: no contract code at given address [recovered]
+	panic: no contract code at given address
+
+goroutine 29 [running]:
+github.com/shamirlabs/oracle/process/oracle.(*Process).subscribeEventStream.func1({0xfef740?, 0xc0005d60a0?})
+	/root/hive-mind-oracle/process/oracle/utils.go:258 +0x315
+github.com/asynkron/protoactor-go/eventstream.(*EventStream).Publish(0xc00016a140, {0xfef740, 0xc0005d60a0})
+	/root/go/pkg/mod/github.com/asynkron/protoactor-go@v0.0.0-20240413045429-76c172a71a16/eventstream/eventstream.go:108 +0x1d8
+github.com/asynkron/protoactor-go/actor.logFailure(...)
+	/root/go/pkg/mod/github.com/asynkron/protoactor-go@v0.0.0-20240413045429-76c172a71a16/actor/supervision.go:25
+github.com/asynkron/protoactor-go/actor.(*oneForOneStrategy).HandleFailure(0x1e80e20, 0xc000142a80, {0x1641080, 0xc0001432c0}, 0xc000143380, 0xc0000103d8, {0x1079a00, 0x1e7c6c0}, {0xfefd80, 0xc00022e1d0})
+	/root/go/pkg/mod/github.com/asynkron/protoactor-go@v0.0.0-20240413045429-76c172a71a16/actor/strategy_one_for_one.go:39 +0x1bd
+github.com/asynkron/protoactor-go/actor.(*actorContext).handleRootFailure(...)
+	/root/go/pkg/mod/github.com/asynkron/protoactor-go@v0.0.0-20240413045429-76c172a71a16/actor/actor_context.go:572
+github.com/asynkron/protoactor-go/actor.(*actorContext).EscalateFailure(0xc0001432c0, {0x1079a00, 0x1e7c6c0}, {0xfefd80, 0xc00022e1d0})
+	/root/go/pkg/mod/github.com/asynkron/protoactor-go@v0.0.0-20240413045429-76c172a71a16/actor/actor_context.go:727 +0x7a7
+github.com/asynkron/protoactor-go/actor.(*defaultMailbox).run.func1()
+	/root/go/pkg/mod/github.com/asynkron/protoactor-go@v0.0.0-20240413045429-76c172a71a16/actor/mailbox.go:132 +0x58
+panic({0x1079a00?, 0x1e7c6c0?})
+	/usr/local/go/src/runtime/panic.go:770 +0x132
+github.com/shamirlabs/oracle/process/oracle.(*Process).Receive(0xc0001c6000, {0x16554d8, 0xc0000f6480})
+	/root/hive-mind-oracle/process/oracle/process.go:73 +0x1485
+github.com/shamirlabs/synapse/system.(*SystemManager).SpawnProcess.(*SystemManager).WrapActor.func1({0x1654838, 0xc0001432c0})
+	/root/go/pkg/mod/github.com/shamirlabs/synapse@v0.4.0/system/system.go:280 +0x67f
+github.com/asynkron/protoactor-go/actor.ReceiveFunc.Receive(0x0?, {0x1654838?, 0xc0001432c0?})
+	/root/go/pkg/mod/github.com/asynkron/protoactor-go@v0.0.0-20240413045429-76c172a71a16/actor/message.go:19 +0x26
+github.com/asynkron/protoactor-go/actor.(*actorContext).defaultReceive(0xc0001432c0)
+	/root/go/pkg/mod/github.com/asynkron/protoactor-go@v0.0.0-20240413045429-76c172a71a16/actor/actor_context.go:372 +0x98
+github.com/asynkron/protoactor-go/actor.(*actorContext).processMessage(0xc0001432c0, {0xfefd80, 0xc00022e1d0})
+	/root/go/pkg/mod/github.com/asynkron/protoactor-go@v0.0.0-20240413045429-76c172a71a16/actor/actor_context.go:527 +0xf9
+github.com/asynkron/protoactor-go/actor.(*actorContext).InvokeUserMessage(0xc0001432c0, {0xfefd80, 0xc00022e1d0})
+	/root/go/pkg/mod/github.com/asynkron/protoactor-go@v0.0.0-20240413045429-76c172a71a16/actor/actor_context.go:505 +0x45a
+github.com/asynkron/protoactor-go/actor.(*defaultMailbox).run(0xc000143320)
+	/root/go/pkg/mod/github.com/asynkron/protoactor-go@v0.0.0-20240413045429-76c172a71a16/actor/mailbox.go:169 +0x22f
+github.com/asynkron/protoactor-go/actor.(*defaultMailbox).processMessages(0xc000143320)
+	/root/go/pkg/mod/github.com/asynkron/protoactor-go@v0.0.0-20240413045429-76c172a71a16/actor/mailbox.go:105 +0x25
+created by github.com/asynkron/protoactor-go/actor.goroutineDispatcher.Schedule in goroutine 82
+	/root/go/pkg/mod/github.com/asynkron/protoactor-go@v0.0.0-20240413045429-76c172a71a16/actor/dispatcher.go:13 +0x16
+time="2024-06-26T09:45:52Z" level=info msg="divaproto plugin installed" cc_url="http://172.16.0.14:3500" cc_version= chain_id=3151908 ec_url="ws://172.16.0.12:8546" ec_version="Geth/v1.13.15-stable-c5ba367e/linux-amd64/go1.21.9" genesis_fork_version=0x10000038 genesis_validators_root=0x9c714f5515e091adccf066e945f10edc19fb6aefd132be221f7066caa17db73a prefix=divaproto.plugin
+[2m9:45AM[0m [92mINF[0m actor system started [2mlib=[0mProto.Actor [2msystem=[0mFDRKyXzUvnMMgCuEUjZwWp [2mid=[0mFDRKyXzUvnMMgCuEUjZwWp
+time="2024-06-26T09:45:52Z" level=info msg="Start Schedulers" prefix="oracle/Process$2"
+time="2024-06-26T09:45:52Z" level=info msg="Starting diva contract process" prefix="oracle/Process$2/oracle/*divacontract.Process$4"
+time="2024-06-26T09:45:52Z" level=info msg="Watching snapshot taken events" prefix="oracle/Process$2/oracle/*divacontract.Process$4"
+time="2024-06-26T09:45:52Z" level=info msg="Listening for snapshot taken events" prefix="oracle/Process$2/oracle/*divacontract.Process$4"
+time="2024-06-26T09:45:52Z" level=info msg="Fetching diva validators and operators" prefix="oracle/Process$2/oracle/*divacontract.Process$4"
+time="2024-06-26T09:45:52Z" level=info msg="Fetch Diva Validators And Operators Complete" prefix="oracle/Process$2"
+time="2024-06-26T09:45:52Z" level=info msg="Try recover from failure" prefix="oracle/Process$2"
+time="2024-06-26T09:45:52Z" level=info msg="Creating rewards merkletree operators" prefix="oracle/Process$2/oracle/*rewardsmerkletree.Process$5"
+time="2024-06-26T09:45:52Z" level=info msg="No Operators To Create Rewards Merkletree" prefix="oracle/Process$2"
+time="2024-06-26T09:45:52Z" level=info msg="Fetch and store epochs process started for epochs: [0 1 2]" prefix="oracle/Process$2/oracle/*fetchstoreepochs.Process$6"
+time="2024-06-26T09:45:52Z" level=info msg="Fetch And Store Epochs Complete" prefix="oracle/Process$2"
+time="2024-06-26T09:45:52Z" level=info msg="Fetch More Attested Epochs" prefix="oracle/Process$2/oracle/*calcperformance.Process$a"
+time="2024-06-26T09:45:52Z" level=info msg="Fetch attested epochs: [0 1 2]" prefix="oracle/Process$2/oracle/*calcperformance.Process$a"
+time="2024-06-26T09:45:52Z" level=info msg="Fetch More Attested Epochs" prefix="oracle/Process$2/oracle/*calcperformance.Process$a"
+time="2024-06-26T09:45:52Z" level=info msg="Fetch Beacon Validators: []" prefix="oracle/Process$2/oracle/*calcperformance.Process$a"
+time="2024-06-26T09:45:52Z" level=error msg="Calc Perfomances Failure. %!w(*errors.errorString=&{no beacon validators found})" prefix="oracle/Process$2"
+time="2024-06-26T09:45:52Z" level=info msg="Try recover from failure or restart scheduler" prefix="oracle/Process$2"
+time="2024-06-26T09:45:52Z" level=info msg="Try recover from failure" prefix="oracle/Process$2"
+time="2024-06-26T09:45:52Z" level=info msg="Recovering from FailureTypeFetchAndStoreEpochs &{{1 2024-06-26 09:45:52.588086 +0000 UTC 2024-06-26 09:45:52.588086 +0000 UTC {0001-01-01 00:00:00 +0000 UTC false}} b5e5b3147c005a1d129b3e581e36764064041b648ca1deb75cc2b3be65c93e17 0,1,2 1 []}" prefix="oracle/Process$2"
+time="2024-06-26T09:45:52Z" level=info msg="Fetch and store epochs process started for epochs: [0 1 2]" prefix="oracle/Process$2/oracle/*fetchstoreepochs.Process$d"
+time="2024-06-26T09:45:52Z" level=info msg="Fetch And Store Epochs Complete" prefix="oracle/Process$2"
+time="2024-06-26T09:45:52Z" level=info msg="Fetch More Attested Epochs" prefix="oracle/Process$2/oracle/*calcperformance.Process$h"
+time="2024-06-26T09:45:52Z" level=info msg="Fetch attested epochs: [0 1 2]" prefix="oracle/Process$2/oracle/*calcperformance.Process$h"
+time="2024-06-26T09:45:52Z" level=info msg="Fetch More Attested Epochs" prefix="oracle/Process$2/oracle/*calcperformance.Process$h"
+time="2024-06-26T09:45:52Z" level=info msg="Fetch Beacon Validators: []" prefix="oracle/Process$2/oracle/*calcperformance.Process$h"
+time="2024-06-26T09:45:52Z" level=error msg="Calc Perfomances Failure. %!w(*errors.errorString=&{no beacon validators found})" prefix="oracle/Process$2"
+time="2024-06-26T09:45:52Z" level=info msg="Try recover from failure or restart scheduler" prefix="oracle/Process$2"
+time="2024-06-26T09:45:52Z" level=info msg="Try recover from failure" prefix="oracle/Process$2"
+time="2024-06-26T09:45:52Z" level=info msg="Recovering from FailureTypeFetchAndStoreEpochs &{{2 2024-06-26 09:45:52.596896 +0000 UTC 2024-06-26 09:45:52.596896 +0000 UTC {0001-01-01 00:00:00 +0000 UTC false}} b5e5b3147c005a1d129b3e581e36764064041b648ca1deb75cc2b3be65c93e17 0,1,2 1 []}" prefix="oracle/Process$2"
+time="2024-06-26T09:45:52Z" level=info msg="Fetch and store epochs process started for epochs: [0 1 2]" prefix="oracle/Process$2/oracle/*fetchstoreepochs.Process$k"
+time="2024-06-26T09:45:52Z" level=info msg="Fetch And Store Epochs Complete" prefix="oracle/Process$2"
+time="2024-06-26T09:45:52Z" level=info msg="Fetch More Attested Epochs" prefix="oracle/Process$2/oracle/*calcperformance.Process$o"
+time="2024-06-26T09:45:52Z" level=info msg="Fetch attested epochs: [0 1 2]" prefix="oracle/Process$2/oracle/*calcperformance.Process$o"
+time="2024-06-26T09:45:52Z" level=info msg="Fetch More Attested Epochs" prefix="oracle/Process$2/oracle/*calcperformance.Process$o"
+time="2024-06-26T09:45:52Z" level=info msg="Fetch Beacon Validators: []" prefix="oracle/Process$2/oracle/*calcperformance.Process$o"
+time="2024-06-26T09:45:52Z" level=error msg="Calc Perfomances Failure. %!w(*errors.errorString=&{no beacon validators found})" prefix="oracle/Process$2"
+time="2024-06-26T09:45:52Z" level=info msg="Try recover from failure or restart scheduler" prefix="oracle/Process$2"
+time="2024-06-26T09:45:52Z" level=info msg="Try recover from failure" prefix="oracle/Process$2"
+time="2024-06-26T09:45:52Z" level=info msg="Recovering from FailureTypeFetchAndStoreEpochs &{{3 2024-06-26 09:45:52.60322 +0000 UTC 2024-06-26 09:45:52.60322 +0000 UTC {0001-01-01 00:00:00 +0000 UTC false}} b5e5b3147c005a1d129b3e581e36764064041b648ca1deb75cc2b3be65c93e17 0,1,2 1 []}" prefix="oracle/Process$2"
+time="2024-06-26T09:45:52Z" level=info msg="Fetch and store epochs process started for epochs: [0 1 2]" prefix="oracle/Process$2/oracle/*fetchstoreepochs.Process$r"
+time="2024-06-26T09:45:52Z" level=info msg="Fetch And Store Epochs Complete" prefix="oracle/Process$2"
+time="2024-06-26T09:45:52Z" level=info msg="Fetch More Attested Epochs" prefix="oracle/Process$2/oracle/*calcperformance.Process$v"
+time="2024-06-26T09:45:52Z" level=info msg="Fetch attested epochs: [0 1 2]" prefix="oracle/Process$2/oracle/*calcperformance.Process$v"
+time="2024-06-26T09:45:52Z" level=info msg="Fetch More Attested Epochs" prefix="oracle/Process$2/oracle/*calcperformance.Process$v"
+time="2024-06-26T09:45:52Z" level=info msg="Fetch Beacon Validators: []" prefix="oracle/Process$2/oracle/*calcperformance.Process$v"
+time="2024-06-26T09:45:52Z" level=error msg="Calc Perfomances Failure. %!w(*errors.errorString=&{no beacon validators found})" prefix="oracle/Process$2"
+[2m9:45AM[0m [92mINF[0m [ACTOR] Recovering [2mlib=[0mProto.Actor [2msystem=[0mFDRKyXzUvnMMgCuEUjZwWp [2mself=[0m"Address:\"nonhost\" Id:\"Process$2\"" [2mreason=[0m"max retries count reached in recovering from failure for oracle process, the latest error: no beacon validators found"
+debug.Stack(): goroutine 64 [running]:
+[2m9:45AM[0m [91mERR[0m [Supervision] [2mlib=[0mProto.Actor [2msystem=[0mFDRKyXzUvnMMgCuEUjZwWp [2mactor=[0m"Address:\"nonhost\" Id:\"Process$2\"" [2mmessage=[0m"&{Epochs:[0 1 2] Error:no beacon validators found}" [2mexception=[0m"max retries count reached in recovering from failure for oracle process, the latest error: no beacon validators found"
+runtime/debug.Stack()
+	/usr/local/go/src/runtime/debug/stack.go:24 +0x5e
+github.com/asynkron/protoactor-go/actor.(*actorContext).EscalateFailure(0xc0001b0960, {0x10aa800, 0xc000aac1a0}, {0xfefe80, 0xc0009da990})
+	/root/go/pkg/mod/github.com/asynkron/protoactor-go@v0.0.0-20240413045429-76c172a71a16/actor/actor_context.go:709 +0x1d3
+time="2024-06-26T09:45:52Z" level=error msg="Supervisor Event Stream" child=Address:"nonhost" Id:"Process$2" directive=RestartDirective prefix="oracle/Process$2" reason="max retries count reached in recovering from failure for oracle process, the latest error: no beacon validators found"
+github.com/asynkron/protoactor-go/actor.(*defaultMailbox).run.func1()
+	/root/go/pkg/mod/github.com/asynkron/protoactor-go@v0.0.0-20240413045429-76c172a71a16/actor/mailbox.go:132 +0x58
+panic({0x10aa800?, 0xc000aac1a0?})
+	/usr/local/go/src/runtime/panic.go:770 +0x132
+github.com/shamirlabs/oracle/process/oracle.(*Process).recoveringFromFailure(0xc000416000?, {0x16554d8?, 0xc0009ea040?}, 0x0?, 0x10?, {0x1631760?, 0xc0004861a0?})
+	/root/hive-mind-oracle/process/oracle/utils.go:114 +0xc5
+github.com/shamirlabs/oracle/process/oracle.(*Process).Receive(0xc000416000, {0x16554d8, 0xc0009ea040})
+	/root/hive-mind-oracle/process/oracle/process.go:106 +0x1137
+github.com/shamirlabs/synapse/system.(*SystemManager).SpawnProcess.(*SystemManager).WrapActor.func1({0x1654838, 0xc0001b0960})
+	/root/go/pkg/mod/github.com/shamirlabs/synapse@v0.4.0/system/system.go:280 +0x67f
+github.com/asynkron/protoactor-go/actor.ReceiveFunc.Receive(0x0?, {0x1654838?, 0xc0001b0960?})
+	/root/go/pkg/mod/github.com/asynkron/protoactor-go@v0.0.0-20240413045429-76c172a71a16/actor/message.go:19 +0x26
+github.com/asynkron/protoactor-go/actor.(*actorContext).defaultReceive(0xc0001b0960)
+	/root/go/pkg/mod/github.com/asynkron/protoactor-go@v0.0.0-20240413045429-76c172a71a16/actor/actor_context.go:372 +0x98
+github.com/asynkron/protoactor-go/actor.(*actorContext).processMessage(0xc0001b0960, {0xfefe80, 0xc0009da990})
+	/root/go/pkg/mod/github.com/asynkron/protoactor-go@v0.0.0-20240413045429-76c172a71a16/actor/actor_context.go:527 +0xf9
+github.com/asynkron/protoactor-go/actor.(*actorContext).InvokeUserMessage(0xc0001b0960, {0xfefe80, 0xc0009da990})
+	/root/go/pkg/mod/github.com/asynkron/protoactor-go@v0.0.0-20240413045429-76c172a71a16/actor/actor_context.go:505 +0x45a
+github.com/asynkron/protoactor-go/actor.(*defaultMailbox).run(0xc0001b09c0)
+	/root/go/pkg/mod/github.com/asynkron/protoactor-go@v0.0.0-20240413045429-76c172a71a16/actor/mailbox.go:169 +0x22f
+github.com/asynkron/protoactor-go/actor.(*defaultMailbox).processMessages(0xc0001b09c0)
+	/root/go/pkg/mod/github.com/asynkron/protoactor-go@v0.0.0-20240413045429-76c172a71a16/actor/mailbox.go:105 +0x25
+created by github.com/asynkron/protoactor-go/actor.goroutineDispatcher.Schedule in goroutine 165
+	/root/go/pkg/mod/github.com/asynkron/protoactor-go@v0.0.0-20240413045429-76c172a71a16/actor/dispatcher.go:13 +0x16
+
+[Supervision] Actor: Address:"nonhost" Id:"Process$2"  failed with message: &{[0 1 2] no beacon validators found}  exception: max retries count reached in recovering from failure for oracle process, the latest error: no beacon validators found
+time="2024-06-26T09:46:18Z" level=info msg="Snapshot taken event" era=0 prefix="oracle/Process$2/oracle/*divacontract.Process$4" slot=22
+panic: max retries count reached in recovering from failure for oracle process, the latest error: no beacon validators found [recovered]
+	panic: max retries count reached in recovering from failure for oracle process, the latest error: no beacon validators found
+
+goroutine 64 [running]:
+github.com/shamirlabs/oracle/process/oracle.(*Process).subscribeEventStream.func1({0xfef740?, 0xc000aac1c0?})
+	/root/hive-mind-oracle/process/oracle/utils.go:258 +0x315
+github.com/asynkron/protoactor-go/eventstream.(*EventStream).Publish(0xc000256100, {0xfef740, 0xc000aac1c0})
+	/root/go/pkg/mod/github.com/asynkron/protoactor-go@v0.0.0-20240413045429-76c172a71a16/eventstream/eventstream.go:108 +0x1d8
+github.com/asynkron/protoactor-go/actor.logFailure(...)
+	/root/go/pkg/mod/github.com/asynkron/protoactor-go@v0.0.0-20240413045429-76c172a71a16/actor/supervision.go:25
+github.com/asynkron/protoactor-go/actor.(*oneForOneStrategy).HandleFailure(0x1e80e20, 0xc0001b0660, {0x1641080, 0xc0001b0960}, 0xc0001b0a20, 0xc000a8aa38, {0x10aa800, 0xc000aac1a0}, {0xfefe80, 0xc0009da990})
+	/root/go/pkg/mod/github.com/asynkron/protoactor-go@v0.0.0-20240413045429-76c172a71a16/actor/strategy_one_for_one.go:39 +0x1bd
+github.com/asynkron/protoactor-go/actor.(*actorContext).handleRootFailure(...)
+	/root/go/pkg/mod/github.com/asynkron/protoactor-go@v0.0.0-20240413045429-76c172a71a16/actor/actor_context.go:572
+github.com/asynkron/protoactor-go/actor.(*actorContext).EscalateFailure(0xc0001b0960, {0x10aa800, 0xc000aac1a0}, {0xfefe80, 0xc0009da990})
+	/root/go/pkg/mod/github.com/asynkron/protoactor-go@v0.0.0-20240413045429-76c172a71a16/actor/actor_context.go:727 +0x7a7
+github.com/asynkron/protoactor-go/actor.(*defaultMailbox).run.func1()
+	/root/go/pkg/mod/github.com/asynkron/protoactor-go@v0.0.0-20240413045429-76c172a71a16/actor/mailbox.go:132 +0x58
+panic({0x10aa800?, 0xc000aac1a0?})
+	/usr/local/go/src/runtime/panic.go:770 +0x132
+github.com/shamirlabs/oracle/process/oracle.(*Process).recoveringFromFailure(0xc000416000?, {0x16554d8?, 0xc0009ea040?}, 0x0?, 0x10?, {0x1631760?, 0xc0004861a0?})
+	/root/hive-mind-oracle/process/oracle/utils.go:114 +0xc5
+github.com/shamirlabs/oracle/process/oracle.(*Process).Receive(0xc000416000, {0x16554d8, 0xc0009ea040})
+	/root/hive-mind-oracle/process/oracle/process.go:106 +0x1137
+github.com/shamirlabs/synapse/system.(*SystemManager).SpawnProcess.(*SystemManager).WrapActor.func1({0x1654838, 0xc0001b0960})
+	/root/go/pkg/mod/github.com/shamirlabs/synapse@v0.4.0/system/system.go:280 +0x67f
+github.com/asynkron/protoactor-go/actor.ReceiveFunc.Receive(0x0?, {0x1654838?, 0xc0001b0960?})
+	/root/go/pkg/mod/github.com/asynkron/protoactor-go@v0.0.0-20240413045429-76c172a71a16/actor/message.go:19 +0x26
+github.com/asynkron/protoactor-go/actor.(*actorContext).defaultReceive(0xc0001b0960)
+	/root/go/pkg/mod/github.com/asynkron/protoactor-go@v0.0.0-20240413045429-76c172a71a16/actor/actor_context.go:372 +0x98
+github.com/asynkron/protoactor-go/actor.(*actorContext).processMessage(0xc0001b0960, {0xfefe80, 0xc0009da990})
+	/root/go/pkg/mod/github.com/asynkron/protoactor-go@v0.0.0-20240413045429-76c172a71a16/actor/actor_context.go:527 +0xf9
+github.com/asynkron/protoactor-go/actor.(*actorContext).InvokeUserMessage(0xc0001b0960, {0xfefe80, 0xc0009da990})
+	/root/go/pkg/mod/github.com/asynkron/protoactor-go@v0.0.0-20240413045429-76c172a71a16/actor/actor_context.go:505 +0x45a
+github.com/asynkron/protoactor-go/actor.(*defaultMailbox).run(0xc0001b09c0)
+	/root/go/pkg/mod/github.com/asynkron/protoactor-go@v0.0.0-20240413045429-76c172a71a16/actor/mailbox.go:169 +0x22f
+github.com/asynkron/protoactor-go/actor.(*defaultMailbox).processMessages(0xc0001b09c0)
+	/root/go/pkg/mod/github.com/asynkron/protoactor-go@v0.0.0-20240413045429-76c172a71a16/actor/mailbox.go:105 +0x25
+created by github.com/asynkron/protoactor-go/actor.goroutineDispatcher.Schedule in goroutine 165
+	/root/go/pkg/mod/github.com/asynkron/protoactor-go@v0.0.0-20240413045429-76c172a71a16/actor/dispatcher.go:13 +0x16
+time="2024-06-26T09:46:53Z" level=info msg="divaproto plugin installed" cc_url="http://172.16.0.14:3500" cc_version= chain_id=3151908 ec_url="ws://172.16.0.12:8546" ec_version="Geth/v1.13.15-stable-c5ba367e/linux-amd64/go1.21.9" genesis_fork_version=0x10000038 genesis_validators_root=0x9c714f5515e091adccf066e945f10edc19fb6aefd132be221f7066caa17db73a prefix=divaproto.plugin
+[2m9:46AM[0m [92mINF[0m actor system started [2mlib=[0mProto.Actor [2msystem=[0mHdmLUed5QrrVuicM7y9FzS [2mid=[0mHdmLUed5QrrVuicM7y9FzS
+time="2024-06-26T09:46:53Z" level=info msg="Start Schedulers" prefix="oracle/Process$2"
+time="2024-06-26T09:46:53Z" level=info msg="Starting diva contract process" prefix="oracle/Process$2/oracle/*divacontract.Process$4"
+time="2024-06-26T09:46:53Z" level=info msg="Watching snapshot taken events" prefix="oracle/Process$2/oracle/*divacontract.Process$4"
+time="2024-06-26T09:46:53Z" level=info msg="Listening for snapshot taken events" prefix="oracle/Process$2/oracle/*divacontract.Process$4"
+time="2024-06-26T09:46:53Z" level=info msg="Fetching diva validators and operators" prefix="oracle/Process$2/oracle/*divacontract.Process$4"
+time="2024-06-26T09:46:53Z" level=info msg="Fetch Diva Validators And Operators Complete" prefix="oracle/Process$2"
+time="2024-06-26T09:46:53Z" level=info msg="Try recover from failure" prefix="oracle/Process$2"
+time="2024-06-26T09:46:53Z" level=info msg="Recovering from FailureTypeFetchAndStoreEpochs &{{4 2024-06-26 09:45:52.608818 +0000 UTC 2024-06-26 09:45:52.608818 +0000 UTC {0001-01-01 00:00:00 +0000 UTC false}} b5e5b3147c005a1d129b3e581e36764064041b648ca1deb75cc2b3be65c93e17 0,1,2 1 []}" prefix="oracle/Process$2"
+time="2024-06-26T09:46:53Z" level=info msg="Fetch and store epochs process started for epochs: [0 1 2]" prefix="oracle/Process$2/oracle/*fetchstoreepochs.Process$5"
+time="2024-06-26T09:46:53Z" level=info msg="Fetch And Store Epochs Complete" prefix="oracle/Process$2"
+time="2024-06-26T09:46:53Z" level=info msg="Fetch More Attested Epochs" prefix="oracle/Process$2/oracle/*calcperformance.Process$9"
+time="2024-06-26T09:46:53Z" level=info msg="Fetch attested epochs: [0 1 2]" prefix="oracle/Process$2/oracle/*calcperformance.Process$9"
+time="2024-06-26T09:46:53Z" level=info msg="Fetch More Attested Epochs" prefix="oracle/Process$2/oracle/*calcperformance.Process$9"
+time="2024-06-26T09:46:53Z" level=info msg="Fetch Beacon Validators: []" prefix="oracle/Process$2/oracle/*calcperformance.Process$9"
+time="2024-06-26T09:46:53Z" level=error msg="Calc Perfomances Failure. %!w(*errors.errorString=&{no beacon validators found})" prefix="oracle/Process$2"
+time="2024-06-26T09:46:53Z" level=info msg="Try recover from failure or restart scheduler" prefix="oracle/Process$2"
+time="2024-06-26T09:46:53Z" level=info msg="Try recover from failure" prefix="oracle/Process$2"
+time="2024-06-26T09:46:53Z" level=info msg="Recovering from FailureTypeFetchAndStoreEpochs &{{5 2024-06-26 09:46:53.525339 +0000 UTC 2024-06-26 09:46:53.525339 +0000 UTC {0001-01-01 00:00:00 +0000 UTC false}} b5e5b3147c005a1d129b3e581e36764064041b648ca1deb75cc2b3be65c93e17 0,1,2 1 []}" prefix="oracle/Process$2"
+time="2024-06-26T09:46:53Z" level=info msg="Fetch and store epochs process started for epochs: [0 1 2]" prefix="oracle/Process$2/oracle/*fetchstoreepochs.Process$c"
+time="2024-06-26T09:46:53Z" level=info msg="Fetch And Store Epochs Complete" prefix="oracle/Process$2"
+time="2024-06-26T09:46:53Z" level=info msg="Fetch More Attested Epochs" prefix="oracle/Process$2/oracle/*calcperformance.Process$g"
+time="2024-06-26T09:46:53Z" level=info msg="Fetch attested epochs: [0 1 2]" prefix="oracle/Process$2/oracle/*calcperformance.Process$g"
+time="2024-06-26T09:46:53Z" level=info msg="Fetch More Attested Epochs" prefix="oracle/Process$2/oracle/*calcperformance.Process$g"
+time="2024-06-26T09:46:53Z" level=info msg="Fetch Beacon Validators: []" prefix="oracle/Process$2/oracle/*calcperformance.Process$g"
+time="2024-06-26T09:46:53Z" level=error msg="Calc Perfomances Failure. %!w(*errors.errorString=&{no beacon validators found})" prefix="oracle/Process$2"
+time="2024-06-26T09:46:53Z" level=info msg="Try recover from failure or restart scheduler" prefix="oracle/Process$2"
+time="2024-06-26T09:46:53Z" level=info msg="Try recover from failure" prefix="oracle/Process$2"
+time="2024-06-26T09:46:53Z" level=info msg="Recovering from FailureTypeFetchAndStoreEpochs &{{6 2024-06-26 09:46:53.530848 +0000 UTC 2024-06-26 09:46:53.530848 +0000 UTC {0001-01-01 00:00:00 +0000 UTC false}} b5e5b3147c005a1d129b3e581e36764064041b648ca1deb75cc2b3be65c93e17 0,1,2 1 []}" prefix="oracle/Process$2"
+time="2024-06-26T09:46:53Z" level=info msg="Fetch and store epochs process started for epochs: [0 1 2]" prefix="oracle/Process$2/oracle/*fetchstoreepochs.Process$j"
+time="2024-06-26T09:46:53Z" level=info msg="Fetch And Store Epochs Complete" prefix="oracle/Process$2"
+time="2024-06-26T09:46:53Z" level=info msg="Fetch More Attested Epochs" prefix="oracle/Process$2/oracle/*calcperformance.Process$n"
+time="2024-06-26T09:46:53Z" level=info msg="Fetch attested epochs: [0 1 2]" prefix="oracle/Process$2/oracle/*calcperformance.Process$n"
+time="2024-06-26T09:46:53Z" level=info msg="Fetch More Attested Epochs" prefix="oracle/Process$2/oracle/*calcperformance.Process$n"
+time="2024-06-26T09:46:53Z" level=info msg="Fetch Beacon Validators: []" prefix="oracle/Process$2/oracle/*calcperformance.Process$n"
+time="2024-06-26T09:46:53Z" level=error msg="Calc Perfomances Failure. %!w(*errors.errorString=&{no beacon validators found})" prefix="oracle/Process$2"
+time="2024-06-26T09:46:53Z" level=info msg="Try recover from failure or restart scheduler" prefix="oracle/Process$2"
+time="2024-06-26T09:46:53Z" level=info msg="Try recover from failure" prefix="oracle/Process$2"
+time="2024-06-26T09:46:53Z" level=info msg="Recovering from FailureTypeFetchAndStoreEpochs &{{7 2024-06-26 09:46:53.535251 +0000 UTC 2024-06-26 09:46:53.535251 +0000 UTC {0001-01-01 00:00:00 +0000 UTC false}} b5e5b3147c005a1d129b3e581e36764064041b648ca1deb75cc2b3be65c93e17 0,1,2 1 []}" prefix="oracle/Process$2"
+time="2024-06-26T09:46:53Z" level=info msg="Fetch and store epochs process started for epochs: [0 1 2]" prefix="oracle/Process$2/oracle/*fetchstoreepochs.Process$q"
+time="2024-06-26T09:46:53Z" level=info msg="Fetch And Store Epochs Complete" prefix="oracle/Process$2"
+time="2024-06-26T09:46:53Z" level=info msg="Fetch More Attested Epochs" prefix="oracle/Process$2/oracle/*calcperformance.Process$u"
+time="2024-06-26T09:46:53Z" level=info msg="Fetch attested epochs: [0 1 2]" prefix="oracle/Process$2/oracle/*calcperformance.Process$u"
+time="2024-06-26T09:46:53Z" level=info msg="Fetch More Attested Epochs" prefix="oracle/Process$2/oracle/*calcperformance.Process$u"
+time="2024-06-26T09:46:53Z" level=info msg="Fetch Beacon Validators: []" prefix="oracle/Process$2/oracle/*calcperformance.Process$u"
+time="2024-06-26T09:46:53Z" level=error msg="Calc Perfomances Failure. %!w(*errors.errorString=&{no beacon validators found})" prefix="oracle/Process$2"
+[2m9:46AM[0m [92mINF[0m [ACTOR] Recovering [2mlib=[0mProto.Actor [2msystem=[0mHdmLUed5QrrVuicM7y9FzS [2mself=[0m"Address:\"nonhost\" Id:\"Process$2\"" [2mreason=[0m"max retries count reached in recovering from failure for oracle process, the latest error: no beacon validators found"
+debug.Stack(): goroutine 174 [running]:
+[2m9:46AM[0m [91mERR[0m [Supervision] [2mlib=[0mProto.Actor [2msystem=[0mHdmLUed5QrrVuicM7y9FzS [2mactor=[0m"Address:\"nonhost\" Id:\"Process$2\"" [2mmessage=[0m"&{Epochs:[0 1 2] Error:no beacon validators found}" [2mexception=[0m"max retries count reached in recovering from failure for oracle process, the latest error: no beacon validators found"
+runtime/debug.Stack()
+	/usr/local/go/src/runtime/debug/stack.go:24 +0x5e
+time="2024-06-26T09:46:53Z" level=error msg="Supervisor Event Stream" child=Address:"nonhost" Id:"Process$2" directive=RestartDirective prefix="oracle/Process$2" reason="max retries count reached in recovering from failure for oracle process, the latest error: no beacon validators found"
+github.com/asynkron/protoactor-go/actor.(*actorContext).EscalateFailure(0xc00050c8a0, {0x10aa800, 0xc00096e620}, {0xfefe80, 0xc00097da70})
+	/root/go/pkg/mod/github.com/asynkron/protoactor-go@v0.0.0-20240413045429-76c172a71a16/actor/actor_context.go:709 +0x1d3
+github.com/asynkron/protoactor-go/actor.(*defaultMailbox).run.func1()
+	/root/go/pkg/mod/github.com/asynkron/protoactor-go@v0.0.0-20240413045429-76c172a71a16/actor/mailbox.go:132 +0x58
+panic({0x10aa800?, 0xc00096e620?})
+	/usr/local/go/src/runtime/panic.go:770 +0x132
+github.com/shamirlabs/oracle/process/oracle.(*Process).recoveringFromFailure(0xc0000003c0?, {0x16554d8?, 0xc000b12980?}, 0x0?, 0x10?, {0x1631760?, 0xc000299490?})
+	/root/hive-mind-oracle/process/oracle/utils.go:114 +0xc5
+github.com/shamirlabs/oracle/process/oracle.(*Process).Receive(0xc0000003c0, {0x16554d8, 0xc000b12980})
+	/root/hive-mind-oracle/process/oracle/process.go:106 +0x1137
+github.com/shamirlabs/synapse/system.(*SystemManager).SpawnProcess.(*SystemManager).WrapActor.func1({0x1654838, 0xc00050c8a0})
+	/root/go/pkg/mod/github.com/shamirlabs/synapse@v0.4.0/system/system.go:280 +0x67f
+github.com/asynkron/protoactor-go/actor.ReceiveFunc.Receive(0x1f71e00?, {0x1654838?, 0xc00050c8a0?})
+	/root/go/pkg/mod/github.com/asynkron/protoactor-go@v0.0.0-20240413045429-76c172a71a16/actor/message.go:19 +0x26
+github.com/asynkron/protoactor-go/actor.(*actorContext).defaultReceive(0xc00050c8a0)
+	/root/go/pkg/mod/github.com/asynkron/protoactor-go@v0.0.0-20240413045429-76c172a71a16/actor/actor_context.go:372 +0x98
+github.com/asynkron/protoactor-go/actor.(*actorContext).processMessage(0xc00050c8a0, {0xfefe80, 0xc00097da70})
+	/root/go/pkg/mod/github.com/asynkron/protoactor-go@v0.0.0-20240413045429-76c172a71a16/actor/actor_context.go:527 +0xf9
+github.com/asynkron/protoactor-go/actor.(*actorContext).InvokeUserMessage(0xc00050c8a0, {0xfefe80, 0xc00097da70})
+	/root/go/pkg/mod/github.com/asynkron/protoactor-go@v0.0.0-20240413045429-76c172a71a16/actor/actor_context.go:505 +0x45a
+github.com/asynkron/protoactor-go/actor.(*defaultMailbox).run(0xc00050c900)
+	/root/go/pkg/mod/github.com/asynkron/protoactor-go@v0.0.0-20240413045429-76c172a71a16/actor/mailbox.go:169 +0x22f
+github.com/asynkron/protoactor-go/actor.(*defaultMailbox).processMessages(0xc00050c900)
+	/root/go/pkg/mod/github.com/asynkron/protoactor-go@v0.0.0-20240413045429-76c172a71a16/actor/mailbox.go:105 +0x25
+created by github.com/asynkron/protoactor-go/actor.goroutineDispatcher.Schedule in goroutine 173
+	/root/go/pkg/mod/github.com/asynkron/protoactor-go@v0.0.0-20240413045429-76c172a71a16/actor/dispatcher.go:13 +0x16
+
+[Supervision] Actor: Address:"nonhost" Id:"Process$2"  failed with message: &{[0 1 2] no beacon validators found}  exception: max retries count reached in recovering from failure for oracle process, the latest error: no beacon validators found
+panic: max retries count reached in recovering from failure for oracle process, the latest error: no beacon validators found [recovered]
+	panic: max retries count reached in recovering from failure for oracle process, the latest error: no beacon validators found
+
+goroutine 174 [running]:
+github.com/shamirlabs/oracle/process/oracle.(*Process).subscribeEventStream.func1({0xfef740?, 0xc00096e640?})
+	/root/hive-mind-oracle/process/oracle/utils.go:258 +0x315
+github.com/asynkron/protoactor-go/eventstream.(*EventStream).Publish(0xc0003ea300, {0xfef740, 0xc00096e640})
+	/root/go/pkg/mod/github.com/asynkron/protoactor-go@v0.0.0-20240413045429-76c172a71a16/eventstream/eventstream.go:108 +0x1d8
+github.com/asynkron/protoactor-go/actor.logFailure(...)
+	/root/go/pkg/mod/github.com/asynkron/protoactor-go@v0.0.0-20240413045429-76c172a71a16/actor/supervision.go:25
+github.com/asynkron/protoactor-go/actor.(*oneForOneStrategy).HandleFailure(0x1e80e20, 0xc00050c600, {0x1641080, 0xc00050c8a0}, 0xc00050c960, 0xc000011f50, {0x10aa800, 0xc00096e620}, {0xfefe80, 0xc00097da70})
+	/root/go/pkg/mod/github.com/asynkron/protoactor-go@v0.0.0-20240413045429-76c172a71a16/actor/strategy_one_for_one.go:39 +0x1bd
+github.com/asynkron/protoactor-go/actor.(*actorContext).handleRootFailure(...)
+	/root/go/pkg/mod/github.com/asynkron/protoactor-go@v0.0.0-20240413045429-76c172a71a16/actor/actor_context.go:572
+github.com/asynkron/protoactor-go/actor.(*actorContext).EscalateFailure(0xc00050c8a0, {0x10aa800, 0xc00096e620}, {0xfefe80, 0xc00097da70})
+	/root/go/pkg/mod/github.com/asynkron/protoactor-go@v0.0.0-20240413045429-76c172a71a16/actor/actor_context.go:727 +0x7a7
+github.com/asynkron/protoactor-go/actor.(*defaultMailbox).run.func1()
+	/root/go/pkg/mod/github.com/asynkron/protoactor-go@v0.0.0-20240413045429-76c172a71a16/actor/mailbox.go:132 +0x58
+panic({0x10aa800?, 0xc00096e620?})
+	/usr/local/go/src/runtime/panic.go:770 +0x132
+github.com/shamirlabs/oracle/process/oracle.(*Process).recoveringFromFailure(0xc0000003c0?, {0x16554d8?, 0xc000b12980?}, 0x0?, 0x10?, {0x1631760?, 0xc000299490?})
+	/root/hive-mind-oracle/process/oracle/utils.go:114 +0xc5
+github.com/shamirlabs/oracle/process/oracle.(*Process).Receive(0xc0000003c0, {0x16554d8, 0xc000b12980})
+	/root/hive-mind-oracle/process/oracle/process.go:106 +0x1137
+github.com/shamirlabs/synapse/system.(*SystemManager).SpawnProcess.(*SystemManager).WrapActor.func1({0x1654838, 0xc00050c8a0})
+	/root/go/pkg/mod/github.com/shamirlabs/synapse@v0.4.0/system/system.go:280 +0x67f
+github.com/asynkron/protoactor-go/actor.ReceiveFunc.Receive(0x1f71e00?, {0x1654838?, 0xc00050c8a0?})
+	/root/go/pkg/mod/github.com/asynkron/protoactor-go@v0.0.0-20240413045429-76c172a71a16/actor/message.go:19 +0x26
+github.com/asynkron/protoactor-go/actor.(*actorContext).defaultReceive(0xc00050c8a0)
+	/root/go/pkg/mod/github.com/asynkron/protoactor-go@v0.0.0-20240413045429-76c172a71a16/actor/actor_context.go:372 +0x98
+github.com/asynkron/protoactor-go/actor.(*actorContext).processMessage(0xc00050c8a0, {0xfefe80, 0xc00097da70})
+	/root/go/pkg/mod/github.com/asynkron/protoactor-go@v0.0.0-20240413045429-76c172a71a16/actor/actor_context.go:527 +0xf9
+github.com/asynkron/protoactor-go/actor.(*actorContext).InvokeUserMessage(0xc00050c8a0, {0xfefe80, 0xc00097da70})
+	/root/go/pkg/mod/github.com/asynkron/protoactor-go@v0.0.0-20240413045429-76c172a71a16/actor/actor_context.go:505 +0x45a
+github.com/asynkron/protoactor-go/actor.(*defaultMailbox).run(0xc00050c900)
+	/root/go/pkg/mod/github.com/asynkron/protoactor-go@v0.0.0-20240413045429-76c172a71a16/actor/mailbox.go:169 +0x22f
+github.com/asynkron/protoactor-go/actor.(*defaultMailbox).processMessages(0xc00050c900)
+	/root/go/pkg/mod/github.com/asynkron/protoactor-go@v0.0.0-20240413045429-76c172a71a16/actor/mailbox.go:105 +0x25
+created by github.com/asynkron/protoactor-go/actor.goroutineDispatcher.Schedule in goroutine 173
+	/root/go/pkg/mod/github.com/asynkron/protoactor-go@v0.0.0-20240413045429-76c172a71a16/actor/dispatcher.go:13 +0x16
+time="2024-06-26T09:47:54Z" level=info msg="divaproto plugin installed" cc_url="http://172.16.0.14:3500" cc_version= chain_id=3151908 ec_url="ws://172.16.0.12:8546" ec_version="Geth/v1.13.15-stable-c5ba367e/linux-amd64/go1.21.9" genesis_fork_version=0x10000038 genesis_validators_root=0x9c714f5515e091adccf066e945f10edc19fb6aefd132be221f7066caa17db73a prefix=divaproto.plugin
+[2m9:47AM[0m [92mINF[0m actor system started [2mlib=[0mProto.Actor [2msystem=[0mb9dLqDEfwQHrxRbJBiRtPb [2mid=[0mb9dLqDEfwQHrxRbJBiRtPb
+time="2024-06-26T09:47:54Z" level=info msg="Start Schedulers" prefix="oracle/Process$2"
+time="2024-06-26T09:47:54Z" level=info msg="Starting diva contract process" prefix="oracle/Process$2/oracle/*divacontract.Process$4"
+time="2024-06-26T09:47:54Z" level=info msg="Watching snapshot taken events" prefix="oracle/Process$2/oracle/*divacontract.Process$4"
+time="2024-06-26T09:47:54Z" level=info msg="Listening for snapshot taken events" prefix="oracle/Process$2/oracle/*divacontract.Process$4"
+time="2024-06-26T09:47:54Z" level=info msg="Fetching diva validators and operators" prefix="oracle/Process$2/oracle/*divacontract.Process$4"
+time="2024-06-26T09:47:54Z" level=info msg="Fetch Diva Validators And Operators Complete" prefix="oracle/Process$2"
+time="2024-06-26T09:47:54Z" level=info msg="Try recover from failure" prefix="oracle/Process$2"
+time="2024-06-26T09:47:54Z" level=info msg="Recovering from FailureTypeFetchAndStoreEpochs &{{8 2024-06-26 09:46:53.539724 +0000 UTC 2024-06-26 09:46:53.539724 +0000 UTC {0001-01-01 00:00:00 +0000 UTC false}} b5e5b3147c005a1d129b3e581e36764064041b648ca1deb75cc2b3be65c93e17 0,1,2 1 []}" prefix="oracle/Process$2"
+time="2024-06-26T09:47:54Z" level=info msg="Fetch and store epochs process started for epochs: [0 1 2]" prefix="oracle/Process$2/oracle/*fetchstoreepochs.Process$5"
+time="2024-06-26T09:47:54Z" level=info msg="Fetch And Store Epochs Complete" prefix="oracle/Process$2"
+time="2024-06-26T09:47:54Z" level=info msg="Fetch More Attested Epochs" prefix="oracle/Process$2/oracle/*calcperformance.Process$9"
+time="2024-06-26T09:47:54Z" level=info msg="Fetch attested epochs: [0 1 2]" prefix="oracle/Process$2/oracle/*calcperformance.Process$9"
+time="2024-06-26T09:47:54Z" level=info msg="Fetch More Attested Epochs" prefix="oracle/Process$2/oracle/*calcperformance.Process$9"
+time="2024-06-26T09:47:54Z" level=info msg="Fetch Beacon Validators: []" prefix="oracle/Process$2/oracle/*calcperformance.Process$9"
+time="2024-06-26T09:47:54Z" level=error msg="Calc Perfomances Failure. %!w(*errors.errorString=&{no beacon validators found})" prefix="oracle/Process$2"
+time="2024-06-26T09:47:54Z" level=info msg="Try recover from failure or restart scheduler" prefix="oracle/Process$2"
+time="2024-06-26T09:47:54Z" level=info msg="Try recover from failure" prefix="oracle/Process$2"
+time="2024-06-26T09:47:54Z" level=info msg="Recovering from FailureTypeFetchAndStoreEpochs &{{9 2024-06-26 09:47:54.372224 +0000 UTC 2024-06-26 09:47:54.372224 +0000 UTC {0001-01-01 00:00:00 +0000 UTC false}} b5e5b3147c005a1d129b3e581e36764064041b648ca1deb75cc2b3be65c93e17 0,1,2 1 []}" prefix="oracle/Process$2"
+time="2024-06-26T09:47:54Z" level=info msg="Fetch and store epochs process started for epochs: [0 1 2]" prefix="oracle/Process$2/oracle/*fetchstoreepochs.Process$c"
+time="2024-06-26T09:47:54Z" level=info msg="Fetch And Store Epochs Complete" prefix="oracle/Process$2"
+time="2024-06-26T09:47:54Z" level=info msg="Fetch More Attested Epochs" prefix="oracle/Process$2/oracle/*calcperformance.Process$g"
+time="2024-06-26T09:47:54Z" level=info msg="Fetch attested epochs: [0 1 2]" prefix="oracle/Process$2/oracle/*calcperformance.Process$g"
+time="2024-06-26T09:47:54Z" level=info msg="Fetch More Attested Epochs" prefix="oracle/Process$2/oracle/*calcperformance.Process$g"
+time="2024-06-26T09:47:54Z" level=info msg="Fetch Beacon Validators: []" prefix="oracle/Process$2/oracle/*calcperformance.Process$g"
+time="2024-06-26T09:47:54Z" level=error msg="Calc Perfomances Failure. %!w(*errors.errorString=&{no beacon validators found})" prefix="oracle/Process$2"
+time="2024-06-26T09:47:54Z" level=info msg="Try recover from failure or restart scheduler" prefix="oracle/Process$2"
+time="2024-06-26T09:47:54Z" level=info msg="Try recover from failure" prefix="oracle/Process$2"
+time="2024-06-26T09:47:54Z" level=info msg="Recovering from FailureTypeFetchAndStoreEpochs &{{10 2024-06-26 09:47:54.37834 +0000 UTC 2024-06-26 09:47:54.37834 +0000 UTC {0001-01-01 00:00:00 +0000 UTC false}} b5e5b3147c005a1d129b3e581e36764064041b648ca1deb75cc2b3be65c93e17 0,1,2 1 []}" prefix="oracle/Process$2"
+time="2024-06-26T09:47:54Z" level=info msg="Fetch and store epochs process started for epochs: [0 1 2]" prefix="oracle/Process$2/oracle/*fetchstoreepochs.Process$j"
+time="2024-06-26T09:47:54Z" level=info msg="Fetch And Store Epochs Complete" prefix="oracle/Process$2"
+time="2024-06-26T09:47:54Z" level=info msg="Fetch More Attested Epochs" prefix="oracle/Process$2/oracle/*calcperformance.Process$n"
+time="2024-06-26T09:47:54Z" level=info msg="Fetch attested epochs: [0 1 2]" prefix="oracle/Process$2/oracle/*calcperformance.Process$n"
+time="2024-06-26T09:47:54Z" level=info msg="Fetch More Attested Epochs" prefix="oracle/Process$2/oracle/*calcperformance.Process$n"
+time="2024-06-26T09:47:54Z" level=info msg="Fetch Beacon Validators: []" prefix="oracle/Process$2/oracle/*calcperformance.Process$n"
+time="2024-06-26T09:47:54Z" level=error msg="Calc Perfomances Failure. %!w(*errors.errorString=&{no beacon validators found})" prefix="oracle/Process$2"
+time="2024-06-26T09:47:54Z" level=info msg="Try recover from failure or restart scheduler" prefix="oracle/Process$2"
+time="2024-06-26T09:47:54Z" level=info msg="Try recover from failure" prefix="oracle/Process$2"
+time="2024-06-26T09:47:54Z" level=info msg="Recovering from FailureTypeFetchAndStoreEpochs &{{11 2024-06-26 09:47:54.383825 +0000 UTC 2024-06-26 09:47:54.383825 +0000 UTC {0001-01-01 00:00:00 +0000 UTC false}} b5e5b3147c005a1d129b3e581e36764064041b648ca1deb75cc2b3be65c93e17 0,1,2 1 []}" prefix="oracle/Process$2"
+time="2024-06-26T09:47:54Z" level=info msg="Fetch and store epochs process started for epochs: [0 1 2]" prefix="oracle/Process$2/oracle/*fetchstoreepochs.Process$q"
+time="2024-06-26T09:47:54Z" level=info msg="Fetch And Store Epochs Complete" prefix="oracle/Process$2"
+time="2024-06-26T09:47:54Z" level=info msg="Fetch More Attested Epochs" prefix="oracle/Process$2/oracle/*calcperformance.Process$u"
+time="2024-06-26T09:47:54Z" level=info msg="Fetch attested epochs: [0 1 2]" prefix="oracle/Process$2/oracle/*calcperformance.Process$u"
+time="2024-06-26T09:47:54Z" level=info msg="Fetch More Attested Epochs" prefix="oracle/Process$2/oracle/*calcperformance.Process$u"
+time="2024-06-26T09:47:54Z" level=info msg="Fetch Beacon Validators: []" prefix="oracle/Process$2/oracle/*calcperformance.Process$u"
+time="2024-06-26T09:47:54Z" level=error msg="Calc Perfomances Failure. %!w(*errors.errorString=&{no beacon validators found})" prefix="oracle/Process$2"
+[2m9:47AM[0m [92mINF[0m [ACTOR] Recovering [2mlib=[0mProto.Actor [2msystem=[0mb9dLqDEfwQHrxRbJBiRtPb [2mself=[0m"Address:\"nonhost\" Id:\"Process$2\"" [2mreason=[0m"max retries count reached in recovering from failure for oracle process, the latest error: no beacon validators found"
+debug.Stack(): goroutine 175 [running]:
+[2m9:47AM[0m [91mERR[0m [Supervision] [2mlib=[0mProto.Actor [2msystem=[0mb9dLqDEfwQHrxRbJBiRtPb [2mactor=[0m"Address:\"nonhost\" Id:\"Process$2\"" [2mmessage=[0m"&{Epochs:[0 1 2] Error:no beacon validators found}" [2mexception=[0m"max retries count reached in recovering from failure for oracle process, the latest error: no beacon validators found"
+time="2024-06-26T09:47:54Z" level=error msg="Supervisor Event Stream" child=Address:"nonhost" Id:"Process$2" directive=RestartDirective prefix="oracle/Process$2" reason="max retries count reached in recovering from failure for oracle process, the latest error: no beacon validators found"
+runtime/debug.Stack()
+	/usr/local/go/src/runtime/debug/stack.go:24 +0x5e
+github.com/asynkron/protoactor-go/actor.(*actorContext).EscalateFailure(0xc00069cde0, {0x10aa800, 0xc0009b5980}, {0xfefe80, 0xc000a44ed0})
+	/root/go/pkg/mod/github.com/asynkron/protoactor-go@v0.0.0-20240413045429-76c172a71a16/actor/actor_context.go:709 +0x1d3
+github.com/asynkron/protoactor-go/actor.(*defaultMailbox).run.func1()
+	/root/go/pkg/mod/github.com/asynkron/protoactor-go@v0.0.0-20240413045429-76c172a71a16/actor/mailbox.go:132 +0x58
+panic({0x10aa800?, 0xc0009b5980?})
+	/usr/local/go/src/runtime/panic.go:770 +0x132
+github.com/shamirlabs/oracle/process/oracle.(*Process).recoveringFromFailure(0xc000000300?, {0x16554d8?, 0xc000a3b8c0?}, 0x0?, 0x10?, {0x1631760?, 0xc000a3c990?})
+	/root/hive-mind-oracle/process/oracle/utils.go:114 +0xc5
+github.com/shamirlabs/oracle/process/oracle.(*Process).Receive(0xc000000300, {0x16554d8, 0xc000a3b8c0})
+	/root/hive-mind-oracle/process/oracle/process.go:106 +0x1137
+github.com/shamirlabs/synapse/system.(*SystemManager).SpawnProcess.(*SystemManager).WrapActor.func1({0x1654838, 0xc00069cde0})
+	/root/go/pkg/mod/github.com/shamirlabs/synapse@v0.4.0/system/system.go:280 +0x67f
+github.com/asynkron/protoactor-go/actor.ReceiveFunc.Receive(0x1f71e00?, {0x1654838?, 0xc00069cde0?})
+	/root/go/pkg/mod/github.com/asynkron/protoactor-go@v0.0.0-20240413045429-76c172a71a16/actor/message.go:19 +0x26
+github.com/asynkron/protoactor-go/actor.(*actorContext).defaultReceive(0xc00069cde0)
+	/root/go/pkg/mod/github.com/asynkron/protoactor-go@v0.0.0-20240413045429-76c172a71a16/actor/actor_context.go:372 +0x98
+github.com/asynkron/protoactor-go/actor.(*actorContext).processMessage(0xc00069cde0, {0xfefe80, 0xc000a44ed0})
+	/root/go/pkg/mod/github.com/asynkron/protoactor-go@v0.0.0-20240413045429-76c172a71a16/actor/actor_context.go:527 +0xf9
+github.com/asynkron/protoactor-go/actor.(*actorContext).InvokeUserMessage(0xc00069cde0, {0xfefe80, 0xc000a44ed0})
+	/root/go/pkg/mod/github.com/asynkron/protoactor-go@v0.0.0-20240413045429-76c172a71a16/actor/actor_context.go:505 +0x45a
+github.com/asynkron/protoactor-go/actor.(*defaultMailbox).run(0xc00069ce40)
+	/root/go/pkg/mod/github.com/asynkron/protoactor-go@v0.0.0-20240413045429-76c172a71a16/actor/mailbox.go:169 +0x22f
+github.com/asynkron/protoactor-go/actor.(*defaultMailbox).processMessages(0xc00069ce40)
+	/root/go/pkg/mod/github.com/asynkron/protoactor-go@v0.0.0-20240413045429-76c172a71a16/actor/mailbox.go:105 +0x25
+created by github.com/asynkron/protoactor-go/actor.goroutineDispatcher.Schedule in goroutine 174
+	/root/go/pkg/mod/github.com/asynkron/protoactor-go@v0.0.0-20240413045429-76c172a71a16/actor/dispatcher.go:13 +0x16
+
+[Supervision] Actor: Address:"nonhost" Id:"Process$2"  failed with message: &{[0 1 2] no beacon validators found}  exception: max retries count reached in recovering from failure for oracle process, the latest error: no beacon validators found
+panic: max retries count reached in recovering from failure for oracle process, the latest error: no beacon validators found [recovered]
+	panic: max retries count reached in recovering from failure for oracle process, the latest error: no beacon validators found
+
+goroutine 175 [running]:
+github.com/shamirlabs/oracle/process/oracle.(*Process).subscribeEventStream.func1({0xfef740?, 0xc0009b59a0?})
+	/root/hive-mind-oracle/process/oracle/utils.go:258 +0x315
+github.com/asynkron/protoactor-go/eventstream.(*EventStream).Publish(0xc00072c040, {0xfef740, 0xc0009b59a0})
+	/root/go/pkg/mod/github.com/asynkron/protoactor-go@v0.0.0-20240413045429-76c172a71a16/eventstream/eventstream.go:108 +0x1d8
+github.com/asynkron/protoactor-go/actor.logFailure(...)
+	/root/go/pkg/mod/github.com/asynkron/protoactor-go@v0.0.0-20240413045429-76c172a71a16/actor/supervision.go:25
+github.com/asynkron/protoactor-go/actor.(*oneForOneStrategy).HandleFailure(0x1e80e20, 0xc00069c8a0, {0x1641080, 0xc00069cde0}, 0xc00069cea0, 0xc000a38738, {0x10aa800, 0xc0009b5980}, {0xfefe80, 0xc000a44ed0})
+	/root/go/pkg/mod/github.com/asynkron/protoactor-go@v0.0.0-20240413045429-76c172a71a16/actor/strategy_one_for_one.go:39 +0x1bd
+github.com/asynkron/protoactor-go/actor.(*actorContext).handleRootFailure(...)
+	/root/go/pkg/mod/github.com/asynkron/protoactor-go@v0.0.0-20240413045429-76c172a71a16/actor/actor_context.go:572
+github.com/asynkron/protoactor-go/actor.(*actorContext).EscalateFailure(0xc00069cde0, {0x10aa800, 0xc0009b5980}, {0xfefe80, 0xc000a44ed0})
+	/root/go/pkg/mod/github.com/asynkron/protoactor-go@v0.0.0-20240413045429-76c172a71a16/actor/actor_context.go:727 +0x7a7
+github.com/asynkron/protoactor-go/actor.(*defaultMailbox).run.func1()
+	/root/go/pkg/mod/github.com/asynkron/protoactor-go@v0.0.0-20240413045429-76c172a71a16/actor/mailbox.go:132 +0x58
+panic({0x10aa800?, 0xc0009b5980?})
+	/usr/local/go/src/runtime/panic.go:770 +0x132
+github.com/shamirlabs/oracle/process/oracle.(*Process).recoveringFromFailure(0xc000000300?, {0x16554d8?, 0xc000a3b8c0?}, 0x0?, 0x10?, {0x1631760?, 0xc000a3c990?})
+	/root/hive-mind-oracle/process/oracle/utils.go:114 +0xc5
+github.com/shamirlabs/oracle/process/oracle.(*Process).Receive(0xc000000300, {0x16554d8, 0xc000a3b8c0})
+	/root/hive-mind-oracle/process/oracle/process.go:106 +0x1137
+github.com/shamirlabs/synapse/system.(*SystemManager).SpawnProcess.(*SystemManager).WrapActor.func1({0x1654838, 0xc00069cde0})
+	/root/go/pkg/mod/github.com/shamirlabs/synapse@v0.4.0/system/system.go:280 +0x67f
+github.com/asynkron/protoactor-go/actor.ReceiveFunc.Receive(0x1f71e00?, {0x1654838?, 0xc00069cde0?})
+	/root/go/pkg/mod/github.com/asynkron/protoactor-go@v0.0.0-20240413045429-76c172a71a16/actor/message.go:19 +0x26
+github.com/asynkron/protoactor-go/actor.(*actorContext).defaultReceive(0xc00069cde0)
+	/root/go/pkg/mod/github.com/asynkron/protoactor-go@v0.0.0-20240413045429-76c172a71a16/actor/actor_context.go:372 +0x98
+github.com/asynkron/protoactor-go/actor.(*actorContext).processMessage(0xc00069cde0, {0xfefe80, 0xc000a44ed0})
+	/root/go/pkg/mod/github.com/asynkron/protoactor-go@v0.0.0-20240413045429-76c172a71a16/actor/actor_context.go:527 +0xf9
+github.com/asynkron/protoactor-go/actor.(*actorContext).InvokeUserMessage(0xc00069cde0, {0xfefe80, 0xc000a44ed0})
+	/root/go/pkg/mod/github.com/asynkron/protoactor-go@v0.0.0-20240413045429-76c172a71a16/actor/actor_context.go:505 +0x45a
+github.com/asynkron/protoactor-go/actor.(*defaultMailbox).run(0xc00069ce40)
+	/root/go/pkg/mod/github.com/asynkron/protoactor-go@v0.0.0-20240413045429-76c172a71a16/actor/mailbox.go:169 +0x22f
+github.com/asynkron/protoactor-go/actor.(*defaultMailbox).processMessages(0xc00069ce40)
+	/root/go/pkg/mod/github.com/asynkron/protoactor-go@v0.0.0-20240413045429-76c172a71a16/actor/mailbox.go:105 +0x25
+created by github.com/asynkron/protoactor-go/actor.goroutineDispatcher.Schedule in goroutine 174
+	/root/go/pkg/mod/github.com/asynkron/protoactor-go@v0.0.0-20240413045429-76c172a71a16/actor/dispatcher.go:13 +0x16
+time="2024-06-26T09:48:54Z" level=info msg="divaproto plugin installed" cc_url="http://172.16.0.14:3500" cc_version= chain_id=3151908 ec_url="ws://172.16.0.12:8546" ec_version="Geth/v1.13.15-stable-c5ba367e/linux-amd64/go1.21.9" genesis_fork_version=0x10000038 genesis_validators_root=0x9c714f5515e091adccf066e945f10edc19fb6aefd132be221f7066caa17db73a prefix=divaproto.plugin
+[2m9:48AM[0m [92mINF[0m actor system started [2mlib=[0mProto.Actor [2msystem=[0mcTHfRLAPR8ZXZDFtRs2zDm [2mid=[0mcTHfRLAPR8ZXZDFtRs2zDm
+time="2024-06-26T09:48:55Z" level=info msg="Start Schedulers" prefix="oracle/Process$2"
+time="2024-06-26T09:48:55Z" level=info msg="Starting diva contract process" prefix="oracle/Process$2/oracle/*divacontract.Process$4"
+time="2024-06-26T09:48:55Z" level=info msg="Watching snapshot taken events" prefix="oracle/Process$2/oracle/*divacontract.Process$4"
+time="2024-06-26T09:48:55Z" level=info msg="Listening for snapshot taken events" prefix="oracle/Process$2/oracle/*divacontract.Process$4"
+time="2024-06-26T09:48:55Z" level=info msg="Fetching diva validators and operators" prefix="oracle/Process$2/oracle/*divacontract.Process$4"
+time="2024-06-26T09:48:55Z" level=info msg="Fetch Diva Validators And Operators Complete" prefix="oracle/Process$2"
+time="2024-06-26T09:48:55Z" level=info msg="Try recover from failure" prefix="oracle/Process$2"
+time="2024-06-26T09:48:55Z" level=info msg="Recovering from FailureTypeFetchAndStoreEpochs &{{12 2024-06-26 09:47:54.38818 +0000 UTC 2024-06-26 09:47:54.38818 +0000 UTC {0001-01-01 00:00:00 +0000 UTC false}} b5e5b3147c005a1d129b3e581e36764064041b648ca1deb75cc2b3be65c93e17 0,1,2 1 []}" prefix="oracle/Process$2"
+time="2024-06-26T09:48:55Z" level=info msg="Fetch and store epochs process started for epochs: [0 1 2]" prefix="oracle/Process$2/oracle/*fetchstoreepochs.Process$5"
+time="2024-06-26T09:48:55Z" level=info msg="Fetch And Store Epochs Complete" prefix="oracle/Process$2"
+time="2024-06-26T09:48:55Z" level=info msg="Fetch More Attested Epochs" prefix="oracle/Process$2/oracle/*calcperformance.Process$9"
+time="2024-06-26T09:48:55Z" level=info msg="Fetch attested epochs: [0 1 2]" prefix="oracle/Process$2/oracle/*calcperformance.Process$9"
+time="2024-06-26T09:48:55Z" level=info msg="Fetch More Attested Epochs" prefix="oracle/Process$2/oracle/*calcperformance.Process$9"
+time="2024-06-26T09:48:55Z" level=info msg="Fetch Beacon Validators: []" prefix="oracle/Process$2/oracle/*calcperformance.Process$9"
+time="2024-06-26T09:48:55Z" level=error msg="Calc Perfomances Failure. %!w(*errors.errorString=&{no beacon validators found})" prefix="oracle/Process$2"
+time="2024-06-26T09:48:55Z" level=info msg="Try recover from failure or restart scheduler" prefix="oracle/Process$2"
+time="2024-06-26T09:48:55Z" level=info msg="Try recover from failure" prefix="oracle/Process$2"
+time="2024-06-26T09:48:55Z" level=info msg="Recovering from FailureTypeFetchAndStoreEpochs &{{13 2024-06-26 09:48:55.321152 +0000 UTC 2024-06-26 09:48:55.321152 +0000 UTC {0001-01-01 00:00:00 +0000 UTC false}} b5e5b3147c005a1d129b3e581e36764064041b648ca1deb75cc2b3be65c93e17 0,1,2 1 []}" prefix="oracle/Process$2"
+time="2024-06-26T09:48:55Z" level=info msg="Fetch and store epochs process started for epochs: [0 1 2]" prefix="oracle/Process$2/oracle/*fetchstoreepochs.Process$c"
+time="2024-06-26T09:48:55Z" level=info msg="Fetch And Store Epochs Complete" prefix="oracle/Process$2"
+time="2024-06-26T09:48:55Z" level=info msg="Fetch More Attested Epochs" prefix="oracle/Process$2/oracle/*calcperformance.Process$g"
+time="2024-06-26T09:48:55Z" level=info msg="Fetch attested epochs: [0 1 2]" prefix="oracle/Process$2/oracle/*calcperformance.Process$g"
+time="2024-06-26T09:48:55Z" level=info msg="Fetch More Attested Epochs" prefix="oracle/Process$2/oracle/*calcperformance.Process$g"
+time="2024-06-26T09:48:55Z" level=info msg="Fetch Beacon Validators: []" prefix="oracle/Process$2/oracle/*calcperformance.Process$g"
+time="2024-06-26T09:48:55Z" level=error msg="Calc Perfomances Failure. %!w(*errors.errorString=&{no beacon validators found})" prefix="oracle/Process$2"
+time="2024-06-26T09:48:55Z" level=info msg="Try recover from failure or restart scheduler" prefix="oracle/Process$2"
+time="2024-06-26T09:48:55Z" level=info msg="Try recover from failure" prefix="oracle/Process$2"
+time="2024-06-26T09:48:55Z" level=info msg="Recovering from FailureTypeFetchAndStoreEpochs &{{14 2024-06-26 09:48:55.32689 +0000 UTC 2024-06-26 09:48:55.32689 +0000 UTC {0001-01-01 00:00:00 +0000 UTC false}} b5e5b3147c005a1d129b3e581e36764064041b648ca1deb75cc2b3be65c93e17 0,1,2 1 []}" prefix="oracle/Process$2"
+time="2024-06-26T09:48:55Z" level=info msg="Fetch and store epochs process started for epochs: [0 1 2]" prefix="oracle/Process$2/oracle/*fetchstoreepochs.Process$j"
+time="2024-06-26T09:48:55Z" level=info msg="Fetch And Store Epochs Complete" prefix="oracle/Process$2"
+time="2024-06-26T09:48:55Z" level=info msg="Fetch More Attested Epochs" prefix="oracle/Process$2/oracle/*calcperformance.Process$n"
+time="2024-06-26T09:48:55Z" level=info msg="Fetch attested epochs: [0 1 2]" prefix="oracle/Process$2/oracle/*calcperformance.Process$n"
+time="2024-06-26T09:48:55Z" level=info msg="Fetch More Attested Epochs" prefix="oracle/Process$2/oracle/*calcperformance.Process$n"
+time="2024-06-26T09:48:55Z" level=info msg="Fetch Beacon Validators: []" prefix="oracle/Process$2/oracle/*calcperformance.Process$n"
+time="2024-06-26T09:48:55Z" level=error msg="Calc Perfomances Failure. %!w(*errors.errorString=&{no beacon validators found})" prefix="oracle/Process$2"
+time="2024-06-26T09:48:55Z" level=info msg="Try recover from failure or restart scheduler" prefix="oracle/Process$2"
+time="2024-06-26T09:48:55Z" level=info msg="Try recover from failure" prefix="oracle/Process$2"
+time="2024-06-26T09:48:55Z" level=info msg="Recovering from FailureTypeFetchAndStoreEpochs &{{15 2024-06-26 09:48:55.331424 +0000 UTC 2024-06-26 09:48:55.331424 +0000 UTC {0001-01-01 00:00:00 +0000 UTC false}} b5e5b3147c005a1d129b3e581e36764064041b648ca1deb75cc2b3be65c93e17 0,1,2 1 []}" prefix="oracle/Process$2"
+time="2024-06-26T09:48:55Z" level=info msg="Fetch and store epochs process started for epochs: [0 1 2]" prefix="oracle/Process$2/oracle/*fetchstoreepochs.Process$q"
+time="2024-06-26T09:48:55Z" level=info msg="Fetch And Store Epochs Complete" prefix="oracle/Process$2"
+time="2024-06-26T09:48:55Z" level=info msg="Fetch More Attested Epochs" prefix="oracle/Process$2/oracle/*calcperformance.Process$u"
+time="2024-06-26T09:48:55Z" level=info msg="Fetch attested epochs: [0 1 2]" prefix="oracle/Process$2/oracle/*calcperformance.Process$u"
+time="2024-06-26T09:48:55Z" level=info msg="Fetch More Attested Epochs" prefix="oracle/Process$2/oracle/*calcperformance.Process$u"
+time="2024-06-26T09:48:55Z" level=info msg="Fetch Beacon Validators: []" prefix="oracle/Process$2/oracle/*calcperformance.Process$u"
+time="2024-06-26T09:48:55Z" level=error msg="Calc Perfomances Failure. %!w(*errors.errorString=&{no beacon validators found})" prefix="oracle/Process$2"
+[2m9:48AM[0m [92mINF[0m [ACTOR] Recovering [2mlib=[0mProto.Actor [2msystem=[0mcTHfRLAPR8ZXZDFtRs2zDm [2mself=[0m"Address:\"nonhost\" Id:\"Process$2\"" [2mreason=[0m"max retries count reached in recovering from failure for oracle process, the latest error: no beacon validators found"
+debug.Stack(): goroutine 166 [running]:
+[2m9:48AM[0m [91mERR[0m [Supervision] [2mlib=[0mProto.Actor [2msystem=[0mcTHfRLAPR8ZXZDFtRs2zDm [2mactor=[0m"Address:\"nonhost\" Id:\"Process$2\"" [2mmessage=[0m"&{Epochs:[0 1 2] Error:no beacon validators found}" [2mexception=[0m"max retries count reached in recovering from failure for oracle process, the latest error: no beacon validators found"
+runtime/debug.Stack()
+	/usr/local/go/src/runtime/debug/stack.go:24 +0x5e
+github.com/asynkron/protoactor-go/actor.(*actorContext).EscalateFailure(0xc000702d80, {0x10aa800, 0xc000985d80}, {0xfefe80, 0xc000a1be60})
+	/root/go/pkg/mod/github.com/asynkron/protoactor-go@v0.0.0-20240413045429-76c172a71a16/actor/actor_context.go:709 +0x1d3
+github.com/asynkron/protoactor-go/actor.(*defaultMailbox).run.func1()
+	/root/go/pkg/mod/github.com/asynkron/protoactor-go@v0.0.0-20240413045429-76c172a71a16/actor/mailbox.go:132 +0x58
+panic({0x10aa800?, 0xc000985d80?})
+	/usr/local/go/src/runtime/panic.go:770 +0x132
+github.com/shamirlabs/oracle/process/oracle.(*Process).recoveringFromFailure(0xc000000300?, {0x16554d8?, 0xc000a38940?}, 0x0?, 0x10?, {0x1631760?, 0xc00057a370?})
+	/root/hive-mind-oracle/process/oracle/utils.go:114 +0xc5
+github.com/shamirlabs/oracle/process/oracle.(*Process).Receive(0xc000000300, {0x16554d8, 0xc000a38940})
+	/root/hive-mind-oracle/process/oracle/process.go:106 +0x1137
+time="2024-06-26T09:48:55Z" level=error msg="Supervisor Event Stream" child=Address:"nonhost" Id:"Process$2" directive=RestartDirective prefix="oracle/Process$2" reason="max retries count reached in recovering from failure for oracle process, the latest error: no beacon validators found"
+github.com/shamirlabs/synapse/system.(*SystemManager).SpawnProcess.(*SystemManager).WrapActor.func1({0x1654838, 0xc000702d80})
+	/root/go/pkg/mod/github.com/shamirlabs/synapse@v0.4.0/system/system.go:280 +0x67f
+github.com/asynkron/protoactor-go/actor.ReceiveFunc.Receive(0x1f71e00?, {0x1654838?, 0xc000702d80?})
+	/root/go/pkg/mod/github.com/asynkron/protoactor-go@v0.0.0-20240413045429-76c172a71a16/actor/message.go:19 +0x26
+github.com/asynkron/protoactor-go/actor.(*actorContext).defaultReceive(0xc000702d80)
+	/root/go/pkg/mod/github.com/asynkron/protoactor-go@v0.0.0-20240413045429-76c172a71a16/actor/actor_context.go:372 +0x98
+github.com/asynkron/protoactor-go/actor.(*actorContext).processMessage(0xc000702d80, {0xfefe80, 0xc000a1be60})
+	/root/go/pkg/mod/github.com/asynkron/protoactor-go@v0.0.0-20240413045429-76c172a71a16/actor/actor_context.go:527 +0xf9
+github.com/asynkron/protoactor-go/actor.(*actorContext).InvokeUserMessage(0xc000702d80, {0xfefe80, 0xc000a1be60})
+	/root/go/pkg/mod/github.com/asynkron/protoactor-go@v0.0.0-20240413045429-76c172a71a16/actor/actor_context.go:505 +0x45a
+github.com/asynkron/protoactor-go/actor.(*defaultMailbox).run(0xc000703020)
+	/root/go/pkg/mod/github.com/asynkron/protoactor-go@v0.0.0-20240413045429-76c172a71a16/actor/mailbox.go:169 +0x22f
+github.com/asynkron/protoactor-go/actor.(*defaultMailbox).processMessages(0xc000703020)
+	/root/go/pkg/mod/github.com/asynkron/protoactor-go@v0.0.0-20240413045429-76c172a71a16/actor/mailbox.go:105 +0x25
+created by github.com/asynkron/protoactor-go/actor.goroutineDispatcher.Schedule in goroutine 165
+	/root/go/pkg/mod/github.com/asynkron/protoactor-go@v0.0.0-20240413045429-76c172a71a16/actor/dispatcher.go:13 +0x16
+
+[Supervision] Actor: Address:"nonhost" Id:"Process$2"  failed with message: &{[0 1 2] no beacon validators found}  exception: max retries count reached in recovering from failure for oracle process, the latest error: no beacon validators found
+panic: max retries count reached in recovering from failure for oracle process, the latest error: no beacon validators found [recovered]
+	panic: max retries count reached in recovering from failure for oracle process, the latest error: no beacon validators found
+
+goroutine 166 [running]:
+github.com/shamirlabs/oracle/process/oracle.(*Process).subscribeEventStream.func1({0xfef740?, 0xc000985da0?})
+	/root/hive-mind-oracle/process/oracle/utils.go:258 +0x315
+github.com/asynkron/protoactor-go/eventstream.(*EventStream).Publish(0xc000228080, {0xfef740, 0xc000985da0})
+	/root/go/pkg/mod/github.com/asynkron/protoactor-go@v0.0.0-20240413045429-76c172a71a16/eventstream/eventstream.go:108 +0x1d8
+github.com/asynkron/protoactor-go/actor.logFailure(...)
+	/root/go/pkg/mod/github.com/asynkron/protoactor-go@v0.0.0-20240413045429-76c172a71a16/actor/supervision.go:25
+github.com/asynkron/protoactor-go/actor.(*oneForOneStrategy).HandleFailure(0x1e80e20, 0xc00055f7a0, {0x1641080, 0xc000702d80}, 0xc000703080, 0xc000a40048, {0x10aa800, 0xc000985d80}, {0xfefe80, 0xc000a1be60})
+	/root/go/pkg/mod/github.com/asynkron/protoactor-go@v0.0.0-20240413045429-76c172a71a16/actor/strategy_one_for_one.go:39 +0x1bd
+github.com/asynkron/protoactor-go/actor.(*actorContext).handleRootFailure(...)
+	/root/go/pkg/mod/github.com/asynkron/protoactor-go@v0.0.0-20240413045429-76c172a71a16/actor/actor_context.go:572
+github.com/asynkron/protoactor-go/actor.(*actorContext).EscalateFailure(0xc000702d80, {0x10aa800, 0xc000985d80}, {0xfefe80, 0xc000a1be60})
+	/root/go/pkg/mod/github.com/asynkron/protoactor-go@v0.0.0-20240413045429-76c172a71a16/actor/actor_context.go:727 +0x7a7
+github.com/asynkron/protoactor-go/actor.(*defaultMailbox).run.func1()
+	/root/go/pkg/mod/github.com/asynkron/protoactor-go@v0.0.0-20240413045429-76c172a71a16/actor/mailbox.go:132 +0x58
+panic({0x10aa800?, 0xc000985d80?})
+	/usr/local/go/src/runtime/panic.go:770 +0x132
+github.com/shamirlabs/oracle/process/oracle.(*Process).recoveringFromFailure(0xc000000300?, {0x16554d8?, 0xc000a38940?}, 0x0?, 0x10?, {0x1631760?, 0xc00057a370?})
+	/root/hive-mind-oracle/process/oracle/utils.go:114 +0xc5
+github.com/shamirlabs/oracle/process/oracle.(*Process).Receive(0xc000000300, {0x16554d8, 0xc000a38940})
+	/root/hive-mind-oracle/process/oracle/process.go:106 +0x1137
+github.com/shamirlabs/synapse/system.(*SystemManager).SpawnProcess.(*SystemManager).WrapActor.func1({0x1654838, 0xc000702d80})
+	/root/go/pkg/mod/github.com/shamirlabs/synapse@v0.4.0/system/system.go:280 +0x67f
+github.com/asynkron/protoactor-go/actor.ReceiveFunc.Receive(0x1f71e00?, {0x1654838?, 0xc000702d80?})
+	/root/go/pkg/mod/github.com/asynkron/protoactor-go@v0.0.0-20240413045429-76c172a71a16/actor/message.go:19 +0x26
+github.com/asynkron/protoactor-go/actor.(*actorContext).defaultReceive(0xc000702d80)
+	/root/go/pkg/mod/github.com/asynkron/protoactor-go@v0.0.0-20240413045429-76c172a71a16/actor/actor_context.go:372 +0x98
+github.com/asynkron/protoactor-go/actor.(*actorContext).processMessage(0xc000702d80, {0xfefe80, 0xc000a1be60})
+	/root/go/pkg/mod/github.com/asynkron/protoactor-go@v0.0.0-20240413045429-76c172a71a16/actor/actor_context.go:527 +0xf9
+github.com/asynkron/protoactor-go/actor.(*actorContext).InvokeUserMessage(0xc000702d80, {0xfefe80, 0xc000a1be60})
+	/root/go/pkg/mod/github.com/asynkron/protoactor-go@v0.0.0-20240413045429-76c172a71a16/actor/actor_context.go:505 +0x45a
+github.com/asynkron/protoactor-go/actor.(*defaultMailbox).run(0xc000703020)
+	/root/go/pkg/mod/github.com/asynkron/protoactor-go@v0.0.0-20240413045429-76c172a71a16/actor/mailbox.go:169 +0x22f
+github.com/asynkron/protoactor-go/actor.(*defaultMailbox).processMessages(0xc000703020)
+	/root/go/pkg/mod/github.com/asynkron/protoactor-go@v0.0.0-20240413045429-76c172a71a16/actor/mailbox.go:105 +0x25
+created by github.com/asynkron/protoactor-go/actor.goroutineDispatcher.Schedule in goroutine 165
+	/root/go/pkg/mod/github.com/asynkron/protoactor-go@v0.0.0-20240413045429-76c172a71a16/actor/dispatcher.go:13 +0x16
+time="2024-06-26T09:49:55Z" level=info msg="divaproto plugin installed" cc_url="http://172.16.0.14:3500" cc_version= chain_id=3151908 ec_url="ws://172.16.0.12:8546" ec_version="Geth/v1.13.15-stable-c5ba367e/linux-amd64/go1.21.9" genesis_fork_version=0x10000038 genesis_validators_root=0x9c714f5515e091adccf066e945f10edc19fb6aefd132be221f7066caa17db73a prefix=divaproto.plugin
+[2m9:49AM[0m [92mINF[0m actor system started [2mlib=[0mProto.Actor [2msystem=[0m2s9PoVvuD45sxU9ZMu7bU3 [2mid=[0m2s9PoVvuD45sxU9ZMu7bU3
+time="2024-06-26T09:49:56Z" level=info msg="Start Schedulers" prefix="oracle/Process$2"
+time="2024-06-26T09:49:56Z" level=info msg="Starting diva contract process" prefix="oracle/Process$2/oracle/*divacontract.Process$4"
+time="2024-06-26T09:49:56Z" level=info msg="Watching snapshot taken events" prefix="oracle/Process$2/oracle/*divacontract.Process$4"
+time="2024-06-26T09:49:56Z" level=info msg="Listening for snapshot taken events" prefix="oracle/Process$2/oracle/*divacontract.Process$4"
+time="2024-06-26T09:49:56Z" level=info msg="Fetching diva validators and operators" prefix="oracle/Process$2/oracle/*divacontract.Process$4"
+time="2024-06-26T09:49:56Z" level=info msg="Fetch Diva Validators And Operators Complete" prefix="oracle/Process$2"
+time="2024-06-26T09:49:56Z" level=info msg="Try recover from failure" prefix="oracle/Process$2"
+time="2024-06-26T09:49:56Z" level=info msg="Recovering from FailureTypeFetchAndStoreEpochs &{{16 2024-06-26 09:48:55.336297 +0000 UTC 2024-06-26 09:48:55.336297 +0000 UTC {0001-01-01 00:00:00 +0000 UTC false}} b5e5b3147c005a1d129b3e581e36764064041b648ca1deb75cc2b3be65c93e17 0,1,2 1 []}" prefix="oracle/Process$2"
+time="2024-06-26T09:49:56Z" level=info msg="Fetch and store epochs process started for epochs: [0 1 2]" prefix="oracle/Process$2/oracle/*fetchstoreepochs.Process$5"
+time="2024-06-26T09:49:56Z" level=info msg="Fetch And Store Epochs Complete" prefix="oracle/Process$2"
+time="2024-06-26T09:49:56Z" level=info msg="Fetch More Attested Epochs" prefix="oracle/Process$2/oracle/*calcperformance.Process$9"
+time="2024-06-26T09:49:56Z" level=info msg="Fetch attested epochs: [0 1 2]" prefix="oracle/Process$2/oracle/*calcperformance.Process$9"
+time="2024-06-26T09:49:56Z" level=info msg="Fetch More Attested Epochs" prefix="oracle/Process$2/oracle/*calcperformance.Process$9"
+time="2024-06-26T09:49:56Z" level=info msg="Fetch Beacon Validators: []" prefix="oracle/Process$2/oracle/*calcperformance.Process$9"
+time="2024-06-26T09:49:56Z" level=error msg="Calc Perfomances Failure. %!w(*errors.errorString=&{no beacon validators found})" prefix="oracle/Process$2"
+time="2024-06-26T09:49:56Z" level=info msg="Try recover from failure or restart scheduler" prefix="oracle/Process$2"
+time="2024-06-26T09:49:56Z" level=info msg="Try recover from failure" prefix="oracle/Process$2"
+time="2024-06-26T09:49:56Z" level=info msg="Recovering from FailureTypeFetchAndStoreEpochs &{{17 2024-06-26 09:49:56.232914 +0000 UTC 2024-06-26 09:49:56.232914 +0000 UTC {0001-01-01 00:00:00 +0000 UTC false}} b5e5b3147c005a1d129b3e581e36764064041b648ca1deb75cc2b3be65c93e17 0,1,2 1 []}" prefix="oracle/Process$2"
+time="2024-06-26T09:49:56Z" level=info msg="Fetch and store epochs process started for epochs: [0 1 2]" prefix="oracle/Process$2/oracle/*fetchstoreepochs.Process$c"
+time="2024-06-26T09:49:56Z" level=info msg="Fetch And Store Epochs Complete" prefix="oracle/Process$2"
+time="2024-06-26T09:49:56Z" level=info msg="Fetch More Attested Epochs" prefix="oracle/Process$2/oracle/*calcperformance.Process$g"
+time="2024-06-26T09:49:56Z" level=info msg="Fetch attested epochs: [0 1 2]" prefix="oracle/Process$2/oracle/*calcperformance.Process$g"
+time="2024-06-26T09:49:56Z" level=info msg="Fetch More Attested Epochs" prefix="oracle/Process$2/oracle/*calcperformance.Process$g"
+time="2024-06-26T09:49:56Z" level=info msg="Fetch Beacon Validators: []" prefix="oracle/Process$2/oracle/*calcperformance.Process$g"
+time="2024-06-26T09:49:56Z" level=error msg="Calc Perfomances Failure. %!w(*errors.errorString=&{no beacon validators found})" prefix="oracle/Process$2"
+time="2024-06-26T09:49:56Z" level=info msg="Try recover from failure or restart scheduler" prefix="oracle/Process$2"
+time="2024-06-26T09:49:56Z" level=info msg="Try recover from failure" prefix="oracle/Process$2"
+time="2024-06-26T09:49:56Z" level=info msg="Recovering from FailureTypeFetchAndStoreEpochs &{{18 2024-06-26 09:49:56.239589 +0000 UTC 2024-06-26 09:49:56.239589 +0000 UTC {0001-01-01 00:00:00 +0000 UTC false}} b5e5b3147c005a1d129b3e581e36764064041b648ca1deb75cc2b3be65c93e17 0,1,2 1 []}" prefix="oracle/Process$2"
+time="2024-06-26T09:49:56Z" level=info msg="Fetch and store epochs process started for epochs: [0 1 2]" prefix="oracle/Process$2/oracle/*fetchstoreepochs.Process$j"
+time="2024-06-26T09:49:56Z" level=info msg="Fetch And Store Epochs Complete" prefix="oracle/Process$2"
+time="2024-06-26T09:49:56Z" level=info msg="Fetch More Attested Epochs" prefix="oracle/Process$2/oracle/*calcperformance.Process$n"
+time="2024-06-26T09:49:56Z" level=info msg="Fetch attested epochs: [0 1 2]" prefix="oracle/Process$2/oracle/*calcperformance.Process$n"
+time="2024-06-26T09:49:56Z" level=info msg="Fetch More Attested Epochs" prefix="oracle/Process$2/oracle/*calcperformance.Process$n"
+time="2024-06-26T09:49:56Z" level=info msg="Fetch Beacon Validators: []" prefix="oracle/Process$2/oracle/*calcperformance.Process$n"
+time="2024-06-26T09:49:56Z" level=error msg="Calc Perfomances Failure. %!w(*errors.errorString=&{no beacon validators found})" prefix="oracle/Process$2"
+time="2024-06-26T09:49:56Z" level=info msg="Try recover from failure or restart scheduler" prefix="oracle/Process$2"
+time="2024-06-26T09:49:56Z" level=info msg="Try recover from failure" prefix="oracle/Process$2"
+time="2024-06-26T09:49:56Z" level=info msg="Recovering from FailureTypeFetchAndStoreEpochs &{{19 2024-06-26 09:49:56.243904 +0000 UTC 2024-06-26 09:49:56.243904 +0000 UTC {0001-01-01 00:00:00 +0000 UTC false}} b5e5b3147c005a1d129b3e581e36764064041b648ca1deb75cc2b3be65c93e17 0,1,2 1 []}" prefix="oracle/Process$2"
+time="2024-06-26T09:49:56Z" level=info msg="Fetch and store epochs process started for epochs: [0 1 2]" prefix="oracle/Process$2/oracle/*fetchstoreepochs.Process$q"
+time="2024-06-26T09:49:56Z" level=info msg="Fetch And Store Epochs Complete" prefix="oracle/Process$2"
+time="2024-06-26T09:49:56Z" level=info msg="Fetch More Attested Epochs" prefix="oracle/Process$2/oracle/*calcperformance.Process$u"
+time="2024-06-26T09:49:56Z" level=info msg="Fetch attested epochs: [0 1 2]" prefix="oracle/Process$2/oracle/*calcperformance.Process$u"
+time="2024-06-26T09:49:56Z" level=info msg="Fetch More Attested Epochs" prefix="oracle/Process$2/oracle/*calcperformance.Process$u"
+time="2024-06-26T09:49:56Z" level=info msg="Fetch Beacon Validators: []" prefix="oracle/Process$2/oracle/*calcperformance.Process$u"
+time="2024-06-26T09:49:56Z" level=error msg="Calc Perfomances Failure. %!w(*errors.errorString=&{no beacon validators found})" prefix="oracle/Process$2"
+[2m9:49AM[0m [92mINF[0m [ACTOR] Recovering [2mlib=[0mProto.Actor [2msystem=[0m2s9PoVvuD45sxU9ZMu7bU3 [2mself=[0m"Address:\"nonhost\" Id:\"Process$2\"" [2mreason=[0m"max retries count reached in recovering from failure for oracle process, the latest error: no beacon validators found"
+debug.Stack(): goroutine 194 [running]:
+runtime/debug.Stack()
+[2m9:49AM[0m [91mERR[0m [Supervision] [2mlib=[0mProto.Actor [2msystem=[0m2s9PoVvuD45sxU9ZMu7bU3 [2mactor=[0m"Address:\"nonhost\" Id:\"Process$2\"" [2mmessage=[0m"&{Epochs:[0 1 2] Error:no beacon validators found}" [2mexception=[0m"max retries count reached in recovering from failure for oracle process, the latest error: no beacon validators found"
+	/usr/local/go/src/runtime/debug/stack.go:24 +0x5e
+time="2024-06-26T09:49:56Z" level=error msg="Supervisor Event Stream" child=Address:"nonhost" Id:"Process$2" directive=RestartDirective prefix="oracle/Process$2" reason="max retries count reached in recovering from failure for oracle process, the latest error: no beacon validators found"
+github.com/asynkron/protoactor-go/actor.(*actorContext).EscalateFailure(0xc0004d6240, {0x10aa800, 0xc0009bcb80}, {0xfefe80, 0xc0008fa2a0})
+	/root/go/pkg/mod/github.com/asynkron/protoactor-go@v0.0.0-20240413045429-76c172a71a16/actor/actor_context.go:709 +0x1d3
+github.com/asynkron/protoactor-go/actor.(*defaultMailbox).run.func1()
+	/root/go/pkg/mod/github.com/asynkron/protoactor-go@v0.0.0-20240413045429-76c172a71a16/actor/mailbox.go:132 +0x58
+panic({0x10aa800?, 0xc0009bcb80?})
+	/usr/local/go/src/runtime/panic.go:770 +0x132
+github.com/shamirlabs/oracle/process/oracle.(*Process).recoveringFromFailure(0xc0000003c0?, {0x16554d8?, 0xc0008fc6c0?}, 0x0?, 0x10?, {0x1631760?, 0xc00052f910?})
+	/root/hive-mind-oracle/process/oracle/utils.go:114 +0xc5
+github.com/shamirlabs/oracle/process/oracle.(*Process).Receive(0xc0000003c0, {0x16554d8, 0xc0008fc6c0})
+	/root/hive-mind-oracle/process/oracle/process.go:106 +0x1137
+github.com/shamirlabs/synapse/system.(*SystemManager).SpawnProcess.(*SystemManager).WrapActor.func1({0x1654838, 0xc0004d6240})
+	/root/go/pkg/mod/github.com/shamirlabs/synapse@v0.4.0/system/system.go:280 +0x67f
+github.com/asynkron/protoactor-go/actor.ReceiveFunc.Receive(0x1f71e00?, {0x1654838?, 0xc0004d6240?})
+	/root/go/pkg/mod/github.com/asynkron/protoactor-go@v0.0.0-20240413045429-76c172a71a16/actor/message.go:19 +0x26
+github.com/asynkron/protoactor-go/actor.(*actorContext).defaultReceive(0xc0004d6240)
+	/root/go/pkg/mod/github.com/asynkron/protoactor-go@v0.0.0-20240413045429-76c172a71a16/actor/actor_context.go:372 +0x98
+github.com/asynkron/protoactor-go/actor.(*actorContext).processMessage(0xc0004d6240, {0xfefe80, 0xc0008fa2a0})
+	/root/go/pkg/mod/github.com/asynkron/protoactor-go@v0.0.0-20240413045429-76c172a71a16/actor/actor_context.go:527 +0xf9
+github.com/asynkron/protoactor-go/actor.(*actorContext).InvokeUserMessage(0xc0004d6240, {0xfefe80, 0xc0008fa2a0})
+	/root/go/pkg/mod/github.com/asynkron/protoactor-go@v0.0.0-20240413045429-76c172a71a16/actor/actor_context.go:505 +0x45a
+github.com/asynkron/protoactor-go/actor.(*defaultMailbox).run(0xc0004d62a0)
+	/root/go/pkg/mod/github.com/asynkron/protoactor-go@v0.0.0-20240413045429-76c172a71a16/actor/mailbox.go:169 +0x22f
+github.com/asynkron/protoactor-go/actor.(*defaultMailbox).processMessages(0xc0004d62a0)
+	/root/go/pkg/mod/github.com/asynkron/protoactor-go@v0.0.0-20240413045429-76c172a71a16/actor/mailbox.go:105 +0x25
+created by github.com/asynkron/protoactor-go/actor.goroutineDispatcher.Schedule in goroutine 193
+	/root/go/pkg/mod/github.com/asynkron/protoactor-go@v0.0.0-20240413045429-76c172a71a16/actor/dispatcher.go:13 +0x16
+
+[Supervision] Actor: Address:"nonhost" Id:"Process$2"  failed with message: &{[0 1 2] no beacon validators found}  exception: max retries count reached in recovering from failure for oracle process, the latest error: no beacon validators found
+panic: max retries count reached in recovering from failure for oracle process, the latest error: no beacon validators found [recovered]
+	panic: max retries count reached in recovering from failure for oracle process, the latest error: no beacon validators found
+
+goroutine 194 [running]:
+github.com/shamirlabs/oracle/process/oracle.(*Process).subscribeEventStream.func1({0xfef740?, 0xc0009bcba0?})
+	/root/hive-mind-oracle/process/oracle/utils.go:258 +0x315
+github.com/asynkron/protoactor-go/eventstream.(*EventStream).Publish(0xc0005bc040, {0xfef740, 0xc0009bcba0})
+	/root/go/pkg/mod/github.com/asynkron/protoactor-go@v0.0.0-20240413045429-76c172a71a16/eventstream/eventstream.go:108 +0x1d8
+github.com/asynkron/protoactor-go/actor.logFailure(...)
+	/root/go/pkg/mod/github.com/asynkron/protoactor-go@v0.0.0-20240413045429-76c172a71a16/actor/supervision.go:25
+github.com/asynkron/protoactor-go/actor.(*oneForOneStrategy).HandleFailure(0x1e80e20, 0xc00044a360, {0x1641080, 0xc0004d6240}, 0xc0004d6300, 0xc000557158, {0x10aa800, 0xc0009bcb80}, {0xfefe80, 0xc0008fa2a0})
+	/root/go/pkg/mod/github.com/asynkron/protoactor-go@v0.0.0-20240413045429-76c172a71a16/actor/strategy_one_for_one.go:39 +0x1bd
+github.com/asynkron/protoactor-go/actor.(*actorContext).handleRootFailure(...)
+	/root/go/pkg/mod/github.com/asynkron/protoactor-go@v0.0.0-20240413045429-76c172a71a16/actor/actor_context.go:572
+github.com/asynkron/protoactor-go/actor.(*actorContext).EscalateFailure(0xc0004d6240, {0x10aa800, 0xc0009bcb80}, {0xfefe80, 0xc0008fa2a0})
+	/root/go/pkg/mod/github.com/asynkron/protoactor-go@v0.0.0-20240413045429-76c172a71a16/actor/actor_context.go:727 +0x7a7
+github.com/asynkron/protoactor-go/actor.(*defaultMailbox).run.func1()
+	/root/go/pkg/mod/github.com/asynkron/protoactor-go@v0.0.0-20240413045429-76c172a71a16/actor/mailbox.go:132 +0x58
+panic({0x10aa800?, 0xc0009bcb80?})
+	/usr/local/go/src/runtime/panic.go:770 +0x132
+github.com/shamirlabs/oracle/process/oracle.(*Process).recoveringFromFailure(0xc0000003c0?, {0x16554d8?, 0xc0008fc6c0?}, 0x0?, 0x10?, {0x1631760?, 0xc00052f910?})
+	/root/hive-mind-oracle/process/oracle/utils.go:114 +0xc5
+github.com/shamirlabs/oracle/process/oracle.(*Process).Receive(0xc0000003c0, {0x16554d8, 0xc0008fc6c0})
+	/root/hive-mind-oracle/process/oracle/process.go:106 +0x1137
+github.com/shamirlabs/synapse/system.(*SystemManager).SpawnProcess.(*SystemManager).WrapActor.func1({0x1654838, 0xc0004d6240})
+	/root/go/pkg/mod/github.com/shamirlabs/synapse@v0.4.0/system/system.go:280 +0x67f
+github.com/asynkron/protoactor-go/actor.ReceiveFunc.Receive(0x1f71e00?, {0x1654838?, 0xc0004d6240?})
+	/root/go/pkg/mod/github.com/asynkron/protoactor-go@v0.0.0-20240413045429-76c172a71a16/actor/message.go:19 +0x26
+github.com/asynkron/protoactor-go/actor.(*actorContext).defaultReceive(0xc0004d6240)
+	/root/go/pkg/mod/github.com/asynkron/protoactor-go@v0.0.0-20240413045429-76c172a71a16/actor/actor_context.go:372 +0x98
+github.com/asynkron/protoactor-go/actor.(*actorContext).processMessage(0xc0004d6240, {0xfefe80, 0xc0008fa2a0})
+	/root/go/pkg/mod/github.com/asynkron/protoactor-go@v0.0.0-20240413045429-76c172a71a16/actor/actor_context.go:527 +0xf9
+github.com/asynkron/protoactor-go/actor.(*actorContext).InvokeUserMessage(0xc0004d6240, {0xfefe80, 0xc0008fa2a0})
+	/root/go/pkg/mod/github.com/asynkron/protoactor-go@v0.0.0-20240413045429-76c172a71a16/actor/actor_context.go:505 +0x45a
+github.com/asynkron/protoactor-go/actor.(*defaultMailbox).run(0xc0004d62a0)
+	/root/go/pkg/mod/github.com/asynkron/protoactor-go@v0.0.0-20240413045429-76c172a71a16/actor/mailbox.go:169 +0x22f
+github.com/asynkron/protoactor-go/actor.(*defaultMailbox).processMessages(0xc0004d62a0)
+	/root/go/pkg/mod/github.com/asynkron/protoactor-go@v0.0.0-20240413045429-76c172a71a16/actor/mailbox.go:105 +0x25
+created by github.com/asynkron/protoactor-go/actor.goroutineDispatcher.Schedule in goroutine 193
+	/root/go/pkg/mod/github.com/asynkron/protoactor-go@v0.0.0-20240413045429-76c172a71a16/actor/dispatcher.go:13 +0x16
+time="2024-06-26T09:50:56Z" level=info msg="divaproto plugin installed" cc_url="http://172.16.0.14:3500" cc_version= chain_id=3151908 ec_url="ws://172.16.0.12:8546" ec_version="Geth/v1.13.15-stable-c5ba367e/linux-amd64/go1.21.9" genesis_fork_version=0x10000038 genesis_validators_root=0x9c714f5515e091adccf066e945f10edc19fb6aefd132be221f7066caa17db73a prefix=divaproto.plugin
+[2m9:50AM[0m [92mINF[0m actor system started [2mlib=[0mProto.Actor [2msystem=[0m7XgDbz8WeeLWPgt48i499b [2mid=[0m7XgDbz8WeeLWPgt48i499b
+time="2024-06-26T09:50:57Z" level=info msg="Start Schedulers" prefix="oracle/Process$2"
+time="2024-06-26T09:50:57Z" level=info msg="Starting diva contract process" prefix="oracle/Process$2/oracle/*divacontract.Process$4"
+time="2024-06-26T09:50:57Z" level=info msg="Watching snapshot taken events" prefix="oracle/Process$2/oracle/*divacontract.Process$4"
+time="2024-06-26T09:50:57Z" level=info msg="Listening for snapshot taken events" prefix="oracle/Process$2/oracle/*divacontract.Process$4"
+time="2024-06-26T09:50:57Z" level=info msg="Fetching diva validators and operators" prefix="oracle/Process$2/oracle/*divacontract.Process$4"
+time="2024-06-26T09:50:57Z" level=info msg="Fetch Diva Validators And Operators Complete" prefix="oracle/Process$2"
+time="2024-06-26T09:50:57Z" level=info msg="Try recover from failure" prefix="oracle/Process$2"
+time="2024-06-26T09:50:57Z" level=info msg="Recovering from FailureTypeFetchAndStoreEpochs &{{20 2024-06-26 09:49:56.247707 +0000 UTC 2024-06-26 09:49:56.247707 +0000 UTC {0001-01-01 00:00:00 +0000 UTC false}} b5e5b3147c005a1d129b3e581e36764064041b648ca1deb75cc2b3be65c93e17 0,1,2 1 []}" prefix="oracle/Process$2"
+time="2024-06-26T09:50:57Z" level=info msg="Fetch and store epochs process started for epochs: [0 1 2]" prefix="oracle/Process$2/oracle/*fetchstoreepochs.Process$5"
+time="2024-06-26T09:50:57Z" level=info msg="Fetch And Store Epochs Complete" prefix="oracle/Process$2"
+time="2024-06-26T09:50:57Z" level=info msg="Fetch More Attested Epochs" prefix="oracle/Process$2/oracle/*calcperformance.Process$9"
+time="2024-06-26T09:50:57Z" level=info msg="Fetch attested epochs: [0 1 2]" prefix="oracle/Process$2/oracle/*calcperformance.Process$9"
+time="2024-06-26T09:50:57Z" level=info msg="Fetch More Attested Epochs" prefix="oracle/Process$2/oracle/*calcperformance.Process$9"
+time="2024-06-26T09:50:57Z" level=info msg="Fetch Beacon Validators: []" prefix="oracle/Process$2/oracle/*calcperformance.Process$9"
+time="2024-06-26T09:50:57Z" level=error msg="Calc Perfomances Failure. %!w(*errors.errorString=&{no beacon validators found})" prefix="oracle/Process$2"
+time="2024-06-26T09:50:57Z" level=info msg="Try recover from failure or restart scheduler" prefix="oracle/Process$2"
+time="2024-06-26T09:50:57Z" level=info msg="Try recover from failure" prefix="oracle/Process$2"
+time="2024-06-26T09:50:57Z" level=info msg="Recovering from FailureTypeFetchAndStoreEpochs &{{21 2024-06-26 09:50:57.181752 +0000 UTC 2024-06-26 09:50:57.181752 +0000 UTC {0001-01-01 00:00:00 +0000 UTC false}} b5e5b3147c005a1d129b3e581e36764064041b648ca1deb75cc2b3be65c93e17 0,1,2 1 []}" prefix="oracle/Process$2"
+time="2024-06-26T09:50:57Z" level=info msg="Fetch and store epochs process started for epochs: [0 1 2]" prefix="oracle/Process$2/oracle/*fetchstoreepochs.Process$c"
+time="2024-06-26T09:50:57Z" level=info msg="Fetch And Store Epochs Complete" prefix="oracle/Process$2"
+time="2024-06-26T09:50:57Z" level=info msg="Fetch More Attested Epochs" prefix="oracle/Process$2/oracle/*calcperformance.Process$g"
+time="2024-06-26T09:50:57Z" level=info msg="Fetch attested epochs: [0 1 2]" prefix="oracle/Process$2/oracle/*calcperformance.Process$g"
+time="2024-06-26T09:50:57Z" level=info msg="Fetch More Attested Epochs" prefix="oracle/Process$2/oracle/*calcperformance.Process$g"
+time="2024-06-26T09:50:57Z" level=info msg="Fetch Beacon Validators: []" prefix="oracle/Process$2/oracle/*calcperformance.Process$g"
+time="2024-06-26T09:50:57Z" level=error msg="Calc Perfomances Failure. %!w(*errors.errorString=&{no beacon validators found})" prefix="oracle/Process$2"
+time="2024-06-26T09:50:57Z" level=info msg="Try recover from failure or restart scheduler" prefix="oracle/Process$2"
+time="2024-06-26T09:50:57Z" level=info msg="Try recover from failure" prefix="oracle/Process$2"
+time="2024-06-26T09:50:57Z" level=info msg="Recovering from FailureTypeFetchAndStoreEpochs &{{22 2024-06-26 09:50:57.188304 +0000 UTC 2024-06-26 09:50:57.188304 +0000 UTC {0001-01-01 00:00:00 +0000 UTC false}} b5e5b3147c005a1d129b3e581e36764064041b648ca1deb75cc2b3be65c93e17 0,1,2 1 []}" prefix="oracle/Process$2"
+time="2024-06-26T09:50:57Z" level=info msg="Fetch and store epochs process started for epochs: [0 1 2]" prefix="oracle/Process$2/oracle/*fetchstoreepochs.Process$j"
+time="2024-06-26T09:50:57Z" level=info msg="Fetch And Store Epochs Complete" prefix="oracle/Process$2"
+time="2024-06-26T09:50:57Z" level=info msg="Fetch More Attested Epochs" prefix="oracle/Process$2/oracle/*calcperformance.Process$n"
+time="2024-06-26T09:50:57Z" level=info msg="Fetch attested epochs: [0 1 2]" prefix="oracle/Process$2/oracle/*calcperformance.Process$n"
+time="2024-06-26T09:50:57Z" level=info msg="Fetch More Attested Epochs" prefix="oracle/Process$2/oracle/*calcperformance.Process$n"
+time="2024-06-26T09:50:57Z" level=info msg="Fetch Beacon Validators: []" prefix="oracle/Process$2/oracle/*calcperformance.Process$n"
+time="2024-06-26T09:50:57Z" level=error msg="Calc Perfomances Failure. %!w(*errors.errorString=&{no beacon validators found})" prefix="oracle/Process$2"
+time="2024-06-26T09:50:57Z" level=info msg="Try recover from failure or restart scheduler" prefix="oracle/Process$2"
+time="2024-06-26T09:50:57Z" level=info msg="Try recover from failure" prefix="oracle/Process$2"
+time="2024-06-26T09:50:57Z" level=info msg="Recovering from FailureTypeFetchAndStoreEpochs &{{23 2024-06-26 09:50:57.1929 +0000 UTC 2024-06-26 09:50:57.1929 +0000 UTC {0001-01-01 00:00:00 +0000 UTC false}} b5e5b3147c005a1d129b3e581e36764064041b648ca1deb75cc2b3be65c93e17 0,1,2 1 []}" prefix="oracle/Process$2"
+time="2024-06-26T09:50:57Z" level=info msg="Fetch and store epochs process started for epochs: [0 1 2]" prefix="oracle/Process$2/oracle/*fetchstoreepochs.Process$q"
+time="2024-06-26T09:50:57Z" level=info msg="Fetch And Store Epochs Complete" prefix="oracle/Process$2"
+time="2024-06-26T09:50:57Z" level=info msg="Fetch More Attested Epochs" prefix="oracle/Process$2/oracle/*calcperformance.Process$u"
+time="2024-06-26T09:50:57Z" level=info msg="Fetch attested epochs: [0 1 2]" prefix="oracle/Process$2/oracle/*calcperformance.Process$u"
+time="2024-06-26T09:50:57Z" level=info msg="Fetch More Attested Epochs" prefix="oracle/Process$2/oracle/*calcperformance.Process$u"
+time="2024-06-26T09:50:57Z" level=info msg="Fetch Beacon Validators: []" prefix="oracle/Process$2/oracle/*calcperformance.Process$u"
+time="2024-06-26T09:50:57Z" level=error msg="Calc Perfomances Failure. %!w(*errors.errorString=&{no beacon validators found})" prefix="oracle/Process$2"
+[2m9:50AM[0m [92mINF[0m [ACTOR] Recovering [2mlib=[0mProto.Actor [2msystem=[0m7XgDbz8WeeLWPgt48i499b [2mself=[0m"Address:\"nonhost\" Id:\"Process$2\"" [2mreason=[0m"max retries count reached in recovering from failure for oracle process, the latest error: no beacon validators found"
+debug.Stack(): goroutine 105 [running]:
+[2m9:50AM[0m [91mERR[0m [Supervision] [2mlib=[0mProto.Actor [2msystem=[0m7XgDbz8WeeLWPgt48i499b [2mactor=[0m"Address:\"nonhost\" Id:\"Process$2\"" [2mmessage=[0m"&{Epochs:[0 1 2] Error:no beacon validators found}" [2mexception=[0m"max retries count reached in recovering from failure for oracle process, the latest error: no beacon validators found"
+runtime/debug.Stack()
+time="2024-06-26T09:50:57Z" level=error msg="Supervisor Event Stream" child=Address:"nonhost" Id:"Process$2" directive=RestartDirective prefix="oracle/Process$2" reason="max retries count reached in recovering from failure for oracle process, the latest error: no beacon validators found"
+	/usr/local/go/src/runtime/debug/stack.go:24 +0x5e
+github.com/asynkron/protoactor-go/actor.(*actorContext).EscalateFailure(0xc0000ac720, {0x10aa800, 0xc0008b18a0}, {0xfefe80, 0xc000a667b0})
+	/root/go/pkg/mod/github.com/asynkron/protoactor-go@v0.0.0-20240413045429-76c172a71a16/actor/actor_context.go:709 +0x1d3
+github.com/asynkron/protoactor-go/actor.(*defaultMailbox).run.func1()
+	/root/go/pkg/mod/github.com/asynkron/protoactor-go@v0.0.0-20240413045429-76c172a71a16/actor/mailbox.go:132 +0x58
+panic({0x10aa800?, 0xc0008b18a0?})
+	/usr/local/go/src/runtime/panic.go:770 +0x132
+github.com/shamirlabs/oracle/process/oracle.(*Process).recoveringFromFailure(0xc0000003c0?, {0x16554d8?, 0xc000a5d6c0?}, 0x0?, 0x10?, {0x1631760?, 0xc000a56d50?})
+	/root/hive-mind-oracle/process/oracle/utils.go:114 +0xc5
+github.com/shamirlabs/oracle/process/oracle.(*Process).Receive(0xc0000003c0, {0x16554d8, 0xc000a5d6c0})
+	/root/hive-mind-oracle/process/oracle/process.go:106 +0x1137
+github.com/shamirlabs/synapse/system.(*SystemManager).SpawnProcess.(*SystemManager).WrapActor.func1({0x1654838, 0xc0000ac720})
+	/root/go/pkg/mod/github.com/shamirlabs/synapse@v0.4.0/system/system.go:280 +0x67f
+github.com/asynkron/protoactor-go/actor.ReceiveFunc.Receive(0x1f71e00?, {0x1654838?, 0xc0000ac720?})
+	/root/go/pkg/mod/github.com/asynkron/protoactor-go@v0.0.0-20240413045429-76c172a71a16/actor/message.go:19 +0x26
+github.com/asynkron/protoactor-go/actor.(*actorContext).defaultReceive(0xc0000ac720)
+	/root/go/pkg/mod/github.com/asynkron/protoactor-go@v0.0.0-20240413045429-76c172a71a16/actor/actor_context.go:372 +0x98
+github.com/asynkron/protoactor-go/actor.(*actorContext).processMessage(0xc0000ac720, {0xfefe80, 0xc000a667b0})
+	/root/go/pkg/mod/github.com/asynkron/protoactor-go@v0.0.0-20240413045429-76c172a71a16/actor/actor_context.go:527 +0xf9
+github.com/asynkron/protoactor-go/actor.(*actorContext).InvokeUserMessage(0xc0000ac720, {0xfefe80, 0xc000a667b0})
+	/root/go/pkg/mod/github.com/asynkron/protoactor-go@v0.0.0-20240413045429-76c172a71a16/actor/actor_context.go:505 +0x45a
+github.com/asynkron/protoactor-go/actor.(*defaultMailbox).run(0xc0000ac780)
+	/root/go/pkg/mod/github.com/asynkron/protoactor-go@v0.0.0-20240413045429-76c172a71a16/actor/mailbox.go:169 +0x22f
+github.com/asynkron/protoactor-go/actor.(*defaultMailbox).processMessages(0xc0000ac780)
+	/root/go/pkg/mod/github.com/asynkron/protoactor-go@v0.0.0-20240413045429-76c172a71a16/actor/mailbox.go:105 +0x25
+created by github.com/asynkron/protoactor-go/actor.goroutineDispatcher.Schedule in goroutine 104
+	/root/go/pkg/mod/github.com/asynkron/protoactor-go@v0.0.0-20240413045429-76c172a71a16/actor/dispatcher.go:13 +0x16
+
+[Supervision] Actor: Address:"nonhost" Id:"Process$2"  failed with message: &{[0 1 2] no beacon validators found}  exception: max retries count reached in recovering from failure for oracle process, the latest error: no beacon validators found
+panic: max retries count reached in recovering from failure for oracle process, the latest error: no beacon validators found [recovered]
+	panic: max retries count reached in recovering from failure for oracle process, the latest error: no beacon validators found
+
+goroutine 105 [running]:
+github.com/shamirlabs/oracle/process/oracle.(*Process).subscribeEventStream.func1({0xfef740?, 0xc0008b18c0?})
+	/root/hive-mind-oracle/process/oracle/utils.go:258 +0x315
+github.com/asynkron/protoactor-go/eventstream.(*EventStream).Publish(0xc00027e0c0, {0xfef740, 0xc0008b18c0})
+	/root/go/pkg/mod/github.com/asynkron/protoactor-go@v0.0.0-20240413045429-76c172a71a16/eventstream/eventstream.go:108 +0x1d8
+github.com/asynkron/protoactor-go/actor.logFailure(...)
+	/root/go/pkg/mod/github.com/asynkron/protoactor-go@v0.0.0-20240413045429-76c172a71a16/actor/supervision.go:25
+github.com/asynkron/protoactor-go/actor.(*oneForOneStrategy).HandleFailure(0x1e80e20, 0xc0005c4180, {0x1641080, 0xc0000ac720}, 0xc0000ac7e0, 0xc0002d9b90, {0x10aa800, 0xc0008b18a0}, {0xfefe80, 0xc000a667b0})
+	/root/go/pkg/mod/github.com/asynkron/protoactor-go@v0.0.0-20240413045429-76c172a71a16/actor/strategy_one_for_one.go:39 +0x1bd
+github.com/asynkron/protoactor-go/actor.(*actorContext).handleRootFailure(...)
+	/root/go/pkg/mod/github.com/asynkron/protoactor-go@v0.0.0-20240413045429-76c172a71a16/actor/actor_context.go:572
+github.com/asynkron/protoactor-go/actor.(*actorContext).EscalateFailure(0xc0000ac720, {0x10aa800, 0xc0008b18a0}, {0xfefe80, 0xc000a667b0})
+	/root/go/pkg/mod/github.com/asynkron/protoactor-go@v0.0.0-20240413045429-76c172a71a16/actor/actor_context.go:727 +0x7a7
+github.com/asynkron/protoactor-go/actor.(*defaultMailbox).run.func1()
+	/root/go/pkg/mod/github.com/asynkron/protoactor-go@v0.0.0-20240413045429-76c172a71a16/actor/mailbox.go:132 +0x58
+panic({0x10aa800?, 0xc0008b18a0?})
+	/usr/local/go/src/runtime/panic.go:770 +0x132
+github.com/shamirlabs/oracle/process/oracle.(*Process).recoveringFromFailure(0xc0000003c0?, {0x16554d8?, 0xc000a5d6c0?}, 0x0?, 0x10?, {0x1631760?, 0xc000a56d50?})
+	/root/hive-mind-oracle/process/oracle/utils.go:114 +0xc5
+github.com/shamirlabs/oracle/process/oracle.(*Process).Receive(0xc0000003c0, {0x16554d8, 0xc000a5d6c0})
+	/root/hive-mind-oracle/process/oracle/process.go:106 +0x1137
+github.com/shamirlabs/synapse/system.(*SystemManager).SpawnProcess.(*SystemManager).WrapActor.func1({0x1654838, 0xc0000ac720})
+	/root/go/pkg/mod/github.com/shamirlabs/synapse@v0.4.0/system/system.go:280 +0x67f
+github.com/asynkron/protoactor-go/actor.ReceiveFunc.Receive(0x1f71e00?, {0x1654838?, 0xc0000ac720?})
+	/root/go/pkg/mod/github.com/asynkron/protoactor-go@v0.0.0-20240413045429-76c172a71a16/actor/message.go:19 +0x26
+github.com/asynkron/protoactor-go/actor.(*actorContext).defaultReceive(0xc0000ac720)
+	/root/go/pkg/mod/github.com/asynkron/protoactor-go@v0.0.0-20240413045429-76c172a71a16/actor/actor_context.go:372 +0x98
+github.com/asynkron/protoactor-go/actor.(*actorContext).processMessage(0xc0000ac720, {0xfefe80, 0xc000a667b0})
+	/root/go/pkg/mod/github.com/asynkron/protoactor-go@v0.0.0-20240413045429-76c172a71a16/actor/actor_context.go:527 +0xf9
+github.com/asynkron/protoactor-go/actor.(*actorContext).InvokeUserMessage(0xc0000ac720, {0xfefe80, 0xc000a667b0})
+	/root/go/pkg/mod/github.com/asynkron/protoactor-go@v0.0.0-20240413045429-76c172a71a16/actor/actor_context.go:505 +0x45a
+github.com/asynkron/protoactor-go/actor.(*defaultMailbox).run(0xc0000ac780)
+	/root/go/pkg/mod/github.com/asynkron/protoactor-go@v0.0.0-20240413045429-76c172a71a16/actor/mailbox.go:169 +0x22f
+github.com/asynkron/protoactor-go/actor.(*defaultMailbox).processMessages(0xc0000ac780)
+	/root/go/pkg/mod/github.com/asynkron/protoactor-go@v0.0.0-20240413045429-76c172a71a16/actor/mailbox.go:105 +0x25
+created by github.com/asynkron/protoactor-go/actor.goroutineDispatcher.Schedule in goroutine 104
+	/root/go/pkg/mod/github.com/asynkron/protoactor-go@v0.0.0-20240413045429-76c172a71a16/actor/dispatcher.go:13 +0x16
+time="2024-06-26T09:51:57Z" level=info msg="divaproto plugin installed" cc_url="http://172.16.0.14:3500" cc_version= chain_id=3151908 ec_url="ws://172.16.0.12:8546" ec_version="Geth/v1.13.15-stable-c5ba367e/linux-amd64/go1.21.9" genesis_fork_version=0x10000038 genesis_validators_root=0x9c714f5515e091adccf066e945f10edc19fb6aefd132be221f7066caa17db73a prefix=divaproto.plugin
+[2m9:51AM[0m [92mINF[0m actor system started [2mlib=[0mProto.Actor [2msystem=[0mBQabvc7now7Bn45nCeLf8W [2mid=[0mBQabvc7now7Bn45nCeLf8W
+time="2024-06-26T09:51:58Z" level=info msg="Start Schedulers" prefix="oracle/Process$2"
+time="2024-06-26T09:51:58Z" level=info msg="Starting diva contract process" prefix="oracle/Process$2/oracle/*divacontract.Process$4"
+time="2024-06-26T09:51:58Z" level=info msg="Watching snapshot taken events" prefix="oracle/Process$2/oracle/*divacontract.Process$4"
+time="2024-06-26T09:51:58Z" level=info msg="Listening for snapshot taken events" prefix="oracle/Process$2/oracle/*divacontract.Process$4"
+time="2024-06-26T09:51:58Z" level=info msg="Fetching diva validators and operators" prefix="oracle/Process$2/oracle/*divacontract.Process$4"
+time="2024-06-26T09:51:58Z" level=info msg="Fetch Diva Validators And Operators Complete" prefix="oracle/Process$2"
+time="2024-06-26T09:51:58Z" level=info msg="Try recover from failure" prefix="oracle/Process$2"
+time="2024-06-26T09:51:58Z" level=info msg="Recovering from FailureTypeFetchAndStoreEpochs &{{24 2024-06-26 09:50:57.197341 +0000 UTC 2024-06-26 09:50:57.197341 +0000 UTC {0001-01-01 00:00:00 +0000 UTC false}} b5e5b3147c005a1d129b3e581e36764064041b648ca1deb75cc2b3be65c93e17 0,1,2 1 []}" prefix="oracle/Process$2"
+time="2024-06-26T09:51:58Z" level=info msg="Fetch and store epochs process started for epochs: [0 1 2]" prefix="oracle/Process$2/oracle/*fetchstoreepochs.Process$5"
+time="2024-06-26T09:51:58Z" level=info msg="Fetch And Store Epochs Complete" prefix="oracle/Process$2"
+time="2024-06-26T09:51:58Z" level=info msg="Fetch More Attested Epochs" prefix="oracle/Process$2/oracle/*calcperformance.Process$9"
+time="2024-06-26T09:51:58Z" level=info msg="Fetch attested epochs: [0 1 2]" prefix="oracle/Process$2/oracle/*calcperformance.Process$9"
+time="2024-06-26T09:51:58Z" level=info msg="Fetch More Attested Epochs" prefix="oracle/Process$2/oracle/*calcperformance.Process$9"
+time="2024-06-26T09:51:58Z" level=info msg="Fetch Beacon Validators: []" prefix="oracle/Process$2/oracle/*calcperformance.Process$9"
+time="2024-06-26T09:51:58Z" level=error msg="Calc Perfomances Failure. %!w(*errors.errorString=&{no beacon validators found})" prefix="oracle/Process$2"
+time="2024-06-26T09:51:58Z" level=info msg="Try recover from failure or restart scheduler" prefix="oracle/Process$2"
+time="2024-06-26T09:51:58Z" level=info msg="Try recover from failure" prefix="oracle/Process$2"
+time="2024-06-26T09:51:58Z" level=info msg="Recovering from FailureTypeFetchAndStoreEpochs &{{25 2024-06-26 09:51:58.037292 +0000 UTC 2024-06-26 09:51:58.037292 +0000 UTC {0001-01-01 00:00:00 +0000 UTC false}} b5e5b3147c005a1d129b3e581e36764064041b648ca1deb75cc2b3be65c93e17 0,1,2 1 []}" prefix="oracle/Process$2"
+time="2024-06-26T09:51:58Z" level=info msg="Fetch and store epochs process started for epochs: [0 1 2]" prefix="oracle/Process$2/oracle/*fetchstoreepochs.Process$c"
+time="2024-06-26T09:51:58Z" level=info msg="Fetch And Store Epochs Complete" prefix="oracle/Process$2"
+time="2024-06-26T09:51:58Z" level=info msg="Fetch More Attested Epochs" prefix="oracle/Process$2/oracle/*calcperformance.Process$g"
+time="2024-06-26T09:51:58Z" level=info msg="Fetch attested epochs: [0 1 2]" prefix="oracle/Process$2/oracle/*calcperformance.Process$g"
+time="2024-06-26T09:51:58Z" level=info msg="Fetch More Attested Epochs" prefix="oracle/Process$2/oracle/*calcperformance.Process$g"
+time="2024-06-26T09:51:58Z" level=info msg="Fetch Beacon Validators: []" prefix="oracle/Process$2/oracle/*calcperformance.Process$g"
+time="2024-06-26T09:51:58Z" level=error msg="Calc Perfomances Failure. %!w(*errors.errorString=&{no beacon validators found})" prefix="oracle/Process$2"
+time="2024-06-26T09:51:58Z" level=info msg="Try recover from failure or restart scheduler" prefix="oracle/Process$2"
+time="2024-06-26T09:51:58Z" level=info msg="Try recover from failure" prefix="oracle/Process$2"
+time="2024-06-26T09:51:58Z" level=info msg="Recovering from FailureTypeFetchAndStoreEpochs &{{26 2024-06-26 09:51:58.045531 +0000 UTC 2024-06-26 09:51:58.045531 +0000 UTC {0001-01-01 00:00:00 +0000 UTC false}} b5e5b3147c005a1d129b3e581e36764064041b648ca1deb75cc2b3be65c93e17 0,1,2 1 []}" prefix="oracle/Process$2"
+time="2024-06-26T09:51:58Z" level=info msg="Fetch and store epochs process started for epochs: [0 1 2]" prefix="oracle/Process$2/oracle/*fetchstoreepochs.Process$j"
+time="2024-06-26T09:51:58Z" level=info msg="Fetch And Store Epochs Complete" prefix="oracle/Process$2"
+time="2024-06-26T09:51:58Z" level=info msg="Fetch More Attested Epochs" prefix="oracle/Process$2/oracle/*calcperformance.Process$n"
+time="2024-06-26T09:51:58Z" level=info msg="Fetch attested epochs: [0 1 2]" prefix="oracle/Process$2/oracle/*calcperformance.Process$n"
+time="2024-06-26T09:51:58Z" level=info msg="Fetch More Attested Epochs" prefix="oracle/Process$2/oracle/*calcperformance.Process$n"
+time="2024-06-26T09:51:58Z" level=info msg="Fetch Beacon Validators: []" prefix="oracle/Process$2/oracle/*calcperformance.Process$n"
+time="2024-06-26T09:51:58Z" level=error msg="Calc Perfomances Failure. %!w(*errors.errorString=&{no beacon validators found})" prefix="oracle/Process$2"
+time="2024-06-26T09:51:58Z" level=info msg="Try recover from failure or restart scheduler" prefix="oracle/Process$2"
+time="2024-06-26T09:51:58Z" level=info msg="Try recover from failure" prefix="oracle/Process$2"
+time="2024-06-26T09:51:58Z" level=info msg="Recovering from FailureTypeFetchAndStoreEpochs &{{27 2024-06-26 09:51:58.050087 +0000 UTC 2024-06-26 09:51:58.050087 +0000 UTC {0001-01-01 00:00:00 +0000 UTC false}} b5e5b3147c005a1d129b3e581e36764064041b648ca1deb75cc2b3be65c93e17 0,1,2 1 []}" prefix="oracle/Process$2"
+time="2024-06-26T09:51:58Z" level=info msg="Fetch and store epochs process started for epochs: [0 1 2]" prefix="oracle/Process$2/oracle/*fetchstoreepochs.Process$q"
+time="2024-06-26T09:51:58Z" level=info msg="Fetch And Store Epochs Complete" prefix="oracle/Process$2"
+time="2024-06-26T09:51:58Z" level=info msg="Fetch More Attested Epochs" prefix="oracle/Process$2/oracle/*calcperformance.Process$u"
+time="2024-06-26T09:51:58Z" level=info msg="Fetch attested epochs: [0 1 2]" prefix="oracle/Process$2/oracle/*calcperformance.Process$u"
+time="2024-06-26T09:51:58Z" level=info msg="Fetch More Attested Epochs" prefix="oracle/Process$2/oracle/*calcperformance.Process$u"
+time="2024-06-26T09:51:58Z" level=info msg="Fetch Beacon Validators: []" prefix="oracle/Process$2/oracle/*calcperformance.Process$u"
+time="2024-06-26T09:51:58Z" level=error msg="Calc Perfomances Failure. %!w(*errors.errorString=&{no beacon validators found})" prefix="oracle/Process$2"
+[2m9:51AM[0m [92mINF[0m [ACTOR] Recovering [2mlib=[0mProto.Actor [2msystem=[0mBQabvc7now7Bn45nCeLf8W [2mself=[0m"Address:\"nonhost\" Id:\"Process$2\"" [2mreason=[0m"max retries count reached in recovering from failure for oracle process, the latest error: no beacon validators found"
+debug.Stack(): goroutine 142 [running]:
+[2m9:51AM[0m [91mERR[0m [Supervision] [2mlib=[0mProto.Actor [2msystem=[0mBQabvc7now7Bn45nCeLf8W [2mactor=[0m"Address:\"nonhost\" Id:\"Process$2\"" [2mmessage=[0m"&{Epochs:[0 1 2] Error:no beacon validators found}" [2mexception=[0m"max retries count reached in recovering from failure for oracle process, the latest error: no beacon validators found"
+runtime/debug.Stack()
+	/usr/local/go/src/runtime/debug/stack.go:24 +0x5e
+time="2024-06-26T09:51:58Z" level=error msg="Supervisor Event Stream" child=Address:"nonhost" Id:"Process$2" directive=RestartDirective prefix="oracle/Process$2" reason="max retries count reached in recovering from failure for oracle process, the latest error: no beacon validators found"
+github.com/asynkron/protoactor-go/actor.(*actorContext).EscalateFailure(0xc0000223c0, {0x10aa800, 0xc000d118a0}, {0xfefe80, 0xc000730540})
+	/root/go/pkg/mod/github.com/asynkron/protoactor-go@v0.0.0-20240413045429-76c172a71a16/actor/actor_context.go:709 +0x1d3
+github.com/asynkron/protoactor-go/actor.(*defaultMailbox).run.func1()
+	/root/go/pkg/mod/github.com/asynkron/protoactor-go@v0.0.0-20240413045429-76c172a71a16/actor/mailbox.go:132 +0x58
+panic({0x10aa800?, 0xc000d118a0?})
+	/usr/local/go/src/runtime/panic.go:770 +0x132
+github.com/shamirlabs/oracle/process/oracle.(*Process).recoveringFromFailure(0xc0000003c0?, {0x16554d8?, 0xc000aafa40?}, 0x0?, 0x10?, {0x1631760?, 0xc000697940?})
+	/root/hive-mind-oracle/process/oracle/utils.go:114 +0xc5
+github.com/shamirlabs/oracle/process/oracle.(*Process).Receive(0xc0000003c0, {0x16554d8, 0xc000aafa40})
+	/root/hive-mind-oracle/process/oracle/process.go:106 +0x1137
+github.com/shamirlabs/synapse/system.(*SystemManager).SpawnProcess.(*SystemManager).WrapActor.func1({0x1654838, 0xc0000223c0})
+	/root/go/pkg/mod/github.com/shamirlabs/synapse@v0.4.0/system/system.go:280 +0x67f
+github.com/asynkron/protoactor-go/actor.ReceiveFunc.Receive(0x1f71e00?, {0x1654838?, 0xc0000223c0?})
+	/root/go/pkg/mod/github.com/asynkron/protoactor-go@v0.0.0-20240413045429-76c172a71a16/actor/message.go:19 +0x26
+github.com/asynkron/protoactor-go/actor.(*actorContext).defaultReceive(0xc0000223c0)
+	/root/go/pkg/mod/github.com/asynkron/protoactor-go@v0.0.0-20240413045429-76c172a71a16/actor/actor_context.go:372 +0x98
+github.com/asynkron/protoactor-go/actor.(*actorContext).processMessage(0xc0000223c0, {0xfefe80, 0xc000730540})
+	/root/go/pkg/mod/github.com/asynkron/protoactor-go@v0.0.0-20240413045429-76c172a71a16/actor/actor_context.go:527 +0xf9
+github.com/asynkron/protoactor-go/actor.(*actorContext).InvokeUserMessage(0xc0000223c0, {0xfefe80, 0xc000730540})
+	/root/go/pkg/mod/github.com/asynkron/protoactor-go@v0.0.0-20240413045429-76c172a71a16/actor/actor_context.go:505 +0x45a
+github.com/asynkron/protoactor-go/actor.(*defaultMailbox).run(0xc000022420)
+	/root/go/pkg/mod/github.com/asynkron/protoactor-go@v0.0.0-20240413045429-76c172a71a16/actor/mailbox.go:169 +0x22f
+github.com/asynkron/protoactor-go/actor.(*defaultMailbox).processMessages(0xc000022420)
+	/root/go/pkg/mod/github.com/asynkron/protoactor-go@v0.0.0-20240413045429-76c172a71a16/actor/mailbox.go:105 +0x25
+created by github.com/asynkron/protoactor-go/actor.goroutineDispatcher.Schedule in goroutine 141
+	/root/go/pkg/mod/github.com/asynkron/protoactor-go@v0.0.0-20240413045429-76c172a71a16/actor/dispatcher.go:13 +0x16
+
+[Supervision] Actor: Address:"nonhost" Id:"Process$2"  failed with message: &{[0 1 2] no beacon validators found}  exception: max retries count reached in recovering from failure for oracle process, the latest error: no beacon validators found
+panic: max retries count reached in recovering from failure for oracle process, the latest error: no beacon validators found [recovered]
+	panic: max retries count reached in recovering from failure for oracle process, the latest error: no beacon validators found
+
+goroutine 142 [running]:
+github.com/shamirlabs/oracle/process/oracle.(*Process).subscribeEventStream.func1({0xfef740?, 0xc000d118c0?})
+	/root/hive-mind-oracle/process/oracle/utils.go:258 +0x315
+github.com/asynkron/protoactor-go/eventstream.(*EventStream).Publish(0xc000298040, {0xfef740, 0xc000d118c0})
+	/root/go/pkg/mod/github.com/asynkron/protoactor-go@v0.0.0-20240413045429-76c172a71a16/eventstream/eventstream.go:108 +0x1d8
+github.com/asynkron/protoactor-go/actor.logFailure(...)
+	/root/go/pkg/mod/github.com/asynkron/protoactor-go@v0.0.0-20240413045429-76c172a71a16/actor/supervision.go:25
+github.com/asynkron/protoactor-go/actor.(*oneForOneStrategy).HandleFailure(0x1e80e20, 0xc0000220c0, {0x1641080, 0xc0000223c0}, 0xc000022480, 0xc00059fd40, {0x10aa800, 0xc000d118a0}, {0xfefe80, 0xc000730540})
+	/root/go/pkg/mod/github.com/asynkron/protoactor-go@v0.0.0-20240413045429-76c172a71a16/actor/strategy_one_for_one.go:39 +0x1bd
+github.com/asynkron/protoactor-go/actor.(*actorContext).handleRootFailure(...)
+	/root/go/pkg/mod/github.com/asynkron/protoactor-go@v0.0.0-20240413045429-76c172a71a16/actor/actor_context.go:572
+github.com/asynkron/protoactor-go/actor.(*actorContext).EscalateFailure(0xc0000223c0, {0x10aa800, 0xc000d118a0}, {0xfefe80, 0xc000730540})
+	/root/go/pkg/mod/github.com/asynkron/protoactor-go@v0.0.0-20240413045429-76c172a71a16/actor/actor_context.go:727 +0x7a7
+github.com/asynkron/protoactor-go/actor.(*defaultMailbox).run.func1()
+	/root/go/pkg/mod/github.com/asynkron/protoactor-go@v0.0.0-20240413045429-76c172a71a16/actor/mailbox.go:132 +0x58
+panic({0x10aa800?, 0xc000d118a0?})
+	/usr/local/go/src/runtime/panic.go:770 +0x132
+github.com/shamirlabs/oracle/process/oracle.(*Process).recoveringFromFailure(0xc0000003c0?, {0x16554d8?, 0xc000aafa40?}, 0x0?, 0x10?, {0x1631760?, 0xc000697940?})
+	/root/hive-mind-oracle/process/oracle/utils.go:114 +0xc5
+github.com/shamirlabs/oracle/process/oracle.(*Process).Receive(0xc0000003c0, {0x16554d8, 0xc000aafa40})
+	/root/hive-mind-oracle/process/oracle/process.go:106 +0x1137
+github.com/shamirlabs/synapse/system.(*SystemManager).SpawnProcess.(*SystemManager).WrapActor.func1({0x1654838, 0xc0000223c0})
+	/root/go/pkg/mod/github.com/shamirlabs/synapse@v0.4.0/system/system.go:280 +0x67f
+github.com/asynkron/protoactor-go/actor.ReceiveFunc.Receive(0x1f71e00?, {0x1654838?, 0xc0000223c0?})
+	/root/go/pkg/mod/github.com/asynkron/protoactor-go@v0.0.0-20240413045429-76c172a71a16/actor/message.go:19 +0x26
+github.com/asynkron/protoactor-go/actor.(*actorContext).defaultReceive(0xc0000223c0)
+	/root/go/pkg/mod/github.com/asynkron/protoactor-go@v0.0.0-20240413045429-76c172a71a16/actor/actor_context.go:372 +0x98
+github.com/asynkron/protoactor-go/actor.(*actorContext).processMessage(0xc0000223c0, {0xfefe80, 0xc000730540})
+	/root/go/pkg/mod/github.com/asynkron/protoactor-go@v0.0.0-20240413045429-76c172a71a16/actor/actor_context.go:527 +0xf9
+github.com/asynkron/protoactor-go/actor.(*actorContext).InvokeUserMessage(0xc0000223c0, {0xfefe80, 0xc000730540})
+	/root/go/pkg/mod/github.com/asynkron/protoactor-go@v0.0.0-20240413045429-76c172a71a16/actor/actor_context.go:505 +0x45a
+github.com/asynkron/protoactor-go/actor.(*defaultMailbox).run(0xc000022420)
+	/root/go/pkg/mod/github.com/asynkron/protoactor-go@v0.0.0-20240413045429-76c172a71a16/actor/mailbox.go:169 +0x22f
+github.com/asynkron/protoactor-go/actor.(*defaultMailbox).processMessages(0xc000022420)
+	/root/go/pkg/mod/github.com/asynkron/protoactor-go@v0.0.0-20240413045429-76c172a71a16/actor/mailbox.go:105 +0x25
+created by github.com/asynkron/protoactor-go/actor.goroutineDispatcher.Schedule in goroutine 141
+	/root/go/pkg/mod/github.com/asynkron/protoactor-go@v0.0.0-20240413045429-76c172a71a16/actor/dispatcher.go:13 +0x16
+time="2024-06-26T09:52:58Z" level=info msg="divaproto plugin installed" cc_url="http://172.16.0.14:3500" cc_version= chain_id=3151908 ec_url="ws://172.16.0.12:8546" ec_version="Geth/v1.13.15-stable-c5ba367e/linux-amd64/go1.21.9" genesis_fork_version=0x10000038 genesis_validators_root=0x9c714f5515e091adccf066e945f10edc19fb6aefd132be221f7066caa17db73a prefix=divaproto.plugin
+[2m9:52AM[0m [92mINF[0m actor system started [2mlib=[0mProto.Actor [2msystem=[0mB8RXVhz4fwdJstJjtAUyLx [2mid=[0mB8RXVhz4fwdJstJjtAUyLx
+time="2024-06-26T09:52:58Z" level=info msg="Start Schedulers" prefix="oracle/Process$2"
+time="2024-06-26T09:52:58Z" level=info msg="Starting diva contract process" prefix="oracle/Process$2/oracle/*divacontract.Process$4"
+time="2024-06-26T09:52:58Z" level=info msg="Watching snapshot taken events" prefix="oracle/Process$2/oracle/*divacontract.Process$4"
+time="2024-06-26T09:52:58Z" level=info msg="Listening for snapshot taken events" prefix="oracle/Process$2/oracle/*divacontract.Process$4"
+time="2024-06-26T09:52:58Z" level=info msg="Fetching diva validators and operators" prefix="oracle/Process$2/oracle/*divacontract.Process$4"
+time="2024-06-26T09:52:58Z" level=info msg="Fetch Diva Validators And Operators Complete" prefix="oracle/Process$2"
+time="2024-06-26T09:52:58Z" level=info msg="Try recover from failure" prefix="oracle/Process$2"
+time="2024-06-26T09:52:58Z" level=info msg="Recovering from FailureTypeFetchAndStoreEpochs &{{28 2024-06-26 09:51:58.054237 +0000 UTC 2024-06-26 09:51:58.054237 +0000 UTC {0001-01-01 00:00:00 +0000 UTC false}} b5e5b3147c005a1d129b3e581e36764064041b648ca1deb75cc2b3be65c93e17 0,1,2 1 []}" prefix="oracle/Process$2"
+time="2024-06-26T09:52:58Z" level=info msg="Fetch and store epochs process started for epochs: [0 1 2]" prefix="oracle/Process$2/oracle/*fetchstoreepochs.Process$5"
+time="2024-06-26T09:52:58Z" level=info msg="Fetch And Store Epochs Complete" prefix="oracle/Process$2"
+time="2024-06-26T09:52:58Z" level=info msg="Fetch More Attested Epochs" prefix="oracle/Process$2/oracle/*calcperformance.Process$1b"
+time="2024-06-26T09:52:58Z" level=info msg="Fetch attested epochs: [0 1 2]" prefix="oracle/Process$2/oracle/*calcperformance.Process$1b"
+time="2024-06-26T09:52:58Z" level=info msg="Fetch More Attested Epochs" prefix="oracle/Process$2/oracle/*calcperformance.Process$1b"
+time="2024-06-26T09:52:58Z" level=info msg="Fetch Beacon Validators: [0]" prefix="oracle/Process$2/oracle/*calcperformance.Process$1b"
+time="2024-06-26T09:52:58Z" level=info msg="Calc Perfomances Complete, operators_performance: [0xc0008766e0]" prefix="oracle/Process$2"
+time="2024-06-26T09:52:58Z" level=info msg="Try recover from failure or restart scheduler" prefix="oracle/Process$2"
+time="2024-06-26T09:52:58Z" level=info msg="Try recover from failure" prefix="oracle/Process$2"
+time="2024-06-26T09:52:58Z" level=info msg="Restarting diva contract process scheduler" prefix="oracle/Process$2"
+time="2024-06-26T09:52:58Z" level=info msg="Starting diva contract process" prefix="oracle/Process$2/oracle/*divacontract.Process$1f"
+time="2024-06-26T09:52:58Z" level=info msg="Watching snapshot taken events" prefix="oracle/Process$2/oracle/*divacontract.Process$1f"
+time="2024-06-26T09:52:58Z" level=info msg="Listening for snapshot taken events" prefix="oracle/Process$2/oracle/*divacontract.Process$1f"
+time="2024-06-26T09:52:58Z" level=info msg="Fetching diva validators and operators" prefix="oracle/Process$2/oracle/*divacontract.Process$1f"
+time="2024-06-26T09:52:58Z" level=info msg="Fetch Diva Validators And Operators Complete" prefix="oracle/Process$2"
+time="2024-06-26T09:52:58Z" level=info msg="Try recover from failure" prefix="oracle/Process$2"
+time="2024-06-26T09:52:58Z" level=info msg="Creating rewards merkletree operators" prefix="oracle/Process$2/oracle/*rewardsmerkletree.Process$1g"
+time="2024-06-26T09:52:58Z" level=info msg="No Operators To Create Rewards Merkletree" prefix="oracle/Process$2"
+time="2024-06-26T09:52:58Z" level=info msg="Fetch and store epochs process started for epochs: [3 4 5]" prefix="oracle/Process$2/oracle/*fetchstoreepochs.Process$1h"
+time="2024-06-26T09:52:58Z" level=info msg="Fetch And Store Epochs Complete" prefix="oracle/Process$2"
+time="2024-06-26T09:52:58Z" level=info msg="Fetch More Attested Epochs" prefix="oracle/Process$2/oracle/*calcperformance.Process$2U"
+time="2024-06-26T09:52:58Z" level=info msg="Fetch attested epochs: [3 4 5]" prefix="oracle/Process$2/oracle/*calcperformance.Process$2U"
+time="2024-06-26T09:52:58Z" level=info msg="Fetch More Attested Epochs" prefix="oracle/Process$2/oracle/*calcperformance.Process$2U"
+time="2024-06-26T09:52:59Z" level=info msg="Fetch Beacon Validators: [0]" prefix="oracle/Process$2/oracle/*calcperformance.Process$2U"
+time="2024-06-26T09:52:59Z" level=info msg="Calc Perfomances Complete, operators_performance: [0xc00122c370]" prefix="oracle/Process$2"
+time="2024-06-26T09:52:59Z" level=info msg="Try recover from failure or restart scheduler" prefix="oracle/Process$2"
+time="2024-06-26T09:52:59Z" level=info msg="Not recovering from failure neither restarting scheduler" prefix="oracle/Process$2"
