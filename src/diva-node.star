@@ -33,7 +33,6 @@ def start_bootnode(
         "--w3s-address=0.0.0.0",
         "--log-level=debug",
         "--swagger-ui-enabled",
-        "--tracing=true",
         "--bootnode-address=",
         "--master-key={0}".format(constants.DIVA_API_KEY),
         "--genesis-fork-version=0x10000038",
@@ -42,8 +41,11 @@ def start_bootnode(
         "--chain-id={0}".format(chain_id),
         "--genesis-time={0}".format(genesis_time),
         "--enable-coordinator",
-        "--insecure-api"
+        #"--capella-fork-version=0x03000000"
     ]
+    if jaeger:
+        cmd.append("--tracing=true")
+
     if minimal:
         cmd.append("--slot-duration=6")
         cmd.append("--slots-per-epoch=8")
@@ -111,7 +113,6 @@ def start_node_config(
         "--w3s-address=0.0.0.0",
         "--log-level=debug",
         "--swagger-ui-enabled",
-        "--tracing=true",
         "--bootnode-address=/ip4/{0}/tcp/5050/p2p/{1}".format(
             bootnode_ip_address, bootnode_peer_id
         ),
@@ -131,6 +132,8 @@ def start_node_config(
         cmd.append("--slot-duration=6")
         cmd.append("--slots-per-epoch=8")
 
+    if jaeger:
+        cmd.append("--tracing=true")
 
     if verify_fee_recipient:
         cmd.append("--verify-fee-recipient")

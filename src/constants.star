@@ -2,6 +2,7 @@
 DIVA_SERVER_IMAGE = "ghcr.io/shamirlabs/diva:v24.6.0-2-g4fdfb5f0"
 DIVA_SC_IMAGE = "diva-sc:release_holesky_with_tr_min5"
 DIVA_SUBMITTER_IMAGE = "sc:5"
+DIVA_PROOFS_IMAGE = "diva-proofs:1"
 DIVA_CLI_IMAGE = "diva-cli:1"
 DIVA_ORACLE_IMAGE = "oracle:10"
 DIVA_HEARBEAT_IMAGE = "diva-hb:4"
@@ -22,6 +23,7 @@ DIVA_CLI_NAME = "diva-cli"
 DIVA_SC_SERVICE_NAME = "diva-smartcontract-deployer"
 DIVA_SC_REGISTER_NAME = "diva-smartcontract-register"
 DIVA_HEARBEAT_SERVICE_NAME = "diva-heartbeat"
+DIVA_PROOFS_SERVICE_NAME = "diva-proofs"
 
 # Diva API endpoints
 DIVA_INFO_ENDPOINT ="/api/v1/node/info"

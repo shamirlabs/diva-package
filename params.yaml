@@ -29,6 +29,7 @@ diva_params:
     verify_fee_recipient: false
     eth_connection_enabled: true
     debug_nodes: false
+    tracing: true
   use_w3s: false
 
 participants:
@@ -36,6 +37,7 @@ participants:
     el_image: ethereum/client-go:v1.13.15
     #el_extra_params: ["--gcmode=archive"]
     cl_type: prysm
+    cl_extra_params: ["--enable-debug-rpc-endpoints"]
     validator_count: 128
     use_separate_vc: true
     count: 2
@@ -51,7 +53,7 @@ additional_services:
   - dora
   #- prometheus_grafana
   #- full_beaconchain_explorer
-  #- blockscout
+  - blockscout
 
 persistent: false
 mev_type: null

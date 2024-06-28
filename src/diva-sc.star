@@ -203,8 +203,8 @@ def get_coord_dkg(plan, coord_dkg_url, el_rpc, minimal, operators_priv):
             command=[
                 "/bin/sh",
                 "-c",
-                "node scripts/testnet/submitterDKG.js {1} {0} {2} {3}".format(
-                    el_rpc, (coord_dkg_url+"/api/v1/coordinator/dkgs"),deployer_private_key, timeFrameDuration
+                "node scripts/testnet/submitterDKG.js {1} {0} {2} {3} {4}".format(
+                    el_rpc, (coord_dkg_url+"/api/v1/coordinator/dkgs"),deployer_private_key, timeFrameDuration, constants.DIVA_API_KEY
                 )
             ],
         ),

@@ -46,6 +46,7 @@ def run(plan, args):
     diva_nodes = diva_args["diva_params"]["diva_nodes"]
     diva_val_type = diva_args["diva_params"]["diva_val_type"]
     debug_nodes= diva_args["diva_params"]["options"]["debug_nodes"]
+    tracing= diva_args["diva_params"]["options"]["tracing"]
     minimal = diva_args["network_params"]["preset"]=="minimal"
 
     deploy_oracle= diva_args["diva_params"]["options"]["deploy_oracle"]
@@ -56,7 +57,10 @@ def run(plan, args):
 
     delay_sc = "0"
     utils.initUtils(plan)
-    jaeguer_url= jaeger.start(plan)
+    jaeger_url=None
+    if tracing:
+        jaeguer_url= jaeger.start(plan)
+        
     if deploy_eth:
         if deploy_diva_sc:
             delay_sc = "15"
@@ -294,6 +298,6 @@ def run(plan, args):
     if sc_init_snapshot:
         diva_sc.init_accounting(plan, el_rpc_uri_0)
         #diva_proofs.init(plan, cl_uri_0 )
-    if sc_dkg_submitter:
-        diva_submitter.init(plan, el_rpc_uri_0, "bcdf20249abf0ed6d944c0288fad489e33f66b3960d9e6229c1cd214ed3bbe31" ,bootnode_url,minimal)
+    #if sc_dkg_submitter:
+        #diva_submitter.init(plan, el_rpc_uri_0, "bcdf20249abf0ed6d944c0288fad489e33f66b3960d9e6229c1cd214ed3bbe31" ,bootnode_url,minimal)
         #diva_sc.get_coord_dkg(plan, bootnode_url, el_rpc_uri_0, minimal, operator_private_keys)
