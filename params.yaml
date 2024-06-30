@@ -20,8 +20,9 @@ diva_params:
     deploy_oracle: false
 
     deposit_operators_eth: 70
-    sc_init_snapshot: true
-    sc_dkg_submitter: true
+    diva_prover: true
+    diva_submitter: true
+    diva_heartbeat: true
 
     private_pools_only: false           # TODO: validar diva_sc and eth_true and nodes_true
     deploy_operator_ui: false
@@ -29,7 +30,7 @@ diva_params:
     verify_fee_recipient: false
     eth_connection_enabled: true
     debug_nodes: false
-    tracing: true
+    tracing: false
   use_w3s: false
 
 participants:

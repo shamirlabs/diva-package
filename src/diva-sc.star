@@ -33,21 +33,7 @@ def deploy(plan, el_rpc, delay_sc, chainID, sc_verif,genesis_time, minimal):
         interval = "3s",
         timeout = "3m",
     )
-    fundDeployer = plan.wait(
-            service_name=constants.DIVA_SC_SERVICE_NAME,
-            recipe=ExecRecipe(
-                command=[
-                    "/bin/sh",
-                    "-c",
-                    "cast send {1} --value \"0.1 ether\" --private-key bcdf20249abf0ed6d944c0288fad489e33f66b3960d9e6229c1cd214ed3bbe31 --rpc-url {0}".format(el_rpc,constants.DEPLOYER_ADDRESS)
-                ]
-            ),
-            field="code", 
-            assertion="==", 
-            target_value=0,
-            interval = "3s",
-            timeout = "3m",
-        )
+ 
     create2factory = plan.wait(
         service_name=constants.DIVA_SC_SERVICE_NAME,
         recipe=ExecRecipe(
@@ -67,13 +53,13 @@ def deploy(plan, el_rpc, delay_sc, chainID, sc_verif,genesis_time, minimal):
         command=[
             "/bin/sh",
             "-c",
-            "SLOTS_PER_EPOCH=8 SECONDS_PER_SLOT=6 ERA_DURATION=10 NETWORK_ID=3151908 MIN_WITHDRAWAL_REQUEST_AMOUNT=\"0.1 ether\" MAX_WITHDRAWAL_REQUEST_AMOUNT=\"100 ether\" MAX_WITHDRAWAL_REQUEST_FULFILLMENT_AMOUNT=10 WITHDRAWAL_FEE=\"0.03 ether\" OPERATORS_FEE=1000 ERA_DURATION=225 SECONDS_PER_SLOT=12 ETH2_DEPOSIT_CONTRACT=0x4242424242424242424242424242424242424242 DEPLOYER_ADDRESS=0x8943545177806ED17B9F23F0a21ee5948eCaa776 TEST=true DEFAULT_EPOCHS_PER_TIMEFRAME=1 GENESIS_TIME_NETWORK={0} forge script scripts/Deploy.s.sol -vv  --rpc-url={1} --broadcast --private-key={2} --legacy".format(genesis_time, el_rpc,constants.DEPLOYER_PRIVATE_KEY)
+            "TEST=false SLOTS_PER_EPOCH=8 SECONDS_PER_SLOT=6 ERA_DURATION_IN_SLOT=10 NETWORK_ID=3151908 MIN_WITHDRAWAL_REQUEST_AMOUNT=\"0.1 ether\" MAX_WITHDRAWAL_REQUEST_AMOUNT=\"100 ether\" MAX_WITHDRAWAL_REQUEST_FULFILLMENT_AMOUNT=10 WITHDRAWAL_FEE=\"0.03 ether\" OPERATORS_FEE=1000 ETH2_DEPOSIT_CONTRACT=0x4242424242424242424242424242424242424242 DEPLOYER_ADDRESS=0x8943545177806ED17B9F23F0a21ee5948eCaa776 DEFAULT_EPOCHS_PER_TIMEFRAME=1 GENESIS_TIME_NETWORK={0} forge script scripts/Deploy.s.sol -vv  --rpc-url={1} --broadcast --private-key={2} --legacy".format(genesis_time, el_rpc,constants.DEPLOYER_PRIVATE_KEY)
         ]    
     else:
         command=[
             "/bin/sh",
             "-c",
-            "NETWORK_ID=3151908 MIN_WITHDRAWAL_REQUEST_AMOUNT=\"0.1 ether\" MAX_WITHDRAWAL_REQUEST_AMOUNT=\"100 ether\" MAX_WITHDRAWAL_REQUEST_FULFILLMENT_AMOUNT=10 WITHDRAWAL_FEE=\"0.03 ether\" OPERATORS_FEE=1000 ERA_DURATION=225 SECONDS_PER_SLOT=12 ETH2_DEPOSIT_CONTRACT=0x4242424242424242424242424242424242424242 DEPLOYER_ADDRESS=0x8943545177806ED17B9F23F0a21ee5948eCaa776 TEST=true DEFAULT_EPOCHS_PER_TIMEFRAME=1 GENESIS_TIME_NETWORK={0} forge script scripts/Deploy.s.sol -vv  --rpc-url={1} --broadcast --private-key={2} --legacy".format(genesis_time, el_rpc,constants.DEPLOYER_PRIVATE_KEY)
+            "NETWORK_ID=3151908 MIN_WITHDRAWAL_REQUEST_AMOUNT=\"0.1 ether\" MAX_WITHDRAWAL_REQUEST_AMOUNT=\"100 ether\" MAX_WITHDRAWAL_REQUEST_FULFILLMENT_AMOUNT=10 WITHDRAWAL_FEE=\"0.03 ether\" OPERATORS_FEE=1000 ERA_DURATION_IN_SLOT=225 SECONDS_PER_SLOT=12 ETH2_DEPOSIT_CONTRACT=0x4242424242424242424242424242424242424242 DEPLOYER_ADDRESS=0x8943545177806ED17B9F23F0a21ee5948eCaa776 TEST=true DEFAULT_EPOCHS_PER_TIMEFRAME=1 GENESIS_TIME_NETWORK={0} forge script scripts/Deploy.s.sol -vv  --rpc-url={1} --broadcast --private-key={2} --legacy".format(genesis_time, el_rpc,constants.DEPLOYER_PRIVATE_KEY)
         ]
 
     deploy = plan.wait(
@@ -122,7 +108,6 @@ def fund(plan, el_rpc, op_addresses, deposit_value_eth):
         ),
     )
  
-    
 def collateral(plan, el_rpc, priv_keys,value):
     commands = []
 
@@ -239,4 +224,4 @@ def init_accounting(plan, el_rpc):
     #node scripts/testnet/submitterDKG.js http://diva-bootnode-coordinator:30000/api/v1/coordinator/dkgs http://el-2-geth-prysm:8545/ bcdf20249abf0ed6d944c0288fad489e33f66b3960d9e6229c1cd214ed3bbe31 48
     
     #./eth2-val-tools deposit-data --fork-version="0x10000038" --withdrawals-mnemonic="giant issue aisle success illegal bike spike question tent bar rely arctic volcano long crawl hungry vocal artwork sniff fantasy very lucky have athlete" --validators-mnemonic="giant issue aisle success illegal bike spike question tent bar rely arctic volcano long crawl hungry vocal artwork sniff fantasy very lucky have athlete" --source-max=1 --source-min=0
-    #{"account":"m/12381/3600/0/0/0","deposit_data_root":"e4c2ebc78b8bfd3e5f1f6224a029ee37c24bc7ff7c8ebcd8156c9d4446461939","pubkey":"aaf6c1251e73fb600624937760fef218aace5b253bf068ed45398aeb29d821e4d2899343ddcbbe37cb3f6cf500dff26c","signature":"a001e41c00714481850760321da53091e4b14cba89857b53a06daa2696ffaa4ea3a4270ec791c1320d801e40bdf98365114d36cf88cb650110a5fb5e5d56cf9b6b2d13eb4f168c210ac1c33a9917d41f0682fff53bf780f525c819e914debae6","value":32000000000,"version":1,"withdrawal_credentials":"0048281f02e108ec495e48a25d2adb4732df75bf5750c060ff31c864c053d28d"}
+    #{"account":"m/12381/3600/0/0/0","deposit_data_root":"e4c2ebc78b8bfd3e5f1f6224a029ee37c24bc7ff7c8ebcd8156c9d4446461939","pubkey":"aaf6c1251e73fb600624937760fef218aace5b253bf068ed45398aeb29d821e4d2899343ddcbbe37cb3f6cf500dff26c","signature":"a001e41c00714481850760321da53091e4b14cba89857b53a06daa2696ffaa4ea3a4270ec791c1320d801e40bdf98365114d36cf88cb650110a5fb5e5d56cf9b6b2d13eb4f168c210ac1c33a9917d41f0682fff53bf780f525c819e914debae6","value":32000000000,"version":1,"withdrawal_credentials":"0048281f02e108ec495e48a25d2adb4732df75bf5750c060ff31c864c053d28d"}0xF10f3614ACA520b4e0E2c2681883970Ca0F2120c

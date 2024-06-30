@@ -22,7 +22,7 @@ oracle = import_module("./src/oracle.star")
 jaeger = import_module("./src/jaeger.star")
 diva_heartbeat = import_module("./src/diva-heartbeat.star")
 diva_submitter = import_module("./src/diva-submitter.star")
-diva_proofs = import_module("./src/diva-proofs.star")
+diva_prover = import_module("./src/diva-prover.star")
 
 def run(plan, args):
     diva_args = input_parser.diva_input_parser(plan, args)
@@ -51,15 +51,16 @@ def run(plan, args):
 
     deploy_oracle= diva_args["diva_params"]["options"]["deploy_oracle"]
 
-    sc_init_snapshot= diva_args["diva_params"]["options"]["sc_init_snapshot"]
-    sc_dkg_submitter= diva_args["diva_params"]["options"]["sc_dkg_submitter"]
+    deploy_heartbeat= diva_args["diva_params"]["options"]["diva_heartbeat"]
+    deploy_prover= diva_args["diva_params"]["options"]["diva_prover"]
+    deploy_submitter= diva_args["diva_params"]["options"]["diva_submitter"]
     
 
     delay_sc = "0"
     utils.initUtils(plan)
-    jaeger_url=None
+    jaeger_url= ""
     if tracing:
-        jaeguer_url= jaeger.start(plan)
+        jaeger_url= jaeger.start(plan)
         
     if deploy_eth:
         if deploy_diva_sc:
@@ -110,10 +111,10 @@ def run(plan, args):
     )
 
     smart_contract_address = constants.DIVA_SC
-
+    prover= constants.DIVA_PROVER
     if deploy_diva_sc:
         diva_sc.deploy(plan, el_rpc_uri_0, delay_sc, network_id, sc_verif, genesis_time, minimal)
-        diva_heartbeat.start(plan,el_rpc_uri_0,el_ws_uri_0)
+           
     if deploy_diva or deploy_diva_coord_boot:
         diva_cli.start_cli(plan)
 
@@ -130,7 +131,7 @@ def run(plan, args):
             eth_connection_enabled,
             debug_nodes,
             minimal,
-            jaeguer_url
+            jaeger_url
         )
         diva_cli.generate_identity(plan, [bootnode_url])
         bootnode_address = utils.get_diva_field(
@@ -139,7 +140,6 @@ def run(plan, args):
 
         if deploy_diva_sc:
             diva_sc.fund(plan, el_rpc_uri_0, [bootnode_address] ,1)
-
     if deploy_diva:
         bootonde_url = "http://{0}:{1}".format(constants.HOST, constants.BOOTNODE_PORT)
         bootnode_ip = constants.HOST
@@ -179,7 +179,7 @@ def run(plan, args):
                 eth_connection_enabled,
                 debug_nodes,
                 minimal,
-                jaeguer_url
+                jaeger_url
             )
             node_configs[service_name_node]=config
 
@@ -295,9 +295,12 @@ def run(plan, args):
 
         plan.add_services(vc_configs)
 
-    if sc_init_snapshot:
-        diva_sc.init_accounting(plan, el_rpc_uri_0)
-        #diva_proofs.init(plan, cl_uri_0 )
-    #if sc_dkg_submitter:
-        #diva_submitter.init(plan, el_rpc_uri_0, "bcdf20249abf0ed6d944c0288fad489e33f66b3960d9e6229c1cd214ed3bbe31" ,bootnode_url,minimal)
-        #diva_sc.get_coord_dkg(plan, bootnode_url, el_rpc_uri_0, minimal, operator_private_keys)
+    if deploy_prover:
+        prover= diva_prover.init(plan, cl_uri_0, el_rpc_uri_0,minimal)
+
+    if deploy_heartbeat:
+        diva_heartbeat.init(plan, el_rpc_uri_0, el_ws_uri_0, prover)
+
+    if deploy_submitter:
+        diva_submitter.init(plan, el_rpc_uri_0,bootnode_url,minimal,prover)
+    
