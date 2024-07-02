@@ -9,6 +9,10 @@ network_params:
 diva_params:
   diva_validators: 0
   diva_nodes: 5
+  diva_nodes_with_single_operators: 5
+  diva_operators_without_nodes: 1
+  diva_nodes_without_operators: 1
+
   diva_val_type: nimbus
   distribution: "[]"                    # Array-index is node-index and array value is number of keyshares, if empty will be randomly distributed
   
@@ -27,6 +31,7 @@ diva_params:
     private_pools_only: false           # TODO: validar diva_sc and eth_true and nodes_true
     deploy_operator_ui: false
     public_ports: false
+    public_bootnodes: false
     verify_fee_recipient: false
     eth_connection_enabled: true
     debug_nodes: false

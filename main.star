@@ -47,6 +47,8 @@ def run(plan, args):
     diva_val_type = diva_args["diva_params"]["diva_val_type"]
     debug_nodes= diva_args["diva_params"]["options"]["debug_nodes"]
     tracing= diva_args["diva_params"]["options"]["tracing"]
+    public_bootnodes= diva_args["diva_params"]["options"]["public_bootnodes"]
+
     minimal = diva_args["network_params"]["preset"]=="minimal"
 
     deploy_oracle= diva_args["diva_params"]["options"]["deploy_oracle"]
@@ -131,7 +133,8 @@ def run(plan, args):
             eth_connection_enabled,
             debug_nodes,
             minimal,
-            jaeger_url
+            jaeger_url,
+            public_bootnodes    
         )
         diva_cli.generate_identity(plan, [bootnode_url])
         bootnode_address = utils.get_diva_field(
@@ -179,7 +182,8 @@ def run(plan, args):
                 eth_connection_enabled,
                 debug_nodes,
                 minimal,
-                jaeger_url
+                jaeger_url,
+                public_bootnodes
             )
             node_configs[service_name_node]=config
 

@@ -13,17 +13,18 @@ def start_bootnode(
     clients_enabled,
     debug_mode,
     minimal,
-    jaeger
+    jaeger,
+    public_bootnodes
 ):
     public_ports = {}
     if expose_public:
-        public_ports["diva_w3s"] = PortSpec(
+        public_ports["w3s-port"] = PortSpec(
             number=1234, transport_protocol="TCP", wait=None
         )
-        public_ports["diva_api"] = PortSpec(
+        public_ports["api-port"] = PortSpec(
             number=constants.DIVA_API, transport_protocol="TCP", wait=None
         )
-        public_ports["diva_p2p"] = PortSpec(
+        public_ports["p2p-port"] = PortSpec(
             number=constants.DIVA_P2P, transport_protocol="TCP", wait=None
         )
     contracts = plan.upload_files("./config/contracts.toml")
@@ -33,7 +34,6 @@ def start_bootnode(
         "--w3s-address=0.0.0.0",
         "--log-level=debug",
         "--swagger-ui-enabled",
-        "--bootnode-address=",
         "--master-key={0}".format(constants.DIVA_API_KEY),
         "--genesis-fork-version=0x10000038",
         "--gvr={0}".format(genesis_validators_root),
@@ -41,8 +41,13 @@ def start_bootnode(
         "--chain-id={0}".format(chain_id),
         "--genesis-time={0}".format(genesis_time),
         "--enable-coordinator",
-        #"--capella-fork-version=0x03000000"
+        "--capella-fork-version=0x40000038"
     ]
+    if public_bootnodes:
+        cmd.append("--bootnode-address=/ip4/3.64.13.227/tcp/5050/p2p/16Uiu2HAkvgZRujNTJ6aHT5uvMNac8iyESxu2uRP8f5jrtKfHiRVU,/ip4/3.79.182.51/tcp/5050/p2p/16Uiu2HAm3tzgHMneLBWKy1BM3r6UYXzR5NZP2FmQdmx8XA29KkKS,/ip4/95.217.218.85/tcp/5050/p2p/16Uiu2HAm1bPsRd7oKqEc1xuYQsqpECZGVW7qothpvSesV38yRkXW,/ip4/37.27.10.207/tcp/5050/p2p/16Uiu2HAmEKRQyRHJwLvaWnnt4jsDDzim3X9wBDixqGYZLJQvfojt")
+    else:
+        cmd.append("--bootnode-address=")
+
     if jaeger:
         cmd.append("--tracing=true")
 
@@ -100,6 +105,7 @@ def start_node_config(
     debug_mode,
     minimal,
     jaeger,
+    public_bootnodes
 ):
 
     ports={
@@ -113,16 +119,23 @@ def start_node_config(
         "--w3s-address=0.0.0.0",
         "--log-level=debug",
         "--swagger-ui-enabled",
-        "--bootnode-address=/ip4/{0}/tcp/5050/p2p/{1}".format(
-            bootnode_ip_address, bootnode_peer_id
-        ),
         "--master-key={0}".format(constants.DIVA_API_KEY),
         "--genesis-fork-version=0x10000038",
         "--gvr={0}".format(genesis_validators_root),
         "--deposit-contract=0x4242424242424242424242424242424242424242",
         "--chain-id={0}".format(chain_id),
         "--genesis-time={0}".format(genesis_time),
+        "--capella-fork-version=0x40000038"
     ]
+
+    if public_bootnodes:
+        cmd.append("--bootnode-address=/ip4/{0}/tcp/5050/p2p/{1}{2}".format(
+            bootnode_ip_address, bootnode_peer_id,",/ip4/3.64.13.227/tcp/5050/p2p/16Uiu2HAkvgZRujNTJ6aHT5uvMNac8iyESxu2uRP8f5jrtKfHiRVU,/ip4/3.79.182.51/tcp/5050/p2p/16Uiu2HAm3tzgHMneLBWKy1BM3r6UYXzR5NZP2FmQdmx8XA29KkKS,/ip4/95.217.218.85/tcp/5050/p2p/16Uiu2HAm1bPsRd7oKqEc1xuYQsqpECZGVW7qothpvSesV38yRkXW,/ip4/37.27.10.207/tcp/5050/p2p/16Uiu2HAmEKRQyRHJwLvaWnnt4jsDDzim3X9wBDixqGYZLJQvfojt"
+        ))
+    else:
+        cmd.append("--bootnode-address=/ip4/{0}/tcp/5050/p2p/{1}".format(
+            bootnode_ip_address, bootnode_peer_id))
+
     if clients_enabled:
         cmd.append("--execution-client-url={0}".format(el_url))
         cmd.append("--consensus-client-url={0}".format(cl_url))

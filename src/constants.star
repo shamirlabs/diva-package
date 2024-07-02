@@ -1,9 +1,9 @@
 # Images
-DIVA_SERVER_IMAGE = "ghcr.io/shamirlabs/diva:v24.6.0-2-g4fdfb5f0"
-DIVA_SC_IMAGE = "diva-sc:12"
-DIVA_SUBMITTER_IMAGE = "diva-sc:12"
-DIVA_PROOFS_IMAGE = "diva-prover:4"
-DIVA_HEARBEAT_IMAGE = "diva-hb:3"
+DIVA_SERVER_IMAGE = "ghcr.io/shamirlabs/diva:v24.6.0-11-g5d797c30"
+DIVA_SC_IMAGE = "diva-sc:16"
+DIVA_SUBMITTER_IMAGE = "diva-sc:16"
+DIVA_PROOFS_IMAGE = "diva-prover:17"
+DIVA_HEARBEAT_IMAGE = "diva-hb:5"
 
 DIVA_CLI_IMAGE = "diva-cli:1"
 DIVA_ORACLE_IMAGE = "oracle:10"
