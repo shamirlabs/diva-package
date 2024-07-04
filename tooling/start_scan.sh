@@ -3,7 +3,7 @@
 
 get_container() {
     case "$1" in
-        diva[1-5] | val[1-5])
+        diva[1-5] | vc-diva[1-5])
             echo "$(docker ps | grep "$1" | awk '{print $1}')"
             ;;
         bc)

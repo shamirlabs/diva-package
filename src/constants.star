@@ -1,11 +1,11 @@
 # Images
-DIVA_SERVER_IMAGE = "ghcr.io/shamirlabs/diva:v24.6.0-11-g5d797c30"
+DIVA_SERVER_IMAGE = "ghcr.io/shamirlabs/diva:v24.6.0-16-g78596f13"
 DIVA_SC_IMAGE = "diva-sc:16"
 DIVA_SUBMITTER_IMAGE = "diva-sc:16"
 DIVA_PROOFS_IMAGE = "diva-prover:17"
-DIVA_HEARBEAT_IMAGE = "diva-hb:5"
+DIVA_HEARBEAT_IMAGE = "diva-hb:6"
 
-DIVA_CLI_IMAGE = "diva-cli:1"
+DIVA_CLI_IMAGE = "ghcr.io/shamirlabs/diva:v24.6.0-16-g78596f13-dev"
 DIVA_ORACLE_IMAGE = "oracle:10"
 OPERATOR_UI_IMAGE = "diva/operator-ui:latest"
 W3S_CONSENSYS = "consensys/web3signer:23.9.0"
@@ -34,10 +34,10 @@ DIVA_API_KEY = "diva"
 DIVA_VAULT_PASSWORD = DIVA_API_KEY
 
 # External Network
-HOST = "65.109.109.62"
-EL_WS_PORT = "35847"
-EL_HTTP_PORT = "35848"
-CL_PORT = "35861"
+HOST = "116.202.198.47"
+EL_WS_PORT = "8546"
+EL_HTTP_PORT = "8545"
+CL_PORT = "4000"
 EXEC_EXPL_PORT = "2878"
 DIVA_SC = "0xDeC3326BE4BaDb9A1fA7Be473Ef8370dA775889a"
 BOOTNODE_PORT = "30000"

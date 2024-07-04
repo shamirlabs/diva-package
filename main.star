@@ -215,16 +215,16 @@ def run(plan, args):
                 operator_private_keys.append(operator_private_key)
                 node_priv_key = utils.get_diva_field(plan, service.name, constants.DIVA_ID_ENDPOINT, "secret_key")
                 node_priv_keys.append(node_priv_key)
+        if not private_pools_only:
+            diva_sc.fund(plan, el_rpc_uri_0, op_addresses, deposit_operators_eth)
 
-        diva_sc.fund(plan, el_rpc_uri_0, op_addresses, deposit_operators_eth)
+            diva_sc.register(
+                plan, node_addresses, node_priv_keys, el_rpc_uri_0, operator_private_keys
+            )                
 
-        diva_sc.register(
-            plan, node_addresses, node_priv_keys, el_rpc_uri_0, operator_private_keys
-        )                
-
-        diva_sc.collateral(
-            plan, el_rpc_uri_0, operator_private_keys, deposit_operators_eth
-        )
+            diva_sc.collateral(
+                plan, el_rpc_uri_0, operator_private_keys, deposit_operators_eth
+            )
     if deploy_operator_ui:
         diva_operator_ui.launch(plan)
 

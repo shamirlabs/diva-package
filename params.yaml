@@ -7,7 +7,7 @@ network_params:
   preset: minimal
 
 diva_params:
-  diva_validators: 0
+  diva_validators: 3
   diva_nodes: 5
   diva_nodes_with_single_operators: 5
   diva_operators_without_nodes: 1
@@ -20,7 +20,7 @@ diva_params:
     deploy_eth: true
     deploy_diva_nodes: true
     deploy_diva_coord_boot: true
-    deploy_diva_sc: true
+    deploy_diva_sc: false
     deploy_oracle: false
 
     deposit_operators_eth: 70
@@ -28,22 +28,22 @@ diva_params:
     diva_submitter: true
     diva_heartbeat: true
 
-    private_pools_only: false           # TODO: validar diva_sc and eth_true and nodes_true
+    private_pools_only: true           # TODO: validar diva_sc and eth_true and nodes_true
     deploy_operator_ui: false
     public_ports: false
     public_bootnodes: false
     verify_fee_recipient: false
     eth_connection_enabled: true
     debug_nodes: false
-    tracing: false
+    tracing: true
   use_w3s: false
 
 participants:
   - el_type: geth
     el_image: ethereum/client-go:v1.13.15
     #el_extra_params: ["--gcmode=archive"]
-    cl_type: prysm
-    cl_extra_params: ["--enable-debug-rpc-endpoints"]
+    cl_type: lighthouse
+    #cl_extra_params: ["--enable-debug-rpc-endpoints"]
     validator_count: 128
     use_separate_vc: true
     count: 2
@@ -59,7 +59,7 @@ additional_services:
   - dora
   #- prometheus_grafana
   #- full_beaconchain_explorer
-  - blockscout
+  #- blockscout
 
-persistent: false
+persistent: true
 mev_type: null

@@ -87,10 +87,10 @@ def distribution(num_keyshares_per_validator,num_total_nodes,num_validators,dist
 
 
 def create_pool(validator,diva_urls, diva_addresses, diva_threshold, diva_api_key,index):
-
     destination="/tmp/configurations/config-0"
 
     configuration = {
+        "validator_index": index+1,
         "keystore": validator.key, 
         "keystore_password": validator.secret,
         "threshold": diva_threshold,

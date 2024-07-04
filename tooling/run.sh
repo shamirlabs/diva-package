@@ -1,7 +1,7 @@
 #!/bin/bash
 
-kurtosis enclave rm min -f
-kurtosis run --enclave min .. --args-file ../params.yaml --production --parallelism 5
+kurtosis enclave rm raz -f
+kurtosis run --enclave raz .. --args-file ../params.yaml --production --parallelism 5
 container_info=$(docker ps | grep -E 'dora|beaconchain-frontend')
 
 host_port=$(echo "$container_info" | awk -F'[ :>-]+' '{for (i=1; i<=NF; i++) if ($i ~ /0.0.0.0/) print $(i+1)}')
