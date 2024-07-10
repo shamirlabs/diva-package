@@ -85,11 +85,12 @@ def deploy(plan, el_rpc, delay_sc, chainID, sc_verif,genesis_time, minimal):
     )
 
 def fund(plan, el_rpc, op_addresses, deposit_value_eth):
+
     commands = []    
-    initial_command = "nonce=$(cast nonce 0x8943545177806ED17B9F23F0a21ee5948eCaa776 --rpc-url {0}); ".format(el_rpc)
+    initial_command = "nonce=$(cast nonce {1} --rpc-url {0}); ".format(el_rpc, constants.FUNDER_ADDRESS)
     for address in op_addresses:
-        command = " cast send {0} --value \"{1} ether\" --nonce $nonce --private-key bcdf20249abf0ed6d944c0288fad489e33f66b3960d9e6229c1cd214ed3bbe31 --rpc-url {2} & nonce=$(($nonce + 1));".format(
-            address, deposit_value_eth + 1, el_rpc
+        command = " cast send {0} --value \"{1} ether\" --nonce $nonce --private-key {3} --rpc-url {2} & nonce=$(($nonce + 1));".format(
+            address, deposit_value_eth + 1, el_rpc,constants.FUNDER_PRIVATE_KEY
         )
         commands.append(command)
 
@@ -176,7 +177,6 @@ def register(plan, node_addresses, node_private_keys, el_rpc, operator_private_k
 
 
 def get_coord_dkg(plan, coord_dkg_url, el_rpc, minimal, operators_priv):
-    deployer_private_key= "bcdf20249abf0ed6d944c0288fad489e33f66b3960d9e6229c1cd214ed3bbe31"
 
     timeFrameDuration = 12*32
     if minimal:
@@ -189,14 +189,13 @@ def get_coord_dkg(plan, coord_dkg_url, el_rpc, minimal, operators_priv):
                 "/bin/sh",
                 "-c",
                 "node scripts/testnet/submitterDKG.js {1} {0} {2} {3} {4}".format(
-                    el_rpc, (coord_dkg_url+"/api/v1/coordinator/dkgs"),deployer_private_key, timeFrameDuration, constants.DIVA_API_KEY
+                    el_rpc, (coord_dkg_url+"/api/v1/coordinator/dkgs"),constants.DEPLOYER_PRIVATE_KEY, timeFrameDuration, constants.DIVA_API_KEY
                 )
             ],
         ),
     )
 
 def init_accounting(plan, el_rpc):
-    deployer_private_key= "bcdf20249abf0ed6d944c0288fad489e33f66b3960d9e6229c1cd214ed3bbe31"
 
     submitReport = plan.exec(
         service_name=constants.DIVA_SC_SERVICE_NAME,
@@ -205,7 +204,7 @@ def init_accounting(plan, el_rpc):
                 "/bin/sh",
                 "-c",
                 "forge script scripts/SubmitReport.s.sol -vvvv --rpc-url={0} --broadcast --private-key {1}".format(
-                el_rpc,deployer_private_key
+                el_rpc,constants.DEPLOYER_PRIVATE_KEY
                 )
             ],
         ),

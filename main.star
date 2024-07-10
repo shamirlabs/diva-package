@@ -93,7 +93,7 @@ def run(plan, args):
         network_id = utils.get_chain_id(plan, cl_uri_0)
         sc_verif = "http://{0}:{1}".format(constants.HOST, constants.EXEC_EXPL_PORT)
         start_index_val = constants.DIVA_VAL_INDEX_START
-
+        bootnode_url= "http://{0}:{1}".format(constants.BOOTNODE_ADD, constants.BOOTNODE_PORT)
     stop_index_val = start_index_val + diva_validators
 
 
@@ -137,14 +137,17 @@ def run(plan, args):
             public_bootnodes    
         )
         diva_cli.generate_identity(plan, [bootnode_url])
+
         bootnode_address = utils.get_diva_field(
             plan, constants.DIVA_BOOTNODE_NAME,constants.DIVA_INFO_ENDPOINT, "node_address"
         )
-
+        plan.exec(
+            service_name=constants.DIVA_SC_SERVICE_NAME,
+            recipe=ExecRecipe(command=["sleep", "1"]),
+        )
         if deploy_diva_sc:
             diva_sc.fund(plan, el_rpc_uri_0, [bootnode_address] ,1)
     if deploy_diva:
-        bootonde_url = "http://{0}:{1}".format(constants.HOST, constants.BOOTNODE_PORT)
         bootnode_ip = constants.HOST
         bootnode_peer_id = constants.BOOT_PEER_ID
         if deploy_diva_coord_boot:
@@ -303,7 +306,7 @@ def run(plan, args):
         prover= diva_prover.init(plan, cl_uri_0, el_rpc_uri_0,minimal)
 
     if deploy_heartbeat:
-        diva_heartbeat.init(plan, el_rpc_uri_0, el_ws_uri_0, prover)
+        diva_heartbeat.init(plan, el_rpc_uri_0, el_ws_uri_0, prover,network_id)
 
     if deploy_submitter:
         diva_submitter.init(plan, el_rpc_uri_0,bootnode_url,minimal,prover)

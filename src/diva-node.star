@@ -35,13 +35,13 @@ def start_bootnode(
         "--log-level=debug",
         "--swagger-ui-enabled",
         "--master-key={0}".format(constants.DIVA_API_KEY),
-        "--genesis-fork-version=0x10000038",
+        "--genesis-fork-version={0}".format(constants.GENESIS_FORK_VERSION),
         "--gvr={0}".format(genesis_validators_root),
         "--deposit-contract=0x4242424242424242424242424242424242424242",
         "--chain-id={0}".format(chain_id),
         "--genesis-time={0}".format(genesis_time),
         "--enable-coordinator",
-        "--capella-fork-version=0x40000038"
+        "--capella-fork-version={0}".format(constants.CAPELLA_FORK_VERSION)
     ]
     if public_bootnodes:
         cmd.append("--bootnode-address=/ip4/3.64.13.227/tcp/5050/p2p/16Uiu2HAkvgZRujNTJ6aHT5uvMNac8iyESxu2uRP8f5jrtKfHiRVU,/ip4/3.79.182.51/tcp/5050/p2p/16Uiu2HAm3tzgHMneLBWKy1BM3r6UYXzR5NZP2FmQdmx8XA29KkKS,/ip4/95.217.218.85/tcp/5050/p2p/16Uiu2HAm1bPsRd7oKqEc1xuYQsqpECZGVW7qothpvSesV38yRkXW,/ip4/37.27.10.207/tcp/5050/p2p/16Uiu2HAmEKRQyRHJwLvaWnnt4jsDDzim3X9wBDixqGYZLJQvfojt")
@@ -120,12 +120,12 @@ def start_node_config(
         "--log-level=debug",
         "--swagger-ui-enabled",
         "--master-key={0}".format(constants.DIVA_API_KEY),
-        "--genesis-fork-version=0x10000038",
+        "--genesis-fork-version={0}".format(constants.GENESIS_FORK_VERSION),
         "--gvr={0}".format(genesis_validators_root),
         "--deposit-contract=0x4242424242424242424242424242424242424242",
         "--chain-id={0}".format(chain_id),
         "--genesis-time={0}".format(genesis_time),
-        "--capella-fork-version=0x40000038"
+        "--capella-fork-version={0}".format(constants.CAPELLA_FORK_VERSION)
     ]
 
     if public_bootnodes:

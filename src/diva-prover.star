@@ -11,12 +11,12 @@ def init(
         preset="minimal"
     env_vars = {
         "PRESET": preset,
-        "PRIVATE_KEY": "0xbcdf20249abf0ed6d944c0288fad489e33f66b3960d9e6229c1cd214ed3bbe31",
+        "PRIVATE_KEY": constants.PROVER_PRIVATE_KEY,
         "CONSENSUS_LAYER_RPC": consensus_url,
         "EXECUTION_LAYER_RPC" : execution_url,
-        "ACCOUNTING_MANAGER_ADDRESS" : "0xDdD4DC7D559d431F6C497a840AD7E38Cdf7E0364",
-        "BALANCE_VERIFIER_ADDRESS" : "0xeC6ffe5Bdd983986AE8217b0D12fD4bb9d1B074E",
-        "VALIDATOR_MANAGER_ADDRESS" : "0x5A22381d4522FF06f62764dE5BA1f2679D129Aab"
+        "ACCOUNTING_MANAGER_ADDRESS" : constants.ACCOUNTING_MANAGER_ADDRESS,
+        "BALANCE_VERIFIER_ADDRESS" : constants.BALANCE_VERIFIER_ADDRESS,
+        "VALIDATOR_MANAGER_ADDRESS" : constants.VALIDATOR_MANAGER_ADDRESS
     }
           
     result= plan.add_service(
