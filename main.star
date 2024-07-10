@@ -1,5 +1,5 @@
 ethereum_package_official = import_module(
-    "github.com/ethpandaops/ethereum-package/main.star"
+    "github.com/ethpandaops/ethereum-package@4.1.0/main.star"
 )
 
 ethereum_package_shamir = import_module("github.com/shamirlabs/ethereum-package@old_full_explorer/main.star")
@@ -73,28 +73,24 @@ def run(plan, args):
             ethereum_package = ethereum_package_official
 
         ethereum_network = ethereum_package.run(plan, diva_args)
-
         plan.print("Succesfully launched an Ethereum Network")
         
         cl_uri_0, el_rpc_uri_0, el_ws_uri_0 = utils.get_eth_urls(
             ethereum_network.all_participants, diva_args, 0
         )
-        network_id = 3151908
         sc_verif = ethereum_network.blockscout_sc_verif_url
-        genesis_validators_root = utils.get_gvr(plan, cl_uri_0)
-        genesis_time = utils.get_genesis_time(plan, cl_uri_0)
-
     else:
         el_ws_uri_0 = "ws://{0}:{1}".format(constants.HOST, constants.EL_WS_PORT)
         cl_uri_0 = "http://{0}:{1}".format(constants.HOST, constants.CL_PORT)
         el_rpc_uri_0 = "http://{0}:{1}".format(constants.HOST, constants.EL_HTTP_PORT)
-        genesis_validators_root = utils.get_gvr(plan, cl_uri_0)
-        genesis_time = utils.get_genesis_time(plan, cl_uri_0)
-        network_id = utils.get_chain_id(plan, cl_uri_0)
         sc_verif = "http://{0}:{1}".format(constants.HOST, constants.EXEC_EXPL_PORT)
         start_index_val = constants.DIVA_VAL_INDEX_START
         bootnode_url= "http://{0}:{1}".format(constants.BOOTNODE_ADD, constants.BOOTNODE_PORT)
+
     stop_index_val = start_index_val + diva_validators
+    genesis_validators_root = utils.get_gvr(plan, cl_uri_0)
+    genesis_time = utils.get_genesis_time(plan, cl_uri_0)
+    network_id = utils.get_chain_id(plan, cl_uri_0)
 
 
     if deploy_oracle:
