@@ -7,6 +7,7 @@ def main():
 
     methods = {
         "get_address": get_address,
+        "get_node_priv_key": get_node_priv_key,
         "get_peer_id": get_peer_id,
         "get_gvr": get_gvr,
         "get_genesis_time": get_genesis_time,
@@ -29,6 +30,29 @@ def get_address():
     while attempts < max_retries:
         try:
             response = requests.get(diva_url + "/api/v1/node/info", headers={"Authorization": "Bearer "
+            + api_key })
+            if response.status_code == 200:
+                node_address = response.json()["node_address"]
+                if node_address != "":
+                    print(node_address, end="")
+                    return node_address
+            else:
+                attempts += 1
+                time.sleep(1)
+        except requests.RequestException:
+            attempts += 1
+
+    if attempts == max_retries:
+        sys.exit(1)
+def get_node_priv_key():
+    diva_url= sys.argv[2]
+    api_key= sys.argv[3]
+    max_retries = 60
+    attempts = 0
+
+    while attempts < max_retries:
+        try:
+            response = requests.get(diva_url + "/api/v1/keymanager/node-key", headers={"Authorization": "Bearer "
             + api_key })
             if response.status_code == 200:
                 node_address = response.json()["node_address"]

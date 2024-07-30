@@ -44,6 +44,7 @@ def run(plan, args):
     public_ports = diva_args["diva_params"]["options"]["public_ports"]
     deposit_operators_eth = diva_args["diva_params"]["options"]["deposit_operators_eth"]
     diva_nodes = diva_args["diva_params"]["diva_nodes"]
+    diva_external_nodes = diva_args["diva_params"]["diva_external_nodes"]
     diva_val_type = diva_args["diva_params"]["diva_val_type"]
     debug_nodes= diva_args["diva_params"]["options"]["debug_nodes"]
     tracing= diva_args["diva_params"]["options"]["tracing"]
@@ -133,13 +134,13 @@ def run(plan, args):
             public_bootnodes    
         )
         diva_cli.generate_identity(plan, [bootnode_url])
-
-        bootnode_address = utils.get_diva_field(
-            plan, constants.DIVA_BOOTNODE_NAME,constants.DIVA_INFO_ENDPOINT, "node_address"
-        )
         plan.exec(
             service_name=constants.DIVA_SC_SERVICE_NAME,
             recipe=ExecRecipe(command=["sleep", "1"]),
+        )
+
+        bootnode_address = utils.get_diva_field(
+            plan, constants.DIVA_BOOTNODE_NAME,constants.DIVA_INFO_ENDPOINT, "node_address"
         )
         if deploy_diva_sc:
             diva_sc.fund(plan, el_rpc_uri_0, [bootnode_address] ,1)
@@ -164,57 +165,123 @@ def run(plan, args):
         operator_private_keys =[]
         op_addresses =[]
         node_configs={}
-        for index in range(0, diva_nodes):
-            service_name_node = "diva{0}".format(index + 1)
-            config = diva_server.start_node_config(
-                plan,
-                service_name_node,
-                el_ws_uri_0,
-                cl_uri_0,
-                smart_contract_address,
-                bootnode_peer_id,
-                genesis_validators_root,
-                genesis_time,
-                bootnode_ip,
-                verify_fee_recipient,
-                network_id,
-                eth_connection_enabled,
-                debug_nodes,
-                minimal,
-                jaeger_url,
-                public_bootnodes
-            )
-            node_configs[service_name_node]=config
+        if not diva_external_nodes:
+            for index in range(0, diva_nodes):
+                service_name_node = "diva{0}".format(index + 1)
+                config = diva_server.start_node_config(
+                    plan,
+                    service_name_node,
+                    el_ws_uri_0,
+                    cl_uri_0,
+                    smart_contract_address,
+                    bootnode_peer_id,
+                    genesis_validators_root,
+                    genesis_time,
+                    bootnode_ip,
+                    verify_fee_recipient,
+                    network_id,
+                    eth_connection_enabled,
+                    debug_nodes,
+                    minimal,
+                    jaeger_url,
+                    public_bootnodes
+                )
+                node_configs[service_name_node]=config
 
-        diva_node_services= diva_server.start_nodes(plan, node_configs)
-
-        for service in diva_node_services.values():
-            node_url= "http://{0}:{1}".format(service.hostname, service.ports["api-port"].number)
-            diva_urls.append(node_url)
-            signer_url= "http://{0}:{1}".format(service.hostname, service.ports["w3s-port"].number)
-            signer_urls.append(signer_url)
+            diva_node_services= diva_server.start_nodes(plan, node_configs)
+            for service in diva_node_services.values():
+                node_url= "http://{0}:{1}".format(service.hostname, service.ports["api-port"].number)
+                diva_urls.append(node_url)
+                signer_url= "http://{0}:{1}".format(service.hostname, service.ports["w3s-port"].number)
+                signer_urls.append(signer_url)
             
-        diva_cli.generate_identity(plan, diva_urls)
-        
-        plan.exec(
-            service_name=constants.DIVA_SC_SERVICE_NAME,
-            recipe=ExecRecipe(command=["sleep", "1"]),
-        )
+            diva_cli.generate_identity(plan, diva_urls)
+            plan.exec(
+                service_name=constants.DIVA_SC_SERVICE_NAME,
+                recipe=ExecRecipe(command=["sleep", "3"]),
+            )                 
 
-        for service in diva_node_services.values():
-            node_address = utils.get_diva_field(plan, service.name, constants.DIVA_INFO_ENDPOINT, "node_address")
-            node_addresses.append(node_address)
-            if not private_pools_only:
+            for service in diva_node_services.values():
+                node_address = utils.get_diva_field(plan, service.name, constants.DIVA_INFO_ENDPOINT, "node_address")
+                node_addresses.append(node_address)
+                node_priv_key = utils.get_diva_field(plan, service.name, constants.DIVA_ID_ENDPOINT, "secret_key")
+                node_priv_keys.append(node_priv_key)
                 (
                     operator_address,
                     operator_private_key,
                 ) = diva_sc.new_key(plan)
-
                 op_addresses.append(operator_address)
                 operator_private_keys.append(operator_private_key)
-                node_priv_key = utils.get_diva_field(plan, service.name, constants.DIVA_ID_ENDPOINT, "secret_key")
-                node_priv_keys.append(node_priv_key)
+
+        else:
+            diva_urls.append(constants.NODE1_URL)
+            diva_cli.generate_identity(plan, [constants.NODE1_URL])
+            plan.exec(
+                service_name=constants.DIVA_SC_SERVICE_NAME,
+                recipe=ExecRecipe(command=["sleep", "3"]),
+            )
+            node_address = utils.get_address(plan, constants.NODE1_URL, "diva")
+            node_addresses.append(node_address)
+            node_priv_key = utils.get_node_priv_key(plan, constants.NODE1_URL, "diva")
+            node_priv_keys.append(node_priv_key)
+
+
+            diva_urls.append(constants.NODE2_URL)
+            diva_cli.generate_identity(plan, [constants.NODE2_URL])
+            plan.exec(
+                service_name=constants.DIVA_SC_SERVICE_NAME,
+                recipe=ExecRecipe(command=["sleep", "3"]),
+            )     
+            node_address = utils.get_address(plan, constants.NODE2_URL, "diva")
+            node_addresses.append(node_address)
+            node_priv_key = utils.get_node_priv_key(plan, constants.NODE2_URL, "diva")
+            node_priv_keys.append(node_priv_key)
+
+
+
+            diva_urls.append(constants.NODE3_URL)
+            diva_cli.generate_identity(plan, [constants.NODE3_URL])
+            plan.exec(
+                service_name=constants.DIVA_SC_SERVICE_NAME,
+                recipe=ExecRecipe(command=["sleep", "3"]),
+            )               
+            node_address = utils.get_address(plan, constants.NODE3_URL, "diva")
+            node_addresses.append(node_address)
+            node_priv_key = utils.get_node_priv_key(plan, constants.NODE3_URL, "diva")
+            node_priv_keys.append(node_priv_key)
+
+            diva_urls.append(constants.NODE4_URL)
+            diva_cli.generate_identity(plan, [constants.NODE4_URL])
+            plan.exec(
+                service_name=constants.DIVA_SC_SERVICE_NAME,
+                recipe=ExecRecipe(command=["sleep", "3"]),
+            )   
+            node_address = utils.get_address(plan, constants.NODE4_URL, "diva")
+            node_addresses.append(node_address)
+            node_priv_key = utils.get_node_priv_key(plan, constants.NODE4_URL, "diva")
+            node_priv_keys.append(node_priv_key)
+
+            diva_urls.append(constants.NODE5_URL)  
+            diva_cli.generate_identity(plan, [constants.NODE5_URL])
+            plan.exec(
+                service_name=constants.DIVA_SC_SERVICE_NAME,
+                recipe=ExecRecipe(command=["sleep", "3"]),
+            )                 
+            node_address = utils.get_address(plan, constants.NODE5_URL, "diva")
+            node_addresses.append(node_address)
+            node_priv_key = utils.get_node_priv_key(plan, constants.NODE5_URL, "diva")
+            node_priv_keys.append(node_priv_key)
+
+
+            for node_address in node_addresses:
+                (
+                    operator_address,
+                    operator_private_key,
+                ) = diva_sc.new_key(plan)
+                op_addresses.append(operator_address)
+                operator_private_keys.append(operator_private_key)
         if not private_pools_only:
+
             diva_sc.fund(plan, el_rpc_uri_0, op_addresses, deposit_operators_eth)
 
             diva_sc.register(
@@ -268,7 +335,7 @@ def run(plan, args):
             node_configs[service_name_node]=config
                 
     
-    if deploy_diva and not use_w3s:
+    if deploy_diva and not use_w3s and not diva_external_nodes:
         vc_configs={}
         for index in range(0, diva_nodes):
             service_name_vc= "vc-diva-{1}-{0}".format((index + 1),diva_val_type)

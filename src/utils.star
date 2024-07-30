@@ -81,6 +81,37 @@ def get_gvr(plan, beacon_url):
     return result["output"]
 
 
+def get_address(plan, diva_url, api_key):
+    result = plan.exec(
+        service_name="diva-utils",
+        recipe=ExecRecipe(
+            command=[
+                "/bin/sh",
+                "-c",
+                "python /tmp/scripts/utils.py get_address {0} {1}| tr -d '\n'".format(
+                    diva_url, api_key
+                ),
+            ]
+        ),
+    )
+    return result["output"]
+
+def get_node_priv_key(plan, diva_url, api_key):
+    result = plan.exec(
+        service_name="diva-utils",
+        recipe=ExecRecipe(
+            command=[
+                "/bin/sh",
+                "-c",
+                "python /tmp/scripts/utils.py get_node_priv_key {0} {1}| tr -d '\n'".format(
+                    diva_url, api_key
+                ),
+            ]
+        ),
+    )
+    return result["output"]    
+
+
 def get_genesis_time(plan, beacon_url):
     result = plan.exec(
         service_name="diva-utils",

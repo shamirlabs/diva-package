@@ -1,5 +1,10 @@
 constants = import_module("./constants.star")
 
+diva_min_cpu=300
+diva_max_cpu=4000 #4 cores
+diva_min_mem=512
+diva_max_mem=16384
+
 
 def start_bootnode(
     plan,
@@ -74,8 +79,6 @@ def start_bootnode(
                 "w3s-port": PortSpec(number=9000, transport_protocol="TCP", wait=None),
                 "api-port": PortSpec(number=30000, transport_protocol="TCP"),
             },
-            min_cpu=200,
-            max_cpu=1000,
             files={
                 "/var/diva": Directory(
                     persistent_key="diva-db-{0}".format(constants.DIVA_BOOTNODE_NAME)
@@ -83,6 +86,11 @@ def start_bootnode(
                 "/var/diva/params": contracts
             },
             public_ports=public_ports,
+            min_cpu=diva_min_cpu,
+            max_cpu=diva_max_cpu,
+            min_memory=diva_min_mem,
+            max_memory=diva_max_mem,
+            node_selectors={"diva_node": "bootnode"},
         ),
     )
 
@@ -173,6 +181,10 @@ def start_node_config(
             ),
             "/var/diva/params": contracts
         },
+        min_cpu=diva_min_cpu,
+        max_cpu=diva_max_cpu,
+        min_memory=diva_min_mem,
+        max_memory=diva_max_mem,
     )
     
     return (

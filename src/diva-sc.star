@@ -53,13 +53,13 @@ def deploy(plan, el_rpc, delay_sc, chainID, sc_verif,genesis_time, minimal):
         command=[
             "/bin/sh",
             "-c",
-            "TEST=false SLOTS_PER_EPOCH=8 SECONDS_PER_SLOT=6 ERA_DURATION_IN_SLOT=10 NETWORK_ID=3151908 MIN_WITHDRAWAL_REQUEST_AMOUNT=\"0.1 ether\" MAX_WITHDRAWAL_REQUEST_AMOUNT=\"100 ether\" MAX_WITHDRAWAL_REQUEST_FULFILLMENT_AMOUNT=10 WITHDRAWAL_FEE=\"0.03 ether\" OPERATORS_FEE=1000 ETH2_DEPOSIT_CONTRACT=0x4242424242424242424242424242424242424242 DEPLOYER_ADDRESS=0x8943545177806ED17B9F23F0a21ee5948eCaa776 DEFAULT_EPOCHS_PER_TIMEFRAME=1 GENESIS_TIME_NETWORK={0} forge script scripts/Deploy.s.sol -vv  --rpc-url={1} --broadcast --private-key={2} --legacy".format(genesis_time, el_rpc,constants.DEPLOYER_PRIVATE_KEY)
+            "TEST=false SLOTS_PER_EPOCH=8 SECONDS_PER_SLOT=6 ERA_DURATION_IN_SLOT=10 NETWORK_ID=3151908 MIN_WITHDRAWAL_REQUEST_AMOUNT=\"0.1 ether\" MAX_WITHDRAWAL_REQUEST_AMOUNT=\"100 ether\" MAX_WITHDRAWAL_REQUEST_FULFILLMENT_AMOUNT=10 WITHDRAWAL_FEE=\"0.03 ether\" OPERATORS_FEE=1000 ETH2_DEPOSIT_CONTRACT=0x4242424242424242424242424242424242424242 DEPLOYER_ADDRESS={3} DEFAULT_EPOCHS_PER_TIMEFRAME=1 GENESIS_TIME_NETWORK={0} forge script scripts/Deploy.s.sol -vv  --rpc-url={1} --broadcast --private-key={2} --legacy".format(genesis_time, el_rpc,constants.DEPLOYER_PRIVATE_KEY,constants.DEPLOYER_ADDRESS)
         ]    
     else:
         command=[
             "/bin/sh",
             "-c",
-            "NETWORK_ID=3151908 MIN_WITHDRAWAL_REQUEST_AMOUNT=\"0.1 ether\" MAX_WITHDRAWAL_REQUEST_AMOUNT=\"100 ether\" MAX_WITHDRAWAL_REQUEST_FULFILLMENT_AMOUNT=10 WITHDRAWAL_FEE=\"0.03 ether\" OPERATORS_FEE=1000 ERA_DURATION_IN_SLOT=225 SECONDS_PER_SLOT=12 ETH2_DEPOSIT_CONTRACT=0x4242424242424242424242424242424242424242 DEPLOYER_ADDRESS=0x8943545177806ED17B9F23F0a21ee5948eCaa776 TEST=true DEFAULT_EPOCHS_PER_TIMEFRAME=1 GENESIS_TIME_NETWORK={0} forge script scripts/Deploy.s.sol -vv  --rpc-url={1} --broadcast --private-key={2} --legacy".format(genesis_time, el_rpc,constants.DEPLOYER_PRIVATE_KEY)
+            "NETWORK_ID=3151908 MIN_WITHDRAWAL_REQUEST_AMOUNT=\"0.1 ether\" MAX_WITHDRAWAL_REQUEST_AMOUNT=\"100 ether\" MAX_WITHDRAWAL_REQUEST_FULFILLMENT_AMOUNT=10 WITHDRAWAL_FEE=\"0.03 ether\" OPERATORS_FEE=1000 ERA_DURATION_IN_SLOT=225 SECONDS_PER_SLOT=12 ETH2_DEPOSIT_CONTRACT=0x4242424242424242424242424242424242424242 DEPLOYER_ADDRESS={3} TEST=true DEFAULT_EPOCHS_PER_TIMEFRAME=1 GENESIS_TIME_NETWORK={0} forge script scripts/Deploy.s.sol -vv  --rpc-url={1} --broadcast --private-key={2} --legacy".format(genesis_time, el_rpc,constants.DEPLOYER_PRIVATE_KEY,constants.DEPLOYER_ADDRESS)
         ]
 
     deploy = plan.wait(
@@ -108,7 +108,6 @@ def fund(plan, el_rpc, op_addresses, deposit_value_eth):
             ]
         ),
     )
- 
 def collateral(plan, el_rpc, priv_keys,value):
     commands = []
 
@@ -119,6 +118,7 @@ def collateral(plan, el_rpc, priv_keys,value):
     
         full_command = " ".join(commands) + " wait; [ $? -eq 0 ] || exit 1"
     
+    plan.print(full_command)
     plan.exec(
         service_name=constants.DIVA_SC_SERVICE_NAME,
         recipe=ExecRecipe(
@@ -178,7 +178,7 @@ def register(plan, node_addresses, node_private_keys, el_rpc, operator_private_k
 
 def get_coord_dkg(plan, coord_dkg_url, el_rpc, minimal, operators_priv):
 
-    timeFrameDuration = 12*32
+    timeFrameDuration = 12*32* constants.EPOCHS_PER_TIMEFRAME
     if minimal:
         timeFrameDuration = 6*8
     
