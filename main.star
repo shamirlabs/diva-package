@@ -184,7 +184,8 @@ def run(plan, args):
                     debug_nodes,
                     minimal,
                     jaeger_url,
-                    public_bootnodes
+                    public_bootnodes,
+                    index
                 )
                 node_configs[service_name_node]=config
 

@@ -24,7 +24,7 @@ def start_bootnode(
     public_ports = {}
     if expose_public:
         public_ports["w3s-port"] = PortSpec(
-            number=1234, transport_protocol="TCP", wait=None
+            number=constants.DIVA_W3S, transport_protocol="TCP", wait=None
         )
         public_ports["api-port"] = PortSpec(
             number=constants.DIVA_API, transport_protocol="TCP", wait=None
@@ -113,14 +113,18 @@ def start_node_config(
     debug_mode,
     minimal,
     jaeger,
-    public_bootnodes
+    public_bootnodes,
+    index
 ):
-
-    ports={
-            "p2p-port": PortSpec(number=5050, transport_protocol="TCP", wait=None),
-            "w3s-port": PortSpec(number=9000, transport_protocol="TCP", wait=None),
-            "api-port": PortSpec(number=30000, transport_protocol="TCP"),
-            }
+    w3s=constants.DIVA_W3S+index+1
+    api=constants.DIVA_API+index+1
+    p2p=constants.DIVA_P2P+index+1
+    
+    public_ports={
+        "p2p-port": PortSpec(number=p2p, transport_protocol="TCP", wait=None),
+        "w3s-port": PortSpec(number=w3s, transport_protocol="TCP", wait=None),
+        "api-port": PortSpec(number=api, transport_protocol="TCP",wait=None),
+    }
 
     cmd = [
         "--db=/var/diva/config/diva.db",
@@ -175,6 +179,7 @@ def start_node_config(
             "api-port": PortSpec(number=30000, transport_protocol="TCP"),
             #"debugger": PortSpec(number=40000, transport_protocol="TCP"),
         },
+        public_ports=public_ports,
         files={
             "/var/diva": Directory(
                 persistent_key="diva-db-{0}".format(diva_node_name)
