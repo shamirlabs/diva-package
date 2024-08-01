@@ -73,16 +73,6 @@ def deploy(plan, el_rpc, delay_sc, chainID, sc_verif,genesis_time, minimal):
         interval = "3s",
         timeout = "3m",        
     )
-    validator_manager = plan.exec(
-        service_name=constants.DIVA_SC_SERVICE_NAME,
-        recipe=ExecRecipe(
-            command=[
-                "/bin/sh",
-                "-c",
-                "cat /app/broadcast/Deploy.s.sol/3151908/run-latest.json "
-            ]
-        ),
-    )
 
 def fund(plan, el_rpc, op_addresses, deposit_value_eth):
 

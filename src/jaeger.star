@@ -23,7 +23,7 @@ def start(
             min_cpu=200,
             max_cpu=1000,
             min_memory=128,
-            max_memory=2048,
+            max_memory=8192,
             public_ports=public_ports
         ),
     )

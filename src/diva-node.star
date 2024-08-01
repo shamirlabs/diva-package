@@ -53,8 +53,8 @@ def start_bootnode(
     else:
         cmd.append("--bootnode-address=")
 
-    if jaeger:
-        cmd.append("--tracing=true")
+    #if jaeger:
+    #    cmd.append("--tracing=true")
 
     if minimal:
         cmd.append("--slot-duration=6")
@@ -122,8 +122,12 @@ def start_node_config(
     
     public_ports={
         "p2p-port": PortSpec(number=p2p, transport_protocol="TCP", wait=None),
-        "w3s-port": PortSpec(number=w3s, transport_protocol="TCP", wait=None),
         "api-port": PortSpec(number=api, transport_protocol="TCP",wait=None),
+    }
+    ports={
+        "p2p-port": PortSpec(number=p2p, transport_protocol="TCP", wait=None),
+        "w3s-port": PortSpec(number=9000, transport_protocol="TCP", wait=None),
+        "api-port": PortSpec(number=30000, transport_protocol="TCP",wait=None),
     }
 
     cmd = [
@@ -173,12 +177,7 @@ def start_node_config(
             "DIVA_VAULT_PASSWORD": constants.DIVA_VAULT_PASSWORD,
             "OTEL_EXPORTER_OTLP_ENDPOINT": jaeger,
         },
-        ports={
-            "p2p-port": PortSpec(number=5050, transport_protocol="TCP", wait=None),
-            "w3s-port": PortSpec(number=9000, transport_protocol="TCP", wait=None),
-            "api-port": PortSpec(number=30000, transport_protocol="TCP"),
-            #"debugger": PortSpec(number=40000, transport_protocol="TCP"),
-        },
+        ports=ports,
         public_ports=public_ports,
         files={
             "/var/diva": Directory(

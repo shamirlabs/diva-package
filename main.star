@@ -64,7 +64,10 @@ def run(plan, args):
     jaeger_url= ""
     if tracing:
         jaeger_url= jaeger.start(plan)
-        
+        if not deploy_eth:
+            jaeger_url= constants.JAEGER
+
+
     if deploy_eth:
         if deploy_diva_sc:
             delay_sc = "15"
@@ -195,11 +198,15 @@ def run(plan, args):
                 diva_urls.append(node_url)
                 signer_url= "http://{0}:{1}".format(service.hostname, service.ports["w3s-port"].number)
                 signer_urls.append(signer_url)
+            plan.exec(
+                service_name=constants.DIVA_SC_SERVICE_NAME,
+                recipe=ExecRecipe(command=["sleep", "2"]),
+            )                 
             
             diva_cli.generate_identity(plan, diva_urls)
             plan.exec(
                 service_name=constants.DIVA_SC_SERVICE_NAME,
-                recipe=ExecRecipe(command=["sleep", "3"]),
+                recipe=ExecRecipe(command=["sleep", "2"]),
             )                 
 
             for service in diva_node_services.values():
