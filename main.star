@@ -63,8 +63,9 @@ def run(plan, args):
     utils.initUtils(plan)
     jaeger_url= ""
     if tracing:
-        jaeger_url= jaeger.start(plan)
-        if not deploy_eth:
+        if deploy_eth:
+            jaeger_url= jaeger.start(plan)
+        else:
             jaeger_url= constants.JAEGER
 
 
@@ -139,7 +140,7 @@ def run(plan, args):
         diva_cli.generate_identity(plan, [bootnode_url])
         plan.exec(
             service_name=constants.DIVA_SC_SERVICE_NAME,
-            recipe=ExecRecipe(command=["sleep", "1"]),
+            recipe=ExecRecipe(command=["sleep", "2"]),
         )
 
         bootnode_address = utils.get_diva_field(
