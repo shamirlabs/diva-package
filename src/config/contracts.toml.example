@@ -1,36 +1,27 @@
 [[contracts]]
 proxy = true
 contract_name = "validator_manager"
-address = "0x5A22381d4522FF06f62764dE5BA1f2679D129Aab"
-initial_implementation = "0x00c042C4D5D913277CE16611a2ce6e9003554aD5"
+address = "0x247074cECCBAd3f01A9352e58C781534D9F3F5D8"
+initial_implementation = "0x50170856887e2cC26828834688EB48d8f72CAF94"
 
 [contracts.implementations]
-"0x00c042C4D5D913277CE16611a2ce6e9003554aD5" = "3d7cfaad94e277167d88c2cb7f3527931613e84449706aaa8a3ee00ff58d760e"
+"0x50170856887e2cC26828834688EB48d8f72CAF94" = "459656dfe20a501f725cf60bf51f342159d2efd033d29ba78cfbbdd9154455bf"
 
 [[contracts]]
 proxy = true
 contract_name = "collateral_curve"
-address = "0xD3739030F2FE06c5b9f58655f91f7B262aa4f30F"
-initial_implementation = "0x63e6DDE6763C3466C7b45Be880f7eE5dC2ca3E25"
+address = "0x2d89Cd01CC3345cBC99118f8045f503F2c61aBa3"
+initial_implementation = "0xB25E222E2bB8566a0b6915818BF4be36811c7046"
 
 [contracts.implementations]
-"0x63e6DDE6763C3466C7b45Be880f7eE5dC2ca3E25" = "9a8585eabd2e7c987221b4e881b13a3e38e61dac1f3143d179deba791a40907b"
+"0xB25E222E2bB8566a0b6915818BF4be36811c7046" = "5340fd5f379d93c8a081f89267830155286f50aeb3cffa759c6e9fdc13dedd06"
 
 [[contracts]]
 proxy = true
 contract_name = "operator_manager"
-address = "0x76a08F6D19cd82E0ceE7aE03D5a2a3bc3292426E"
-initial_implementation = "0x373E0B8B80A15cdf587C1263654c6B5edd195a43"
+address = "0x715b1626E30201610c46205d0266208321c261b3"
+initial_implementation = "0x95df3127be9c2754B4b060E61d7f8a4760AE1b2c"
 
 [contracts.implementations]
-"0x373E0B8B80A15cdf587C1263654c6B5edd195a43" = "2c2d435d2fcea5133bc617e5f2463b39c329a88336838e4f9969068eb6b37889"
-
-[[contracts]]
-proxy = true
-contract_name = "balance_verifier"
-address = "0xeC6ffe5Bdd983986AE8217b0D12fD4bb9d1B074E"
-initial_implementation = "0x0000000000000000000000000000000000000000"
-
-[contracts.implementations]
-"0x0000000000000000000000000000000000000000" = "2c2d435d2fcea5133bc617e5f2463b39c329a88336838e4f9969068eb6b37889"
+"0x95df3127be9c2754B4b060E61d7f8a4760AE1b2c" = "fc1e017b8758469ad7385bdf1df06eed957f27a83e46d9b02d96eb152b722f5a"
 
