@@ -22,16 +22,15 @@ def start_bootnode(
     public_bootnodes
 ):
     public_ports = {}
-    if expose_public:
-        public_ports["w3s-port"] = PortSpec(
-            number=constants.DIVA_W3S, transport_protocol="TCP", wait=None
-        )
-        public_ports["api-port"] = PortSpec(
-            number=constants.DIVA_API, transport_protocol="TCP", wait=None
-        )
-        public_ports["p2p-port"] = PortSpec(
-            number=constants.DIVA_P2P, transport_protocol="TCP", wait=None
-        )
+    public_ports["w3s-port"] = PortSpec(
+        number=constants.DIVA_W3S, transport_protocol="TCP", wait=None
+    )
+    public_ports["api-port"] = PortSpec(
+        number=constants.DIVA_API, transport_protocol="TCP", wait=None
+    )
+    public_ports["p2p-port"] = PortSpec(
+        number=constants.DIVA_P2P, transport_protocol="TCP", wait=None
+    )
     contracts = plan.upload_files("./config/contracts.toml")
 
     cmd = [

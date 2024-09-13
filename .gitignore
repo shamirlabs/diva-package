@@ -1,4 +1,9 @@
 .DS_store
 params.yaml
 /src/constants.star
-/src/config/contracts.toml
+*.log
+*.db
+*.json
+*.txt
+*.toml
+/tooling

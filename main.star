@@ -98,17 +98,6 @@ def run(plan, args):
     network_id = utils.get_chain_id(plan, cl_uri_0)
 
 
-    if deploy_oracle:
-        oracle.start_oracle(
-            plan,
-            el_ws_uri_0,
-            cl_uri_0,
-            network_id,
-            minimal,
-            genesis_time,
-            genesis_validators_root
-        )
-
     diva_sc.init(
         plan, el_rpc_uri_0, genesis_constants.PRE_FUNDED_ACCOUNTS[1].private_key
     )
@@ -380,6 +369,32 @@ def run(plan, args):
     if deploy_heartbeat:
         diva_heartbeat.init(plan, el_rpc_uri_0, el_ws_uri_0, prover,network_id)
 
+    if deploy_oracle:
+        for index in range(0, 4):
+            oracle_balance_address, oracle_balance_private_key= diva_sc.new_key(plan)
+            oracle_prover_address, oracle_prover_private_key= diva_sc.new_key(plan)
+            diva_sc.fund(plan, el_rpc_uri_0, oracle_balance_address , 2):
+            diva_sc.fund(plan, el_rpc_uri_0, oracle_prover_address , 2):
+            diva_sc.add_oracle_balance_verifier(plan, el_rpc_uri_0, oracle_balance_address ):
+            
+            oracle.start_oracle(
+                plan,
+                "oracle-{0}".format(index + 1),
+                el_ws_uri_0,
+                cl_uri_0,
+                network_id,
+                minimal,
+                genesis_time,
+                genesis_validators_root,
+                False,
+                oracle_balance_private_key,
+                oracle_prover_private_key
+            )
+
     if deploy_submitter:
-        diva_submitter.init(plan, el_rpc_uri_0,bootnode_url,minimal,prover)
+        diva_submitter.init(plan, el_rpc_uri_0,bootnode_url,minimal,"http://oracle:4000/api/v1")
+        #diva_submitter.propose(plan, bootnode_url, el_rpc_uri_0)
+        #diva_submitter.register(plan, bootnode_url, el_rpc_uri_0)
+        #diva_submitter.activate(plan, bootnode_url, el_rpc_uri_0)
     
+    diva_sc.add_mev_builder(plan,el_rpc_uri_0)

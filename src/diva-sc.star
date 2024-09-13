@@ -18,13 +18,28 @@ def deploy(plan, el_rpc, delay_sc, chainID, sc_verif,genesis_time, minimal):
         service_name=constants.DIVA_SC_SERVICE_NAME,
         recipe=ExecRecipe(command=["sleep", "0"]),
     )
-    fund = plan.wait(
+    fund_create2 = plan.wait(
         service_name=constants.DIVA_SC_SERVICE_NAME,
         recipe=ExecRecipe(
             command=[
                 "/bin/sh",
                 "-c",
-                "cast send 0x3fab184622dc19b6109349b94811493bf2a45362 --value \"0.1 ether\" --private-key bcdf20249abf0ed6d944c0288fad489e33f66b3960d9e6229c1cd214ed3bbe31 --rpc-url {0}".format(el_rpc)
+                "cast send 0x3fab184622dc19b6109349b94811493bf2a45362 --value \"0.1 ether\" --private-key {1} --rpc-url {0}".format(el_rpc,constants.FUNDER_PRIVATE_KEY)
+            ]
+        ),
+        field="code", 
+        assertion="==", 
+        target_value=0,
+        interval = "3s",
+        timeout = "3m",
+    )
+    fund_deployer = plan.wait(
+        service_name=constants.DIVA_SC_SERVICE_NAME,
+        recipe=ExecRecipe(
+            command=[
+                "/bin/sh",
+                "-c",
+                "cast send {2} --value \"2 ether\" --private-key {1} --rpc-url {0}".format(el_rpc,constants.FUNDER_PRIVATE_KEY, constants.DEPLOYER_ADDRESS)
             ]
         ),
         field="code", 
@@ -53,13 +68,13 @@ def deploy(plan, el_rpc, delay_sc, chainID, sc_verif,genesis_time, minimal):
         command=[
             "/bin/sh",
             "-c",
-            "TEST=false SLOTS_PER_EPOCH=8 SECONDS_PER_SLOT=6 ERA_DURATION_IN_SLOT=10 NETWORK_ID=3151908 MIN_WITHDRAWAL_REQUEST_AMOUNT=\"0.1 ether\" MAX_WITHDRAWAL_REQUEST_AMOUNT=\"100 ether\" MAX_WITHDRAWAL_REQUEST_FULFILLMENT_AMOUNT=10 WITHDRAWAL_FEE=\"0.03 ether\" OPERATORS_FEE=1000 ETH2_DEPOSIT_CONTRACT=0x4242424242424242424242424242424242424242 DEPLOYER_ADDRESS={3} DEFAULT_EPOCHS_PER_TIMEFRAME=1 GENESIS_TIME_NETWORK={0} forge script scripts/Deploy.s.sol -vv  --rpc-url={1} --broadcast --private-key={2} --legacy".format(genesis_time, el_rpc,constants.DEPLOYER_PRIVATE_KEY,constants.DEPLOYER_ADDRESS)
+            "TEST=false SLOTS_PER_EPOCH=8 SECONDS_PER_SLOT=6 ERA_DURATION_IN_SLOT=10 NETWORK_ID=3151908 MIN_WITHDRAWAL_REQUEST_AMOUNT=\"0.1 ether\" MAX_WITHDRAWAL_REQUEST_AMOUNT=\"100 ether\" MAX_WITHDRAWAL_REQUEST_FULFILLMENT_AMOUNT=10 WITHDRAWAL_FEE=\"0.03 ether\" ETH2_DEPOSIT_CONTRACT=0x4242424242424242424242424242424242424242 DEPLOYER_ADDRESS={3} DEFAULT_EPOCHS_PER_TIMEFRAME=1 GENESIS_TIME_NETWORK={0} forge script scripts/Deploy.s.sol -vv  --rpc-url={1} --broadcast --private-key={2} --legacy".format(genesis_time, el_rpc,constants.DEPLOYER_PRIVATE_KEY,constants.DEPLOYER_ADDRESS,chainID)
         ]    
     else:
         command=[
             "/bin/sh",
             "-c",
-            "NETWORK_ID=3151908 MIN_WITHDRAWAL_REQUEST_AMOUNT=\"0.1 ether\" MAX_WITHDRAWAL_REQUEST_AMOUNT=\"100 ether\" MAX_WITHDRAWAL_REQUEST_FULFILLMENT_AMOUNT=10 WITHDRAWAL_FEE=\"0.03 ether\" OPERATORS_FEE=1000 ERA_DURATION_IN_SLOT=225 SECONDS_PER_SLOT=12 ETH2_DEPOSIT_CONTRACT=0x4242424242424242424242424242424242424242 DEPLOYER_ADDRESS={3} TEST=true DEFAULT_EPOCHS_PER_TIMEFRAME=1 GENESIS_TIME_NETWORK={0} forge script scripts/Deploy.s.sol -vv  --rpc-url={1} --broadcast --private-key={2} --legacy".format(genesis_time, el_rpc,constants.DEPLOYER_PRIVATE_KEY,constants.DEPLOYER_ADDRESS)
+            "TEST=false NETWORK_ID=3151908 ERA_DURATION_IN_SLOT=10 SECONDS_PER_SLOT=12 ETH2_DEPOSIT_CONTRACT=0x4242424242424242424242424242424242424242 DEPLOYER_ADDRESS={3} DEFAULT_EPOCHS_PER_TIMEFRAME=1 GENESIS_TIME_NETWORK={0} forge script scripts/Deploy.s.sol -vv  --rpc-url={1} --broadcast --private-key={2} --legacy".format(genesis_time, el_rpc,constants.DEPLOYER_PRIVATE_KEY,constants.DEPLOYER_ADDRESS,chainID)
         ]
 
     deploy = plan.wait(
@@ -185,22 +200,37 @@ def get_coord_dkg(plan, coord_dkg_url, el_rpc, minimal, operators_priv):
         ),
     )
 
-def init_accounting(plan, el_rpc):
+def add_mev_builder(plan, el_rpc):
+        
+    description= "diva builder 1"
 
-    submitReport = plan.exec(
+    plan.exec(
         service_name=constants.DIVA_SC_SERVICE_NAME,
         recipe=ExecRecipe(
             command=[
                 "/bin/sh",
                 "-c",
-                "forge script scripts/SubmitReport.s.sol -vvvv --rpc-url={0} --broadcast --private-key {1}".format(
-                el_rpc,constants.DEPLOYER_PRIVATE_KEY
+                "DEPLOYER_ADDRESS={0}  BLS_PUBKEY={1} FEE_RECIPIENT={2} DESCRIPTION=\"{3}\" forge script scripts/testnet/AddBuilder.s.sol -vvvv --rpc-url={4} --broadcast --private-key {5}".format(
+                constants.DEPLOYER_ADDRESS, constants.BUILDER_PUBKEY, constants.BUILDER_ADDRESS, description, el_rpc,constants.DEPLOYER_PRIVATE_KEY
                 )
             ],
         ),
     )
     
-
+def add_oracle_balance_verifier(plan, el_rpc, address):
+    
+    plan.exec(
+        service_name=constants.DIVA_SC_SERVICE_NAME,
+        recipe=ExecRecipe(
+            command=[
+                "/bin/sh",
+                "-c",
+                "DEPLOYER_ADDRESS={0}  forge script scripts/testnet/ORACLE.s.sol -vvvv --rpc-url={1} --broadcast --private-key {2}".format(
+                constants.DEPLOYER_ADDRESS, el_rpc, description,constants.DEPLOYER_PRIVATE_KEY
+                )
+            ],
+        ),
+    )
     #DKG 
     #node scripts/testnet/getCoordDKG.js http://diva-bootnode-coordinator:30000/api/v1/coordinator/dkgs
     #pending - 2 timeframe after
