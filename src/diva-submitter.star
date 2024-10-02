@@ -19,7 +19,7 @@ def init(plan, el_url,coord_dkg_url,minimal,prover):
 
 def propose(plan, diva_url, ec_rpc):
     name = "proposer"
-    script = plan.upload_files("../config/submitter_keystore_prop_1.json")
+    script = plan.upload_files("./config/submitter_keystore_prop_1.json")
     files = {
         "/usr/local/bin/": script,
     }
@@ -40,7 +40,7 @@ def propose(plan, diva_url, ec_rpc):
 
 def register(plan, diva_url, ec_rpc):
     name = "proposer"
-    script = plan.upload_files("../config/submitter_keystore_register_1")
+    script = plan.upload_files("./config/submitter_keystore_register_1")
     files = {
         "/usr/local/bin/": script,
     }
@@ -57,7 +57,7 @@ def register(plan, diva_url, ec_rpc):
 
 def activate(plan, diva_url, ec_rpc):
     name = "proposer"
-    script = plan.upload_files("../config/submitter_activate_1")
+    script = plan.upload_files("./config/submitter_activate_1")
     files = {
         "/usr/local/bin/": script,
     }

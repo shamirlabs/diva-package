@@ -15,6 +15,8 @@ constants = import_module("./src/constants.star")
 keys = import_module("./src/keys.star")
 nimbus = import_module("./src/nimbus.star")
 prysm = import_module("./src/prysm.star")
+teku = import_module("./src/teku.star")
+lodestar = import_module("./src/lodestar.star")
 utils = import_module("./src/utils.star")
 input_parser = import_module("./src/input-parser.star")
 w3s = import_module("./src/w3s.star")
@@ -79,7 +81,7 @@ def run(plan, args):
 
         ethereum_network = ethereum_package.run(plan, diva_args)
         plan.print("Succesfully launched an Ethereum Network")
-        
+        plan.print(ethereum_network.all_participants)
         cl_uri_0, el_rpc_uri_0, el_ws_uri_0 = utils.get_eth_urls(
             ethereum_network.all_participants, diva_args, 0
         )
@@ -335,6 +337,12 @@ def run(plan, args):
     
     if deploy_diva and not use_w3s and not diva_external_nodes:
         vc_configs={}
+        if diva_val_type == "prysm":
+            plan.exec(
+                service_name=constants.DIVA_SC_SERVICE_NAME,
+                recipe=ExecRecipe(command=["sleep", "100"]),
+            )
+
         for index in range(0, diva_nodes):
             service_name_vc= "vc-diva-{1}-{0}".format((index + 1),diva_val_type)
             if diva_val_type == "prysm":
@@ -348,6 +356,17 @@ def run(plan, args):
                     mev,
                     minimal
                 )
+            if diva_val_type == "lodestar":
+                config=lodestar.launch(
+                    plan,
+                    "val{0}".format(index + 1),
+                    signer_urls[index],
+                    cl_uri_0,
+                    smart_contract_address,
+                    verify_fee_recipient,
+                    mev,
+                    minimal
+                )                
             else:
                 config=nimbus.launch(
                     plan,
@@ -370,12 +389,11 @@ def run(plan, args):
         diva_heartbeat.init(plan, el_rpc_uri_0, el_ws_uri_0, prover,network_id)
 
     if deploy_oracle:
-        for index in range(0, 4):
+        for index in range(0, 0):
             oracle_balance_address, oracle_balance_private_key= diva_sc.new_key(plan)
             oracle_prover_address, oracle_prover_private_key= diva_sc.new_key(plan)
-            diva_sc.fund(plan, el_rpc_uri_0, oracle_balance_address , 2):
-            diva_sc.fund(plan, el_rpc_uri_0, oracle_prover_address , 2):
-            diva_sc.add_oracle_balance_verifier(plan, el_rpc_uri_0, oracle_balance_address ):
+            diva_sc.fund(plan, el_rpc_uri_0, [oracle_balance_address,oracle_prover_address] , 2)
+            diva_sc.add_oracle_balance_verifier(plan, el_rpc_uri_0, oracle_balance_address )
             
             oracle.start_oracle(
                 plan,
@@ -392,9 +410,9 @@ def run(plan, args):
             )
 
     if deploy_submitter:
-        diva_submitter.init(plan, el_rpc_uri_0,bootnode_url,minimal,"http://oracle:4000/api/v1")
+        diva_submitter.init(plan, el_rpc_uri_0,bootnode_url,minimal,"http://oracle-1:4000/api/v1")
         #diva_submitter.propose(plan, bootnode_url, el_rpc_uri_0)
         #diva_submitter.register(plan, bootnode_url, el_rpc_uri_0)
         #diva_submitter.activate(plan, bootnode_url, el_rpc_uri_0)
     
-    diva_sc.add_mev_builder(plan,el_rpc_uri_0)
+    #diva_sc.add_mev_builder(plan,el_rpc_uri_0)

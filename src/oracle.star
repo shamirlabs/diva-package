@@ -92,9 +92,9 @@ def start_oracle(
             ports={
                 "postgres": PortSpec(number=5432, transport_protocol="TCP")
             },
-            files={
-                "/var/lib/postgresql/data": Directory(persistent_key="pg-data")
-            },
+            #files={
+            #    "/var/lib/postgresql/data": Directory(persistent_key="pg-data")
+            #},
             min_cpu=200,
             max_cpu=1000
         )

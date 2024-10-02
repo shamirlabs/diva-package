@@ -225,8 +225,8 @@ def add_oracle_balance_verifier(plan, el_rpc, address):
             command=[
                 "/bin/sh",
                 "-c",
-                "DEPLOYER_ADDRESS={0}  forge script scripts/testnet/ORACLE.s.sol -vvvv --rpc-url={1} --broadcast --private-key {2}".format(
-                constants.DEPLOYER_ADDRESS, el_rpc, description,constants.DEPLOYER_PRIVATE_KEY
+                "DEPLOYER_ADDRESS={0} VOTER_ADDRESS={3} forge script scripts/testnet/AddVoter.s.sol -vvvv --rpc-url={1} --broadcast --private-key {2}".format(
+                constants.DEPLOYER_ADDRESS, el_rpc ,constants.DEPLOYER_PRIVATE_KEY,address
                 )
             ],
         ),

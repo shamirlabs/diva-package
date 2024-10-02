@@ -3,7 +3,7 @@ constants = import_module("./constants.star")
 diva_min_cpu=300
 diva_max_cpu=4000 #4 cores
 diva_min_mem=512
-diva_max_mem=16384
+diva_max_mem=2048
 
 
 def start_bootnode(
@@ -44,7 +44,7 @@ def start_bootnode(
         "--deposit-contract=0x4242424242424242424242424242424242424242",
         "--chain-id={0}".format(chain_id),
         "--genesis-time={0}".format(genesis_time),
-        "--enable-coordinator",
+        #"--enable-coordinator",
         "--capella-fork-version={0}".format(constants.CAPELLA_FORK_VERSION)
     ]
     if public_bootnodes:
@@ -140,7 +140,8 @@ def start_node_config(
         "--deposit-contract=0x4242424242424242424242424242424242424242",
         "--chain-id={0}".format(chain_id),
         "--genesis-time={0}".format(genesis_time),
-        "--capella-fork-version={0}".format(constants.CAPELLA_FORK_VERSION)
+        "--capella-fork-version={0}".format(constants.CAPELLA_FORK_VERSION),
+        "--debug-endpoints"
     ]
 
     if public_bootnodes:
